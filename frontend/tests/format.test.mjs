@@ -16,7 +16,12 @@ const NNBSP = '\u202f' // narrow no-break space (fr-CH thousands separator)
 
 const CASES = {
   'de-CH': { chf: `CHF${NBSP}414'489.12`, quantity: '6.964', percent: '63%', date: '10.10.2026' },
-  'fr-CH': { chf: `414${NNBSP}489.12${NBSP}CHF`, quantity: '6,964', percent: "63%", date: '10 oct. 2026' },
+  'fr-CH': {
+    chf: `414${NNBSP}489.12${NBSP}CHF`,
+    quantity: '6,964',
+    percent: '63%',
+    date: '10 oct. 2026',
+  },
   en: { chf: `CHF${NBSP}414,489.12`, quantity: '6.964', percent: '63%', date: 'Oct 10, 2026' },
 }
 

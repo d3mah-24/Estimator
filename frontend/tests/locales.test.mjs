@@ -6,7 +6,13 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { test } from 'node:test'
-import { STATUS_CODES, UNIT_CODES, SCENARIO_CODES, PRICE_SOURCE_CODES, TENDER_STATUS } from '../src/utils/codes.js'
+import {
+  STATUS_CODES,
+  UNIT_CODES,
+  SCENARIO_CODES,
+  PRICE_SOURCE_CODES,
+  TENDER_STATUS,
+} from '../src/utils/codes.js'
 
 const root = new URL('..', import.meta.url).pathname
 const load = (code) => JSON.parse(readFileSync(join(root, 'src/locales', `${code}.json`), 'utf8'))
@@ -23,7 +29,8 @@ function flatten(obj, prefix = '', out = {}) {
   return out
 }
 const flat = Object.fromEntries(Object.entries(locales).map(([c, m]) => [c, flatten(m)]))
-const placeholders = (msg) => [...new Set([...String(msg).matchAll(/\{(\w+)\}/g)].map((m) => m[1]))].sort()
+const placeholders = (msg) =>
+  [...new Set([...String(msg).matchAll(/\{(\w+)\}/g)].map((m) => m[1]))].sort()
 const pluralForms = (msg) => String(msg).split(' | ').length
 
 for (const code of OTHERS) {
@@ -48,7 +55,10 @@ test('every message compiles (no stray braces, @ or |)', () => {
       const errors = []
       baseCompile(String(msg), { onError: (e) => errors.push(e.message) })
       assert.deepEqual(errors, [], `${code} ${key}`)
-      assert.ok(!String(msg).includes('@'), `${code} ${key}: '@' starts a linked message in vue-i18n`)
+      assert.ok(
+        !String(msg).includes('@'),
+        `${code} ${key}: '@' starts a linked message in vue-i18n`
+      )
     }
   }
 })
@@ -70,21 +80,38 @@ test('every status, unit, scenario, price source and tender status code has a la
 
 test('frontend codes match the backend (doctype options, reasons, warnings)', () => {
   const app = join(root, '..', 'equans_bid')
-  const doctype = JSON.parse(readFileSync(join(app, 'bid_intelligence/doctype/tender_item/tender_item.json'), 'utf8'))
+  const doctype = JSON.parse(
+    readFileSync(join(app, 'bid_intelligence/doctype/tender_item/tender_item.json'), 'utf8')
+  )
   const statusOptions = doctype.fields.find((f) => f.fieldname === 'status').options.split('\n')
   assert.deepEqual([...statusOptions].sort(), [...STATUS_CODES].sort())
-  const tenderDoctype = JSON.parse(readFileSync(join(app, 'bid_intelligence/doctype/tender/tender.json'), 'utf8'))
-  const tenderOptions = tenderDoctype.fields.find((f) => f.fieldname === 'status').options.split('\n')
+  const tenderDoctype = JSON.parse(
+    readFileSync(join(app, 'bid_intelligence/doctype/tender/tender.json'), 'utf8')
+  )
+  const tenderOptions = tenderDoctype.fields
+    .find((f) => f.fieldname === 'status')
+    .options.split('\n')
   assert.deepEqual([...tenderOptions].sort(), Object.keys(TENDER_STATUS).sort())
 
   const reasons = readFileSync(join(app, 'reasons.py'), 'utf8')
-  const block = (name) => reasons.slice(reasons.indexOf(`${name} = {`), reasons.indexOf('\n}', reasons.indexOf(`${name} = {`)))
+  const block = (name) =>
+    reasons.slice(
+      reasons.indexOf(`${name} = {`),
+      reasons.indexOf('\n}', reasons.indexOf(`${name} = {`))
+    )
   const keysOf = (name) => [...block(name).matchAll(/^\t"(\w+)":/gm)].map((m) => m[1])
   // Product-family labels are master data (Product Family), not locale strings.
-  for (const [name, group] of [['REASONS', 'reason'], ['WARNINGS', 'warning']]) {
+  for (const [name, group] of [
+    ['REASONS', 'reason'],
+    ['WARNINGS', 'warning'],
+  ]) {
     const backend = keysOf(name)
     assert.ok(backend.length > 0, name)
-    assert.deepEqual(backend.sort(), Object.keys(locales[REFERENCE][group]).sort(), `${name} vs ${group}.*`)
+    assert.deepEqual(
+      backend.sort(),
+      Object.keys(locales[REFERENCE][group]).sort(),
+      `${name} vs ${group}.*`
+    )
   }
 })
 

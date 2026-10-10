@@ -35,7 +35,12 @@ def _check(results: list, label: str, ok: bool, detail: str = "", fix: str = "")
 def smoke():
 	"""Everything the live demo depends on. Prints OK/FAIL per check."""
 	r: list[bool] = []
-	from equans_bid.trades import available_trades, load_trade, read_catalog, read_productivity
+	from equans_bid.trades import (
+		available_trades,
+		load_trade,
+		read_catalog,
+		read_productivity,
+	)
 
 	for folder in available_trades():
 		trade = load_trade(folder)
@@ -49,25 +54,40 @@ def smoke():
 			f"{items}/{want_items} items, {rules}/{want_rules} rules",
 			fix="run commands.seed_data.run",
 		)
-	_check(r, "Project parameters loaded", bool(frappe.get_single("Project Parameter").parameters))
+	_check(
+		r,
+		"Project parameters loaded",
+		bool(frappe.get_single("Project Parameter").parameters),
+	)
 
 	name = frappe.db.get_value("Tender", {"project_name": seed_demo.DEMO_NAME})
 	_check(r, "Demo tender exists", bool(name), name or "", fix="run demo.reset")
 	if name:
 		doc = frappe.get_doc("Tender", name)
 		_check(
-			r, "Demo tender processed", doc.status == "Completed", f"{doc.status}, {len(doc.items)} positions"
+			r,
+			"Demo tender processed",
+			doc.status == "Completed",
+			f"{doc.status}, {len(doc.items)} positions",
 		)
 		path = None
 		if doc.tender_file:
 			path = Path(frappe.get_doc("File", {"file_url": doc.tender_file}).get_full_path())
 		_check(
-			r, "Tender PDF attached and readable", bool(path and path.exists()), doc.tender_file or "missing"
+			r,
+			"Tender PDF attached and readable",
+			bool(path and path.exists()),
+			doc.tender_file or "missing",
 		)
 
 		golden = {p["lv_id"]: p for p in json.loads(GOLDEN.read_text())["position_results"]}
 		rows = {i.golden_lv_id: i for i in doc.items if i.golden_lv_id}
-		_check(r, "All 22 reference positions found", len(rows) == len(golden), f"{len(rows)}/{len(golden)}")
+		_check(
+			r,
+			"All 22 reference positions found",
+			len(rows) == len(golden),
+			f"{len(rows)}/{len(golden)}",
+		)
 		lv1 = rows.get("LV0001")
 		_check(
 			r,
@@ -80,7 +100,12 @@ def smoke():
 			for k, g in golden.items()
 			if k in rows and abs(rows[k].direct_cost - g["direct_position_cost_chf"]) > 0.01
 		]
-		_check(r, "Reference positions match the golden costs", not off, ", ".join(off) or "22/22")
+		_check(
+			r,
+			"Reference positions match the golden costs",
+			not off,
+			", ".join(off) or "22/22",
+		)
 		quotes = [i.position_id for i in doc.items if i.quote_override]
 		_check(r, "No leftover supplier quotes", not quotes, ", ".join(quotes[:5]))
 		_check(r, "Default bid assumptions", not doc.bid_assumptions)

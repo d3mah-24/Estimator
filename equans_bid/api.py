@@ -11,8 +11,17 @@ from equans_bid.extraction.benchmark import assign_golden_ids
 from equans_bid.extraction.pdf_text import file_sha256
 from equans_bid.extraction.pipeline import STARTER, extract_positions
 from equans_bid.extraction.structurer import get_structurer
-from equans_bid.pricing.engine import apply_factor_rules, parse_factor_keys, price_position
-from equans_bid.pricing.project import bid_range, effective_assumptions, indicative_price, project_baseline
+from equans_bid.pricing.engine import (
+	apply_factor_rules,
+	parse_factor_keys,
+	price_position,
+)
+from equans_bid.pricing.project import (
+	bid_range,
+	effective_assumptions,
+	indicative_price,
+	project_baseline,
+)
 from equans_bid.reasons import render
 from equans_bid.trades import TradeConfig, from_documents
 
@@ -88,7 +97,12 @@ def trade_config(code: str | None) -> TradeConfig:
 def _rules() -> dict:
 	rows = frappe.get_all(
 		"Productivity Rule",
-		fields=["install_code", "base_hours_per_unit", "default_hourly_rate_chf", "factor_keys"],
+		fields=[
+			"install_code",
+			"base_hours_per_unit",
+			"default_hourly_rate_chf",
+			"factor_keys",
+		],
 	)
 	return {r.install_code: r for r in rows}
 
@@ -114,13 +128,22 @@ def _snapshot(item, product, rule, factor_rules: list) -> None:
 	item.base_hours_per_unit = rule.base_hours_per_unit
 	item.labour_rate = rule.default_hourly_rate_chf
 	keys = apply_factor_rules(
-		rule.factor_keys, {"system": item.system, "page": item.source_page}, factor_rules
+		rule.factor_keys,
+		{"system": item.system, "page": item.source_page},
+		factor_rules,
 	)
 	item.factor_keys = "|".join(keys)
 	item.price_version = product.price_version or "unversioned"
 
 
-def _price_item(item, catalog: dict, rules: dict, params: dict, factor_rules: list, refresh: bool = False):
+def _price_item(
+	item,
+	catalog: dict,
+	rules: dict,
+	params: dict,
+	factor_rules: list,
+	refresh: bool = False,
+):
 	"""Fill an item's cost fields from its snapshot (taken now if missing or `refresh`).
 	Unpriced statuses keep zero costs and the UI shows "—"."""
 	for f in COST_FIELDS:
@@ -212,7 +235,8 @@ def process_tender_pdf(tender: str, pages: str | list | None = None):
 		trade = trade_config(doc.trade)
 		catalog = _catalog_rows(trade.code)
 		structurer = get_structurer(
-			[f.code for f in trade.families], frappe.get_site_path("private", "extraction_cache")
+			[f.code for f in trade.families],
+			frappe.get_site_path("private", "extraction_cache"),
 		)
 		positions = extract_positions(path, catalog, pages, structurer, trade)
 		doc.file_hash = file_sha256(path)
@@ -269,7 +293,11 @@ def recalculate_tender(tender: str):
 
 @frappe.whitelist()
 def update_item(
-	tender: str, item: str, quote_override=None, matched_product: str | None = None, status: str | None = None
+	tender: str,
+	item: str,
+	quote_override=None,
+	matched_product: str | None = None,
+	status: str | None = None,
 ):
 	"""Estimator edits one position (supplier quote, product, status).
 
@@ -316,11 +344,20 @@ def _refresh_diff(doc) -> dict:
 	total_before = doc.direct_cost or 0
 	_recalculate(doc, refresh=True)
 	changes = [
-		{"item": i.name, "position_id": i.position_id, "before": before[i.name], "after": i.direct_cost or 0}
+		{
+			"item": i.name,
+			"position_id": i.position_id,
+			"before": before[i.name],
+			"after": i.direct_cost or 0,
+		}
 		for i in doc.items
 		if abs((i.direct_cost or 0) - before[i.name]) >= 0.005
 	]
-	return {"changes": changes, "total_before": total_before, "total_after": doc.direct_cost or 0}
+	return {
+		"changes": changes,
+		"total_before": total_before,
+		"total_after": doc.direct_cost or 0,
+	}
 
 
 @frappe.whitelist()
@@ -382,7 +419,11 @@ def get_tender_summary(tender: str, assumptions: str | dict | None = None):
 	for i in doc.items:
 		product = catalog.get(i.matched_product)
 		category = product.category if product and i.status in PRICED_STATUSES else "-"
-		for bucket in (by_system[i.system or "-"], by_category[category], by_status[i.status]):
+		for bucket in (
+			by_system[i.system or "-"],
+			by_category[category],
+			by_status[i.status],
+		):
 			bucket["direct_cost"] += i.direct_cost
 			bucket["positions"] += 1
 
