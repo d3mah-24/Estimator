@@ -6,3 +6,4 @@ equans_bid.patches.v1_0.create_roles
 # Patches added in this section will be executed after doctypes are migrated
 equans_bid.patches.v1_0.sync_trade_master_data
 equans_bid.patches.v1_0.backfill_tender_trade
+equans_bid.patches.v1_0.seed_missing_project_parameters
