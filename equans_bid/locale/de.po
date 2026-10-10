@@ -384,6 +384,9 @@ msgstr "Die Ausschreibungsdatei ist grösser als {0} MB"
 msgid "The tender file must be a PDF"
 msgstr "Die Ausschreibungsdatei muss ein PDF sein"
 
+msgid "The tender is being processed. Delete it when processing has finished."
+msgstr "Die Ausschreibung wird gerade verarbeitet. Löschen Sie sie, wenn die Verarbeitung abgeschlossen ist."
+
 msgid "The trade of this tender could not be recognised. Please select it."
 msgstr "Das Gewerk dieser Ausschreibung wurde nicht erkannt. Bitte wählen Sie es aus."
 

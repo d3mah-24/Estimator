@@ -329,5 +329,14 @@
     "elapsed": "Elapsed {time}",
     "hint": "With the LLM, the first run of a large tender can take a few minutes. Processing continues even if you leave this page.",
     "leave": "Back to the list (processing continues)"
+  },
+  "delete": {
+    "title": "Delete tender",
+    "question": "Permanently delete this tender?",
+    "consequence": "All positions, quotes, assumptions, the chosen bid and the uploaded PDF are deleted. This cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Delete permanently",
+    "failed": "Delete failed",
+    "busy": "Being processed – can be deleted afterwards"
   }
 }

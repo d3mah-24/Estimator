@@ -386,6 +386,9 @@ msgstr "Le fichier d’appel d’offres dépasse {0} Mo"
 msgid "The tender file must be a PDF"
 msgstr "Le fichier d’appel d’offres doit être un PDF"
 
+msgid "The tender is being processed. Delete it when processing has finished."
+msgstr "L'appel d'offres est en cours de traitement. Supprimez-le une fois le traitement terminé."
+
 msgid "The trade of this tender could not be recognised. Please select it."
 msgstr "Le corps de métier de cet appel d'offres n'a pas été reconnu. Veuillez le sélectionner."
 

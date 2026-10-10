@@ -6,6 +6,7 @@ import frappe
 from frappe.tests import IntegrationTestCase
 
 from equans_bid.api import (
+	delete_tender,
 	export_tender,
 	get_tender_summary,
 	process_tender_pdf,
@@ -119,3 +120,45 @@ class TestTenderEndToEnd(IntegrationTestCase):
 			if i.status in ("review_required", "insufficient_information"):
 				self.assertEqual(i.direct_cost, 0, i.position_id)
 		self.assertGreater(doc.unresolved_count, 0)
+
+
+class TestDeleteTender(IntegrationTestCase):
+	def upload(self, title: str):
+		# Uploaded from the dialog before the tender exists: not attached to anything.
+		from pypdf import PdfWriter
+
+		writer, buf = PdfWriter(), io.BytesIO()
+		writer.add_blank_page(width=200, height=200)
+		writer.add_metadata({"/Title": f"{title} {frappe.generate_hash()}"})  # unique content
+		writer.write(buf)
+		return frappe.get_doc(
+			{"doctype": "File", "file_name": "lv.pdf", "is_private": 1, "content": buf.getvalue()}
+		).insert()
+
+	def tender(self, file_url=None, status="Completed"):
+		doc = frappe.get_doc({"doctype": "Tender", "project_name": "Delete test", "trade": "HVAC"}).insert()
+		doc.db_set({"tender_file": file_url, "status": status})
+		return doc.name
+
+	def test_deletes_tender_items_and_its_pdf(self):
+		file = self.upload("only mine")
+		name = self.tender(file.file_url)
+		frappe.get_doc("Tender", name).append("items", {"position_id": "P1", "quantity": 1}).db_insert()
+		self.assertEqual(delete_tender(name), {"deleted": name})
+		self.assertFalse(frappe.db.exists("Tender", name))
+		self.assertFalse(frappe.db.exists("Tender Item", {"parent": name}))
+		self.assertFalse(frappe.db.exists("File", file.name))
+
+	def test_shared_pdf_is_kept(self):
+		file = self.upload("shared")
+		first, second = self.tender(file.file_url), self.tender(file.file_url)
+		delete_tender(first)
+		self.assertTrue(frappe.db.exists("File", file.name))
+		delete_tender(second)
+		self.assertFalse(frappe.db.exists("File", file.name))
+
+	def test_not_while_processing(self):
+		name = self.tender(status="Processing")
+		with self.assertRaises(frappe.ValidationError):
+			delete_tender(name)
+		self.assertTrue(frappe.db.exists("Tender", name))

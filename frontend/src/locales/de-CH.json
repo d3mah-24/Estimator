@@ -329,5 +329,14 @@
     "elapsed": "Laufzeit {time}",
     "hint": "Mit LLM kann die erste Verarbeitung einer grossen Ausschreibung einige Minuten dauern. Die Verarbeitung läuft weiter, auch wenn Sie diese Seite verlassen.",
     "leave": "Zur Übersicht (Verarbeitung läuft weiter)"
+  },
+  "delete": {
+    "title": "Ausschreibung löschen",
+    "question": "Diese Ausschreibung endgültig löschen?",
+    "consequence": "Alle Positionen, Offerten, Annahmen, das gewählte Angebot und das hochgeladene PDF werden gelöscht. Das kann nicht rückgängig gemacht werden.",
+    "cancel": "Abbrechen",
+    "confirm": "Endgültig löschen",
+    "failed": "Löschen fehlgeschlagen",
+    "busy": "Wird verarbeitet – Löschen danach möglich"
   }
 }

@@ -329,5 +329,14 @@
     "elapsed": "Durée {time}",
     "hint": "Avec le LLM, le premier traitement d'un grand appel d'offres peut prendre quelques minutes. Le traitement continue même si vous quittez cette page.",
     "leave": "Vers la liste (le traitement continue)"
+  },
+  "delete": {
+    "title": "Supprimer l'appel d'offres",
+    "question": "Supprimer définitivement cet appel d'offres ?",
+    "consequence": "Toutes les positions, offres, hypothèses, l'offre retenue et le PDF téléversé seront supprimés. Cette action est irréversible.",
+    "cancel": "Annuler",
+    "confirm": "Supprimer définitivement",
+    "failed": "Échec de la suppression",
+    "busy": "En cours de traitement – suppression possible ensuite"
   }
 }

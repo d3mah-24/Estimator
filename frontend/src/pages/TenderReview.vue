@@ -806,6 +806,11 @@
 				</div>
 			</aside>
 		</div>
+		<DeleteTenderDialog
+			v-model="showDelete"
+			:tender="tender.doc ? { name, project_name: tender.doc.project_name } : null"
+			@deleted="() => router.push('/')"
+		/>
 		<Dialog v-model="refresh.open" :options="{ title: t('review.refreshTitle') }">
 			<template #body-content>
 				<p v-if="!refresh.diff?.changes?.length" class="text-sm text-ink-gray-7">
@@ -866,6 +871,7 @@ import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import BidPanel from '@/components/BidPanel.vue'
+import DeleteTenderDialog from '@/components/DeleteTenderDialog.vue'
 import PdfViewer from '@/components/PdfViewer.vue'
 import StatusPill from '@/components/StatusPill.vue'
 import ProcessingOverlay from '@/components/ProcessingOverlay.vue'
@@ -1069,7 +1075,9 @@ const tabs = computed(() => [
 ])
 const moreActions = computed(() => [
 	{ label: t('review.reprocess'), icon: 'refresh-cw', onClick: () => reprocess() },
+	{ label: t('delete.title'), icon: 'trash-2', onClick: () => (showDelete.value = true) },
 ])
+const showDelete = ref(false)
 
 const catalogDescription = computed<Record<string, string>>(() =>
 	Object.fromEntries((catalog.data || []).map((c: any) => [c.name, c.description])),

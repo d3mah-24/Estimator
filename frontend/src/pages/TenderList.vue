@@ -88,7 +88,7 @@
 							<th class="px-3 py-3 text-right font-medium">
 								{{ t('list.col.open') }}
 							</th>
-							<th class="w-10" />
+							<th class="w-20" />
 						</tr>
 					</thead>
 					<tbody>
@@ -152,10 +152,28 @@
 									:aria-label="t('list.noOpen')"
 								/>
 							</td>
-							<td class="pr-4 text-ink-gray-4 group-hover:text-ink-gray-7">
+							<td class="whitespace-nowrap pr-4 text-right">
+								<button
+									class="mr-1 rounded p-1.5 text-ink-gray-4 opacity-0 hover:bg-red-50 hover:text-red-600 focus:opacity-100 group-hover:opacity-100 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-ink-gray-4"
+									:disabled="row.status === 'Processing'"
+									:title="
+										row.status === 'Processing'
+											? t('delete.busy')
+											: t('delete.title')
+									"
+									:aria-label="`${t('delete.title')}: ${row.project_name}`"
+									@click.stop="askDelete(row)"
+									@keydown.enter.stop
+								>
+									<FeatherIcon
+										name="trash-2"
+										class="h-4 w-4"
+										aria-hidden="true"
+									/>
+								</button>
 								<FeatherIcon
 									name="chevron-right"
-									class="h-4 w-4"
+									class="inline h-4 w-4 text-ink-gray-4 group-hover:text-ink-gray-7"
 									aria-hidden="true"
 								/>
 							</td>
@@ -164,6 +182,12 @@
 				</table>
 			</div>
 		</div>
+
+		<DeleteTenderDialog
+			v-model="showDelete"
+			:tender="toDelete"
+			@deleted="() => tenders.reload()"
+		/>
 
 		<!-- New tender: name, trade (usually automatic), PDF by drop or file picker -->
 		<Dialog v-model="showNew" :options="{ title: t('list.new') }">
@@ -291,6 +315,7 @@ import {
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import DeleteTenderDialog from '@/components/DeleteTenderDialog.vue'
 import ProgressBar from '@/components/ProgressBar.vue'
 import StatusPill from '@/components/StatusPill.vue'
 import { api, errorText } from '@/utils/api'
@@ -375,6 +400,13 @@ function progressParts(row: any) {
 			label: t('kpi.provisional.label'),
 		},
 	]
+}
+
+const showDelete = ref(false)
+const toDelete = ref<any>(null)
+function askDelete(row: any) {
+	toDelete.value = row
+	showDelete.value = true
 }
 
 function openNew() {

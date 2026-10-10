@@ -338,6 +338,25 @@ def start_processing(tender: str):
 	return {"status": "Processing"}
 
 
+@frappe.whitelist(methods=["POST"])
+def delete_tender(tender: str) -> dict:
+	"""Delete a tender with its positions and its uploaded PDF (if no other tender uses it).
+	Not while it is being processed: the background job would write into a deleted record."""
+	doc = frappe.get_doc("Tender", tender)
+	doc.check_permission("delete")
+	if doc.status == "Processing":
+		frappe.throw(_("The tender is being processed. Delete it when processing has finished."))
+	file_url = doc.tender_file
+	frappe.delete_doc("Tender", tender)  # also removes files attached to it
+	if file_url and not frappe.db.exists("Tender", {"tender_file": file_url}):
+		# The dialog uploads the PDF before the tender exists, so it is not attached to it.
+		for name in frappe.get_all(
+			"File", {"file_url": file_url, "attached_to_name": ["in", ["", None, tender]]}, pluck="name"
+		):
+			frappe.delete_doc("File", name, ignore_permissions=True)
+	return {"deleted": tender}
+
+
 @frappe.whitelist()
 def recalculate_tender(tender: str):
 	doc = frappe.get_doc("Tender", tender)
