@@ -1,0 +1,148 @@
+{
+ "autoname": "hash",
+ "creation": "2026-10-10 11:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project_name",
+  "tender_file",
+  "file_hash",
+  "status",
+  "processing_log",
+  "section_totals",
+  "material_cost",
+  "labour_cost",
+  "direct_cost",
+  "column_break_t",
+  "confirmed_cost",
+  "provisional_cost",
+  "unresolved_count",
+  "cost_baseline",
+  "section_items",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Project Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tender_file",
+   "fieldtype": "Attach",
+   "label": "Tender File"
+  },
+  {
+   "fieldname": "file_hash",
+   "fieldtype": "Data",
+   "label": "File Hash",
+   "read_only": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nProcessing\nCompleted\nFailed"
+  },
+  {
+   "fieldname": "processing_log",
+   "fieldtype": "Small Text",
+   "label": "Processing Log",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_totals",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "material_cost",
+   "fieldtype": "Currency",
+   "label": "Material Cost (CHF)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "labour_cost",
+   "fieldtype": "Currency",
+   "label": "Labour Cost (CHF)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "direct_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Direct Cost (CHF)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_t",
+   "fieldtype": "Column Break",
+   "label": "Column Break T"
+  },
+  {
+   "fieldname": "confirmed_cost",
+   "fieldtype": "Currency",
+   "label": "Confirmed (CHF)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "provisional_cost",
+   "fieldtype": "Currency",
+   "label": "Provisional (CHF)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "unresolved_count",
+   "fieldtype": "Int",
+   "label": "Unresolved Positions",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cost_baseline",
+   "fieldtype": "Currency",
+   "label": "Cost Baseline (CHF)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_items",
+   "fieldtype": "Section Break",
+   "label": "Positions"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Tender Item"
+  }
+ ],
+ "modified": "2026-10-10 11:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bid Intelligence",
+ "name": "Tender",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "project_name",
+ "track_changes": 1
+}

@@ -1,0 +1,6 @@
+# Editor linting only. The project's real linter is ruff (see pyproject.toml and
+# .pre-commit-config.yaml); these settings mirror its line length and Frappe's tab style.
+[flake8]
+max-line-length = 110
+extend-ignore = B017,B018,B023,B904,E101,E402,E501,E741,F401,F403,F405,F722,W191,W503,E203
+exclude = .git,__pycache__,node_modules,frontend

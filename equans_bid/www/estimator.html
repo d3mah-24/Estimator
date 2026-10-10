@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/assets/equans_bid/frontend/favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no"
+    />
+    <title>Equans Kalkulation</title>
+    <script type="module" crossorigin src="/assets/equans_bid/frontend/assets/index-dab298c0.js"></script>
+    <link rel="stylesheet" href="/assets/equans_bid/frontend/assets/index-d34fa488.css">
+  </head>
+  <body class="h-full">
+    <div id="app" class="h-full"></div>
+    
+  
+          <script>
+              {% for key in boot %}
+              window["{{ key }}"] = {{ boot[key] | tojson }};
+              {% endfor %}
+          </script>
+          </body>
+          
+</html>

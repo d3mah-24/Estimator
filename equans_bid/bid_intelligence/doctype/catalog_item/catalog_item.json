@@ -1,0 +1,132 @@
+{
+ "autoname": "field:product_id",
+ "creation": "2026-10-10 11:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "product_id",
+  "category",
+  "subcategory",
+  "manufacturer",
+  "model",
+  "column_break_1",
+  "description",
+  "unit",
+  "list_price_chf",
+  "discount_pct",
+  "net_cost_chf",
+  "install_code",
+  "source_type",
+  "supplier_quote_required"
+ ],
+ "fields": [
+  {
+   "fieldname": "product_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Product ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Category"
+  },
+  {
+   "fieldname": "subcategory",
+   "fieldtype": "Data",
+   "label": "Subcategory"
+  },
+  {
+   "fieldname": "manufacturer",
+   "fieldtype": "Data",
+   "label": "Manufacturer"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break",
+   "label": "Column Break 1"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "label": "Unit"
+  },
+  {
+   "fieldname": "list_price_chf",
+   "fieldtype": "Currency",
+   "label": "List Price (CHF)"
+  },
+  {
+   "fieldname": "discount_pct",
+   "fieldtype": "Percent",
+   "label": "Discount %"
+  },
+  {
+   "fieldname": "net_cost_chf",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Net Cost (CHF)"
+  },
+  {
+   "fieldname": "install_code",
+   "fieldtype": "Link",
+   "label": "Install Code",
+   "options": "Productivity Rule"
+  },
+  {
+   "fieldname": "source_type",
+   "fieldtype": "Select",
+   "label": "Source Type",
+   "options": "catalog\nsupplier_package"
+  },
+  {
+   "default": "0",
+   "fieldname": "supplier_quote_required",
+   "fieldtype": "Check",
+   "label": "Supplier Quote Required"
+  }
+ ],
+ "modified": "2026-10-10 11:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bid Intelligence",
+ "name": "Catalog Item",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "description,category,model",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "description",
+ "track_changes": 1
+}

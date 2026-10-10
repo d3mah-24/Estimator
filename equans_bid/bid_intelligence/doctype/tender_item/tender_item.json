@@ -1,0 +1,223 @@
+{
+ "creation": "2026-10-10 11:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "position_id",
+  "golden_lv_id",
+  "system",
+  "source_page",
+  "description_original",
+  "description",
+  "attributes",
+  "extraction_confidence",
+  "column_break_q",
+  "quantity_raw",
+  "unit_raw",
+  "quantity",
+  "unit",
+  "section_match",
+  "matched_product",
+  "match_confidence",
+  "install_code",
+  "price_source",
+  "section_cost",
+  "net_unit_cost",
+  "quote_override",
+  "material_cost",
+  "column_break_c",
+  "labour_hours",
+  "labour_rate",
+  "labour_cost",
+  "direct_cost",
+  "section_status",
+  "status",
+  "status_reason",
+  "error"
+ ],
+ "fields": [
+  {
+   "fieldname": "position_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Position ID"
+  },
+  {
+   "fieldname": "golden_lv_id",
+   "fieldtype": "Data",
+   "label": "Golden LV ID"
+  },
+  {
+   "fieldname": "system",
+   "fieldtype": "Data",
+   "label": "System"
+  },
+  {
+   "fieldname": "source_page",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Source Page"
+  },
+  {
+   "fieldname": "description_original",
+   "fieldtype": "Small Text",
+   "label": "Original Description"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "attributes",
+   "fieldtype": "JSON",
+   "label": "Attributes"
+  },
+  {
+   "fieldname": "extraction_confidence",
+   "fieldtype": "Float",
+   "label": "Extraction Confidence",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_q",
+   "fieldtype": "Column Break",
+   "label": "Column Break Q"
+  },
+  {
+   "fieldname": "quantity_raw",
+   "fieldtype": "Data",
+   "label": "Quantity (raw)"
+  },
+  {
+   "fieldname": "unit_raw",
+   "fieldtype": "Data",
+   "label": "Unit (raw)"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity",
+   "precision": "3"
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "label": "Unit"
+  },
+  {
+   "fieldname": "section_match",
+   "fieldtype": "Section Break",
+   "label": "Match"
+  },
+  {
+   "fieldname": "matched_product",
+   "fieldtype": "Link",
+   "label": "Matched Product",
+   "options": "Catalog Item"
+  },
+  {
+   "fieldname": "match_confidence",
+   "fieldtype": "Float",
+   "label": "Match Confidence",
+   "precision": "2"
+  },
+  {
+   "fieldname": "install_code",
+   "fieldtype": "Data",
+   "label": "Install Code"
+  },
+  {
+   "fieldname": "price_source",
+   "fieldtype": "Data",
+   "label": "Price Source"
+  },
+  {
+   "fieldname": "section_cost",
+   "fieldtype": "Section Break",
+   "label": "Cost"
+  },
+  {
+   "fieldname": "net_unit_cost",
+   "fieldtype": "Currency",
+   "label": "Net Unit Cost (CHF)"
+  },
+  {
+   "description": "Replaces catalogue material cost when set",
+   "fieldname": "quote_override",
+   "fieldtype": "Currency",
+   "label": "Supplier Quote (CHF)"
+  },
+  {
+   "fieldname": "material_cost",
+   "fieldtype": "Currency",
+   "label": "Material Cost (CHF)"
+  },
+  {
+   "fieldname": "column_break_c",
+   "fieldtype": "Column Break",
+   "label": "Column Break C"
+  },
+  {
+   "fieldname": "labour_hours",
+   "fieldtype": "Float",
+   "label": "Labour Hours",
+   "precision": "4"
+  },
+  {
+   "fieldname": "labour_rate",
+   "fieldtype": "Currency",
+   "label": "Labour Rate (CHF/h)"
+  },
+  {
+   "fieldname": "labour_cost",
+   "fieldtype": "Currency",
+   "label": "Labour Cost (CHF)"
+  },
+  {
+   "fieldname": "direct_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Direct Cost (CHF)"
+  },
+  {
+   "fieldname": "section_status",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "default": "review_required",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "calculated\nsupplier_quote_required\nassumption_applied\nreview_required\ninsufficient_information\nout_of_scope\nnon_priceable"
+  },
+  {
+   "fieldname": "status_reason",
+   "fieldtype": "Small Text",
+   "label": "Status Reason"
+  },
+  {
+   "fieldname": "error",
+   "fieldtype": "Small Text",
+   "label": "Error"
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-10-10 11:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bid Intelligence",
+ "name": "Tender Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0
+}
