@@ -9,7 +9,11 @@ readme = "README.md"
 dynamic = ["version"]
 dependencies = [
     # "frappe~=16.0.0" # Installed and managed by bench.
-    "rapidfuzz>=3.0",
+    "pdfplumber>=0.11,<0.12",   # PDF text (extraction)
+    "rapidfuzz>=3.0,<4",        # text similarity (matching, LLM shortlist)
+    "openai>=1.40",             # LLM client for any OpenAI-compatible API (Groq, OpenAI, Azure)
+    "openpyxl>=3.1,<4",         # Excel export (also shipped with Frappe)
+    "babel>=2.12",              # locale formatting in exports (also shipped with Frappe)
 ]
 
 [build-system]
@@ -18,11 +22,12 @@ build-backend = "flit_core.buildapi"
 
 # These dependencies are only installed when developer mode is enabled
 [tool.bench.dev-dependencies]
-# package_name = "~=1.1.0"
+# Tender package generator (equans_bid.tools) and its tests render PDFs; needs Pango (see apt below).
+weasyprint = ">=60"
 
 # These apt dependencies will be installed from Ubuntu repositories when you host your app on Frappe Cloud
 [deploy.dependencies.apt]
-packages = []
+packages = ["libpango-1.0-0", "libpangoft2-1.0-0"]
 
 [tool.ruff]
 line-length = 110

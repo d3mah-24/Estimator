@@ -5,6 +5,18 @@ reads every position and maps it to the central catalogue in the database, the r
 it, and every franc is computed **deterministically in Python** from the catalogue prices. The
 estimator reviews and decides in the review UI (de-CH, fr-CH, en) and exports the result to Excel.
 
+#### Install (fresh bench)
+
+```bash
+bench get-app <repo-url>                   # or: copy/clone into apps/equans_bid
+bench setup requirements --python           # installs pdfplumber, openai, rapidfuzz, openpyxl, babel
+bench --site <site> install-app equans_bid  # or: bench --site <site> migrate (already installed)
+bench restart                               # or restart `bench start`: workers load the new packages
+```
+
+"No module named 'pdfplumber'" means the second step was skipped. The tender generator
+(`equans_bid.tools`) also needs `weasyprint` (dev dependency; system packages `libpango-1.0-0`).
+
 #### Run it
 
 ```bash
