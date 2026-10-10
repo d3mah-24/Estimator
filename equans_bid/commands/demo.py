@@ -16,11 +16,19 @@ GOLDEN = APP / "data" / "starter" / "expected_output_example.json"
 
 
 def reset():
-	"""Reseed reference data and reprocess the demo tender: no quotes, no custom assumptions."""
+	"""Reseed reference data and reprocess the demo tender from scratch: no quotes, no hand-set
+	products or statuses, no custom assumptions, no chosen bid."""
 	seed_data.run()
+	name = frappe.db.get_value("Tender", {"project_name": seed_demo.DEMO_NAME})
+	if name:
+		# Reprocessing keeps estimator edits by design; a demo reset must not.
+		doc = frappe.get_doc("Tender", name)
+		doc.set("items", [])
+		doc.bid_assumptions = None
+		doc.bid_selection = None
+		doc.save()
+		frappe.db.commit()
 	name = seed_demo.run()
-	frappe.db.set_value("Tender", name, "bid_assumptions", None)
-	frappe.db.commit()
 	print(f"Demo ready: /estimator/tender/{name}")
 	smoke()
 
@@ -109,6 +117,9 @@ def smoke():
 		quotes = [i.position_id for i in doc.items if i.quote_override]
 		_check(r, "No leftover supplier quotes", not quotes, ", ".join(quotes[:5]))
 		_check(r, "Default bid assumptions", not doc.bid_assumptions)
+		_check(r, "No bid chosen yet", not doc.bid_selection, fix="run demo.reset")
+		manual = [i.position_id for i in doc.items if (i.reason_code or "").endswith("_set_by_estimator")]
+		_check(r, "No hand-set products or statuses", not manual, ", ".join(manual[:5]))
 
 	www = APP / "www" / "estimator.html"
 	_check(

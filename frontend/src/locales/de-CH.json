@@ -1,6 +1,8 @@
 {
   "app": {
-    "language": "Sprache"
+    "language": "Sprache",
+    "home": "Zur Startseite",
+    "tagline": "Erstpreis aus dem Leistungsverzeichnis"
   },
   "common": {
     "loading": "Lädt …",
@@ -23,9 +25,10 @@
       "directCost": "Direkte Kosten",
       "baseline": "Kostenbasis",
       "open": "Offene Positionen",
-      "trade": "Gewerk"
+      "trade": "Gewerk",
+      "progress": "Bepreist (Wert)"
     },
-    "empty": "Noch keine Ausschreibung erfasst.",
+    "empty": "Laden Sie ein Leistungsverzeichnis (PDF) hoch. Positionen, Katalogzuordnung und Preise werden automatisch erstellt.",
     "dialog": {
       "projectName": "Projektname",
       "tradeAuto": "Automatisch erkennen",
@@ -35,16 +38,24 @@
       "submit": "Hochladen und verarbeiten",
       "notPdf": "Bitte eine PDF-Datei wählen.",
       "tooLarge": "Die Datei ist grösser als {size} MB.",
-      "createFailed": "Erstellen fehlgeschlagen"
+      "createFailed": "Erstellen fehlgeschlagen",
+      "drop": "PDF hierher ziehen oder klicken",
+      "dropHint": "Leistungsverzeichnis als PDF, bis 50 MB",
+      "replace": "Andere Datei wählen: klicken oder ziehen"
+    },
+    "updated": "Geändert {date}",
+    "noOpen": "Keine offenen Positionen",
+    "emptyTitle": "Noch keine Ausschreibung",
+    "stats": {
+      "tenders": "Ausschreibungen",
+      "open": "Offene Positionen",
+      "baseline": "Kostenbasis gesamt"
     }
   },
   "review": {
     "export": "Excel exportieren",
     "reprocess": "Erneut verarbeiten",
-    "bySystem": "Nach Anlage ({count})",
-    "positionsShort": "{count} Pos.",
     "search": "Suchen (Beschreibung, Produkt, LV-ID)",
-    "allStatuses": "Alle Status ({count})",
     "allSystems": "Alle Anlagen",
     "positions": "keine Positionen | eine Position | {count} Positionen",
     "col": {
@@ -74,7 +85,6 @@
     "labour": "Arbeit",
     "labourFormula": "{hours} Std × {rate}",
     "selectHint": "Position wählen, um Herkunft und Berechnung zu sehen.",
-    "noSystem": "Ohne Anlage",
     "processed": "Keine Positionen aus {file} extrahiert. | Eine Position aus {file} extrahiert. | {count} Positionen aus {file} extrahiert.",
     "llmUsed": "LLM {model} ({provider}): {calls} Aufrufe, {cached} aus Cache, {errors} Fehler.",
     "llmNone": "LLM nicht konfiguriert (nur Regeln).",
@@ -102,6 +112,40 @@
       "exact": "exakt",
       "close": "ähnlich",
       "none": "keine Übereinstimmung"
+    },
+    "showPdf": "PDF anzeigen",
+    "hidePdf": "PDF ausblenden",
+    "openInPdf": "Im PDF anzeigen",
+    "closePanel": "Seitenleiste schliessen",
+    "more": "Weitere Aktionen",
+    "progress": "Stand der Prüfung",
+    "directCostLine": "Direkte Kosten {amount}",
+    "bidCard": "Angebot",
+    "bidNone": "Noch nicht gewählt",
+    "bidChoose": "Szenario oder eigenes Angebot wählen",
+    "tab": {
+      "positions": "Positionen",
+      "bid": "Angebot"
+    },
+    "filter": {
+      "all": "Alle",
+      "open": "Offen",
+      "quote": "Offerte nötig",
+      "assumption": "Annahme",
+      "calculated": "Berechnet",
+      "excluded": "Ausgeschlossen"
+    },
+    "group": {
+      "calculated": "Berechnet",
+      "provisional": "Provisorisch",
+      "open": "Offen"
+    },
+    "filteredTotal": "Summe {amount}",
+    "noMatch": "Keine Position passt zu den Filtern.",
+    "clearFilters": "Filter zurücksetzen",
+    "section": {
+      "edit": "Bearbeiten",
+      "price": "Preis"
     }
   },
   "kpi": {
@@ -166,8 +210,11 @@
       "margin": "Marge %",
       "price": "Preis CHF",
       "update": "Übernehmen",
-      "belowBaseline": "Preis unter der Kostenbasis"
-    }
+      "belowBaseline": "Preis unter der Kostenbasis",
+      "hint": "Eigene Marge oder festen Preis eingeben."
+    },
+    "advanced": "Erweitert: Gewinnchance-Modell",
+    "advancedHint": "Grobe Schätzung aus den Projektparametern, nicht aus historischen Angeboten. Beeinflusst nur Gewinnchance und Empfehlung, nie die Preise."
   },
   "buildUp": {
     "catalog_material": {
@@ -274,5 +321,13 @@
   },
   "warning": {
     "header_conflict": "Seitenkopf nennt «{header}», Quelldokument ist «{source}.docx»"
+  },
+  "processing": {
+    "title": "PDF wird verarbeitet …",
+    "working": "Positionen lesen, dem Katalog zuordnen und bepreisen",
+    "loading": "Ergebnisse werden geladen …",
+    "elapsed": "Laufzeit {time}",
+    "hint": "Mit LLM kann die erste Verarbeitung einer grossen Ausschreibung einige Minuten dauern. Die Verarbeitung läuft weiter, auch wenn Sie diese Seite verlassen.",
+    "leave": "Zur Übersicht (Verarbeitung läuft weiter)"
   }
 }

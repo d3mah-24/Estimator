@@ -24,7 +24,7 @@ function formatter(kind, options) {
 			key,
 			kind === 'date'
 				? new Intl.DateTimeFormat(current.value, options)
-				: new Intl.NumberFormat(current.value, options)
+				: new Intl.NumberFormat(current.value, options),
 		)
 	}
 	return cache.get(key)
@@ -63,7 +63,7 @@ export function formatQuantity(value) {
 export function formatPercent(fraction, { maxDigits = 1 } = {}) {
 	if (isMissing(fraction)) return MISSING
 	return formatter('number', { style: 'percent', maximumFractionDigits: maxDigits }).format(
-		Number(fraction)
+		Number(fraction),
 	)
 }
 
@@ -75,4 +75,10 @@ export function formatDate(value, options = { dateStyle: 'medium' }) {
 			? value
 			: new Date(typeof value === 'string' ? value.replace(' ', 'T') : value)
 	return Number.isNaN(date.getTime()) ? MISSING : formatter('date', options).format(date)
+}
+
+/** Elapsed time as m:ss (e.g. 3:07); locale-neutral. */
+export function formatDuration(seconds) {
+	const s = Math.max(0, Math.floor(Number(seconds) || 0))
+	return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 }

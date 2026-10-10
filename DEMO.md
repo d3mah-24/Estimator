@@ -20,7 +20,8 @@ Upload `BKP_244_LV_Lueftung_260804.pdf`. ~20 s later: 439 positions, 6 systems, 
 *If short on time:* open the pre-processed tender instead.
 
 **1:00 — One position, end to end** (search `LV0001`)
-- Click the row: the PDF jumps to page 78 and highlights "Ø 10 cm … Stk 5".
+- Click the row (or its "S. 78" link with the PDF shown): the PDF jumps to page 78 and highlights
+  "Ø 10 cm … Stk 5".
 - Detail panel: 5 Stk, matched to P-AIR-001 because family *and* DN100 agree.
 - Breakdown: 5 × CHF 74.80 + 4 % waste = CHF 388.96; 4.35 h × CHF 96 = CHF 417.30; **CHF 806.26** —
   exactly the Equans reference. The LLM never touches money.
@@ -32,18 +33,23 @@ Upload `BKP_244_LV_Lueftung_260804.pdf`. ~20 s later: 439 positions, 6 systems, 
   The estimator decides to price it as P-AIR-003; the reason now says "Produkt durch Kalkulator gesetzt".
 
 **3:00 — Honesty about uncertainty**
-- KPI row: confirmed vs provisional vs 224 positions without a price — never silently CHF 0.
-- Filter `Annahme`: rectangular ducts priced at the nearest catalogue size class, the class is named.
-- Select a Turnhalle position (filter system 244.05): the tool found a **contradiction in the tender** —
+- Overview bar "Stand der Prüfung": berechnet vs provisorisch vs 224 offen — never silently CHF 0.
+  Click "Offen" to jump to the open positions.
+- Chip `Annahme`: rectangular ducts priced at the nearest catalogue size class, the class is named.
+- Select a Turnhalle position (system filter 244.05): the tool found a **contradiction in the tender** —
   pages headed "244.03 Küche" are in the Turnhalle source document.
 
-**3:45 — The bid decision** (`Kostenaufbau`, then `Annahmen`)
-- Build-up: material, packages, labour, small material, reserve, project costs → overhead → baseline.
+**3:45 — The bid decision** (tab `Angebot`)
+- Right: the cost build-up, material, packages, labour, small material, reserve, project costs →
+  overhead → baseline.
 - Three scenarios with price, margin, win probability and expected contribution; Konservativ recommended.
-- Set *Wettbewerb* to −15 Pp.: probabilities drop live — the trade-off is visible and editable.
+- Under *Annahmen → Erweitert*, set *Wettbewerb* to −15 Pp.: probabilities drop live.
+- Click `Auswählen` on a scenario (or enter an own margin / price): the chosen bid appears in the
+  header card and in the Excel.
 
 **4:30 — Take it away**
-`Export (CSV)` opens in Excel with every position, source page, reason, build-up and scenarios.
+`Excel exportieren`: sheets Positionen, Zusammenfassung (with the chosen bid), Angebotsbereich,
+Offene Punkte, Annahmen.
 Scalability: new trade = new catalogue + productivity CSV + keyword families. Same UI, same engine.
 
 **After the demo**: `demo.reset` again to clear the quote and the product change.

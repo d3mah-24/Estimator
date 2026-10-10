@@ -47,6 +47,21 @@ class TestTenderEndToEnd(IntegrationTestCase):
 		self.assertEqual(lv6.labour_cost, labour_before)
 		self.assertEqual(lv6.price_source, "supplier_quote")
 
+	def test_reprocessing_keeps_estimator_edits(self):
+		doc, lv6 = self.item("LV0006")
+		update_item(doc.name, lv6.name, quote_override=7777)
+		other = next(i for i in doc.items if i.status == "review_required")
+		update_item(doc.name, other.name, status="out_of_scope")
+		process_tender_pdf(self.tender.name, pages=[78, 79, 80])
+		_, lv6 = self.item("LV0006")
+		self.assertEqual((lv6.quote_override, lv6.material_cost), (7777, 7777))
+		again = next(
+			i for i in frappe.get_doc("Tender", doc.name).items if i.position_id == other.position_id
+		)
+		self.assertEqual((again.status, again.reason_code), ("out_of_scope", "status_set_by_estimator"))
+		update_item(doc.name, lv6.name, quote_override=0)
+		update_item(doc.name, again.name, status="review_required")
+
 	def test_bid_selection_saved_and_exported(self):
 		s = set_bid_selection(self.tender.name, "Conservative")
 		self.assertEqual(s["selected_bid"]["scenario"], "Conservative")

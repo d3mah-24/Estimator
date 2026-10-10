@@ -233,14 +233,55 @@ def _build_up(tender, catalog: dict, params: dict) -> dict:
 	return project_baseline(catalog_material, supplier_material, labour, params)
 
 
+def _position_key(item) -> tuple:
+	"""The same position in a rerun: page, printed text, unit and quantity (not the row name)."""
+	text = " ".join(str(item.get("description_original") or "").split())
+	return (item.get("source_page"), text, item.get("unit"), float(item.get("quantity") or 0))
+
+
+def _estimator_edits(doc) -> dict:
+	"""What the estimator entered on the current positions, by position key."""
+	edits = {}
+	for i in doc.items:
+		edit = {}
+		if i.quote_override:
+			edit["quote_override"] = i.quote_override
+		if i.reason_code == "product_set_by_estimator" and i.matched_product:
+			edit["matched_product"] = i.matched_product
+		if i.reason_code == "status_set_by_estimator":
+			edit["status"] = i.status
+		if edit:
+			edits[_position_key(i)] = edit
+	return edits
+
+
+def _restore_edits(row, edit: dict | None) -> None:
+	"""Apply an earlier estimator edit to the re-extracted position (it wins over the machine)."""
+	if not edit:
+		return
+	if "matched_product" in edit and frappe.db.exists("Catalog Item", edit["matched_product"]):
+		row.matched_product = edit["matched_product"]
+		row.match_confidence = 1.0
+		quote = frappe.db.get_value("Catalog Item", row.matched_product, "supplier_quote_required")
+		row.status = "supplier_quote_required" if quote else "calculated"
+		_set_reason(row, "product_set_by_estimator")
+	if "status" in edit:
+		row.status = edit["status"]
+		_set_reason(row, "status_set_by_estimator")
+	if "quote_override" in edit:
+		row.quote_override = edit["quote_override"]
+
+
 @frappe.whitelist()
 def process_tender_pdf(tender: str, pages: str | list | None = None):
-	"""Extract, match and price every position of the tender PDF. Replaces existing items."""
+	"""Extract, match and price every position of the tender PDF. Replaces existing items, but
+	keeps the estimator's work: quotes, hand-picked products and statuses (see _estimator_edits)."""
 	doc = frappe.get_doc("Tender", tender)
 	doc.check_permission("write")
 	if isinstance(pages, str):
 		pages = json.loads(pages)
-	doc.db_set("status", "Processing")
+	# No status write here: start_processing set "Processing" and committed it. Writing the row
+	# again would lock it in this transaction for the whole (possibly long) LLM run.
 	try:
 		path = _tender_pdf_path(doc)
 		if not doc.trade:
@@ -255,9 +296,10 @@ def process_tender_pdf(tender: str, pages: str | list | None = None):
 		if doc.file_hash == file_sha256(STARTER_PDF):
 			# Verified example rows exist for this tender only (the UI shows their LV IDs).
 			assign_golden_ids(positions, catalog)
+		edits = _estimator_edits(doc)
 		doc.set("items", [])
 		for p in positions:
-			doc.append(
+			row = doc.append(
 				"items",
 				{
 					**p,
@@ -266,6 +308,7 @@ def process_tender_pdf(tender: str, pages: str | list | None = None):
 					"reason_args": json.dumps(p["reason_args"] or {}),
 				},
 			)
+			_restore_edits(row, edits.get(_position_key(row)))
 		doc.catalog_priced_at = None
 		_recalculate(doc)
 		doc.status = "Completed"

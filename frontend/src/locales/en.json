@@ -1,6 +1,8 @@
 {
   "app": {
-    "language": "Language"
+    "language": "Language",
+    "home": "Home",
+    "tagline": "First price from the bill of quantities"
   },
   "common": {
     "loading": "Loading …",
@@ -23,9 +25,10 @@
       "directCost": "Direct cost",
       "baseline": "Cost baseline",
       "open": "Open positions",
-      "trade": "Trade"
+      "trade": "Trade",
+      "progress": "Priced (value)"
     },
-    "empty": "No tenders yet.",
+    "empty": "Upload a bill of quantities (PDF). Positions, catalogue mapping and prices are created automatically.",
     "dialog": {
       "projectName": "Project name",
       "tradeAuto": "Detect automatically",
@@ -35,16 +38,24 @@
       "submit": "Upload and process",
       "notPdf": "Please choose a PDF file.",
       "tooLarge": "The file is larger than {size} MB.",
-      "createFailed": "Creating the tender failed"
+      "createFailed": "Creating the tender failed",
+      "drop": "Drop the PDF here or click",
+      "dropHint": "Bill of quantities as PDF, up to 50 MB",
+      "replace": "Choose another file: click or drop"
+    },
+    "updated": "Changed {date}",
+    "noOpen": "No open positions",
+    "emptyTitle": "No tenders yet",
+    "stats": {
+      "tenders": "Tenders",
+      "open": "Open positions",
+      "baseline": "Total cost baseline"
     }
   },
   "review": {
     "export": "Export to Excel",
     "reprocess": "Process again",
-    "bySystem": "By system ({count})",
-    "positionsShort": "{count} pos.",
     "search": "Search (description, product, LV ID)",
-    "allStatuses": "All statuses ({count})",
     "allSystems": "All systems",
     "positions": "no positions | one position | {count} positions",
     "col": {
@@ -74,7 +85,6 @@
     "labour": "Labour",
     "labourFormula": "{hours} h × {rate}",
     "selectHint": "Select a position to see where it comes from and how it is priced.",
-    "noSystem": "No system",
     "processed": "No positions extracted from {file}. | One position extracted from {file}. | {count} positions extracted from {file}.",
     "llmUsed": "LLM {model} ({provider}): {calls} calls, {cached} cached, {errors} errors.",
     "llmNone": "LLM not configured (rules only).",
@@ -102,6 +112,40 @@
       "exact": "exact",
       "close": "close",
       "none": "no match"
+    },
+    "showPdf": "Show PDF",
+    "hidePdf": "Hide PDF",
+    "openInPdf": "Show in the PDF",
+    "closePanel": "Close panel",
+    "more": "More actions",
+    "progress": "Review progress",
+    "directCostLine": "Direct cost {amount}",
+    "bidCard": "Offer",
+    "bidNone": "Not chosen yet",
+    "bidChoose": "Choose a scenario or your own offer",
+    "tab": {
+      "positions": "Positions",
+      "bid": "Offer"
+    },
+    "filter": {
+      "all": "All",
+      "open": "Open",
+      "quote": "Quote needed",
+      "assumption": "Assumption",
+      "calculated": "Calculated",
+      "excluded": "Excluded"
+    },
+    "group": {
+      "calculated": "Calculated",
+      "provisional": "Provisional",
+      "open": "Open"
+    },
+    "filteredTotal": "Total {amount}",
+    "noMatch": "No position matches the filters.",
+    "clearFilters": "Clear filters",
+    "section": {
+      "edit": "Edit",
+      "price": "Price"
     }
   },
   "kpi": {
@@ -166,8 +210,11 @@
       "margin": "Margin %",
       "price": "Price CHF",
       "update": "Apply",
-      "belowBaseline": "Price below the cost baseline"
-    }
+      "belowBaseline": "Price below the cost baseline",
+      "hint": "Enter your own margin or a fixed price."
+    },
+    "advanced": "Advanced: win-probability model",
+    "advancedHint": "A rough estimate from the project parameters, not from past bids. Only affects the win probability and the recommendation, never the prices."
   },
   "buildUp": {
     "catalog_material": {
@@ -274,5 +321,13 @@
   },
   "warning": {
     "header_conflict": "Page header says '{header}', source document is '{source}.docx'"
+  },
+  "processing": {
+    "title": "Processing the PDF …",
+    "working": "Reading positions, mapping them to the catalogue and pricing",
+    "loading": "Loading the results …",
+    "elapsed": "Elapsed {time}",
+    "hint": "With the LLM, the first run of a large tender can take a few minutes. Processing continues even if you leave this page.",
+    "leave": "Back to the list (processing continues)"
   }
 }

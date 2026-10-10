@@ -1,6 +1,8 @@
 {
   "app": {
-    "language": "Langue"
+    "language": "Langue",
+    "home": "Vers l'accueil",
+    "tagline": "Premier prix à partir du descriptif"
   },
   "common": {
     "loading": "Chargement …",
@@ -23,9 +25,10 @@
       "directCost": "Coûts directs",
       "baseline": "Base de coûts",
       "open": "Positions ouvertes",
-      "trade": "Corps de métier"
+      "trade": "Corps de métier",
+      "progress": "Chiffré (valeur)"
     },
-    "empty": "Aucun appel d’offres saisi.",
+    "empty": "Téléversez un descriptif (PDF). Les positions, l'attribution au catalogue et les prix sont créés automatiquement.",
     "dialog": {
       "projectName": "Nom du projet",
       "tradeAuto": "Détection automatique",
@@ -35,16 +38,24 @@
       "submit": "Téléverser et traiter",
       "notPdf": "Veuillez choisir un fichier PDF.",
       "tooLarge": "Le fichier dépasse {size} Mo.",
-      "createFailed": "Échec de la création"
+      "createFailed": "Échec de la création",
+      "drop": "Glissez le PDF ici ou cliquez",
+      "dropHint": "Descriptif en PDF, jusqu'à 50 Mo",
+      "replace": "Autre fichier : cliquer ou glisser"
+    },
+    "updated": "Modifié {date}",
+    "noOpen": "Aucune position ouverte",
+    "emptyTitle": "Aucun appel d'offres",
+    "stats": {
+      "tenders": "Appels d'offres",
+      "open": "Positions ouvertes",
+      "baseline": "Base de coûts totale"
     }
   },
   "review": {
     "export": "Exporter vers Excel",
     "reprocess": "Retraiter",
-    "bySystem": "Par installation ({count})",
-    "positionsShort": "{count} pos.",
     "search": "Rechercher (description, produit, n° de position)",
-    "allStatuses": "Tous les statuts ({count})",
     "allSystems": "Toutes les installations",
     "positions": "aucune position | une position | {count} positions",
     "col": {
@@ -74,7 +85,6 @@
     "labour": "Main-d’œuvre",
     "labourFormula": "{hours} h × {rate}",
     "selectHint": "Choisissez une position pour voir son origine et son calcul.",
-    "noSystem": "Sans installation",
     "processed": "Aucune position extraite de {file}. | Une position extraite de {file}. | {count} positions extraites de {file}.",
     "llmUsed": "LLM {model} ({provider}) : {calls} appels, {cached} en cache, {errors} erreurs.",
     "llmNone": "LLM non configuré (règles uniquement).",
@@ -102,6 +112,40 @@
       "exact": "exact",
       "close": "proche",
       "none": "aucune correspondance"
+    },
+    "showPdf": "Afficher le PDF",
+    "hidePdf": "Masquer le PDF",
+    "openInPdf": "Afficher dans le PDF",
+    "closePanel": "Fermer le panneau",
+    "more": "Autres actions",
+    "progress": "Avancement de la vérification",
+    "directCostLine": "Coûts directs {amount}",
+    "bidCard": "Offre",
+    "bidNone": "Pas encore choisie",
+    "bidChoose": "Choisir un scénario ou une offre propre",
+    "tab": {
+      "positions": "Positions",
+      "bid": "Offre"
+    },
+    "filter": {
+      "all": "Toutes",
+      "open": "Ouvertes",
+      "quote": "Offre requise",
+      "assumption": "Hypothèse",
+      "calculated": "Calculées",
+      "excluded": "Exclues"
+    },
+    "group": {
+      "calculated": "Calculées",
+      "provisional": "Provisoires",
+      "open": "Ouvertes"
+    },
+    "filteredTotal": "Total {amount}",
+    "noMatch": "Aucune position ne correspond aux filtres.",
+    "clearFilters": "Réinitialiser les filtres",
+    "section": {
+      "edit": "Modifier",
+      "price": "Prix"
     }
   },
   "kpi": {
@@ -166,8 +210,11 @@
       "margin": "Marge %",
       "price": "Prix CHF",
       "update": "Appliquer",
-      "belowBaseline": "Prix sous la base de coûts"
-    }
+      "belowBaseline": "Prix sous la base de coûts",
+      "hint": "Saisir une marge propre ou un prix fixe."
+    },
+    "advanced": "Avancé : modèle de probabilité de gain",
+    "advancedHint": "Estimation grossière à partir des paramètres du projet, non basée sur des offres historiques. N'influence que la probabilité de gain et la recommandation, jamais les prix."
   },
   "buildUp": {
     "catalog_material": {
@@ -274,5 +321,13 @@
   },
   "warning": {
     "header_conflict": "L’en-tête de page indique « {header} », le document source est « {source}.docx »"
+  },
+  "processing": {
+    "title": "Traitement du PDF …",
+    "working": "Lecture des positions, attribution au catalogue et calcul des prix",
+    "loading": "Chargement des résultats …",
+    "elapsed": "Durée {time}",
+    "hint": "Avec le LLM, le premier traitement d'un grand appel d'offres peut prendre quelques minutes. Le traitement continue même si vous quittez cette page.",
+    "leave": "Vers la liste (le traitement continue)"
   }
 }

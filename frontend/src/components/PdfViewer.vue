@@ -81,8 +81,12 @@ const highlightNote = computed(() =>
 	highlighted.value === null
 		? ''
 		: highlighted.value
-		? t('pdf.highlighted', { count: highlighted.value, page: props.page }, highlighted.value)
-		: t('pdf.notHighlighted')
+			? t(
+					'pdf.highlighted',
+					{ count: highlighted.value, page: props.page },
+					highlighted.value,
+				)
+			: t('pdf.notHighlighted'),
 )
 let renderTask: any = null
 

@@ -1,326 +1,403 @@
 <template>
-	<section class="border-b px-5 py-3">
-		<div class="mb-2 flex flex-wrap items-center gap-2">
-			<h2 class="text-base font-semibold text-ink-gray-9">{{ t('bid.title') }}</h2>
-			<span class="text-xs text-ink-gray-5">{{ t('bid.modelNote') }}</span>
-			<span
-				v-if="isCustom"
-				class="rounded bg-surface-amber-1 px-1.5 py-0.5 text-xs text-ink-amber-3"
-				>{{ t('bid.custom') }}</span
-			>
-			<div class="ml-auto flex gap-2">
-				<Button
-					v-if="shown.selected_bid"
-					variant="ghost"
-					icon-left="x"
-					:loading="selecting"
-					@click="select(null)"
-					>{{ t('bid.clearSelection') }}</Button
-				>
-				<Button
-					:variant="open === 'buildup' ? 'subtle' : 'ghost'"
-					icon-left="layers"
-					@click="toggle('buildup')"
-					>{{ t('bid.buildUp') }}</Button
-				>
-				<Button
-					:variant="open === 'assumptions' ? 'subtle' : 'ghost'"
-					icon-left="sliders"
-					@click="toggle('assumptions')"
-					>{{ t('bid.assumptions') }}</Button
-				>
-			</div>
-		</div>
-
-		<!-- The bid the estimator chose (saved per tender, exported to Excel). -->
+	<div class="mx-auto max-w-7xl px-6 py-5">
+		<!-- The bid the estimator chose (saved per tender, exported to Excel) -->
 		<div
-			class="mb-2 rounded px-3 py-1.5 text-sm"
+			class="mb-5 flex flex-wrap items-center gap-3 rounded-xl px-4 py-3"
 			:class="
 				shown.selected_bid
-					? 'bg-surface-blue-1 text-ink-blue-3'
-					: 'bg-surface-gray-2 text-ink-gray-6'
+					? 'bg-brand-600 text-white'
+					: 'border border-dashed border-outline-gray-3 bg-surface-white text-ink-gray-7'
 			"
 		>
-			<template v-if="shown.selected_bid">
-				{{
-					t('bid.selectedLine', {
-						price: formatCHF(shown.selected_bid.bid_price_chf, { digits: 0 }),
-						scenario: t(`scenario.${shown.selected_bid.scenario}`),
-						margin: formatPercent(shown.selected_bid.margin_pct / 100),
-					})
-				}}
-				<span
-					v-if="shown.selected_bid.below_baseline"
-					class="ml-2 font-medium text-ink-red-4"
-					>{{ t('bid.own.belowBaseline') }}</span
-				>
-			</template>
-			<template v-else>{{
-				t('bid.noneSelected', { scenario: t(`scenario.${recommendedName}`) })
-			}}</template>
-		</div>
-
-		<div class="grid grid-cols-1 gap-3 md:grid-cols-5">
-			<div
-				v-for="s in shown.bid_range"
-				:key="s.scenario"
-				class="flex flex-col rounded-lg border px-3 py-2"
-				:class="[
-					s.recommended ? 'border-outline-green-2 bg-surface-green-1' : '',
-					s.selected ? 'ring-2 ring-outline-blue-2' : '',
-				]"
-			>
-				<div class="flex items-center justify-between gap-1">
-					<span class="text-sm font-medium text-ink-gray-7">{{
-						t(`scenario.${s.scenario}`)
+			<FeatherIcon
+				:name="shown.selected_bid ? 'award' : 'target'"
+				class="h-5 w-5 shrink-0"
+				:class="shown.selected_bid ? 'text-white' : 'text-brand-600'"
+				aria-hidden="true"
+			/>
+			<div class="min-w-0 flex-1 text-sm">
+				<template v-if="shown.selected_bid">
+					<span class="font-semibold">{{
+						t('bid.selectedLine', {
+							price: formatCHF(shown.selected_bid.bid_price_chf, { digits: 0 }),
+							scenario: t(`scenario.${shown.selected_bid.scenario}`),
+							margin: formatPercent(shown.selected_bid.margin_pct / 100),
+						})
 					}}</span>
-					<Badge v-if="s.selected" theme="blue" :label="t('bid.selected')" />
-					<Badge v-else-if="s.recommended" theme="green" :label="t('bid.recommended')" />
-				</div>
-				<div class="text-xl font-semibold tabular-nums text-ink-gray-9">
-					{{ formatCHF(s.bid_price_chf, { digits: 0 }) }}
-				</div>
-				<div class="mt-1 grid grid-cols-2 gap-x-2 text-xs text-ink-gray-6">
-					<span>{{ t('bid.margin') }}</span>
-					<span class="text-right tabular-nums text-ink-gray-8">{{
-						formatPercent(s.margin_pct / 100)
-					}}</span>
-					<span>{{ t('bid.winProbability') }}</span>
-					<span class="text-right tabular-nums text-ink-gray-8">{{
-						formatPercent(s.estimated_win_probability, { maxDigits: 0 })
-					}}</span>
-					<span>{{ t('bid.contributionIfWon') }}</span>
-					<span class="text-right tabular-nums text-ink-gray-8">{{
-						formatCHF(s.contribution_if_won_chf, { digits: 0 })
-					}}</span>
-					<span>{{ t('bid.expectedContribution') }}</span>
-					<span class="text-right font-medium tabular-nums text-ink-gray-9">{{
-						formatCHF(s.expected_contribution_chf, { digits: 0 })
-					}}</span>
-				</div>
-				<div
-					class="mt-1.5 h-1.5 overflow-hidden rounded bg-surface-gray-3"
-					:title="`${t('bid.winProbability')} ${formatPercent(
-						s.estimated_win_probability,
-						{ maxDigits: 0 },
-					)}`"
-				>
-					<div
-						class="h-full rounded bg-surface-gray-7"
-						:style="{ width: `${s.estimated_win_probability * 100}%` }"
-					/>
-				</div>
-				<Button
-					class="mt-2"
-					:variant="s.selected ? 'subtle' : 'outline'"
-					:disabled="s.selected || dirty"
-					:loading="selecting === s.scenario"
-					@click="select({ scenario: s.scenario })"
-					>{{ s.selected ? t('bid.selected') : t('bid.select') }}</Button
-				>
-			</div>
-
-			<!-- Own offer: a margin or a fixed price chosen by the estimator. -->
-			<div
-				class="flex flex-col rounded-lg border px-3 py-2"
-				:class="ownSelected ? 'ring-2 ring-outline-blue-2' : ''"
-			>
-				<div class="flex items-center justify-between gap-1">
-					<span class="text-sm font-medium text-ink-gray-7">{{
-						t('scenario.custom')
-					}}</span>
-					<Badge v-if="ownSelected" theme="blue" :label="t('bid.selected')" />
-				</div>
-				<template v-if="ownSelected">
-					<div class="text-xl font-semibold tabular-nums text-ink-gray-9">
-						{{ formatCHF(shown.selected_bid.bid_price_chf, { digits: 0 }) }}
-					</div>
-					<div class="mt-1 grid grid-cols-2 gap-x-2 text-xs text-ink-gray-6">
-						<span>{{ t('bid.margin') }}</span>
-						<span
-							class="text-right tabular-nums"
-							:class="
-								shown.selected_bid.below_baseline
-									? 'text-ink-red-4'
-									: 'text-ink-gray-8'
-							"
-							>{{ formatPercent(shown.selected_bid.margin_pct / 100) }}</span
-						>
-						<span>{{ t('bid.winProbability') }}</span>
-						<span class="text-right tabular-nums text-ink-gray-8">{{
-							formatPercent(shown.selected_bid.estimated_win_probability, {
-								maxDigits: 0,
-							})
-						}}</span>
-						<span>{{ t('bid.expectedContribution') }}</span>
-						<span class="text-right font-medium tabular-nums text-ink-gray-9">{{
-							formatCHF(shown.selected_bid.expected_contribution_chf, { digits: 0 })
-						}}</span>
-					</div>
-				</template>
-				<div class="mt-2 flex gap-1">
-					<select
-						v-model="own.mode"
-						class="form-select h-7 rounded border-outline-gray-2 py-0 text-xs"
-						:aria-label="t('bid.own.mode')"
+					<span
+						v-if="shown.selected_bid.below_baseline"
+						class="ml-2 rounded bg-white/20 px-1.5 py-0.5 font-medium"
+						>{{ t('bid.own.belowBaseline') }}</span
 					>
-						<option value="margin_pct">{{ t('bid.own.margin') }}</option>
-						<option value="price_chf">{{ t('bid.own.price') }}</option>
-					</select>
-					<input
-						v-model.number="own.value"
-						type="number"
-						:step="own.mode === 'margin_pct' ? 0.5 : 1000"
-						:min="own.mode === 'margin_pct' ? 0 : 1"
-						:max="own.mode === 'margin_pct' ? 30 : undefined"
-						class="form-input h-7 w-full min-w-0 rounded border-outline-gray-2 text-sm"
-						:aria-label="
-							own.mode === 'margin_pct' ? t('bid.own.margin') : t('bid.own.price')
-						"
-						@keydown.enter="selectOwn"
-					/>
-				</div>
-				<Button
-					class="mt-2"
-					variant="outline"
-					:disabled="!ownValid || dirty"
-					:loading="selecting === 'custom'"
-					@click="selectOwn"
-					>{{ ownSelected ? t('bid.own.update') : t('bid.select') }}</Button
-				>
+				</template>
+				<template v-else>{{
+					t('bid.noneSelected', { scenario: t(`scenario.${recommendedName}`) })
+				}}</template>
 			</div>
+			<button
+				v-if="shown.selected_bid"
+				class="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm text-white/90 hover:bg-white/10"
+				:disabled="!!selecting"
+				@click="select(null)"
+			>
+				<FeatherIcon name="x" class="h-4 w-4" aria-hidden="true" />
+				{{ t('bid.clearSelection') }}
+			</button>
+		</div>
+		<ErrorMessage v-if="selectError" class="mb-3" :message="selectError" />
 
-			<div class="rounded-lg border border-dashed px-3 py-2">
-				<div class="text-sm font-medium text-ink-gray-7">{{ t('bid.standardOffer') }}</div>
-				<div class="text-xl font-semibold tabular-nums text-ink-gray-9">
-					{{ formatCHF(shown.indicative_price.bid_price_chf, { digits: 0 }) }}
+		<div class="grid grid-cols-1 gap-5 xl:grid-cols-3">
+			<!-- Scenarios and own offer -->
+			<div class="xl:col-span-2">
+				<div class="mb-2 flex flex-wrap items-baseline gap-2">
+					<h2 class="text-base font-semibold text-ink-gray-9">{{ t('bid.title') }}</h2>
+					<span class="text-xs text-ink-gray-5">{{ t('bid.modelNote') }}</span>
+					<span
+						v-if="isCustom"
+						class="rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-700"
+						>{{ t('bid.custom') }}</span
+					>
 				</div>
-				<div class="mt-1 text-xs text-ink-gray-6">
-					{{
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+					<div
+						v-for="s in shown.bid_range"
+						:key="s.scenario"
+						class="flex flex-col rounded-xl bg-surface-white p-4 shadow-card ring-1 transition-shadow"
+						:class="
+							s.selected
+								? 'ring-2 ring-brand-500'
+								: s.recommended
+									? 'ring-green-300'
+									: 'ring-outline-gray-1'
+						"
+					>
+						<div class="flex items-center justify-between gap-2">
+							<span class="text-sm font-semibold text-ink-gray-8">{{
+								t(`scenario.${s.scenario}`)
+							}}</span>
+							<StatusPill v-if="s.selected" theme="blue" icon="check">{{
+								t('bid.selected')
+							}}</StatusPill>
+							<StatusPill v-else-if="s.recommended" theme="green" icon="star">{{
+								t('bid.recommended')
+							}}</StatusPill>
+						</div>
+						<div
+							class="mt-1 text-3xl font-semibold tracking-tight tabular-nums text-ink-gray-9"
+						>
+							{{ formatCHF(s.bid_price_chf, { digits: 0 }) }}
+						</div>
+						<div class="mt-1 text-sm text-ink-gray-6">
+							{{ t('bid.margin') }}
+							<span class="font-medium tabular-nums text-ink-gray-8">{{
+								formatPercent(s.margin_pct / 100)
+							}}</span>
+						</div>
+						<div class="mt-3">
+							<div class="flex justify-between text-xs text-ink-gray-5">
+								<span>{{ t('bid.winProbability') }}</span>
+								<span class="font-medium tabular-nums text-ink-gray-8">{{
+									formatPercent(s.estimated_win_probability, { maxDigits: 0 })
+								}}</span>
+							</div>
+							<div class="mt-1 h-2 overflow-hidden rounded-full bg-surface-gray-3">
+								<div
+									class="h-full rounded-full"
+									:class="s.recommended ? 'bg-green-500' : 'bg-brand-500'"
+									:style="{ width: `${s.estimated_win_probability * 100}%` }"
+								/>
+							</div>
+						</div>
+						<dl class="mt-3 grid grid-cols-2 gap-y-1 text-xs">
+							<dt class="text-ink-gray-5">{{ t('bid.contributionIfWon') }}</dt>
+							<dd class="text-right tabular-nums text-ink-gray-8">
+								{{ formatCHF(s.contribution_if_won_chf, { digits: 0 }) }}
+							</dd>
+							<dt class="text-ink-gray-5">{{ t('bid.expectedContribution') }}</dt>
+							<dd class="text-right font-semibold tabular-nums text-ink-gray-9">
+								{{ formatCHF(s.expected_contribution_chf, { digits: 0 }) }}
+							</dd>
+						</dl>
+						<button
+							class="mt-4 inline-flex h-8 items-center justify-center gap-1.5 rounded-lg text-sm font-medium transition-colors disabled:cursor-not-allowed"
+							:class="
+								s.selected
+									? 'bg-brand-50 text-brand-700'
+									: 'bg-brand-600 text-white hover:bg-brand-700 disabled:opacity-50'
+							"
+							:disabled="s.selected || dirty || !!selecting"
+							@click="select({ scenario: s.scenario })"
+						>
+							<FeatherIcon
+								:name="s.selected ? 'check' : 'mouse-pointer'"
+								class="h-4 w-4"
+								aria-hidden="true"
+							/>
+							{{ s.selected ? t('bid.selected') : t('bid.select') }}
+						</button>
+					</div>
+
+					<!-- Own offer: a margin or a fixed price chosen by the estimator -->
+					<div
+						class="flex flex-col rounded-xl bg-surface-white p-4 shadow-card ring-1"
+						:class="ownSelected ? 'ring-2 ring-brand-500' : 'ring-outline-gray-1'"
+					>
+						<div class="flex items-center justify-between gap-2">
+							<span class="text-sm font-semibold text-ink-gray-8">{{
+								t('scenario.custom')
+							}}</span>
+							<StatusPill v-if="ownSelected" theme="blue" icon="check">{{
+								t('bid.selected')
+							}}</StatusPill>
+						</div>
+						<template v-if="ownSelected">
+							<div
+								class="mt-1 text-3xl font-semibold tracking-tight tabular-nums text-ink-gray-9"
+							>
+								{{ formatCHF(shown.selected_bid.bid_price_chf, { digits: 0 }) }}
+							</div>
+							<dl class="mt-2 grid grid-cols-2 gap-y-1 text-xs">
+								<dt class="text-ink-gray-5">{{ t('bid.margin') }}</dt>
+								<dd
+									class="text-right tabular-nums"
+									:class="
+										shown.selected_bid.below_baseline
+											? 'text-red-600'
+											: 'text-ink-gray-8'
+									"
+								>
+									{{ formatPercent(shown.selected_bid.margin_pct / 100) }}
+								</dd>
+								<dt class="text-ink-gray-5">{{ t('bid.winProbability') }}</dt>
+								<dd class="text-right tabular-nums text-ink-gray-8">
+									{{
+										formatPercent(
+											shown.selected_bid.estimated_win_probability,
+											{ maxDigits: 0 },
+										)
+									}}
+								</dd>
+								<dt class="text-ink-gray-5">{{ t('bid.expectedContribution') }}</dt>
+								<dd class="text-right font-semibold tabular-nums text-ink-gray-9">
+									{{
+										formatCHF(shown.selected_bid.expected_contribution_chf, {
+											digits: 0,
+										})
+									}}
+								</dd>
+							</dl>
+						</template>
+						<p v-else class="mt-1 text-sm text-ink-gray-5">{{ t('bid.own.hint') }}</p>
+						<div class="mt-auto pt-4">
+							<div
+								class="flex rounded-lg bg-surface-gray-2 p-0.5 text-xs"
+								role="radiogroup"
+								:aria-label="t('bid.own.mode')"
+							>
+								<button
+									v-for="m in OWN_MODES"
+									:key="m.mode"
+									role="radio"
+									:aria-checked="own.mode === m.mode"
+									class="flex-1 rounded-md px-2 py-1 font-medium"
+									:class="
+										own.mode === m.mode
+											? 'bg-surface-white text-ink-gray-9 shadow-sm'
+											: 'text-ink-gray-6'
+									"
+									@click="own.mode = m.mode"
+								>
+									{{ t(m.label) }}
+								</button>
+							</div>
+							<input
+								v-model.number="own.value"
+								type="number"
+								:step="own.mode === 'margin_pct' ? 0.5 : 1000"
+								:min="own.mode === 'margin_pct' ? 0 : 1"
+								:max="own.mode === 'margin_pct' ? 30 : undefined"
+								class="form-input mt-2 h-8 w-full rounded-lg border-outline-gray-2 text-sm"
+								:aria-label="
+									own.mode === 'margin_pct'
+										? t('bid.own.margin')
+										: t('bid.own.price')
+								"
+								:placeholder="own.mode === 'margin_pct' ? '5' : '450000'"
+								@keydown.enter="selectOwn"
+							/>
+							<button
+								class="mt-2 inline-flex h-8 w-full items-center justify-center gap-1.5 rounded-lg border border-brand-600 text-sm font-medium text-brand-700 hover:bg-brand-50 disabled:cursor-not-allowed disabled:opacity-50"
+								:disabled="!ownValid || dirty || !!selecting"
+								@click="selectOwn"
+							>
+								<FeatherIcon name="edit-3" class="h-4 w-4" aria-hidden="true" />
+								{{ ownSelected ? t('bid.own.update') : t('bid.select') }}
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Standard offer: the reference the win probability is measured against -->
+				<div
+					class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl border border-dashed bg-surface-white px-4 py-3 text-sm"
+				>
+					<span class="font-medium text-ink-gray-7">{{ t('bid.standardOffer') }}</span>
+					<span class="font-semibold tabular-nums text-ink-gray-9">{{
+						formatCHF(shown.indicative_price.bid_price_chf, { digits: 0 })
+					}}</span>
+					<span class="text-xs text-ink-gray-5">{{
 						t('bid.standardOfferFormula', {
 							baseline: formatCHF(shown.build_up.cost_baseline, { digits: 0 }),
 							margin: formatPercent(shown.indicative_price.margin_pct / 100),
 							step: formatCHF(1000, { digits: 0 }),
 						})
-					}}
-				</div>
-				<div v-if="shown.totals.unresolved_count" class="mt-1 text-xs text-ink-red-4">
-					{{
-						t(
-							'bid.unpricedExcluded',
-							{ count: shown.totals.unresolved_count },
-							shown.totals.unresolved_count,
-						)
-					}}
-				</div>
-			</div>
-		</div>
-
-		<!-- Cost build-up -->
-		<div v-if="open === 'buildup'" class="mt-3 max-w-xl rounded-lg border">
-			<table class="w-full text-sm">
-				<tbody>
-					<tr
-						v-for="line in buildUp"
-						:key="line.key"
-						class="border-t first:border-t-0"
-						:class="line.total ? 'bg-surface-gray-2 font-semibold' : ''"
+					}}</span>
+					<span
+						v-if="shown.totals.unresolved_count"
+						class="inline-flex items-center gap-1 text-xs text-red-600"
 					>
-						<td class="px-3 py-1.5 text-ink-gray-8">{{ line.label }}</td>
-						<td class="px-3 py-1.5 text-xs text-ink-gray-5">{{ line.note }}</td>
-						<td class="px-3 py-1.5 text-right tabular-nums">
-							{{ formatCHF(shown.build_up[line.key], { digits: 0 }) }}
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+						<FeatherIcon name="alert-triangle" class="h-3.5 w-3.5" aria-hidden="true" />
+						{{
+							t(
+								'bid.unpricedExcluded',
+								{ count: shown.totals.unresolved_count },
+								shown.totals.unresolved_count,
+							)
+						}}
+					</span>
+				</div>
+			</div>
 
-		<!-- Assumptions -->
-		<div v-if="open === 'assumptions'" class="mt-3 rounded-lg border p-3">
-			<div class="grid grid-cols-2 gap-3 md:grid-cols-6">
-				<label v-for="name in scenarioNames" :key="name" class="text-xs text-ink-gray-6">
-					{{ t('bid.input.margin', { scenario: t(`scenario.${name}`) }) }}
-					<input
-						v-model.number="draft.scenario_margins_pct[name]"
-						type="number"
-						step="0.5"
-						min="0"
-						max="30"
-						class="form-input mt-0.5 h-7 w-full rounded border-outline-gray-2 text-sm"
-						@input="touched = true"
-					/>
-				</label>
-				<label class="text-xs text-ink-gray-6" :title="t('bid.input.strategicHint')">
-					{{ t('bid.input.strategic') }}
-					<input
-						v-model.number="pp.strategic_appetite_adjustment"
-						type="number"
-						step="1"
-						min="-50"
-						max="50"
-						class="form-input mt-0.5 h-7 w-full rounded border-outline-gray-2 text-sm"
-						@input="touched = true"
-					/>
-				</label>
-				<label class="text-xs text-ink-gray-6" :title="t('bid.input.competitionHint')">
-					{{ t('bid.input.competition') }}
-					<input
-						v-model.number="pp.competition_adjustment"
-						type="number"
-						step="1"
-						min="-50"
-						max="50"
-						class="form-input mt-0.5 h-7 w-full rounded border-outline-gray-2 text-sm"
-						@input="touched = true"
-					/>
-				</label>
-				<label class="text-xs text-ink-gray-6" :title="t('bid.input.sensitivityHint')">
-					{{ t('bid.input.sensitivity') }}
-					<input
-						v-model.number="pp.price_sensitivity_probability_points_per_1pct_price"
-						type="number"
-						step="0.5"
-						min="0"
-						max="50"
-						class="form-input mt-0.5 h-7 w-full rounded border-outline-gray-2 text-sm"
-						@input="touched = true"
-					/>
-				</label>
-				<label class="text-xs text-ink-gray-6" :title="t('bid.input.baseHint')">
-					{{ t('bid.input.base') }}
-					<input
-						v-model.number="pp.reference_win_probability"
-						type="number"
-						step="1"
-						min="0"
-						max="100"
-						class="form-input mt-0.5 h-7 w-full rounded border-outline-gray-2 text-sm"
-						@input="touched = true"
-					/>
-				</label>
-			</div>
-			<div class="mt-3 flex items-center gap-2">
-				<Button variant="solid" :loading="saving" :disabled="!dirty" @click="save">{{
-					t('bid.save')
-				}}</Button>
-				<Button variant="ghost" :disabled="saving" @click="reset">{{
-					t('bid.reset')
-				}}</Button>
-				<span class="text-xs text-ink-gray-5">{{
-					dirty ? t('bid.previewState') : t('bid.savedState')
-				}}</span>
-				<ErrorMessage :message="error" />
+			<!-- Right column: how the price is built and what it assumes -->
+			<div class="space-y-5">
+				<section class="rounded-xl bg-surface-white p-4 shadow-card">
+					<h2
+						class="mb-3 flex items-center gap-2 text-base font-semibold text-ink-gray-9"
+					>
+						<FeatherIcon
+							name="layers"
+							class="h-4 w-4 text-ink-gray-5"
+							aria-hidden="true"
+						/>
+						{{ t('bid.buildUp') }}
+					</h2>
+					<table class="w-full text-sm">
+						<tbody>
+							<tr
+								v-for="line in buildUp"
+								:key="line.key"
+								:class="line.total ? 'border-t font-semibold' : ''"
+							>
+								<td
+									class="py-1.5 pr-2"
+									:class="line.total ? 'text-ink-gray-9' : 'text-ink-gray-7'"
+								>
+									{{ line.label }}
+									<div
+										v-if="line.note"
+										class="text-xs font-normal text-ink-gray-5"
+									>
+										{{ line.note }}
+									</div>
+								</td>
+								<td
+									class="py-1.5 text-right align-top tabular-nums"
+									:class="line.total ? 'text-ink-gray-9' : 'text-ink-gray-8'"
+								>
+									{{ formatCHF(shown.build_up[line.key], { digits: 0 }) }}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section class="rounded-xl bg-surface-white p-4 shadow-card">
+					<h2
+						class="mb-3 flex items-center gap-2 text-base font-semibold text-ink-gray-9"
+					>
+						<FeatherIcon
+							name="sliders"
+							class="h-4 w-4 text-ink-gray-5"
+							aria-hidden="true"
+						/>
+						{{ t('bid.assumptions') }}
+					</h2>
+					<div class="grid grid-cols-3 gap-2">
+						<label
+							v-for="name in scenarioNames"
+							:key="name"
+							class="text-xs text-ink-gray-6"
+						>
+							{{ t('bid.input.margin', { scenario: t(`scenario.${name}`) }) }}
+							<input
+								v-model.number="draft.scenario_margins_pct[name]"
+								type="number"
+								step="0.5"
+								min="0"
+								max="30"
+								class="form-input mt-0.5 h-8 w-full rounded-lg border-outline-gray-2 text-sm"
+								@input="touched = true"
+							/>
+						</label>
+					</div>
+
+					<!-- Win-probability model: a rough estimate, so out of the way by default -->
+					<details class="mt-3 rounded-lg bg-surface-gray-1 px-3 py-2">
+						<summary class="cursor-pointer text-sm font-medium text-ink-gray-7">
+							{{ t('bid.advanced') }}
+						</summary>
+						<p class="mt-1 text-xs text-ink-gray-5">{{ t('bid.advancedHint') }}</p>
+						<div class="mt-2 grid grid-cols-2 gap-2">
+							<label
+								v-for="f in PP_FIELDS"
+								:key="f.key"
+								class="text-xs text-ink-gray-6"
+								:title="t(f.hint)"
+							>
+								{{ t(f.label) }}
+								<input
+									v-model.number="pp[f.key]"
+									type="number"
+									:step="f.step"
+									:min="f.min"
+									:max="f.max"
+									class="form-input mt-0.5 h-8 w-full rounded-lg border-outline-gray-2 text-sm"
+									@input="touched = true"
+								/>
+							</label>
+						</div>
+					</details>
+
+					<div class="mt-3 flex flex-wrap items-center gap-2">
+						<button
+							class="inline-flex h-8 items-center gap-1.5 rounded-lg bg-brand-600 px-3 text-sm font-medium text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
+							:disabled="!dirty || saving"
+							@click="save"
+						>
+							<FeatherIcon name="save" class="h-4 w-4" aria-hidden="true" />
+							{{ t('bid.save') }}
+						</button>
+						<Button variant="ghost" :disabled="saving" @click="reset">{{
+							t('bid.reset')
+						}}</Button>
+						<span
+							class="text-xs"
+							:class="dirty ? 'text-amber-700' : 'text-ink-gray-5'"
+							>{{ dirty ? t('bid.previewState') : t('bid.savedState') }}</span
+						>
+					</div>
+					<ErrorMessage class="mt-2" :message="error" />
+				</section>
 			</div>
 		</div>
-		<ErrorMessage v-if="selectError" class="mt-2" :message="selectError" />
-	</section>
+	</div>
 </template>
 
 <script setup lang="ts">
-import { Badge, ErrorMessage } from 'frappe-ui'
+import { ErrorMessage, FeatherIcon } from 'frappe-ui'
 import { computed, reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import StatusPill from '@/components/StatusPill.vue'
 import { api, errorText } from '@/utils/api'
 import { formatCHF, formatPercent } from '@/utils/format'
 
@@ -329,8 +406,45 @@ const { t } = useI18n()
 const props = defineProps<{ summary: any; tender: string }>()
 const emit = defineEmits<{ (e: 'update', summary: any): void }>()
 
-const open = ref<'' | 'buildup' | 'assumptions'>('')
-const toggle = (what: 'buildup' | 'assumptions') => (open.value = open.value === what ? '' : what)
+const OWN_MODES = [
+	{ mode: 'margin_pct' as const, label: 'bid.own.margin' },
+	{ mode: 'price_chf' as const, label: 'bid.own.price' },
+]
+// Win-probability inputs, edited as percentage points.
+const PP_FIELDS = [
+	{
+		key: 'reference_win_probability',
+		label: 'bid.input.base',
+		hint: 'bid.input.baseHint',
+		step: 1,
+		min: 0,
+		max: 100,
+	},
+	{
+		key: 'price_sensitivity_probability_points_per_1pct_price',
+		label: 'bid.input.sensitivity',
+		hint: 'bid.input.sensitivityHint',
+		step: 0.5,
+		min: 0,
+		max: 50,
+	},
+	{
+		key: 'strategic_appetite_adjustment',
+		label: 'bid.input.strategic',
+		hint: 'bid.input.strategicHint',
+		step: 1,
+		min: -50,
+		max: 50,
+	},
+	{
+		key: 'competition_adjustment',
+		label: 'bid.input.competition',
+		hint: 'bid.input.competitionHint',
+		step: 1,
+		min: -50,
+		max: 50,
+	},
+]
 
 // Probabilities are edited as percentage points (0.05 -> 5).
 const PP_KEYS = [
