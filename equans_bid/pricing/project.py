@@ -168,12 +168,12 @@ def validate_selection(selection: dict | None, params: dict) -> dict | None:
 		raise ValueError("a custom bid needs either margin_pct or price_chf")
 	if margin is not None:
 		margin = float(margin)
-		if not math.isfinite(margin) or not MARGIN_LIMITS[0] <= margin <= MARGIN_LIMITS[1]:
+		if not MARGIN_LIMITS[0] <= margin <= MARGIN_LIMITS[1]:
 			raise ValueError(f"margin must be between {MARGIN_LIMITS[0]:g} and {MARGIN_LIMITS[1]:g} %")
 		return {"scenario": "custom", "margin_pct": margin}
 	price = float(price)
-	if not math.isfinite(price) or price <= 0:
-		raise ValueError("price must be a positive number")
+	if price <= 0:
+		raise ValueError("price must be positive")
 	return {"scenario": "custom", "price_chf": round(price, 2)}
 
 

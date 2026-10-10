@@ -280,8 +280,7 @@ def process_tender_pdf(tender: str, pages: str | list | None = None):
 	doc.check_permission("write")
 	if isinstance(pages, str):
 		pages = json.loads(pages)
-	# No status write here: start_processing set "Processing" and committed it. Writing the row
-	# again would lock it in this transaction for the whole (possibly long) LLM run.
+	doc.db_set("status", "Processing")
 	try:
 		path = _tender_pdf_path(doc)
 		if not doc.trade:

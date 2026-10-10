@@ -55,8 +55,8 @@ def combine(c: dict, m: matcher.Match, status: str, why: dict, checked, catalog_
 	"""Rules match + verified LLM answer -> (match, status, reason, matched_by).
 
 	- both pick the same item: confirmed by two independent methods;
-	- the LLM finds a stronger match than the rules: priced as an assumption (exact fit, and of
-	  the family the rules recognised, if any) or proposed for review; a weaker one is ignored;
+	- only the LLM finds an item: priced as an assumption (exact fit, and of the family the rules
+	  recognised, if any) or proposed for review;
 	- the rules are certain (family and sizes agree) and the LLM picks another item: the rules
 	  match stands, the LLM answer is kept for review;
 	- the LLM read another quantity or unit than printed: a human decides.
@@ -73,17 +73,15 @@ def combine(c: dict, m: matcher.Match, status: str, why: dict, checked, catalog_
 		# Family and every key size already agree with the rules item, and the checks reject an
 		# LLM item with other sizes: a different pick here is another kind of product or a guess.
 		# The certain rules match stands; the answer stays visible in the review panel.
-		pass
+		return m, status, why, matched_by
 	elif pid:
+		matched_by = "llm"
 		# A product of another family than the one the rules recognised is only a proposal.
 		other_family = c.get("kind") and catalog_by_id[pid]["kind"] != c["kind"]
 		exact = checked.fit == "exact" and not other_family
 		confidence = matcher.ASSUMED if exact else matcher.PROPOSED
-		if confidence > m.confidence or not m.product_id:
-			# Only an answer that is stronger than the rules result replaces it.
-			matched_by = "llm"
-			m = matcher.Match(pid, confidence, "llm_matched", {"product": pid})
-			status, why = status_for(c, m, catalog_by_id)
+		m = matcher.Match(pid, confidence, "llm_matched", {"product": pid})
+		status, why = status_for(c, m, catalog_by_id)
 	if checked.conflicts and status in ("calculated", "supplier_quote_required", "assumption_applied"):
 		status = "review_required"
 		why = reason("llm_conflict", fields=", ".join(sorted(checked.conflicts)))

@@ -255,8 +255,8 @@
 							v-for="g in groupCounts"
 							:key="g.key"
 							class="inline-flex h-7 items-center gap-1 rounded-full px-3 text-xs font-medium ring-1 ring-inset"
-							:class="chipActive(g.key) ? CHIP_ACTIVE[g.theme] : CHIP[g.theme]"
-							:aria-pressed="chipActive(g.key)"
+							:class="groupFilter === g.key ? CHIP_ACTIVE[g.theme] : CHIP[g.theme]"
+							:aria-pressed="groupFilter === g.key"
 							:disabled="!g.count"
 							@click="filterGroup(groupFilter === g.key ? '' : g.key)"
 						>
@@ -965,20 +965,13 @@ const systemFilter = ref('')
 const groupOf: Record<string, string> = Object.fromEntries(
 	STATUS_GROUPS.flatMap((g) => g.statuses.map((st) => [st, g.key])),
 )
-// "provisional" (overview) = the quote and assumption chips together.
-const COMBINED_FILTERS: Record<string, string[]> = { provisional: ['quote', 'assumption'] }
-const inFilter = (status: string, filter: string) =>
-	(COMBINED_FILTERS[filter] || [filter]).includes(groupOf[status])
-const chipActive = (key: string) =>
-	!!groupFilter.value &&
-	(COMBINED_FILTERS[groupFilter.value] || [groupFilter.value]).includes(key)
 const systems = computed(() =>
 	[...new Set((items.data || []).map((i: any) => i.system).filter(Boolean))].sort(),
 )
 const filtered = computed(() => {
 	const q = search.value.trim().toLowerCase()
 	return (items.data || []).filter((i: any) => {
-		if (groupFilter.value && !inFilter(i.status, groupFilter.value)) return false
+		if (groupFilter.value && groupOf[i.status] !== groupFilter.value) return false
 		if (systemFilter.value && i.system !== systemFilter.value) return false
 		if (!q) return true
 		return [i.description, i.matched_product, i.position_id, i.golden_lv_id].some((v) =>
@@ -1036,7 +1029,7 @@ const progressGroups = computed(() => {
 		},
 		{
 			key: 'provisional',
-			filter: 'provisional',
+			filter: 'quote',
 			codes: ['supplier_quote_required', 'assumption_applied'],
 			bar: 'bg-amber-400',
 			value: true,
