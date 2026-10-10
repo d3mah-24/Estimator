@@ -1,4 +1,4 @@
-"""Extraction tests. Pure Python; the LLM structurer is tested with a fake client (no network)."""
+"""Extraction tests. Pure Python; the LLM mapper is tested with a fake client (no network)."""
 
 import json
 import re
@@ -14,9 +14,9 @@ from equans_bid.extraction.benchmark import (
 	assign_golden_ids,
 	validate_extraction_against_benchmark,
 )
+from equans_bid.extraction.llm_mapper import PageMapper, check, schema
 from equans_bid.extraction.pipeline import STARTER, extract_positions, prepare_catalog
 from equans_bid.extraction.segmenter import page_system
-from equans_bid.extraction.structurer import BlockStructurer, schema
 from equans_bid.extraction.verify import verify
 from equans_bid.trades import load_trade, read_catalog
 from equans_bid.trades.hvac.component_list import parse_page
@@ -280,29 +280,179 @@ CONTRACT = {
 }
 
 
-class TestStructurer(unittest.TestCase):
-	def structurer(self, client):
-		s = BlockStructurer(sorted(FAMILIES), tempfile.mkdtemp(), api_key="test")
-		s._client = client
-		return s
+LV_PAGE = 78
+LV1_TEXT = "Zuluft - Tellerventil"
 
-	def test_schema_family_enum_comes_from_master_data(self):
-		enum = schema(sorted(FAMILIES))["schema"]["properties"]["family_hint"]["enum"]
-		self.assertEqual(set(enum), set(FAMILIES) | {"other"})
+
+def rules_positions(pages=(LV_PAGE,)):
+	return extract_positions(PDF, CATALOG_ROWS, list(pages), None, HVAC)
+
+
+def fake_mapper(answer_for):
+	"""A mapper that answers through `answer_for(position, offered)` and the real checks."""
+
+	def mapper(page, page_text, positions, catalog):
+		offered = PageMapper.page_items(positions, catalog)
+		return [check(answer_for(p, offered), p, page_text, offered, set(FAMILIES)) for p in positions]
+
+	return mapper
+
+
+def answer(position, product_id, fit="exact", **extra):
+	return {
+		"index": 0,
+		"last_line": [line for line in position["block_text"].splitlines() if line.strip()][-1],
+		"quantity": position["quantity"],
+		"unit": position["unit"],
+		"family": "other",
+		"product_id": product_id,
+		"fit": fit,
+		"note": "test",
+		"custom_attributes": [],
+		**extra,
+	}
+
+
+class TestPageMapper(unittest.TestCase):
+	def mapper(self, client):
+		m = PageMapper(sorted(FAMILIES), tempfile.mkdtemp(), {"api_key": "test", "model": "test-model"})
+		m._client = client
+		return m
+
+	def position(self):
+		return {**BLOCK, "kind": "supply_valve", "attrs": {"dn_mm": [100]}}
+
+	def test_schema_enums_come_from_master_data_and_the_shortlist(self):
+		props = schema(sorted(FAMILIES), ["P-AIR-001"])["schema"]["properties"]["positions"]["items"]
+		self.assertEqual(set(props["properties"]["family"]["enum"]), set(FAMILIES) | {"other"})
+		self.assertEqual(props["properties"]["product_id"]["enum"], ["P-AIR-001", None])
+
+	def test_shortlist_same_unit_and_family_first(self):
+		offered = PageMapper.shortlist(self.position(), CATALOG)
+		self.assertTrue(all(c["unit"] == "pc" for c in offered))
+		self.assertEqual(offered[0]["kind"], "supply_valve")
 
 	def test_cached_after_first_call(self):
-		client = FakeClient(CONTRACT)
-		s = self.structurer(client)
-		self.assertEqual(s(BLOCK), s(BLOCK))
-		self.assertEqual(client.calls, 1)
-		self.assertEqual(s.cache_hits, 1)
+		client = FakeClient({"positions": [answer(BLOCK, "P-AIR-001")]})
+		m = self.mapper(client)
+		first = m(LV_PAGE, "Grösse Ø 10 cm Stk 5", [self.position()], CATALOG)
+		second = m(LV_PAGE, "Grösse Ø 10 cm Stk 5", [self.position()], CATALOG)
+		self.assertEqual(first[0].product_id, "P-AIR-001")
+		self.assertEqual(first, second)
+		self.assertEqual((client.calls, m.cache_hits), (1, 1))
 
 	def test_api_failure_is_reported_not_cached(self):
 		client = FakeClient(error=TimeoutError("read timeout"))
-		s = self.structurer(client)
-		self.assertIn("TimeoutError", s(BLOCK)["error"])
-		s(BLOCK)
+		m = self.mapper(client)
+		result = m(LV_PAGE, "Stk 5", [self.position()], CATALOG)
+		self.assertEqual(result[0].failures, ["llm_error"])
+		self.assertIn("TimeoutError", m.last_error)
+		m(LV_PAGE, "Stk 5", [self.position()], CATALOG)
 		self.assertEqual(client.calls, 2)  # retried, not served from cache
+
+	def test_checks_reject_invented_or_wrong_answers(self):
+		pos, page = self.position(), "Grösse Ø 10 cm Stk 5"
+		offered = PageMapper.shortlist(pos, CATALOG)
+		self.assertIn(
+			"quantity_not_on_page",
+			check(answer(pos, None, quantity=7), pos, page, offered, set(FAMILIES)).failures,
+		)
+		wrong_dn = check(answer(pos, "P-AIR-002"), pos, page, offered, set(FAMILIES))  # DN125 item
+		self.assertIsNone(wrong_dn.product_id)
+		self.assertIn("product_attributes_disagree", wrong_dn.failures)
+		not_offered = check(answer(pos, "P-NOPE"), pos, page, offered, set(FAMILIES))
+		self.assertEqual(not_offered.failures, ["product_not_offered"])
+		self.assertEqual(
+			check(answer(pos, "P-AIR-001"), pos, page, offered, set(FAMILIES)).product_id, "P-AIR-001"
+		)
+
+
+class TestLlmInPipeline(unittest.TestCase):
+	"""Rules + LLM: agreement confirms, disagreement goes to a human, the PDF quantity is priced."""
+
+	@classmethod
+	def setUpClass(cls):
+		cls.rules = {p["position_id"]: p for p in rules_positions()}
+		cls.rules_by_text = {p["description_original"]: p for p in cls.rules.values()}
+
+	def run_with(self, answer_for):
+		return {
+			p["position_id"]: p
+			for p in extract_positions(PDF, CATALOG_ROWS, [LV_PAGE], fake_mapper(answer_for), HVAC)
+		}
+
+	def lv1(self, positions):
+		return next(p for p in positions.values() if p["quantity"] == 5 and LV1_TEXT in p["description"])
+
+	def test_agreement_is_confirmed(self):
+		out = self.run_with(
+			lambda p, offered: answer(p, self.rules_by_text[p["block_text"]]["matched_product"])
+		)
+		lv1 = self.lv1(out)
+		self.assertEqual(lv1["matched_product"], "P-AIR-001")
+		self.assertEqual(lv1["status"], "calculated")
+		self.assertEqual(lv1["attributes"]["matched_by"], "llm+rules")
+
+	def test_certain_rules_match_is_not_overruled(self):
+		# The DN100 exhaust valve is another kind of product than the supply valve matched exactly.
+		out = self.run_with(
+			lambda p, offered: answer(p, "P-AIR-003" if LV1_TEXT in p["block_text"] else None)
+		)
+		lv1 = self.lv1(out)
+		self.assertEqual((lv1["matched_product"], lv1["status"]), ("P-AIR-001", "calculated"))
+		self.assertEqual(lv1["attributes"]["llm"]["product_id"], "P-AIR-003")  # visible in review
+
+	def llm_only(self, family_known: bool):
+		"""Run with the LLM mapping one position the rules could not map to a catalogue item."""
+		target = next(
+			p
+			for p in self.rules.values()
+			if p["attributes"]["source_kind"] == "lv"
+			and not p["matched_product"]
+			and bool(p["attributes"]["kind"]) == family_known
+		)
+		pick = "P-CTL-002"  # temperature sensor: a family the rules did not recognise here
+		out = self.run_with(
+			lambda p, o: answer(p, pick if p["block_text"] == target["description_original"] else None)
+		)
+		return out[target["position_id"]], pick
+
+	def test_llm_finds_what_the_rules_missed(self):
+		found, pick = self.llm_only(family_known=False)
+		self.assertEqual(found["matched_product"], pick)
+		self.assertEqual(found["reason_code"], "llm_classified")
+		self.assertEqual(found["family"], "temp_sensor")
+		self.assertEqual(found["status"], "assumption_applied")  # priced provisionally, confirm in review
+		self.assertEqual(found["attributes"]["matched_by"], "llm")
+
+	def test_llm_item_of_another_family_is_only_proposed(self):
+		# The rules recognised the family (e.g. rain hat) but the catalogue has none: an item of
+		# another family is a proposal for review, never priced automatically.
+		found, pick = self.llm_only(family_known=True)
+		self.assertEqual(found["matched_product"], pick)
+		self.assertEqual(found["status"], "review_required")
+
+	def test_answer_for_another_position_is_dropped(self):
+		out = self.run_with(lambda p, o: answer(p, "P-AIR-003", last_line="Grösse Ø 99 cm"))
+		lv1 = self.lv1(out)
+		self.assertEqual(lv1["attributes"]["llm"]["failures"], ["position_mismatch"])
+		self.assertEqual((lv1["matched_product"], lv1["status"]), ("P-AIR-001", "calculated"))
+
+	def test_quantity_conflict_goes_to_review_and_pdf_quantity_stays(self):
+		out = self.run_with(lambda p, o: answer(p, None, quantity=6) if LV1_TEXT in p["block_text"] else None)
+		lv1 = next(p for p in out.values() if p["position_id"] == self.lv1(self.rules)["position_id"])
+		self.assertEqual(lv1["quantity"], 5)
+		# 6 is printed on the page too (the DN125 variant), so it is a conflict, not an invention.
+		self.assertEqual(lv1["reason_code"], "llm_conflict")
+		self.assertEqual(lv1["status"], "review_required")
+
+	def test_llm_failure_keeps_the_rules_result(self):
+		out = self.run_with(lambda p, o: None)
+		for pid, p in out.items():
+			self.assertEqual(
+				(p["matched_product"], p["status"]),
+				(self.rules[pid]["matched_product"], self.rules[pid]["status"]),
+			)
 
 
 class TestVerify(unittest.TestCase):
@@ -333,23 +483,6 @@ class TestVerify(unittest.TestCase):
 	def test_different_quantity_on_page_is_a_conflict(self):
 		v = verify({**CONTRACT, "quantity": 6}, BLOCK, self.PAGE + " Stk 6", set(FAMILIES))
 		self.assertEqual(v.conflicts, {"quantity": 6})
-
-	def test_pipeline_marks_llm_conflict_for_review(self):
-		def structurer(block):
-			return {
-				**CONTRACT,
-				"quantity": 6,
-				"source_page": block["source_page"],
-				"description": block["block_text"],
-				"family_hint": "other",
-				"custom_attributes": [],
-			}
-
-		positions = extract_positions(PDF, CATALOG_ROWS, [78], structurer, HVAC)
-		lv1 = next(p for p in positions if p["quantity"] == 5 and p["source_page"] == 78)
-		self.assertEqual(lv1["status"], "review_required")
-		self.assertEqual(lv1["reason_code"], "llm_conflict")
-		self.assertEqual(lv1["quantity"], 5)  # rules stay the reference
 
 
 if __name__ == "__main__":

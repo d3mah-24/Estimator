@@ -8,9 +8,9 @@ import frappe
 from frappe import _
 
 from equans_bid.extraction.benchmark import assign_golden_ids
+from equans_bid.extraction.llm_mapper import get_mapper
 from equans_bid.extraction.pdf_text import file_sha256
-from equans_bid.extraction.pipeline import STARTER, extract_positions
-from equans_bid.extraction.structurer import get_structurer
+from equans_bid.extraction.pipeline import STARTER, detect_trade, extract_positions
 from equans_bid.pricing.engine import (
 	apply_factor_rules,
 	parse_factor_keys,
@@ -21,6 +21,8 @@ from equans_bid.pricing.project import (
 	effective_assumptions,
 	indicative_price,
 	project_baseline,
+	selected_bid,
+	validate_selection,
 )
 from equans_bid.reasons import render
 from equans_bid.trades import TradeConfig, from_documents
@@ -92,6 +94,15 @@ def trade_config(code: str | None) -> TradeConfig:
 		for name in frappe.get_all("Product Family", {"trade": code}, pluck="name", order_by="priority asc")
 	]
 	return from_documents(frappe.get_doc("Trade", code), families)
+
+
+def _detect_trade(path) -> str:
+	"""The trade of a tender PDF, recognised from its LV page headers (master data)."""
+	trades = [trade_config(code) for code in frappe.get_all("Trade", pluck="name")]
+	code, _scores = detect_trade(path, trades)
+	if not code:
+		frappe.throw(_("The trade of this tender could not be recognised. Please select it."))
+	return code
 
 
 def _rules() -> dict:
@@ -232,13 +243,14 @@ def process_tender_pdf(tender: str, pages: str | list | None = None):
 	doc.db_set("status", "Processing")
 	try:
 		path = _tender_pdf_path(doc)
+		if not doc.trade:
+			doc.trade = _detect_trade(path)
 		trade = trade_config(doc.trade)
 		catalog = _catalog_rows(trade.code)
-		structurer = get_structurer(
-			[f.code for f in trade.families],
-			frappe.get_site_path("private", "extraction_cache"),
+		mapper = get_mapper(
+			[f.code for f in trade.families], frappe.get_site_path("private", "extraction_cache")
 		)
-		positions = extract_positions(path, catalog, pages, structurer, trade)
+		positions = extract_positions(path, catalog, pages, mapper, trade)
 		doc.file_hash = file_sha256(path)
 		if doc.file_hash == file_sha256(STARTER_PDF):
 			# Verified example rows exist for this tender only (the UI shows their LV IDs).
@@ -259,10 +271,10 @@ def process_tender_pdf(tender: str, pages: str | list | None = None):
 		doc.status = "Completed"
 		# Record which provider saw the tender text (data-handling requirement). Structured, so the
 		# UI shows it in the user's language; processing_log keeps an English line for admins.
-		llm = structurer.info() if structurer else None
+		llm = mapper.info() if mapper else None
 		doc.processing_info = json.dumps({"positions": len(positions), "file": path.name, "llm": llm})
 		doc.processing_log = f"{len(positions)} positions extracted from {path.name}. " + (
-			structurer.stats() if structurer else "LLM: not configured (rules only)"
+			mapper.stats() if mapper else "LLM: not configured (rules only)"
 		)
 		doc.save()
 	except Exception as e:
@@ -278,7 +290,9 @@ def start_processing(tender: str):
 	"""Queue extraction in the background so the UI stays responsive."""
 	frappe.get_doc("Tender", tender).check_permission("write")
 	frappe.db.set_value("Tender", tender, "status", "Processing")
-	frappe.enqueue("equans_bid.api.process_tender_pdf", tender=tender, queue="long", timeout=1800)
+	frappe.enqueue(
+		"equans_bid.api.process_tender_pdf", tender=tender, queue="long", timeout=5400
+	)  # first LLM run of a large PDF on a rate-limited tier
 	return {"status": "Processing"}
 
 
@@ -413,6 +427,11 @@ def get_tender_summary(tender: str, assumptions: str | dict | None = None):
 	build_up = _build_up(doc, catalog, params)
 	baseline = build_up["cost_baseline"]
 
+	scenarios = bid_range(baseline, params, overrides)
+	chosen = selected_bid(baseline, params, overrides, _selection(doc))
+	for sc in scenarios:
+		sc["selected"] = bool(chosen) and chosen["scenario"] == sc["scenario"]
+
 	by_system = defaultdict(lambda: {"direct_cost": 0.0, "positions": 0})
 	by_category = defaultdict(lambda: {"direct_cost": 0.0, "positions": 0})
 	by_status = defaultdict(lambda: {"direct_cost": 0.0, "positions": 0})
@@ -448,7 +467,8 @@ def get_tender_summary(tender: str, assumptions: str | dict | None = None):
 		"by_category": dict(by_category),
 		"by_status": dict(by_status),
 		"indicative_price": indicative_price(baseline, params),
-		"bid_range": bid_range(baseline, params, overrides),
+		"bid_range": scenarios,
+		"selected_bid": chosen,
 		"assumptions": effective_assumptions(params, overrides),
 		"default_assumptions": effective_assumptions(params),
 	}
@@ -466,16 +486,48 @@ def set_bid_assumptions(tender: str, assumptions: str | dict | None = None):
 	return get_tender_summary(tender)
 
 
+def _selection(doc) -> dict | None:
+	raw = doc.bid_selection
+	if not raw:
+		return None
+	return json.loads(raw) if isinstance(raw, str) else raw
+
+
 @frappe.whitelist()
-def export_tender(tender: str, lang: str | None = None):
-	"""Priced offer as CSV in the given UI locale (de-CH, fr-CH, en; default de-CH)."""
-	from equans_bid.export import build_csv
+def set_bid_selection(tender: str, scenario: str | None = None, margin_pct=None, price_chf=None) -> dict:
+	"""Choose the bid to submit: a scenario name, or "custom" with a margin (%) or a price (CHF).
+	Without a scenario the choice is cleared."""
+	doc = frappe.get_doc("Tender", tender)
+	doc.check_permission("write")
+	selection = None
+	margin_pct = None if margin_pct in ("", None) else margin_pct
+	price_chf = None if price_chf in ("", None) else price_chf
+	if scenario:
+		try:
+			selection = validate_selection(
+				{"scenario": scenario, "margin_pct": margin_pct, "price_chf": price_chf}, get_params()
+			)
+		except (TypeError, ValueError) as e:
+			frappe.throw(_("Invalid bid selection: {0}").format(e))
+	doc.db_set("bid_selection", json.dumps(selection) if selection else None)
+	return get_tender_summary(tender)
+
+
+@frappe.whitelist()
+def export_tender(tender: str, lang: str | None = None, format: str = "xlsx"):
+	"""Priced offer as an Excel workbook (default) or CSV, in the given UI locale (default de-CH)."""
+	from equans_bid.export import build_csv, build_xlsx
 
 	summary = get_tender_summary(tender)
 	doc = frappe.get_doc("Tender", tender)
-	filename, content = build_csv(
-		doc, summary, lang, frappe.utils.now_datetime(), family_labels=family_labels()
-	)
+	now = frappe.utils.now_datetime()
+	if format == "csv":
+		filename, content = build_csv(doc, summary, lang, now, family_labels=family_labels())
+	else:
+		descriptions = {c.product_id: c.description for c in _catalog_rows()}
+		filename, content = build_xlsx(
+			doc, summary, lang, now, family_labels=family_labels(), catalog=descriptions
+		)
 	frappe.local.response.filename = filename
 	frappe.local.response.filecontent = content
 	frappe.local.response.type = "download"

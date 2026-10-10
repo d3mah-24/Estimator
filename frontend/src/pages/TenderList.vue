@@ -84,6 +84,7 @@
 							v-model="trade"
 							class="form-select mt-1 h-8 w-full rounded border-outline-gray-2 py-0 text-sm"
 						>
+							<option value="">{{ t('list.dialog.tradeAuto') }}</option>
 							<option v-for="tr in trades.data || []" :key="tr.name" :value="tr.name">
 								{{ tradeLabel(tr.name) }}
 							</option>
@@ -108,7 +109,7 @@
 													progress: formatPercent(progress / 100, {
 														maxDigits: 0,
 													}),
-											  })
+												})
 											: t('list.dialog.choose')
 									}}
 								</Button>
@@ -162,7 +163,7 @@ const projectName = ref('')
 const uploaded = ref<any>(null)
 const creating = ref(false)
 const createError = ref('')
-const trade = ref('HVAC')
+const trade = ref('')
 
 const tenders = createListResource({
 	doctype: 'Tender',

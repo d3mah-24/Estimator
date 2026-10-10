@@ -34,7 +34,12 @@ STATUS_LABELS = {
 	"non_priceable": "Not priceable",
 }
 UNIT_LABELS = {"pc": "pc", "m": "m", "m2": "m²", "m3": "m³", "h": "h", "LS": "LS", "system": "system"}
-SCENARIO_LABELS = {"Aggressive": "Aggressive", "Target": "Target", "Conservative": "Conservative"}
+SCENARIO_LABELS = {
+	"Aggressive": "Aggressive",
+	"Target": "Target",
+	"Conservative": "Conservative",
+	"custom": "Own offer",
+}
 PRICE_SOURCE_LABELS = {
 	"catalog": "Catalogue",
 	"supplier_package": "Supplier package",

@@ -36,6 +36,8 @@ REASONS = {
 		"Supplier package: catalogue price is provisional until a quote is entered"
 	),
 	"llm_classified": N_("Classified by LLM as {family}. {detail}"),
+	"llm_matched": N_("Mapped by the LLM to {product}; please confirm"),
+	"llm_confirmed": N_("LLM and rules both chose {product}"),
 	"no_productivity_rule": N_("No productivity rule {install_code}"),
 	"product_set_by_estimator": N_("Product set by estimator"),
 	"status_set_by_estimator": N_("Status set by estimator"),

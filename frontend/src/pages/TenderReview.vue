@@ -37,7 +37,7 @@
 				>
 					{{ t('review.refreshPrices') }}
 				</Button>
-				<Button icon-left="download" :disabled="!summary.data" @click="exportCsv">{{
+				<Button icon-left="download" :disabled="!summary.data" @click="exportExcel">{{
 					t('review.export')
 				}}</Button>
 				<Button icon-left="refresh-cw" :loading="reprocessing" @click="reprocess">{{
@@ -212,7 +212,13 @@
 											"
 											:title="t('review.quoteTitle')"
 											class="form-input h-7 w-32 rounded border-outline-amber-2 text-right text-sm"
-											@change="(e) => saveQuote(row, (e.target as HTMLInputElement).value)"
+											@change="
+												(e) =>
+													saveQuote(
+														row,
+														(e.target as HTMLInputElement).value,
+													)
+											"
 											@focus="select(row)"
 										/>
 										<div
@@ -289,7 +295,7 @@
 								selected.reason_code,
 								selected.reason_args,
 								selected.status_reason,
-								familyLabel
+								familyLabel,
 							)
 						}}
 					</p>
@@ -387,13 +393,32 @@
 						</p>
 					</div>
 
+					<!-- What the LLM answered (model text is English and shown as returned). -->
+					<div v-if="llmAnswer" class="mt-3 rounded bg-surface-gray-1 p-2 text-xs">
+						<div class="mb-0.5 font-medium text-ink-gray-5">
+							{{ t('review.llmAnswer', { by: t(`review.matchedBy.${matchedBy}`) }) }}
+						</div>
+						<div class="text-ink-gray-8">
+							{{ llmAnswer.product_id || t('review.llmNoProduct') }}
+							<span class="text-ink-gray-5"
+								>({{ t(`review.fit.${llmAnswer.fit}`) }})</span
+							>
+						</div>
+						<div v-if="llmAnswer.note" class="italic text-ink-gray-6" lang="en">
+							{{ llmAnswer.note }}
+						</div>
+					</div>
+
 					<div class="mt-3 grid grid-cols-2 gap-2">
 						<label class="text-xs text-ink-gray-5">
 							{{ t('review.col.product') }}
 							<select
 								class="form-select mt-0.5 h-7 w-full rounded border-outline-gray-2 py-0 text-sm"
 								:value="selected.matched_product || ''"
-								@change="(e) => saveProduct(selected, (e.target as HTMLSelectElement).value)"
+								@change="
+									(e) =>
+										saveProduct(selected, (e.target as HTMLSelectElement).value)
+								"
 							>
 								<option value="" disabled>{{ t('common.choose') }}</option>
 								<option v-for="p in catalog.data" :key="p.name" :value="p.name">
@@ -406,7 +431,10 @@
 							<select
 								class="form-select mt-0.5 h-7 w-full rounded border-outline-gray-2 py-0 text-sm"
 								:value="selected.status"
-								@change="(e) => saveStatus(selected, (e.target as HTMLSelectElement).value)"
+								@change="
+									(e) =>
+										saveStatus(selected, (e.target as HTMLSelectElement).value)
+								"
 							>
 								<option v-for="code in STATUS_CODES" :key="code" :value="code">
 									{{ statusLabel(code) }}
@@ -579,7 +607,7 @@ const search = ref('')
 const statusFilter = ref('')
 const systemFilter = ref('')
 const systems = computed(() =>
-	[...new Set((items.data || []).map((i: any) => i.system).filter(Boolean))].sort()
+	[...new Set((items.data || []).map((i: any) => i.system).filter(Boolean))].sort(),
 )
 const filtered = computed(() => {
 	const q = search.value.trim().toLowerCase()
@@ -588,12 +616,12 @@ const filtered = computed(() => {
 		if (systemFilter.value && i.system !== systemFilter.value) return false
 		if (!q) return true
 		return [i.description, i.matched_product, i.position_id, i.golden_lv_id].some((v) =>
-			v?.toLowerCase().includes(q)
+			v?.toLowerCase().includes(q),
 		)
 	})
 })
 const filteredTotal = computed(() =>
-	filtered.value.reduce((s: number, i: any) => s + (i.direct_cost || 0), 0)
+	filtered.value.reduce((s: number, i: any) => s + (i.direct_cost || 0), 0),
 )
 
 // Totals
@@ -628,7 +656,7 @@ const systemRows = computed(() =>
 			system: key === '-' ? t('review.noSystem') : key,
 			...v,
 		}))
-		.sort((a, b) => b.direct_cost - a.direct_cost)
+		.sort((a, b) => b.direct_cost - a.direct_cost),
 )
 
 // Selection and traceability
@@ -642,10 +670,10 @@ function select(row: any) {
 const pdfUrl = computed(() =>
 	tender.doc
 		? `/api/method/equans_bid.api.get_tender_pdf?tender=${encodeURIComponent(props.name)}`
-		: ''
+		: '',
 )
 const fileName = computed(() =>
-	(tender.doc?.tender_file || 'BKP_244_LV_Lueftung_260804.pdf').split('/').pop()
+	(tender.doc?.tender_file || 'BKP_244_LV_Lueftung_260804.pdf').split('/').pop(),
 )
 
 // Parsed attributes (kind, sizes, document warnings) stored as JSON on the row.
@@ -682,11 +710,11 @@ const processingText = computed(() => {
 		info = null
 	}
 	if (!info || doc.status === 'Failed') return doc.processing_log || ''
-	const llm = info.llm ? t('review.llmUsed', info.llm) : t('review.llmNone')
+	const llm = info.llm ? t('review.llmUsed', { provider: '—', ...info.llm }) : t('review.llmNone')
 	return `${t(
 		'review.processed',
 		{ count: info.positions, file: info.file },
-		info.positions
+		info.positions,
 	)} ${llm}`
 })
 
@@ -730,10 +758,13 @@ const saveProduct = (row: any, product: string) =>
 	product && update(row, { matched_product: product })
 const saveStatus = (row: any, status: string) => update(row, { status })
 
-function exportCsv() {
+function exportExcel() {
 	const q = new URLSearchParams({ tender: props.name, lang: currentLocale() })
 	window.location.href = `/api/method/equans_bid.api.export_tender?${q}`
 }
+
+const llmAnswer = computed(() => attrs.value.llm || null)
+const matchedBy = computed(() => attrs.value.matched_by || 'rules')
 
 const customRows = computed(() => {
 	const raw = selected.value?.custom_attributes
@@ -792,7 +823,7 @@ function poll() {
 watch(
 	() => tender.doc?.status,
 	(s) => s === 'Processing' && poll(),
-	{ immediate: true }
+	{ immediate: true },
 )
 
 async function reprocess() {

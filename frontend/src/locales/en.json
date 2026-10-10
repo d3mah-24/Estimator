@@ -28,6 +28,7 @@
     "empty": "No tenders yet.",
     "dialog": {
       "projectName": "Project name",
+      "tradeAuto": "Detect automatically",
       "placeholder": "e.g. Oberglatt school – ventilation",
       "uploading": "Uploading {progress}",
       "choose": "Choose bill of quantities (PDF)",
@@ -38,7 +39,7 @@
     }
   },
   "review": {
-    "export": "Export (CSV)",
+    "export": "Export to Excel",
     "reprocess": "Process again",
     "bySystem": "By system ({count})",
     "positionsShort": "{count} pos.",
@@ -75,7 +76,7 @@
     "selectHint": "Select a position to see where it comes from and how it is priced.",
     "noSystem": "No system",
     "processed": "No positions extracted from {file}. | One position extracted from {file}. | {count} positions extracted from {file}.",
-    "llmUsed": "LLM {model}: {calls} calls, {cached} cached, {errors} errors.",
+    "llmUsed": "LLM {model} ({provider}): {calls} calls, {cached} cached, {errors} errors.",
     "llmNone": "LLM not configured (rules only).",
     "saved": "Saved and repriced in {ms} ms",
     "customAttributes": "Project attributes (as printed)",
@@ -89,7 +90,19 @@
     "refreshApply": "Apply",
     "refreshCancel": "Cancel",
     "pricedAt": "Prices as of {date}",
-    "positionRef": "Printed LV no."
+    "positionRef": "Printed LV no.",
+    "llmAnswer": "LLM answer · matched by {by}",
+    "llmNoProduct": "no fitting catalogue item",
+    "matchedBy": {
+      "rules": "rules",
+      "llm": "LLM",
+      "llm+rules": "LLM and rules"
+    },
+    "fit": {
+      "exact": "exact",
+      "close": "close",
+      "none": "no match"
+    }
   },
   "kpi": {
     "direct": {
@@ -142,7 +155,19 @@
     "reset": "Reset to project parameters",
     "previewState": "Preview – not saved yet",
     "savedState": "Saved",
-    "previewFailed": "Preview failed"
+    "previewFailed": "Preview failed",
+    "select": "Select",
+    "selected": "Selected",
+    "clearSelection": "Clear selection",
+    "selectedLine": "Selected bid: {price} · {scenario} · margin {margin}",
+    "noneSelected": "No bid selected yet. Recommended: {scenario}. Choose a scenario or your own offer.",
+    "own": {
+      "mode": "Input",
+      "margin": "Margin %",
+      "price": "Price CHF",
+      "update": "Apply",
+      "belowBaseline": "Price below the cost baseline"
+    }
   },
   "buildUp": {
     "catalog_material": {
@@ -213,7 +238,8 @@
   "scenario": {
     "Aggressive": "Aggressive",
     "Target": "Target",
-    "Conservative": "Conservative"
+    "Conservative": "Conservative",
+    "custom": "Own offer"
   },
   "priceSource": {
     "catalog": "Catalogue",
@@ -242,7 +268,9 @@
     "product_set_by_estimator": "Product set by estimator",
     "status_set_by_estimator": "Status set by estimator",
     "attribute_mismatch": "{attribute} is {found}, catalogue item has {expected}",
-    "llm_conflict": "The LLM read a different {fields} than the rules; please check the source"
+    "llm_conflict": "The LLM read a different {fields} than the rules; please check the source",
+    "llm_matched": "Mapped by the LLM to {product}; please confirm",
+    "llm_confirmed": "LLM and rules both chose {product}"
   },
   "warning": {
     "header_conflict": "Page header says '{header}', source document is '{source}.docx'"

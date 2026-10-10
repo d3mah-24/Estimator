@@ -28,6 +28,7 @@
     "empty": "Noch keine Ausschreibung erfasst.",
     "dialog": {
       "projectName": "Projektname",
+      "tradeAuto": "Automatisch erkennen",
       "placeholder": "z. B. Schulhaus Oberglatt – Lüftung",
       "uploading": "Hochladen {progress}",
       "choose": "Leistungsverzeichnis (PDF) wählen",
@@ -38,7 +39,7 @@
     }
   },
   "review": {
-    "export": "Export (CSV)",
+    "export": "Excel exportieren",
     "reprocess": "Erneut verarbeiten",
     "bySystem": "Nach Anlage ({count})",
     "positionsShort": "{count} Pos.",
@@ -75,7 +76,7 @@
     "selectHint": "Position wählen, um Herkunft und Berechnung zu sehen.",
     "noSystem": "Ohne Anlage",
     "processed": "Keine Positionen aus {file} extrahiert. | Eine Position aus {file} extrahiert. | {count} Positionen aus {file} extrahiert.",
-    "llmUsed": "LLM {model}: {calls} Aufrufe, {cached} aus Cache, {errors} Fehler.",
+    "llmUsed": "LLM {model} ({provider}): {calls} Aufrufe, {cached} aus Cache, {errors} Fehler.",
     "llmNone": "LLM nicht konfiguriert (nur Regeln).",
     "saved": "Gespeichert und neu berechnet in {ms} ms",
     "customAttributes": "Projektmerkmale (wie im LV)",
@@ -89,7 +90,19 @@
     "refreshApply": "Übernehmen",
     "refreshCancel": "Abbrechen",
     "pricedAt": "Preise Stand {date}",
-    "positionRef": "LV-Nr."
+    "positionRef": "LV-Nr.",
+    "llmAnswer": "Antwort des LLM · zugeordnet durch {by}",
+    "llmNoProduct": "kein passender Katalogartikel",
+    "matchedBy": {
+      "rules": "Regeln",
+      "llm": "LLM",
+      "llm+rules": "LLM und Regeln"
+    },
+    "fit": {
+      "exact": "exakt",
+      "close": "ähnlich",
+      "none": "keine Übereinstimmung"
+    }
   },
   "kpi": {
     "direct": {
@@ -142,7 +155,19 @@
     "reset": "Auf Projektparameter zurücksetzen",
     "previewState": "Vorschau – noch nicht gespeichert",
     "savedState": "Gespeichert",
-    "previewFailed": "Vorschau fehlgeschlagen"
+    "previewFailed": "Vorschau fehlgeschlagen",
+    "select": "Auswählen",
+    "selected": "Ausgewählt",
+    "clearSelection": "Auswahl aufheben",
+    "selectedLine": "Gewähltes Angebot: {price} · {scenario} · Marge {margin}",
+    "noneSelected": "Noch kein Angebot gewählt. Empfehlung: {scenario}. Wählen Sie ein Szenario oder ein eigenes Angebot.",
+    "own": {
+      "mode": "Eingabe",
+      "margin": "Marge %",
+      "price": "Preis CHF",
+      "update": "Übernehmen",
+      "belowBaseline": "Preis unter der Kostenbasis"
+    }
   },
   "buildUp": {
     "catalog_material": {
@@ -213,7 +238,8 @@
   "scenario": {
     "Aggressive": "Aggressiv",
     "Target": "Zielmarge",
-    "Conservative": "Konservativ"
+    "Conservative": "Konservativ",
+    "custom": "Eigenes Angebot"
   },
   "priceSource": {
     "catalog": "Katalog",
@@ -242,7 +268,9 @@
     "product_set_by_estimator": "Produkt durch Kalkulator gesetzt",
     "status_set_by_estimator": "Status durch Kalkulator gesetzt",
     "attribute_mismatch": "{attribute} ist {found}, Katalogartikel hat {expected}",
-    "llm_conflict": "Das LLM hat eine andere {fields} gelesen als die Regeln; bitte Quelle prüfen"
+    "llm_conflict": "Das LLM hat eine andere {fields} gelesen als die Regeln; bitte Quelle prüfen",
+    "llm_matched": "Vom LLM {product} zugeordnet; bitte bestätigen",
+    "llm_confirmed": "LLM und Regeln haben beide {product} gewählt"
   },
   "warning": {
     "header_conflict": "Seitenkopf nennt «{header}», Quelldokument ist «{source}.docx»"

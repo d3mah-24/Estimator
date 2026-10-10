@@ -1,8 +1,9 @@
 ### Equans Bid — AI tender pricing assistant
 
-Turns a ventilation tender (BKP 244, Schulhaus Oberglatt) into a traceable, reviewable first price.
-The rules and the LLM only **extract**; every franc is computed **deterministically in Python**;
-the estimator reviews and decides in a German review UI.
+Upload a tender PDF, get a priced Excel workbook. The trade is recognised from the PDF, an LLM
+reads every position and maps it to the central catalogue in the database, the rules cross-check
+it, and every franc is computed **deterministically in Python** from the catalogue prices. The
+estimator reviews and decides in the review UI (de-CH, fr-CH, en) and exports the result to Excel.
 
 #### Run it
 
@@ -22,8 +23,34 @@ cd apps/equans_bid/frontend && yarn dev                   # http://equans.localh
 yarn build                                                # production build used on :8000
 ```
 
-Optional GPT-4o fallback for positions the rules cannot classify:
-`export OPENAI_API_KEY=...` or `bench --site equans.localhost set-config openai_api_key ...`.
+LLM (any OpenAI-compatible API; without a key the rules run alone):
+
+```bash
+bench --site equans.localhost set-config llm_api_key <key>
+bench --site equans.localhost set-config llm_base_url https://api.groq.com/openai/v1   # omit for OpenAI
+bench --site equans.localhost set-config llm_model openai/gpt-oss-120b                 # default: gpt-4o on OpenAI
+```
+
+The same can be given as `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL` in the environment (used by the
+benchmark CLI). The provider sees the tender text; it is recorded on every Tender (`processing_info`).
+Tests never call the LLM.
+
+#### The flow
+
+1. **Upload** the tender PDF ("Neue Ausschreibung"). Leave the trade on "Automatisch erkennen".
+2. **Trade**: recognised from the LV page headers (`244.01 LA01 … Seite 3/20` → HVAC).
+3. **Positions**: the segmenter cuts the LV pages into positions (text + quantity column).
+4. **LLM**, one request per page: quantity, unit, family and the catalogue item for each position,
+   chosen from a shortlist of the catalogue in the database. Cached, so a rerun costs nothing.
+5. **Checks** (Python): the quantity is on the page, the item was offered, its sizes (DN, W×H,
+   thickness, angle) agree with the position. What fails is dropped and recorded.
+6. **Decision**: LLM and rules agree → calculated; only the LLM finds an item → priced as an
+   assumption; they disagree or the LLM read another quantity → review. The quantity priced is
+   always the one printed in the PDF.
+7. **Pricing** (Python, never the LLM): material = qty × net × (1 + waste); labour = qty × hours ×
+   factors × rate; build-up, overhead, margin, bid range.
+8. **Review** in `/estimator`, then **Excel export**: sheets Positions, Summary, Bid range, Open
+   points, Assumptions, in the estimator's language.
 
 #### Check it
 
@@ -44,11 +71,14 @@ uvx ruff@0.14.10 check equans_bid && uvx ruff@0.14.10 format --check equans_bid
 | Table plug-ins | `trades/hvac/component_list.py` | HVAC CAD lists ("Bauteilliste"); registered in trade.json |
 | Family | `extraction/families.py` | Product Family patterns from master data, in priority order |
 | Attributes | `extraction/attributes.py` | generic notation (Ø, DN, W×H) + trade rules; `custom_attributes` as printed |
-| LLM (optional) | `extraction/structurer.py`, `verify.py` | strict contract, verified against the page, cached, never prices |
-| Matching | `extraction/matcher.py` | family key attributes must agree; similarity only ranks |
+| Trade detection | `extraction/pipeline.py` `detect_trade` | LV page headers of every Trade in master data |
+| LLM mapping | `extraction/llm_mapper.py`, `verify.py` | one request per page, catalogue shortlist, strict JSON, verified, cached, never prices |
+| Matching (rules) | `extraction/matcher.py` | family key attributes must agree; similarity only ranks |
+| Rules + LLM | `extraction/pipeline.py` `combine` | agree → calculated; LLM only → assumption; disagree → review |
 | Pricing | `pricing/engine.py` | material = qty × net × (1 + waste); hours = qty × base × factors |
 | Project price | `pricing/project.py` | build-up, overhead, margin, Recommended Bid Range |
-| API | `api.py` | process, edit, price snapshot + refresh, summary, assumptions, PDF, CSV export |
+| API | `api.py` | process, edit, price snapshot + refresh, summary, assumptions, PDF, Excel/CSV export |
+| Excel | `export.py` `build_xlsx` | amounts as numbers with CHF format, "—" for a missing price, translated sheets |
 | UI | `frontend/` | Vue 3 + frappe-ui, served at `/estimator` |
 
 Design decisions are recorded in `docs/adr/`.
@@ -105,6 +135,36 @@ forms, that every code has a label, and that no component formats numbers itself
 `data/trades/electrical/` is a complete, **synthetic** example (rebuild its PDF with
 `sample/build_pdf.py`); `tests/test_trades.py` proves it is priced with no code change.
 
+#### Generating synthetic tender packages
+
+`equans_bid/tools/tender_package.py` builds a complete package in the format of the Equans starter
+package (tender PDF, catalogue, productivity rules, project parameters, verified positions,
+expected output, README, manifest) from a scenario JSON:
+
+```bash
+env/bin/python -m equans_bid.tools.tender_package \
+  apps/equans_bid/equans_bid/data/scenarios/talacker_hvac.json <output folder>
+```
+
+A scenario lists systems (BKP code, LA, name) and positions: description lines, and per
+variant the quantity line, unit, catalogue product and, for verified rows, the English golden
+description. Page numbers come from the generator's own layout; golden values from the pricing
+engine. Packages are labelled SYNTHETIC on every page; `tests/test_tender_package.py` checks the
+format against the starter files and that the app finds and prices every verified row.
+
+**Automatic generation.** `equans_bid/tools/scenario_generator.py` writes the scenarios itself
+from the wording templates in `data/scenarios/templates/hvac.json` (one entry per product family:
+LV text, quantity-line format, catalogue products, quantity range, golden description):
+
+```bash
+env/bin/python -m equans_bid.tools.scenario_generator --seed 1 --count 10 --systems 3 --out <folder>
+```
+
+Each seed is one reproducible tender (fictional school, systems, positions, distractors without
+catalogue items, CAD duct list). Every package is self-checked: the rendered PDF must have the
+planned pages, and the real pipeline must find and price every verified position, else the run
+fails. Without `--out` the scenario is printed. More product families = more template entries.
+
 #### Central catalogue and price snapshots
 
 `Catalog Item` is one global master for all tenders (upserted by `product_id`, never duplicated).
@@ -117,6 +177,10 @@ catalogue change does not move an existing tender. "Preise aktualisieren" previe
 ```bash
 cd apps/equans_bid && ../../env/bin/python -m equans_bid.extraction.benchmark [--all] [--strict] [--llm]
 ```
+
+With `--llm` (key from `LLM_API_KEY`), the 22 verified rows are found with LLM and rules
+combined: 22/22 strict with `openai/gpt-oss-120b` on Groq (10 requests, about 3 minutes on the
+free tier; cached afterwards in `data/llm_cache/`).
 
 `validate_extraction_against_benchmark()` finds each of the 22 verified rows by page, unit and
 quantity (ties: expected install code, then sizes in the description). The PDF prints no LV IDs,

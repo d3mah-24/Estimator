@@ -24,6 +24,7 @@
   "catalog_priced_at",
   "price_version",
   "bid_assumptions",
+  "bid_selection",
   "section_items",
   "items"
  ],
@@ -36,14 +37,13 @@
    "reqd": 1
   },
   {
-   "default": "HVAC",
    "fieldname": "trade",
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Trade",
    "options": "Trade",
-   "reqd": 1
+   "description": "Empty: recognised from the tender PDF when it is processed."
   },
   {
    "fieldname": "tender_file",
@@ -148,6 +148,13 @@
    "fieldname": "bid_assumptions",
    "fieldtype": "JSON",
    "label": "Bid Assumptions"
+  },
+  {
+   "fieldname": "bid_selection",
+   "fieldtype": "JSON",
+   "label": "Bid Selection",
+   "read_only": 1,
+   "description": "The bid the estimator chose: a scenario, or a custom margin or price (JSON)."
   },
   {
    "fieldname": "section_items",

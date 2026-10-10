@@ -1,0 +1,110 @@
+{
+  "trade": "HVAC",
+  "bkp": "244",
+  "schools": ["Talacker", "Rietwies", "Sonnhalde", "Lindenhof", "Bachmatt", "Grünau", "Steinacker"],
+  "towns": ["Musterwil", "Beispielberg", "Testikon", "Probstdorf", "Modellingen"],
+  "systems": ["Nebenräume UG", "Mehrzweckraum EG", "Schulzimmer OG", "Turnhalle", "Küche/Abwaschen", "Aula EG", "Bibliothek OG"],
+  "positions": [
+    {
+      "family": "supply_valve", "unit": "pc", "qty": [2, 24], "products": ["P-AIR-001", "P-AIR-002"],
+      "lines": ["Zuluft - Tellerventil", "aus Kunststoff, mit Luftmengeneinstellung", "Fabrikat z.B Trox Hesco", "Typ z.B Z-LVS"],
+      "label": "Grösse Ø {dn_cm} cm", "variant_label": "Ø {dn_cm} cm",
+      "golden": {"description": "Supply air valve, plastic, airflow adjustable, DN{dn_mm}", "manufacturer_hint": "Trox Hesco", "model_hint": "Z-LVS"}
+    },
+    {
+      "family": "exhaust_valve", "unit": "pc", "qty": [2, 24], "products": ["P-AIR-003"],
+      "lines": ["Abluft - Tellerventil", "aus Kunststoff, mit Luftmengeneinstellung", "Fabrikat z.B Trox Hesco", "Typ z.B LVS"],
+      "label": "Grösse Ø {dn_cm} cm",
+      "golden": {"description": "Exhaust air valve, plastic, airflow adjustable, DN{dn_mm}", "manufacturer_hint": "Trox Hesco", "model_hint": "LVS"}
+    },
+    {
+      "family": "fire_damper", "unit": "pc", "qty": [1, 8], "products": ["P-FIR-001"],
+      "lines": ["Brandschutzklappen eingemauert", "Steckerfertige Brandschutzklappe mit VKF Zulassung", "Feuerwiderstandsklasse EI 90-S"],
+      "label": "Grösse (B x H) {dn_cm} Ø cm",
+      "golden": {"description": "Fire damper EI90-S with actuator and interface, DN{dn_mm}", "manufacturer_hint": "Trox Hesco", "model_hint": "FKRS-EU"}
+    },
+    {
+      "family": "manual_damper", "unit": "pc", "qty": [2, 12], "products": ["P-DAM-001"],
+      "lines": ["Drosselklappen", "mit Stellsegment, fest arretierbar", "Material sendizimierverzinkt"],
+      "label": "Grösse Ø {dn_cm} cm",
+      "golden": {"description": "Manual balancing damper, galvanized, DN{dn_mm}"}
+    },
+    {
+      "family": "silencer", "unit": "pc", "qty": [1, 8], "products": ["P-SIL-001", "P-SIL-003", "P-SIL-004"],
+      "lines": ["Schalldämpfer", "Fabrikat z.B. Trox Hesco AG", "Typ z.B. MS-F", "B x H x L {w_cm} x {h_cm} x {l_cm} cm"],
+      "label": "Druckverlust {pressure}Pa",
+      "golden": {"description": "Rectangular silencer {w_mm}x{h_mm}x{l_mm} mm", "manufacturer_hint": "Trox Hesco", "model_hint": "MS-F"}
+    },
+    {
+      "family": "silencer", "unit": "pc", "qty": [2, 10], "products": ["P-SIL-002"],
+      "lines": ["Kompaktschalldämpfer", "Fabrikat z.B. allvotech", "Typ z.B. KOSD 100/900", "Länge Ø aussen I Dämpfung", "cm cm cm dB"],
+      "label": "100 10 28.5x20.5 27",
+      "golden": {"description": "Compact silencer DN100, length 900 mm", "manufacturer_hint": "allvotech", "model_hint": "KOSD 100/900"}
+    },
+    {
+      "family": "vav", "unit": "pc", "qty": [1, 10], "products": ["P-VAV-001", "P-VAV-002"],
+      "lines": ["Einkanal-Volumenstromregler für variable ZUL und ABL", "Fabrikat z.B. Trox Hesco", "Typ z.B. TVJ-D", "Mod. BxH Vmin. Vmax. P", "cm m3/h m3/h Pa"],
+      "label": "TVJ-D {w_cm}x{h_cm} 800 1600 300",
+      "golden": {"description": "Variable volume flow controller {w_mm}x{h_mm} mm", "manufacturer_hint": "Trox Hesco", "model_hint": "TVJ-D"}
+    },
+    {
+      "family": "vav", "unit": "pc", "qty": [2, 16], "products": ["P-VAV-003", "P-VAV-004", "P-VAV-005"],
+      "lines": ["Einkanal-Volumenstromregler für variable ZUL und ABL", "Fabrikat z.B. Trox Hesco", "Typ z.B. TVR-D", "Mod. DN Vmin. Vmax. P", "cm m3/h m3/h Pa"],
+      "label": "TVR-D {dn_cm} {row}",
+      "rows": {"P-VAV-003": "60 200 150", "P-VAV-004": "120 400 150", "P-VAV-005": "180 600 150"},
+      "golden": {"description": "Variable volume flow controller DN{dn_mm}", "manufacturer_hint": "Trox Hesco", "model_hint": "TVR-D"}
+    },
+    {
+      "family": "cav", "unit": "pc", "qty": [2, 10], "products": ["P-CAV-001"],
+      "lines": ["Einkanal-Volumenstromregler für konstanten Vol.strom", "für konstanten Luftvolumenstrom mit Anschlussstutzen,", "Fabrikat Trox Hesco", "Typ VFC", "Mod. DN V P", "mm m3/h Pa"],
+      "label": "....... {dn_mm} 100 150",
+      "golden": {"description": "Constant volume flow controller DN{dn_mm}", "manufacturer_hint": "Trox Hesco", "model_hint": "VFC"}
+    },
+    {
+      "family": "insulation", "unit": "m2", "qty": [10, 180], "products": ["P-INS-001", "P-INS-002"],
+      "lines": ["Thermische Aussendämmung {thickness_mm}/5", "aus {thickness_mm} mm Mineralwollmatten"],
+      "label": "mit Alu-Folie, gestiftet",
+      "golden": {"description": "External thermal duct insulation, mineral wool {thickness_mm} mm"}
+    },
+    {
+      "family": "insulation", "unit": "m2", "qty": [40, 500], "products": ["P-INS-003"],
+      "lines": ["Doppelwandige Blechkanäle mit Ummantelung in V2A", "Thermische Aussendämmung 100/15", "aus 100 mm Mineralwollplatten"],
+      "label": "Wetterfeste Ummantelung V2A inkl. Abdichtung",
+      "golden": {"description": "Weatherproof external insulation 100 mm with stainless steel cladding"}
+    },
+    {
+      "family": "fire_seal", "unit": "pc", "qty": [2, 12], "products": ["P-FIR-002"],
+      "lines": ["Durchdringungen durch brandabschnittsbildende Decken", "EI30 (z.B. System Flumroc)", "Für Lüftungskanäle Abmessungen B x H (mm)"],
+      "label": "{w_mm} x {h_mm}",
+      "golden": {"description": "EI30 penetration sealing for rectangular duct {w_mm}x{h_mm} mm"}
+    },
+    {
+      "family": "fire_seal", "unit": "pc", "qty": [2, 12], "products": ["P-FIR-003"],
+      "lines": ["Durchdringungen durch brandabschnittsbildende Wände", "und Decken für runde Rohre EI30", "nur VKF zertifizierte Systeme zulässig"],
+      "label": "Grösse {dn_cm} Ø cm",
+      "golden": {"description": "EI30 penetration sealing for circular duct DN{dn_mm}"}
+    },
+    {
+      "family": "inspection_cover", "unit": "pc", "qty": [2, 12], "products": ["P-FIR-004"],
+      "lines": ["Revisionsdeckel bei BS-Dämmungen", "nur VKF zertifizierte Systeme zulässig", "Für Lüftungskanäle Abmessungen B x H (mm)"],
+      "label": "{w_mm} x {h_mm}",
+      "golden": {"description": "Inspection cover for fire insulation, duct {w_mm}x{h_mm} mm"}
+    },
+    {
+      "family": "support_set", "unit": "pc", "qty": [2, 12], "products": ["P-SUP-001"],
+      "lines": ["Anschlusswinkel für Befestigung an Wand oder Decke", "50x50x35x2.5mm, 8 Stück pro Durchführung"],
+      "label": "Anzahl Durchführungen",
+      "golden": {"description": "Connection angles for wall or ceiling mounting"}
+    }
+  ],
+  "distractors": [
+    {"lines": ["Regenhut", "Fabrikat z.B Schmidlin", "Material V2A"], "label": "BxH 110 x 35 cm", "unit": "pc", "qty": [1, 2]},
+    {"lines": ["Zuluftgitter", "mit Mengenregulierung, für Einbau in Rohr", "Fabrikat z.B.Trox Hesco"], "label": "Grösse (B x H) 25 x 10 cm", "unit": "pc", "qty": [2, 12]},
+    {"lines": ["Zeigerthermometer", "für Kanaleinbau"], "label": "Messbereich 0-50 °C", "unit": "pc", "qty": [1, 6]},
+    {"lines": ["Bezeichnungsschilder", "Farbpfeile für Luftrichtung"], "label": "100 x 50 mm", "unit": "pc", "qty": [10, 60]}
+  ],
+  "component_list": {
+    "duct_round": ["P-DCT-R-100", "P-DCT-R-125", "P-DCT-R-160", "P-DCT-R-200"],
+    "bends": ["P-FTG-B-100-90", "P-FTG-B-125-90", "P-FTG-B-160-90", "P-FTG-B-200-90"]
+  }
+}

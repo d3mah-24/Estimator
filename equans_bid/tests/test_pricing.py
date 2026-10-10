@@ -15,7 +15,9 @@ from equans_bid.pricing.project import (
 	effective_assumptions,
 	indicative_price,
 	project_baseline,
+	selected_bid,
 	subset_baseline,
+	validate_selection,
 )
 from equans_bid.trades import load_trade
 
@@ -110,6 +112,50 @@ class TestPositionPricing(unittest.TestCase):
 		)
 		self.assertEqual(quoted.material_cost, Decimal("9000.00"))
 		self.assertEqual(quoted.labour_cost, base.labour_cost)
+
+
+BASELINE = Decimal("414489.12")  # golden subset baseline
+
+
+class TestBidSelection(unittest.TestCase):
+	def test_scenario_selection_equals_the_scenario(self):
+		chosen = selected_bid(BASELINE, PARAMS, None, validate_selection({"scenario": "Target"}, PARAMS))
+		target = next(s for s in bid_range(BASELINE, PARAMS) if s["scenario"] == "Target")
+		self.assertEqual(chosen["bid_price_chf"], 432000)
+		for key in ("bid_price_chf", "margin_pct", "estimated_win_probability", "expected_contribution_chf"):
+			self.assertEqual(chosen[key], target[key], key)
+		self.assertFalse(chosen["below_baseline"])
+
+	def test_scenario_follows_edited_margin(self):
+		sel = validate_selection({"scenario": "Target"}, PARAMS)
+		chosen = selected_bid(BASELINE, PARAMS, {"scenario_margins_pct": {"Target": 8}}, sel)
+		self.assertEqual(chosen["bid_price_chf"], 451000)  # ceil(414489.12 / 0.92 / 1000) * 1000
+
+	def test_own_margin_is_priced_like_a_scenario(self):
+		sel = validate_selection({"scenario": "custom", "margin_pct": 5}, PARAMS)
+		self.assertEqual(selected_bid(BASELINE, PARAMS, None, sel)["bid_price_chf"], 437000)
+
+	def test_fixed_price_derives_the_margin(self):
+		sel = validate_selection({"scenario": "custom", "price_chf": 440000}, PARAMS)
+		chosen = selected_bid(BASELINE, PARAMS, None, sel)
+		self.assertEqual(chosen["bid_price_chf"], 440000)
+		self.assertAlmostEqual(chosen["margin_pct"], 5.8, places=1)  # 1 - 414489.12 / 440000
+		self.assertAlmostEqual(chosen["contribution_if_won_chf"], 25510.88, places=2)
+		below = selected_bid(BASELINE, PARAMS, None, {"scenario": "custom", "price_chf": 400000})
+		self.assertTrue(below["below_baseline"])
+		self.assertLess(below["margin_pct"], 0)
+
+	def test_invalid_selections_are_rejected(self):
+		for bad in (
+			{"scenario": "Greedy"},
+			{"scenario": "custom"},
+			{"scenario": "custom", "margin_pct": 5, "price_chf": 1},
+			{"scenario": "custom", "margin_pct": 45},
+			{"scenario": "custom", "price_chf": -5},
+		):
+			with self.subTest(bad=bad), self.assertRaises(ValueError):
+				validate_selection(bad, PARAMS)
+		self.assertIsNone(validate_selection(None, PARAMS))
 
 
 class TestProjectPricing(unittest.TestCase):

@@ -10,6 +10,14 @@
 			>
 			<div class="ml-auto flex gap-2">
 				<Button
+					v-if="shown.selected_bid"
+					variant="ghost"
+					icon-left="x"
+					:loading="selecting"
+					@click="select(null)"
+					>{{ t('bid.clearSelection') }}</Button
+				>
+				<Button
 					:variant="open === 'buildup' ? 'subtle' : 'ghost'"
 					icon-left="layers"
 					@click="toggle('buildup')"
@@ -24,18 +32,50 @@
 			</div>
 		</div>
 
-		<div class="grid grid-cols-1 gap-3 md:grid-cols-4">
+		<!-- The bid the estimator chose (saved per tender, exported to Excel). -->
+		<div
+			class="mb-2 rounded px-3 py-1.5 text-sm"
+			:class="
+				shown.selected_bid
+					? 'bg-surface-blue-1 text-ink-blue-3'
+					: 'bg-surface-gray-2 text-ink-gray-6'
+			"
+		>
+			<template v-if="shown.selected_bid">
+				{{
+					t('bid.selectedLine', {
+						price: formatCHF(shown.selected_bid.bid_price_chf, { digits: 0 }),
+						scenario: t(`scenario.${shown.selected_bid.scenario}`),
+						margin: formatPercent(shown.selected_bid.margin_pct / 100),
+					})
+				}}
+				<span
+					v-if="shown.selected_bid.below_baseline"
+					class="ml-2 font-medium text-ink-red-4"
+					>{{ t('bid.own.belowBaseline') }}</span
+				>
+			</template>
+			<template v-else>{{
+				t('bid.noneSelected', { scenario: t(`scenario.${recommendedName}`) })
+			}}</template>
+		</div>
+
+		<div class="grid grid-cols-1 gap-3 md:grid-cols-5">
 			<div
 				v-for="s in shown.bid_range"
 				:key="s.scenario"
-				class="rounded-lg border px-3 py-2"
-				:class="s.recommended ? 'border-outline-green-2 bg-surface-green-1' : ''"
+				class="flex flex-col rounded-lg border px-3 py-2"
+				:class="[
+					s.recommended ? 'border-outline-green-2 bg-surface-green-1' : '',
+					s.selected ? 'ring-2 ring-outline-blue-2' : '',
+				]"
 			>
-				<div class="flex items-center justify-between">
+				<div class="flex items-center justify-between gap-1">
 					<span class="text-sm font-medium text-ink-gray-7">{{
 						t(`scenario.${s.scenario}`)
 					}}</span>
-					<Badge v-if="s.recommended" theme="green" :label="t('bid.recommended')" />
+					<Badge v-if="s.selected" theme="blue" :label="t('bid.selected')" />
+					<Badge v-else-if="s.recommended" theme="green" :label="t('bid.recommended')" />
 				</div>
 				<div class="text-xl font-semibold tabular-nums text-ink-gray-9">
 					{{ formatCHF(s.bid_price_chf, { digits: 0 }) }}
@@ -62,7 +102,7 @@
 					class="mt-1.5 h-1.5 overflow-hidden rounded bg-surface-gray-3"
 					:title="`${t('bid.winProbability')} ${formatPercent(
 						s.estimated_win_probability,
-						{ maxDigits: 0 }
+						{ maxDigits: 0 },
 					)}`"
 				>
 					<div
@@ -70,7 +110,86 @@
 						:style="{ width: `${s.estimated_win_probability * 100}%` }"
 					/>
 				</div>
+				<Button
+					class="mt-2"
+					:variant="s.selected ? 'subtle' : 'outline'"
+					:disabled="s.selected || dirty"
+					:loading="selecting === s.scenario"
+					@click="select({ scenario: s.scenario })"
+					>{{ s.selected ? t('bid.selected') : t('bid.select') }}</Button
+				>
 			</div>
+
+			<!-- Own offer: a margin or a fixed price chosen by the estimator. -->
+			<div
+				class="flex flex-col rounded-lg border px-3 py-2"
+				:class="ownSelected ? 'ring-2 ring-outline-blue-2' : ''"
+			>
+				<div class="flex items-center justify-between gap-1">
+					<span class="text-sm font-medium text-ink-gray-7">{{
+						t('scenario.custom')
+					}}</span>
+					<Badge v-if="ownSelected" theme="blue" :label="t('bid.selected')" />
+				</div>
+				<template v-if="ownSelected">
+					<div class="text-xl font-semibold tabular-nums text-ink-gray-9">
+						{{ formatCHF(shown.selected_bid.bid_price_chf, { digits: 0 }) }}
+					</div>
+					<div class="mt-1 grid grid-cols-2 gap-x-2 text-xs text-ink-gray-6">
+						<span>{{ t('bid.margin') }}</span>
+						<span
+							class="text-right tabular-nums"
+							:class="
+								shown.selected_bid.below_baseline
+									? 'text-ink-red-4'
+									: 'text-ink-gray-8'
+							"
+							>{{ formatPercent(shown.selected_bid.margin_pct / 100) }}</span
+						>
+						<span>{{ t('bid.winProbability') }}</span>
+						<span class="text-right tabular-nums text-ink-gray-8">{{
+							formatPercent(shown.selected_bid.estimated_win_probability, {
+								maxDigits: 0,
+							})
+						}}</span>
+						<span>{{ t('bid.expectedContribution') }}</span>
+						<span class="text-right font-medium tabular-nums text-ink-gray-9">{{
+							formatCHF(shown.selected_bid.expected_contribution_chf, { digits: 0 })
+						}}</span>
+					</div>
+				</template>
+				<div class="mt-2 flex gap-1">
+					<select
+						v-model="own.mode"
+						class="form-select h-7 rounded border-outline-gray-2 py-0 text-xs"
+						:aria-label="t('bid.own.mode')"
+					>
+						<option value="margin_pct">{{ t('bid.own.margin') }}</option>
+						<option value="price_chf">{{ t('bid.own.price') }}</option>
+					</select>
+					<input
+						v-model.number="own.value"
+						type="number"
+						:step="own.mode === 'margin_pct' ? 0.5 : 1000"
+						:min="own.mode === 'margin_pct' ? 0 : 1"
+						:max="own.mode === 'margin_pct' ? 30 : undefined"
+						class="form-input h-7 w-full min-w-0 rounded border-outline-gray-2 text-sm"
+						:aria-label="
+							own.mode === 'margin_pct' ? t('bid.own.margin') : t('bid.own.price')
+						"
+						@keydown.enter="selectOwn"
+					/>
+				</div>
+				<Button
+					class="mt-2"
+					variant="outline"
+					:disabled="!ownValid || dirty"
+					:loading="selecting === 'custom'"
+					@click="selectOwn"
+					>{{ ownSelected ? t('bid.own.update') : t('bid.select') }}</Button
+				>
+			</div>
+
 			<div class="rounded-lg border border-dashed px-3 py-2">
 				<div class="text-sm font-medium text-ink-gray-7">{{ t('bid.standardOffer') }}</div>
 				<div class="text-xl font-semibold tabular-nums text-ink-gray-9">
@@ -90,7 +209,7 @@
 						t(
 							'bid.unpricedExcluded',
 							{ count: shown.totals.unresolved_count },
-							shown.totals.unresolved_count
+							shown.totals.unresolved_count,
 						)
 					}}
 				</div>
@@ -194,6 +313,7 @@
 				<ErrorMessage :message="error" />
 			</div>
 		</div>
+		<ErrorMessage v-if="selectError" class="mt-2" :message="selectError" />
 	</section>
 </template>
 
@@ -235,11 +355,11 @@ function loadDraft(a: any) {
 watch(
 	() => props.summary?.assumptions,
 	(a) => a && !touched.value && loadDraft(a),
-	{ immediate: true }
+	{ immediate: true },
 )
 
 const scenarioNames = computed(() =>
-	Object.keys(props.summary?.assumptions?.scenario_margins_pct || {})
+	Object.keys(props.summary?.assumptions?.scenario_margins_pct || {}),
 )
 const draftAssumptions = computed(() => ({
 	scenario_margins_pct: { ...draft.scenario_margins_pct },
@@ -251,14 +371,14 @@ const dirty = computed(() => {
 	if (!saved || !touched.value) return false
 	const norm = (a: any) => ({
 		scenario_margins_pct: Object.fromEntries(
-			Object.entries(a.scenario_margins_pct).map(([k, v]) => [k, Number(v)])
+			Object.entries(a.scenario_margins_pct).map(([k, v]) => [k, Number(v)]),
 		),
 		...Object.fromEntries(PP_KEYS.map((k) => [k, Math.round(a[k] * 1000) / 1000])),
 	})
 	return !same(norm(draftAssumptions.value), norm(saved))
 })
 const isCustom = computed(
-	() => props.summary && !same(props.summary.assumptions, props.summary.default_assumptions)
+	() => props.summary && !same(props.summary.assumptions, props.summary.default_assumptions),
 )
 
 // Live preview while editing (debounced); the cards show the preview until saved or reset.
@@ -280,7 +400,7 @@ watch(
 			}
 		}, 250)
 	},
-	{ deep: true }
+	{ deep: true },
 )
 const shown = computed(() => (dirty.value && preview.value) || props.summary)
 
@@ -304,6 +424,49 @@ async function persist(assumptions: any) {
 }
 const save = () => persist(draftAssumptions.value)
 const reset = () => persist(null)
+
+// Bid selection: a scenario, or the own offer (margin % or fixed CHF price). Disabled while
+// assumptions are being edited, so what is chosen is always what is saved.
+const selecting = ref<string | null>(null)
+const selectError = ref('')
+const own = reactive<{ mode: 'margin_pct' | 'price_chf'; value: number | '' }>({
+	mode: 'margin_pct',
+	value: '',
+})
+const ownSelected = computed(() => shown.value?.selected_bid?.scenario === 'custom')
+watch(
+	() => props.summary?.selected_bid,
+	(b) => {
+		if (b?.scenario !== 'custom') return
+		const [mode, value] = Object.entries(b.input)[0] as [any, number]
+		own.mode = mode
+		own.value = value
+	},
+	{ immediate: true },
+)
+const ownValid = computed(() => {
+	const v = Number(own.value)
+	if (own.value === '' || !Number.isFinite(v)) return false
+	return own.mode === 'margin_pct' ? v >= 0 && v <= 30 : v > 0
+})
+const recommendedName = computed(
+	() => (shown.value?.bid_range || []).find((s: any) => s.recommended)?.scenario || 'Target',
+)
+
+async function select(choice: any) {
+	selecting.value = choice?.scenario || 'clear'
+	selectError.value = ''
+	try {
+		const s = await api('equans_bid.api.set_bid_selection', { tender: props.tender, ...choice })
+		emit('update', s)
+	} catch (e: any) {
+		selectError.value = errorText(e, t('common.saveFailed'))
+	} finally {
+		selecting.value = null
+	}
+}
+const selectOwn = () =>
+	ownValid.value && select({ scenario: 'custom', [own.mode]: Number(own.value) })
 
 // Cost build-up lines; notes carry the percentages from the project parameters.
 const buildUp = computed(() => {

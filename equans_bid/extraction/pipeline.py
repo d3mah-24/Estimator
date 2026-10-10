@@ -1,9 +1,10 @@
 """PDF -> extracted, matched positions with a status. No pricing and no Frappe here.
 
 Everything trade-specific comes from a `TradeConfig` (equans_bid.trades): page header, family
-recognition, attribute rules, table-parser plug-ins. The optional `structurer` (LLM) only adds
-verified information (family hint, custom attributes); the rules result stays the reference for
-quantity, unit and page.
+recognition, attribute rules, table-parser plug-ins. With an LLM configured (`mapper`), the model
+reads every LV position and maps it to the catalogue; its answer is verified against the page and
+the catalogue and combined with the rules result (see `combine`). Quantity, unit and page priced
+are always the ones read from the PDF, and nothing here computes money.
 """
 
 import re
@@ -50,11 +51,75 @@ def status_for(position: dict, m: matcher.Match, catalog_by_id: dict) -> tuple[s
 	return "calculated", match_reason
 
 
+def combine(c: dict, m: matcher.Match, status: str, why: dict, checked, catalog_by_id: dict):
+	"""Rules match + verified LLM answer -> (match, status, reason, matched_by).
+
+	- both pick the same item: confirmed by two independent methods;
+	- only the LLM finds an item: priced as an assumption (exact fit, and of the family the rules
+	  recognised, if any) or proposed for review;
+	- the rules are certain (family and sizes agree) and the LLM picks another item: the rules
+	  match stands, the LLM answer is kept for review;
+	- the LLM read another quantity or unit than printed: a human decides.
+	The quantity and unit priced are always the ones read from the page.
+	"""
+	pid = checked.product_id
+	matched_by = "rules"
+	if pid and pid == m.product_id:
+		matched_by = "llm+rules"
+		if checked.fit == "exact" and m.confidence < matcher.CONFIDENT:
+			m = matcher.Match(pid, matcher.CONFIDENT, "llm_confirmed", {"product": pid})
+			status, why = status_for(c, m, catalog_by_id)
+	elif pid and m.product_id and m.confidence >= matcher.CONFIDENT:
+		# Family and every key size already agree with the rules item, and the checks reject an
+		# LLM item with other sizes: a different pick here is another kind of product or a guess.
+		# The certain rules match stands; the answer stays visible in the review panel.
+		return m, status, why, matched_by
+	elif pid:
+		matched_by = "llm"
+		# A product of another family than the one the rules recognised is only a proposal.
+		other_family = c.get("kind") and catalog_by_id[pid]["kind"] != c["kind"]
+		exact = checked.fit == "exact" and not other_family
+		confidence = matcher.ASSUMED if exact else matcher.PROPOSED
+		m = matcher.Match(pid, confidence, "llm_matched", {"product": pid})
+		status, why = status_for(c, m, catalog_by_id)
+	if checked.conflicts and status in ("calculated", "supplier_quote_required", "assumption_applied"):
+		status = "review_required"
+		why = reason("llm_conflict", fields=", ".join(sorted(checked.conflicts)))
+	return m, status, why, matched_by
+
+
+def _llm_evidence(checked) -> dict:
+	"""What the model answered, for the review panel (model text is English, never translated)."""
+	return {
+		"llm": {
+			"product_id": checked.product_id,
+			"fit": checked.fit,
+			"note": checked.note,
+			**({"failures": checked.failures} if checked.failures else {}),
+			**({"conflicts": checked.conflicts} if checked.conflicts else {}),
+		}
+	}
+
+
 def prepare_catalog(rows: list[dict], trade: TradeConfig) -> list[dict]:
 	"""Catalogue rows with `family` and normalised `attributes` (from columns or trade rules)."""
 	return [
 		{**r, "family": catalog_family(r, trade), "attributes": catalog_attributes(r, trade)} for r in rows
 	]
+
+
+def detect_trade(pdf_path, trades: list[TradeConfig], samples: int = 60) -> tuple[str | None, dict]:
+	"""(trade code, LV pages found per trade) from the PDF itself: the trade whose LV page header
+	("244.01 LA01 … Seite 3/20") starts the most sampled pages. None when no header matches."""
+	import pdfplumber
+
+	with pdfplumber.open(Path(pdf_path)) as pdf:
+		n = len(pdf.pages)
+	numbers = list(range(1, n + 1, max(1, n // samples)))
+	first_lines = [p.text.strip().splitlines()[0] for p in read_pages(pdf_path, numbers) if p.text.strip()]
+	scores = {t.code: sum(1 for line in first_lines if t.system_header.search(line)) for t in trades}
+	best = max(scores, key=scores.get, default=None)
+	return (best if best and scores[best] else None), scores
 
 
 def page_systems(pages, trade: TradeConfig, parsers) -> dict[int, str]:
@@ -80,14 +145,15 @@ def extract_positions(
 	pdf_path,
 	catalog_rows: list[dict],
 	pages: list[int] | None = None,
-	structurer=None,
+	mapper=None,
 	trade: TradeConfig | None = None,
 	similarity=None,
 ) -> list[dict]:
 	"""`catalog_rows`: product_id, subcategory, description, unit, supplier_quote_required, and
 	optionally `family` / `attributes` (else derived from the trade's rules).
 
-	`structurer(block) -> contract` is the optional LLM step (equans_bid.extraction.structurer).
+	`mapper(page, page_text, positions, catalog) -> [Checked]` is the LLM step
+	(equans_bid.extraction.llm_mapper); without it the rules extract and match alone.
 	"""
 	trade = trade or load_trade("HVAC")
 	parsers = trade.parsers()
@@ -156,44 +222,56 @@ def extract_positions(
 	def english_label(code):
 		return families[code].label("en") if code in families else code
 
-	out = []
+	# Family per position from the rules; "wie vorbeschrieben, jedoch ..." repeats the previous one.
 	previous_kind = None
 	for c in candidates:
+		if c["kind"] is None and SAME_AS_ABOVE.match(c["title"]):
+			c["kind"] = previous_kind
+		previous_kind = c["kind"]
+
+	# LLM: reads every LV position and maps it to the catalogue, one request per page.
+	answers = {}
+	if mapper is not None:
+		by_page = defaultdict(list)
+		for c in candidates:
+			if c["source_kind"] == "lv":
+				by_page[c["source_page"]].append(c)
+		for page, group in by_page.items():
+			for c, answer in zip(group, mapper(page, text_by_page[page], group, catalog), strict=True):
+				answers[id(c)] = answer
+
+	out = []
+	for c in candidates:
 		per_page[c["source_page"]] += 1
-		kind, attrs, source, error = c["kind"], c["attrs"], "rules", None
+		kind, attrs, source, matched_by, error = c["kind"], c["attrs"], "rules", "rules", None
 		custom = dict(c.get("custom_attributes") or {})
-		llm_failures, llm_conflicts, position_ref = [], {}, None
-		if kind is None and SAME_AS_ABOVE.match(c["title"]):
-			# "wie vorbeschrieben, jedoch ..." repeats the previous position's family.
-			kind = previous_kind
-		if structurer is not None and c["source_kind"] == "lv":
-			contract = structurer(c)
-			checked = verify(contract, c, text_by_page[c["source_page"]], family_codes)
-			error = contract.get("error") if isinstance(contract, dict) else None
-			llm_failures, llm_conflicts, position_ref = (
-				checked.failures,
-				checked.conflicts,
-				checked.position_ref,
-			)
-			for label, value in checked.custom_attributes.items():
-				custom.setdefault(label, value)
-			if kind is None and checked.family_hint:
-				kind, source = checked.family_hint, "llm"
-		previous_kind = kind
+		checked = answers.get(id(c))
+		if checked is not None and kind is None and checked.family:
+			kind, source = checked.family, "llm"
 		m = matcher.match(kind, attrs, f"{c['title']} {c['label']}", catalog, families, c["unit"], similarity)
 		status, why = status_for(c, m, catalog_by_id)
+		if checked is not None:
+			for label, value in checked.custom_attributes.items():
+				custom.setdefault(label, value)
+			m, status, why, matched_by = combine(c, m, status, why, checked, catalog_by_id)
+			if "llm_error" in checked.failures:
+				error = getattr(mapper, "last_error", None)
 		if source == "llm":
-			why = reason("llm_classified", family=kind, detail=why)
-		if llm_conflicts and status in ("calculated", "supplier_quote_required"):
-			# The model read a different quantity or unit than the rules: a human decides.
-			status, why = "review_required", reason("llm_conflict", fields=", ".join(sorted(llm_conflicts)))
+			# Only the LLM recognised what the product is: priced at most as an assumption.
+			matched_by = "llm"
+			if why["code"] not in ("llm_conflict", "llm_disagrees"):
+				why = reason("llm_classified", family=kind, detail=why)
+			if status == "calculated":
+				status = "assumption_applied"
+		product_kind = catalog_by_id[m.product_id]["kind"] if m.product_id else None
+		kind = kind or product_kind
 		description = re.sub(r"\s+", " ", f"{c['title']} — {c['label']}" if c["label"] else c["title"]).strip(
 			" —"
 		)
 		out.append(
 			{
 				"position_id": f"P{c['source_page']:03d}-{per_page[c['source_page']]:02d}",
-				"position_ref": position_ref,
+				"position_ref": None,
 				"golden_lv_id": None,
 				"system": c["system"],
 				"source_page": c["source_page"],
@@ -213,8 +291,8 @@ def extract_positions(
 					"evidence_lines": c.get("evidence_lines") or [],
 					**attrs,
 					**({"system_conflict": c["system_conflict"]} if c.get("system_conflict") else {}),
-					**({"llm_failures": llm_failures} if llm_failures else {}),
-					**({"llm_conflicts": llm_conflicts} if llm_conflicts else {}),
+					"matched_by": matched_by,
+					**(_llm_evidence(checked) if checked is not None else {}),
 				},
 				"extraction_confidence": c["extraction_confidence"],
 				"matched_product": m.product_id,

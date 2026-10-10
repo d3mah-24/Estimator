@@ -6,7 +6,7 @@ the row's expected install code (via the family's catalogue items) and the sizes
 description decide; `require_product` additionally checks the matched catalogue product and the
 status, testing extraction and matching together.
 
-	cd apps/equans_bid && ../../env/bin/python -m equans_bid.extraction.benchmark [--all] [--strict] [-v]
+        cd apps/equans_bid && ../../env/bin/python -m equans_bid.extraction.benchmark [--all] [--strict] [-v]
 """
 
 import csv
@@ -113,7 +113,11 @@ def validate_extraction_against_benchmark(
 			cands = by_size or cands
 		if not cands:
 			report.rows.append(
-				RowResult(g["lv_id"], "MISS", detail=f"no position on page {page} with {qty:g} {unit}")
+				RowResult(
+					g["lv_id"],
+					"MISS",
+					detail=f"no position on page {page} with {qty:g} {unit}",
+				)
 			)
 			continue
 		if len(cands) > 1:
@@ -135,7 +139,9 @@ def validate_extraction_against_benchmark(
 
 
 def assign_golden_ids(
-	positions: list[dict], catalog_rows: list[dict] | None = None, golden_csv: Path = GOLDEN_CSV
+	positions: list[dict],
+	catalog_rows: list[dict] | None = None,
+	golden_csv: Path = GOLDEN_CSV,
 ) -> int:
 	"""Write the golden lv_id onto the positions the benchmark identifies (UI badge, tests)."""
 	report = validate_extraction_against_benchmark(positions, golden_csv, catalog_rows)
@@ -147,26 +153,26 @@ def assign_golden_ids(
 
 
 def main():
+	from equans_bid.extraction.llm_mapper import get_mapper
 	from equans_bid.extraction.pipeline import extract_positions, prepare_catalog
-	from equans_bid.extraction.structurer import get_structurer
 	from equans_bid.trades import load_trade, read_catalog
 
 	trade = load_trade("HVAC")
 	catalog = prepare_catalog(read_catalog(trade), trade)
-	structurer = None
-	if "--llm" in sys.argv:
-		structurer = get_structurer([f.code for f in trade.families], STARTER.parent / "llm_cache")
+	mapper = None
+	if "--llm" in sys.argv:  # LLM_API_KEY / LLM_BASE_URL / LLM_MODEL from the environment
+		mapper = get_mapper([f.code for f in trade.families], STARTER.parent / "llm_cache")
 	pages = None if "--all" in sys.argv else GOLDEN_PAGES
 	pdf = STARTER / "BKP_244_LV_Lueftung_260804.pdf"
-	positions = extract_positions(pdf, catalog, pages, structurer, trade)
+	positions = extract_positions(pdf, catalog, pages, mapper, trade)
 	report = validate_extraction_against_benchmark(
 		positions, catalog_rows=catalog, require_product="--strict" in sys.argv
 	)
 	for r in report.rows:
 		print(f"{r.outcome:<13} {r.lv_id} {r.position_id or '':<8} {r.detail}")
 	print(f"\n{report.summary()} · {len(positions)} positions, {report.extra_positions} not in the benchmark")
-	if structurer:
-		print(structurer.stats())
+	if mapper:
+		print(mapper.stats())
 	if "-v" in sys.argv:
 		for p in positions:
 			print(

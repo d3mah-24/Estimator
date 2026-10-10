@@ -1,6 +1,6 @@
 # 0001 — Hybrid, verified extraction
 
-Status: Proposed (implemented 2026-10-11)
+Status: Superseded by 0006 (2026-10-10)
 
 ## Context
 Tenders have ~200 pages. An LLM can structure free text well but can also invent a quantity.

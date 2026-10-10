@@ -28,6 +28,7 @@
     "empty": "Aucun appel d’offres saisi.",
     "dialog": {
       "projectName": "Nom du projet",
+      "tradeAuto": "Détection automatique",
       "placeholder": "p. ex. école d’Oberglatt – ventilation",
       "uploading": "Téléversement {progress}",
       "choose": "Choisir le descriptif (PDF)",
@@ -38,7 +39,7 @@
     }
   },
   "review": {
-    "export": "Export (CSV)",
+    "export": "Exporter vers Excel",
     "reprocess": "Retraiter",
     "bySystem": "Par installation ({count})",
     "positionsShort": "{count} pos.",
@@ -75,7 +76,7 @@
     "selectHint": "Choisissez une position pour voir son origine et son calcul.",
     "noSystem": "Sans installation",
     "processed": "Aucune position extraite de {file}. | Une position extraite de {file}. | {count} positions extraites de {file}.",
-    "llmUsed": "LLM {model} : {calls} appels, {cached} en cache, {errors} erreurs.",
+    "llmUsed": "LLM {model} ({provider}) : {calls} appels, {cached} en cache, {errors} erreurs.",
     "llmNone": "LLM non configuré (règles uniquement).",
     "saved": "Enregistré et recalculé en {ms} ms",
     "customAttributes": "Attributs du projet (tels qu’imprimés)",
@@ -89,7 +90,19 @@
     "refreshApply": "Appliquer",
     "refreshCancel": "Annuler",
     "pricedAt": "Prix au {date}",
-    "positionRef": "N° pos. imprimé"
+    "positionRef": "N° pos. imprimé",
+    "llmAnswer": "Réponse du LLM · attribué par {by}",
+    "llmNoProduct": "aucun article de catalogue adapté",
+    "matchedBy": {
+      "rules": "règles",
+      "llm": "LLM",
+      "llm+rules": "LLM et règles"
+    },
+    "fit": {
+      "exact": "exact",
+      "close": "proche",
+      "none": "aucune correspondance"
+    }
   },
   "kpi": {
     "direct": {
@@ -142,7 +155,19 @@
     "reset": "Revenir aux paramètres du projet",
     "previewState": "Aperçu – pas encore enregistré",
     "savedState": "Enregistré",
-    "previewFailed": "Échec de l’aperçu"
+    "previewFailed": "Échec de l’aperçu",
+    "select": "Choisir",
+    "selected": "Choisie",
+    "clearSelection": "Annuler le choix",
+    "selectedLine": "Offre retenue : {price} · {scenario} · marge {margin}",
+    "noneSelected": "Aucune offre choisie. Recommandation : {scenario}. Choisissez un scénario ou une offre propre.",
+    "own": {
+      "mode": "Saisie",
+      "margin": "Marge %",
+      "price": "Prix CHF",
+      "update": "Appliquer",
+      "belowBaseline": "Prix sous la base de coûts"
+    }
   },
   "buildUp": {
     "catalog_material": {
@@ -213,7 +238,8 @@
   "scenario": {
     "Aggressive": "Agressif",
     "Target": "Marge cible",
-    "Conservative": "Prudent"
+    "Conservative": "Prudent",
+    "custom": "Offre propre"
   },
   "priceSource": {
     "catalog": "Catalogue",
@@ -242,7 +268,9 @@
     "product_set_by_estimator": "Produit défini par le calculateur",
     "status_set_by_estimator": "Statut défini par le calculateur",
     "attribute_mismatch": "{attribute} vaut {found}, l’article du catalogue a {expected}",
-    "llm_conflict": "Le LLM a lu une autre {fields} que les règles ; veuillez vérifier la source"
+    "llm_conflict": "Le LLM a lu une autre {fields} que les règles ; veuillez vérifier la source",
+    "llm_matched": "Attribué par le LLM à {product} ; veuillez confirmer",
+    "llm_confirmed": "Le LLM et les règles ont tous deux choisi {product}"
   },
   "warning": {
     "header_conflict": "L’en-tête de page indique « {header} », le document source est « {source}.docx »"

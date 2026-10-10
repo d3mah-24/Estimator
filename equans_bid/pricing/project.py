@@ -139,3 +139,66 @@ def bid_range(baseline, params: dict, overrides: dict | None = None) -> list[dic
 	if scenarios:
 		max(scenarios, key=lambda s: s["expected_contribution_chf"])["recommended"] = True
 	return scenarios
+
+
+def _scenario_values(name: str, price, margin, baseline, params: dict, a: dict) -> dict:
+	p = win_probability(price, baseline, params, a)
+	return {
+		"scenario": name,
+		"bid_price_chf": price,
+		"margin_pct": float(round(D(margin), 2)),
+		"estimated_win_probability": float(round(p, 2)),
+		"contribution_if_won_chf": float(money(D(price) - D(baseline))),
+		"expected_contribution_chf": float(money((D(price) - D(baseline)) * p)),
+	}
+
+
+def validate_selection(selection: dict | None, params: dict) -> dict | None:
+	"""The estimator's bid choice, checked: {"scenario": <name>} or {"scenario": "custom",
+	"margin_pct": m} or {"scenario": "custom", "price_chf": p}. None clears it."""
+	if not selection:
+		return None
+	name = selection.get("scenario")
+	if name in params["stretch_bid_optimization"]["scenario_names"]:
+		return {"scenario": name}
+	if name != "custom":
+		raise ValueError(f"unknown scenario {name!r}")
+	margin, price = selection.get("margin_pct"), selection.get("price_chf")
+	if (margin is None) == (price is None):
+		raise ValueError("a custom bid needs either margin_pct or price_chf")
+	if margin is not None:
+		margin = float(margin)
+		if not MARGIN_LIMITS[0] <= margin <= MARGIN_LIMITS[1]:
+			raise ValueError(f"margin must be between {MARGIN_LIMITS[0]:g} and {MARGIN_LIMITS[1]:g} %")
+		return {"scenario": "custom", "margin_pct": margin}
+	price = float(price)
+	if price <= 0:
+		raise ValueError("price must be positive")
+	return {"scenario": "custom", "price_chf": round(price, 2)}
+
+
+def selected_bid(baseline, params: dict, overrides: dict | None, selection: dict | None) -> dict | None:
+	"""The bid the estimator chose, with the same figures as the scenarios.
+
+	A scenario follows its margin (its price moves with the baseline); a custom margin is priced
+	like a scenario; a custom price stays fixed and its margin is derived:
+	margin = 1 - baseline / price. `below_baseline` flags a price under the cost baseline.
+	"""
+	if not selection:
+		return None
+	a = effective_assumptions(params, overrides)
+	round_to = params["commercial"].get("round_to_chf", 1000)
+	name = selection["scenario"]
+	if name != "custom":
+		margin = a["scenario_margins_pct"][name]
+		price = selling_price(baseline, margin, round_to)
+	elif selection.get("margin_pct") is not None:
+		margin = selection["margin_pct"]
+		price = selling_price(baseline, margin, round_to)
+	else:
+		price = selection["price_chf"]
+		margin = (1 - D(baseline) / D(price)) * 100
+	out = _scenario_values(name, price, margin, baseline, params, a)
+	out["below_baseline"] = D(price) < D(baseline)
+	out["input"] = {k: v for k, v in selection.items() if k != "scenario"}
+	return out

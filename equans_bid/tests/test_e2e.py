@@ -1,5 +1,7 @@
 """End to end in Frappe: PDF -> Tender Items -> price -> estimator edit -> reprice."""
 
+import io
+
 import frappe
 from frappe.tests import IntegrationTestCase
 
@@ -8,6 +10,7 @@ from equans_bid.api import (
 	get_tender_summary,
 	process_tender_pdf,
 	set_bid_assumptions,
+	set_bid_selection,
 	update_item,
 )
 from equans_bid.commands.seed_data import run as seed
@@ -44,6 +47,27 @@ class TestTenderEndToEnd(IntegrationTestCase):
 		self.assertEqual(lv6.labour_cost, labour_before)
 		self.assertEqual(lv6.price_source, "supplier_quote")
 
+	def test_bid_selection_saved_and_exported(self):
+		s = set_bid_selection(self.tender.name, "Conservative")
+		self.assertEqual(s["selected_bid"]["scenario"], "Conservative")
+		self.assertTrue(next(x for x in s["bid_range"] if x["scenario"] == "Conservative")["selected"])
+		s = set_bid_selection(self.tender.name, "custom", price_chf="500000", margin_pct="")
+		self.assertEqual(s["selected_bid"]["bid_price_chf"], 500000)
+		self.assertFalse(any(x["selected"] for x in s["bid_range"]))
+
+		from openpyxl import load_workbook
+
+		export_tender(self.tender.name)
+		wb = load_workbook(io.BytesIO(frappe.local.response.filecontent))
+		labels = {r[0]: r[1:] for r in wb["Zusammenfassung"].iter_rows(values_only=True) if r and r[0]}
+		self.assertEqual(labels["Gewähltes Angebot"][0], 500000)
+		bids = [r for r in wb["Angebotsbereich"].iter_rows(min_row=2, values_only=True) if r[0]]
+		self.assertIn(("Eigenes Angebot", 500000), [(r[0], r[1]) for r in bids])
+
+		with self.assertRaises(frappe.ValidationError):
+			set_bid_selection(self.tender.name, "custom", margin_pct=50)
+		self.assertIsNone(set_bid_selection(self.tender.name, None)["selected_bid"])
+
 	def test_bid_assumptions_are_saved_and_reset(self):
 		before = get_tender_summary(self.tender.name)
 		after = set_bid_assumptions(self.tender.name, {"scenario_margins_pct": {"Target": 8}})
@@ -54,8 +78,19 @@ class TestTenderEndToEnd(IntegrationTestCase):
 		reset = set_bid_assumptions(self.tender.name, None)
 		self.assertEqual(reset["assumptions"], reset["default_assumptions"])
 
-	def test_export_csv(self):
+	def test_export_excel(self):
+		from openpyxl import load_workbook
+
 		export_tender(self.tender.name)
+		self.assertTrue(frappe.local.response.filename.endswith(".xlsx"))
+		wb = load_workbook(io.BytesIO(frappe.local.response.filecontent))
+		summary = wb["Zusammenfassung"]
+		labels = {r[0]: r[1] for r in summary.iter_rows(values_only=True) if r and r[0]}
+		baseline = frappe.get_doc("Tender", self.tender.name).cost_baseline
+		self.assertAlmostEqual(labels["Kostenbasis"], baseline, places=2)
+
+	def test_export_csv(self):
+		export_tender(self.tender.name, format="csv")
 		content = frappe.local.response.filecontent
 		self.assertEqual(frappe.local.response.type, "download")
 		self.assertTrue(frappe.local.response.filename.endswith(".csv"))

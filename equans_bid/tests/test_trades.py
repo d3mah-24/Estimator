@@ -6,6 +6,7 @@ import frappe
 from frappe.tests import IntegrationTestCase
 
 from equans_bid.api import (
+	STARTER_PDF,
 	apply_price_refresh,
 	export_tender,
 	preview_price_refresh,
@@ -14,6 +15,7 @@ from equans_bid.api import (
 	update_item,
 )
 from equans_bid.commands.seed_data import run as seed
+from equans_bid.extraction.pipeline import detect_trade
 from equans_bid.trades import TRADES_DIR, load_trade
 
 ELECTRICAL_PDF = TRADES_DIR / "electrical" / "sample" / "BKP_231_LV_Elektro_SAMPLE.pdf"
@@ -128,14 +130,19 @@ class TestElectricalTrade(IntegrationTestCase):
 	def setUpClass(cls):
 		super().setUpClass()
 		seed()
-		cls.tender = frappe.get_doc(
-			{"doctype": "Tender", "project_name": "Electrical sample", "trade": "Electrical"}
-		).insert()
+		# No trade given: it is recognised from the PDF's LV page headers.
+		cls.tender = frappe.get_doc({"doctype": "Tender", "project_name": "Electrical sample"}).insert()
 		cls.tender.db_set("tender_file", _attach(cls.tender.name, ELECTRICAL_PDF))
 		process_tender_pdf(cls.tender.name)
 
 	def items(self):
 		return frappe.get_doc("Tender", self.tender.name).items
+
+	def test_trade_recognised_from_the_pdf(self):
+		self.assertEqual(frappe.db.get_value("Tender", self.tender.name, "trade"), "Electrical")
+		trades = [trade_config(code) for code in ("HVAC", "Electrical")]
+		self.assertEqual(detect_trade(STARTER_PDF, trades)[0], "HVAC")
+		self.assertEqual(detect_trade(ELECTRICAL_PDF, trades)[0], "Electrical")
 
 	def test_cables_matched_by_cores_and_cross_section(self):
 		by_qty = {i.quantity: i for i in self.items() if i.family == "el_cable"}
@@ -158,7 +165,7 @@ class TestElectricalTrade(IntegrationTestCase):
 		self.assertEqual(emergency.direct_cost, 0)
 
 	def test_export_uses_family_labels_from_master_data(self):
-		export_tender(self.tender.name, lang="de-CH")
+		export_tender(self.tender.name, lang="de-CH", format="csv")
 		self.assertIn("Notleuchte", frappe.local.response.filecontent)
 		header = frappe.local.response.filecontent.splitlines()[2].split(";")
 		self.assertIn("Querschnitt", header)  # project column, label as printed

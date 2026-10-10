@@ -16,7 +16,7 @@ from equans_bid import localization as L
 from equans_bid import reasons as R
 from equans_bid.api import export_tender, get_tender_summary, process_tender_pdf
 from equans_bid.commands.seed_data import run as seed
-from equans_bid.export import AMOUNT_COLUMNS, BUILD_UP, TEXT_COLUMNS
+from equans_bid.export import AMOUNT_COLUMNS, BUILD_UP, MATCHED_BY, TEXT_COLUMNS, XLSX_COLUMNS
 
 APP = Path(__file__).resolve().parent.parent
 UI_LOCALES = list(L.UI_LOCALES)
@@ -74,6 +74,7 @@ class TestTranslationFiles(unittest.TestCase):
 		need |= {(L.CTX_PRICE_SOURCE, s) for s in L.PRICE_SOURCE_LABELS.values()}
 		export_src = (APP / "export.py").read_text()
 		headers = {lbl for _, lbl in TEXT_COLUMNS + AMOUNT_COLUMNS + BUILD_UP}
+		headers |= {lbl for _, lbl, _ in XLSX_COLUMNS} | set(MATCHED_BY.values())
 		headers |= set(re.findall(r"""\bh\(\s*["']([^"']+)["']\s*\)""", export_src))
 		need |= {(L.CTX_EXPORT, s) for s in headers}
 		# frappe.throw(_("…")) messages in the API and the DocType controllers
@@ -137,8 +138,43 @@ class TestLocaleIndependence(IntegrationTestCase):
 			self.assertEqual(summaries["de"][key], summaries["en"][key], key)
 
 	def export_rows(self, ui):
-		export_tender(self.tender.name, lang=ui)
+		export_tender(self.tender.name, lang=ui, format="csv")
 		return _rows(frappe.local.response.filecontent)
+
+	def workbook(self, ui):
+		from openpyxl import load_workbook
+
+		export_tender(self.tender.name, lang=ui)
+		return load_workbook(io.BytesIO(frappe.local.response.filecontent))
+
+	def test_excel_amounts_are_numbers_and_identical_in_every_locale(self):
+		values = {}
+		for ui in UI_LOCALES:
+			ws = self.workbook(ui).worksheets[0]
+			header = [c.value for c in ws[4]]
+			ref, direct = header.index(L.Localizer(ui).t("Reference LV", L.CTX_EXPORT)), len(XLSX_COLUMNS) - 1
+			rows = list(ws.iter_rows(min_row=5, values_only=True))
+			lv1 = next(r for r in rows if r[ref] == "LV0001")
+			self.assertEqual(lv1[direct], 806.26)  # a number, not text
+			values[ui] = [r[direct] for r in rows]
+		self.assertEqual(values["de-CH"], values["fr-CH"])
+		self.assertEqual(values["de-CH"], values["en"])
+
+	def test_excel_missing_price_is_dash_and_sheets_translated(self):
+		wb = self.workbook("de-CH")
+		self.assertEqual(
+			wb.sheetnames, ["Positionen", "Zusammenfassung", "Angebotsbereich", "Offene Punkte", "Annahmen"]
+		)
+		self.assertEqual(self.workbook("fr-CH").sheetnames[0], "Positions")
+		ws = wb.worksheets[0]
+		doc = frappe.get_doc("Tender", self.tender.name)
+		unpriced = {i.position_id for i in doc.items if i.status == "review_required"}
+		self.assertTrue(unpriced)
+		for r in ws.iter_rows(min_row=5, values_only=True):
+			if r[0] in unpriced:
+				self.assertEqual(r[len(XLSX_COLUMNS) - 1], "—", r[0])
+		open_ids = {r[0] for r in wb["Offene Punkte"].iter_rows(min_row=2, values_only=True)}
+		self.assertLessEqual(unpriced, open_ids)
 
 	def test_lv0001_golden_806_26_in_every_locale(self):
 		for ui in UI_LOCALES:

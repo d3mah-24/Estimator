@@ -37,12 +37,20 @@ msgctxt "Tender Item status"
 msgid "Assumption applied"
 msgstr "Annahme"
 
+msgctxt "Tender export"
+msgid "Assumptions"
+msgstr "Annahmen"
+
 msgid "At most {0} custom attributes per position"
 msgstr "Höchstens {0} Projektmerkmale pro Position"
 
 msgctxt "Tender export"
 msgid "Bid price"
 msgstr "Angebotspreis"
+
+msgctxt "Tender export"
+msgid "Bid range"
+msgstr "Angebotsbereich"
 
 msgctxt "Tender Item status"
 msgid "Calculated"
@@ -53,11 +61,19 @@ msgid "Catalogue"
 msgstr "Katalog"
 
 msgctxt "Tender export"
+msgid "Catalogue description"
+msgstr "Katalogbeschreibung"
+
+msgctxt "Tender export"
 msgid "Catalogue material"
 msgstr "Material Katalog"
 
 msgid "Classified by LLM as {family}. {detail}"
 msgstr "Vom LLM klassifiziert als {family}. {detail}"
+
+msgctxt "Tender export"
+msgid "Confirmed (calculated)"
+msgstr "Bestätigt (berechnet)"
 
 msgctxt "Bid scenario"
 msgid "Conservative"
@@ -112,6 +128,20 @@ msgctxt "Tender Item status"
 msgid "Insufficient information"
 msgstr "Angaben fehlen"
 
+msgid "Invalid bid selection: {0}"
+msgstr "Ungültige Angebotswahl: {0}"
+
+msgctxt "Tender export"
+msgid "LLM"
+msgstr "LLM"
+
+msgctxt "Tender export"
+msgid "LLM and rules"
+msgstr "LLM und Regeln"
+
+msgid "LLM and rules both chose {product}"
+msgstr "LLM und Regeln haben beide {product} gewählt"
+
 msgctxt "Unit of measure"
 msgid "LS"
 msgstr "psch"
@@ -128,8 +158,19 @@ msgid "Labour"
 msgstr "Arbeit"
 
 msgctxt "Tender export"
+msgid "Labour hours"
+msgstr "Montagestunden"
+
+msgid "Mapped by the LLM to {product}; please confirm"
+msgstr "Vom LLM {product} zugeordnet; bitte bestätigen"
+
+msgctxt "Tender export"
 msgid "Margin"
 msgstr "Marge"
+
+msgctxt "Tender export"
+msgid "Matched by"
+msgstr "Zugeordnet durch"
 
 msgctxt "Tender export"
 msgid "Material"
@@ -151,6 +192,10 @@ msgctxt "Tender Item status"
 msgid "Not priceable"
 msgstr "Nicht kalkulierbar"
 
+msgctxt "Tender export"
+msgid "Open points"
+msgstr "Offene Punkte"
+
 msgctxt "Tender Item status"
 msgid "Out of scope"
 msgstr "Ausser Umfang"
@@ -159,6 +204,10 @@ msgctxt "Tender export"
 msgid "Overhead"
 msgstr "Gemeinkosten"
 
+msgctxt "Bid scenario"
+msgid "Own offer"
+msgstr "Eigenes Angebot"
+
 msgctxt "Tender export"
 msgid "Page"
 msgstr "Seite"
@@ -166,11 +215,19 @@ msgstr "Seite"
 msgid "Page header says '{header}', source document is '{source}.docx'"
 msgstr "Seitenkopf nennt «{header}», Quelldokument ist «{source}.docx»"
 
+msgctxt "Tender export"
+msgid "Parameter"
+msgstr "Parameter"
+
 msgid "Pattern {0} is not a valid regular expression: {1}"
 msgstr "Muster {0} ist kein gültiger regulärer Ausdruck: {1}"
 
 msgid "Position {0} not found in tender {1}"
 msgstr "Position {0} in Ausschreibung {1} nicht gefunden"
+
+msgctxt "Tender export"
+msgid "Positions"
+msgstr "Positionen"
 
 msgctxt "Tender export"
 msgid "Positions without a price"
@@ -204,6 +261,10 @@ msgid "Project parameters are missing. Run equans_bid.commands.seed_data.run fir
 msgstr "Projektparameter fehlen. Zuerst equans_bid.commands.seed_data.run ausführen."
 
 msgctxt "Tender export"
+msgid "Provisional (assumption or supplier package)"
+msgstr "Provisorisch (Annahme oder Lieferantenpaket)"
+
+msgctxt "Tender export"
 msgid "Quantity"
 msgstr "Menge"
 
@@ -227,8 +288,20 @@ msgid "Review required"
 msgstr "Prüfung nötig"
 
 msgctxt "Tender export"
+msgid "Rules"
+msgstr "Regeln"
+
+msgctxt "Tender export"
 msgid "Scenario"
 msgstr "Szenario"
+
+msgctxt "Tender export"
+msgid "Selected"
+msgstr "Ausgewählt"
+
+msgctxt "Tender export"
+msgid "Selected bid"
+msgstr "Gewähltes Angebot"
 
 msgctxt "Tender export"
 msgid "Small material"
@@ -247,6 +320,10 @@ msgstr "Status"
 
 msgid "Status set by estimator"
 msgstr "Status durch Kalkulator gesetzt"
+
+msgctxt "Tender export"
+msgid "Summary"
+msgstr "Zusammenfassung"
 
 msgctxt "Price source"
 msgid "Supplier package"
@@ -307,6 +384,13 @@ msgstr "Die Ausschreibungsdatei ist grösser als {0} MB"
 msgid "The tender file must be a PDF"
 msgstr "Die Ausschreibungsdatei muss ein PDF sein"
 
+msgid "The trade of this tender could not be recognised. Please select it."
+msgstr "Das Gewerk dieser Ausschreibung wurde nicht erkannt. Bitte wählen Sie es aus."
+
+msgctxt "Tender export"
+msgid "Total"
+msgstr "Total"
+
 msgid "Trade {0} is not configured. Run equans_bid.commands.seed_data.run."
 msgstr "Gewerk {0} ist nicht eingerichtet. equans_bid.commands.seed_data.run ausführen."
 
@@ -325,6 +409,10 @@ msgid "Unknown status {0}"
 msgstr "Unbekannter Status {0}"
 
 msgctxt "Tender export"
+msgid "Value"
+msgstr "Wert"
+
+msgctxt "Tender export"
 msgid "Win probability"
 msgstr "Gewinnchance"
 
@@ -337,6 +425,14 @@ msgstr "Winkel {angle}° statt Katalog {catalog_angle}°"
 
 msgid "attributes agree"
 msgstr "Merkmale stimmen überein"
+
+msgctxt "Tender export"
+msgid "below the cost baseline"
+msgstr "unter der Kostenbasis"
+
+msgctxt "Tender export"
+msgid "fixed price"
+msgstr "fester Preis"
 
 msgctxt "Unit of measure"
 msgid "h"
@@ -358,8 +454,16 @@ msgid "m³"
 msgstr "m³"
 
 msgctxt "Tender export"
+msgid "not selected yet"
+msgstr "noch nicht gewählt"
+
+msgctxt "Tender export"
 msgid "number, CHF"
 msgstr "Zahl, CHF"
+
+msgctxt "Tender export"
+msgid "own margin"
+msgstr "eigene Marge"
 
 msgctxt "Unit of measure"
 msgid "pc"
