@@ -1,40 +1,64 @@
-"""Match a tender position to a catalogue item.
+"""Match a tender position to a catalogue item, driven only by the trade's family data.
 
-Technical attributes beat similarity: a candidate is only accepted when every size attribute
-it carries (DN, dimensions, insulation thickness, weatherproof) agrees with the position.
-Text similarity only ranks candidates that already agree.
+1. Candidates: catalogue items of the position's family (and unit of measure).
+2. Hard guard: every key attribute of the family must agree with the item; this keeps a
+   DN125 position off a DN100 item, or a 5x2.5 mm² cable off a 3x1.5 mm² one.
+3. Soft attributes (family data) may differ: priced as the nearest item, status assumption.
+4. size_strategy "nearest_class": the nearest catalogue size class by perimeter, ties larger.
+5. Similarity only ranks candidates that already agree. It is pluggable (`Similarity`);
+   the default is lexical, an embedding backend can be configured.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Protocol
 
 from rapidfuzz import fuzz
 
-from equans_bid.extraction.classify import NO_CATALOG_LABELS, catalog_attributes, catalog_kind
+from equans_bid.extraction.attributes import KEY_TYPES
+from equans_bid.reasons import reason, render
+from equans_bid.trades import Family
 
 CONFIDENT = 0.92  # same value the golden file reports for verified matches
 ASSUMED = 0.75
 PROPOSED = 0.5
-SOFT_ATTRIBUTES = {"angle"}  # a bend at another angle is priced like the catalogue bend
-NEAREST_SIZE_KINDS = {"duct_rect"}  # catalogue has size classes, the tender has exact sizes
+
+# Reason code when a key attribute differs; other keys use the generic "attribute_mismatch".
+MISMATCH_REASONS = {
+	"dn_mm": lambda cat, pos: reason("dn_mismatch", dn=cat),
+	"dims_mm": lambda cat, pos: reason("size_mismatch", size="x".join(map(str, cat))),
+	"thickness_mm": lambda cat, pos: reason("thickness_mismatch", thickness=cat),
+	"weatherproof": lambda cat, pos: reason("weatherproof_mismatch"),
+	"angle": lambda cat, pos: reason("angle_mismatch", angle=pos, catalog_angle=cat),
+}
+
+
+class Similarity(Protocol):
+	def score(self, text: str, candidate: str) -> float: ...
+
+
+class LexicalSimilarity:
+	"""Token-set similarity in [0, 1]; deterministic and dependency-free."""
+
+	def score(self, text: str, candidate: str) -> float:
+		return fuzz.token_set_ratio(text, candidate) / 100
 
 
 @dataclass(frozen=True)
 class Match:
 	product_id: str | None
 	confidence: float
-	reason: str
+	reason_code: str
+	reason_args: dict = field(default_factory=dict)
+
+	@property
+	def reason(self) -> str:
+		"""English text of the reason (stored as `status_reason`, for logs); display translates the code."""
+		return render(self.reason_code, self.reason_args)
 
 
 def index_catalog(rows: list[dict]) -> list[dict]:
-	"""Rows from catalog.csv or Catalog Item; adds `kind` and parsed `attrs`."""
-	return [
-		{
-			**r,
-			"kind": catalog_kind(r["subcategory"], r.get("category", ""), r["description"]),
-			"attrs": catalog_attributes(r["description"], r["subcategory"]),
-		}
-		for r in rows
-	]
+	"""Rows with `family` and `attributes` already set (see equans_bid.trades / seed)."""
+	return [{**r, "kind": r.get("family"), "attrs": r.get("attributes") or {}} for r in rows]
 
 
 def _dims_agree(pos_dims: list[int], cat_dims: list[int]) -> bool:
@@ -47,75 +71,94 @@ def _dims_agree(pos_dims: list[int], cat_dims: list[int]) -> bool:
 	return n < 3 or pos_dims[2] == cat_dims[2]
 
 
-def attributes_agree(pos: dict, cat: dict) -> tuple[bool, str]:
-	if "dn_mm" in cat:
-		if cat["dn_mm"] not in pos.get("dn_mm", []):
-			return False, f"DN{cat['dn_mm']} kommt in der Position nicht vor"
-	if "dims_mm" in cat:
-		if not _dims_agree(pos.get("dims_mm", []), cat["dims_mm"]):
-			return False, f"Grösse {'x'.join(map(str, cat['dims_mm']))} mm passt nicht"
-	if "thickness_mm" in cat and pos.get("thickness_mm") != cat["thickness_mm"]:
-		return False, f"Dämmstärke {cat['thickness_mm']} mm passt nicht"
-	if bool(cat.get("weatherproof")) != bool(pos.get("weatherproof")):
-		return False, "wetterfeste Ausführung weicht ab"
-	if "angle" in cat and "angle" in pos and pos["angle"] != cat["angle"]:
-		return False, f"Winkel {pos['angle']}° statt Katalog {cat['angle']}°"
-	return True, "Merkmale stimmen überein"
+def _agrees(key: str, pos_value, cat_value) -> bool:
+	kind = KEY_TYPES.get(key)
+	if kind == "flag":
+		return bool(pos_value) == bool(cat_value)
+	if kind == "dims":
+		return _dims_agree(pos_value or [], cat_value)
+	if kind == "candidates":
+		return cat_value in (pos_value or [])
+	return pos_value == cat_value
 
 
-def _without(attrs: dict, keys: set) -> dict:
-	return {k: v for k, v in attrs.items() if k not in keys}
+def attributes_agree(pos: dict, cat: dict, keys: list[str], soft: tuple = ()) -> tuple[bool, dict]:
+	"""(agree, detail): every key attribute the item carries must agree with the position.
+	A soft attribute only counts when the position states it."""
+	for key in keys:
+		cat_value = cat.get(key)
+		if KEY_TYPES.get(key) != "flag" and cat_value is None:
+			continue  # the item does not constrain this attribute
+		if key in soft and key not in pos:
+			continue
+		if not _agrees(key, pos.get(key), cat_value):
+			make = MISMATCH_REASONS.get(key)
+			detail = (
+				make(cat_value, pos.get(key))
+				if make
+				else reason("attribute_mismatch", attribute=key, expected=cat_value, found=pos.get(key))
+			)
+			return False, detail
+	return True, reason("attributes_agree")
 
 
 def _perimeter(dims: list[int]) -> int:
 	return 2 * sum(dims[:2]) if len(dims) >= 2 else 0
 
 
-def match(kind: str | None, attrs: dict, text: str, catalog: list[dict], unit: str = "") -> Match:
-	if not kind:
-		return Match(None, 0.0, "Produktfamilie nicht erkannt")
-	candidates = [c for c in catalog if c["kind"] == kind]
+def match(
+	family_code: str | None,
+	attrs: dict,
+	text: str,
+	catalog: list[dict],
+	families: dict[str, Family],
+	unit: str = "",
+	similarity: Similarity | None = None,
+) -> Match:
+	sim = similarity or LexicalSimilarity()
+	if not family_code:
+		return Match(None, 0.0, "family_unknown")
+	candidates = [c for c in catalog if c["kind"] == family_code]
 	if not candidates:
-		label = NO_CATALOG_LABELS.get(kind, kind)
-		return Match(None, 0.0, f"Kein Katalogartikel für {label}: manuell kalkulieren oder Offerte einholen")
+		return Match(None, 0.0, "no_catalog_item", {"family": family_code})
 
-	agreeing = [c for c in candidates if attributes_agree(attrs, c["attrs"])[0]]
+	family = families.get(family_code) or Family(code=family_code)
+	keys = family.key_attributes or sorted({k for c in candidates for k in c["attrs"]})
+	soft = tuple(family.soft_attributes)
+
+	agreeing = [c for c in candidates if attributes_agree(attrs, c["attrs"], keys, soft)[0]]
 	if unit:
 		same_unit = [c for c in agreeing if c["unit"] == unit]
 		if agreeing and not same_unit:
 			best = agreeing[0]
 			return Match(
-				best["product_id"],
-				PROPOSED,
-				f"Einheit {unit} weicht von der Katalogeinheit {best['unit']} ab",
+				best["product_id"], PROPOSED, "unit_mismatch", {"unit": unit, "catalog_unit": best["unit"]}
 			)
 		agreeing = same_unit
 
 	if agreeing:
-		best = max(agreeing, key=lambda c: fuzz.token_set_ratio(text, c["description"]))
+		best = max(agreeing, key=lambda c: sim.score(text, c["description"]))
 		if len(agreeing) > 1:
+			return Match(best["product_id"], ASSUMED, "several_fit", {"count": len(agreeing)})
+		return Match(best["product_id"], CONFIDENT, "exact_match")
+
+	# Soft attributes: same family and key attributes, a soft one differs -> priced as that item.
+	if soft and any(k in attrs for k in soft):
+		hard = [k for k in keys if k not in soft]
+		near = [
+			c
+			for c in candidates
+			if (c["unit"] == unit or not unit) and attributes_agree(attrs, c["attrs"], hard)[0]
+		]
+		if near:
+			first = soft[0]
+			best = min(near, key=lambda c: abs((c["attrs"].get(first) or 0) - (attrs.get(first) or 0)))
+			_, why = attributes_agree(attrs, best["attrs"], keys, soft)
 			return Match(
-				best["product_id"],
-				ASSUMED,
-				f"{len(agreeing)} Katalogartikel passen; beste Textübereinstimmung gewählt",
+				best["product_id"], ASSUMED, "priced_as", {"product": best["product_id"], "detail": why}
 			)
-		return Match(
-			best["product_id"], CONFIDENT, "Produktfamilie und Grösse stimmen mit dem Katalog überein"
-		)
 
-	# Soft attributes: same family and size, different angle -> priced as the catalogue item.
-	soft = [c for c in candidates if c["unit"] == unit or not unit]
-	soft = [
-		c
-		for c in soft
-		if attributes_agree(_without(attrs, SOFT_ATTRIBUTES), _without(c["attrs"], SOFT_ATTRIBUTES))[0]
-	]
-	if soft and any(k in attrs for k in SOFT_ATTRIBUTES):
-		best = min(soft, key=lambda c: abs(c["attrs"].get("angle", 0) - attrs.get("angle", 0)))
-		_, why = attributes_agree(attrs, best["attrs"])
-		return Match(best["product_id"], ASSUMED, f"Kalkuliert als {best['product_id']}: {why}")
-
-	if kind in NEAREST_SIZE_KINDS and attrs.get("dims_mm"):
+	if family.size_strategy == "nearest_class" and attrs.get("dims_mm"):
 		target = _perimeter(attrs["dims_mm"])
 		# On a tie between two size classes take the larger one: conservative for a price.
 		best = min(
@@ -126,12 +169,8 @@ def match(kind: str | None, attrs: dict, text: str, catalog: list[dict], unit: s
 			),
 		)
 		size = "x".join(map(str, best["attrs"]["dims_mm"]))
-		return Match(
-			best["product_id"],
-			ASSUMED,
-			f"Keine exakte Grösse im Katalog; pro m² kalkuliert mit nächster Grössenklasse {size} mm",
-		)
+		return Match(best["product_id"], ASSUMED, "nearest_size_class", {"size": size})
 
-	best = max(candidates, key=lambda c: fuzz.token_set_ratio(text, c["description"]))
-	_, why = attributes_agree(attrs, best["attrs"])
-	return Match(best["product_id"], PROPOSED, f"Nächster Artikel {best['product_id']}: {why}")
+	best = max(candidates, key=lambda c: sim.score(text, c["description"]))
+	_, why = attributes_agree(attrs, best["attrs"], keys, soft)
+	return Match(best["product_id"], PROPOSED, "nearest_item", {"product": best["product_id"], "detail": why})

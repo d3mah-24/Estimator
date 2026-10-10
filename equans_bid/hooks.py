@@ -96,7 +96,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "equans_bid.install.before_install"
-# after_install = "equans_bid.install.after_install"
+after_install = "equans_bid.setup.after_install"
 
 # Uninstallation
 # ------------

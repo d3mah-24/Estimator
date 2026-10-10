@@ -6,10 +6,12 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
+  "trade",
   "tender_file",
   "file_hash",
   "status",
   "processing_log",
+  "processing_info",
   "section_totals",
   "material_cost",
   "labour_cost",
@@ -19,6 +21,8 @@
   "provisional_cost",
   "unresolved_count",
   "cost_baseline",
+  "catalog_priced_at",
+  "price_version",
   "bid_assumptions",
   "section_items",
   "items"
@@ -29,6 +33,16 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Project Name",
+   "reqd": 1
+  },
+  {
+   "default": "HVAC",
+   "fieldname": "trade",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Trade",
+   "options": "Trade",
    "reqd": 1
   },
   {
@@ -54,6 +68,13 @@
    "fieldname": "processing_log",
    "fieldtype": "Small Text",
    "label": "Processing Log",
+   "read_only": 1
+  },
+  {
+   "description": "Positions, file and LLM usage; translated at display time",
+   "fieldname": "processing_info",
+   "fieldtype": "JSON",
+   "label": "Processing Info",
    "read_only": 1
   },
   {
@@ -110,6 +131,19 @@
    "read_only": 1
   },
   {
+   "description": "When catalogue prices were snapshotted",
+   "fieldname": "catalog_priced_at",
+   "fieldtype": "Datetime",
+   "label": "Catalog Priced At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "price_version",
+   "fieldtype": "Data",
+   "label": "Price Version",
+   "read_only": 1
+  },
+  {
    "description": "Estimator overrides of the bid model (margins, competition, strategic appetite)",
    "fieldname": "bid_assumptions",
    "fieldtype": "JSON",
@@ -127,7 +161,7 @@
    "options": "Tender Item"
   }
  ],
- "modified": "2026-10-10 16:00:00.000000",
+ "modified": "2026-10-10 22:00:00.000000",
  "modified_by": "Administrator",
  "module": "Bid Intelligence",
  "name": "Tender",
@@ -144,6 +178,25 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Estimator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Catalogue Manager"
   }
  ],
  "row_format": "Dynamic",

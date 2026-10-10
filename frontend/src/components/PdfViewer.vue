@@ -4,7 +4,7 @@
       <div class="truncate text-ink-gray-7" :title="fileName">{{ fileName }}</div>
       <div class="flex shrink-0 items-center gap-1">
         <Button variant="ghost" icon="chevron-left" :disabled="page <= 1" @click="go(page - 1)" />
-        <span class="tabular-nums text-ink-gray-8">S. {{ page }} / {{ pageCount || '…' }}</span>
+        <span class="tabular-nums text-ink-gray-8">{{ t('pdf.page', { page, count: pageCount || '…' }) }}</span>
         <Button variant="ghost" icon="chevron-right" :disabled="page >= pageCount" @click="go(page + 1)" />
       </div>
     </div>
@@ -31,7 +31,8 @@
 import { LoadingIndicator } from 'frappe-ui'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.js?url'
-import { nextTick, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl
 
@@ -43,6 +44,7 @@ const props = defineProps<{
   evidence: string[]
 }>()
 const emit = defineEmits<{ (e: 'update:page', page: number): void }>()
+const { t } = useI18n()
 
 const canvas = ref<HTMLCanvasElement | null>(null)
 const scroller = ref<HTMLElement | null>(null)
@@ -51,7 +53,15 @@ const pageCount = ref(0)
 const loading = ref(false)
 const error = ref('')
 const boxes = ref<{ x: number; y: number; w: number; h: number }[]>([])
-const highlightNote = ref('')
+// Highlight result as data, so the note follows a language switch.
+const highlighted = ref<number | null>(null)
+const highlightNote = computed(() =>
+  highlighted.value === null
+    ? ''
+    : highlighted.value
+      ? t('pdf.highlighted', { count: highlighted.value, page: props.page }, highlighted.value)
+      : t('pdf.notHighlighted'),
+)
 let renderTask: any = null
 
 const squash = (s: string) => s.replace(/\s+/g, '').toLowerCase()
@@ -68,7 +78,7 @@ async function load() {
     pageCount.value = pdf.value.numPages
     await render()
   } catch (e: any) {
-    error.value = `PDF konnte nicht geladen werden: ${e?.message || e}`
+    error.value = t('pdf.loadFailed', { error: e?.message || String(e) })
   } finally {
     loading.value = false
   }
@@ -109,7 +119,7 @@ async function render() {
 // Group the page's text items into lines and box every line that contains an evidence fragment.
 async function highlight(page: any, viewport: any) {
   const wanted = props.evidence.map(squash).filter((s) => s.length >= 3)
-  highlightNote.value = ''
+  highlighted.value = null
   if (!wanted.length) return []
   const content = await page.getTextContent()
   const lines = new Map<number, any[]>()
@@ -136,9 +146,7 @@ async function highlight(page: any, viewport: any) {
     const y = Math.min(...rects.map((r) => r.y)) - 2
     out.push({ x, y, w: Math.max(...rects.map((r) => r.r)) - x + 3, h: Math.max(...rects.map((r) => r.b)) - y + 2 })
   }
-  highlightNote.value = out.length
-    ? `${out.length} Zeile(n) auf Seite ${props.page} markiert`
-    : 'Fundstelle auf dieser Seite nicht automatisch markiert'
+  highlighted.value = out.length
   return out
 }
 

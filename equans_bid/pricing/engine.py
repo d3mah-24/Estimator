@@ -54,11 +54,18 @@ def parse_factor_keys(factor_keys) -> list[str]:
 	return list(factor_keys)
 
 
-def factor_keys_for_system(factor_keys, system: str | None) -> list[str]:
-	"""Sports-hall positions use the higher mounting-height factor from the project parameters."""
+def apply_factor_rules(factor_keys, context: dict, rules: list[dict]) -> list[str]:
+	"""Swap productivity factors for positions that match a trade's factor rule (data, e.g. a
+	sports-hall system uses the sports-hall mounting height). Rule:
+	{"field": "system", "pattern": "<regex>", "flags": "i", "replace": {"<factor>": "<factor>"}}"""
+	import re
+
 	keys = parse_factor_keys(factor_keys)
-	if system and "turnhalle" in system.lower():
-		keys = ["mounting_height_sports_hall" if k == "mounting_height_school" else k for k in keys]
+	for rule in rules or []:
+		value = str(context.get(rule.get("field", "system")) or "")
+		flags = re.IGNORECASE if "i" in (rule.get("flags") or "") else 0
+		if value and re.search(rule["pattern"], value, flags):
+			keys = [rule["replace"].get(k, k) for k in keys]
 	return keys
 
 

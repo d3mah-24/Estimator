@@ -1,0 +1,272 @@
+{
+  "app": {
+    "language": "Langue"
+  },
+  "common": {
+    "loading": "Chargement …",
+    "choose": "— choisir —",
+    "saveFailed": "Échec de l’enregistrement"
+  },
+  "tenderStatus": {
+    "Draft": "Brouillon",
+    "Processing": "En traitement",
+    "Completed": "Prêt pour vérification",
+    "Failed": "Échec"
+  },
+  "list": {
+    "title": "Appels d’offres",
+    "intro": "Téléverser le descriptif, vérifier les positions, établir un premier prix.",
+    "new": "Nouvel appel d’offres",
+    "col": {
+      "project": "Projet",
+      "status": "Statut",
+      "directCost": "Coûts directs",
+      "baseline": "Base de coûts",
+      "open": "Positions ouvertes"
+    },
+    "empty": "Aucun appel d’offres saisi.",
+    "dialog": {
+      "projectName": "Nom du projet",
+      "placeholder": "p. ex. école d’Oberglatt – ventilation",
+      "uploading": "Téléversement {progress}",
+      "choose": "Choisir le descriptif (PDF)",
+      "submit": "Téléverser et traiter",
+      "notPdf": "Veuillez choisir un fichier PDF.",
+      "tooLarge": "Le fichier dépasse {size} Mo.",
+      "createFailed": "Échec de la création"
+    }
+  },
+  "review": {
+    "export": "Export (CSV)",
+    "reprocess": "Retraiter",
+    "bySystem": "Par installation ({count})",
+    "positionsShort": "{count} pos.",
+    "search": "Rechercher (description, produit, n° de position)",
+    "allStatuses": "Tous les statuts ({count})",
+    "allSystems": "Toutes les installations",
+    "positions": "aucune position | une position | {count} positions",
+    "col": {
+      "lvId": "N° pos.",
+      "description": "Description",
+      "quantity": "Quantité",
+      "unit": "Unité",
+      "product": "Produit",
+      "directCost": "Coûts directs",
+      "status": "Statut",
+      "source": "Source"
+    },
+    "loadingPositions": "Chargement des positions …",
+    "verifiedReference": "Position de référence vérifiée",
+    "quotePlaceholder": "Catalogue {amount}",
+    "quoteTitle": "Prix de l’offre fournisseur (matériel total, CHF)",
+    "quoted": "offre",
+    "provisional": "provisoire",
+    "noPriceYet": "Pas de prix avant vérification",
+    "page": "p. {page}",
+    "traceability": "Traçabilité du document",
+    "documentConflict": "Contradiction dans le document",
+    "technicalError": "Erreur technique",
+    "confidence": "Reconnaissance / attribution",
+    "material": "Matériel",
+    "materialFormula": "{quantity} × {price} + {waste} de chute",
+    "labour": "Main-d’œuvre",
+    "labourFormula": "{hours} h × {rate}",
+    "selectHint": "Choisissez une position pour voir son origine et son calcul.",
+    "noSystem": "Sans installation",
+    "processed": "Aucune position extraite de {file}. | Une position extraite de {file}. | {count} positions extraites de {file}.",
+    "llmUsed": "LLM {model} : {calls} appels, {cached} en cache, {errors} erreurs.",
+    "llmNone": "LLM non configuré (règles uniquement).",
+    "saved": "Enregistré et recalculé en {ms} ms"
+  },
+  "kpi": {
+    "direct": {
+      "label": "Coûts directs",
+      "hint": "Matériel + main-d’œuvre, positions chiffrées"
+    },
+    "confirmed": {
+      "label": "Dont confirmés",
+      "hint": "Catalogue ou offre"
+    },
+    "provisional": {
+      "label": "Dont provisoires",
+      "hint": "Offre en attente / hypothèse"
+    },
+    "open": {
+      "label": "Positions ouvertes",
+      "hint": "Sans prix, vérification requise"
+    },
+    "baseline": {
+      "label": "Base de coûts",
+      "hint": "y c. coûts de projet, suppléments, frais généraux"
+    }
+  },
+  "bid": {
+    "title": "Fourchette d’offre recommandée",
+    "modelNote": "Probabilité de gain : estimation du modèle, non calibrée sur des offres passées",
+    "custom": "Hypothèses personnalisées",
+    "buildUp": "Structure des coûts",
+    "assumptions": "Hypothèses",
+    "recommended": "Recommandé",
+    "margin": "Marge",
+    "winProbability": "Probabilité de gain",
+    "contributionIfWon": "Contribution si adjugé",
+    "expectedContribution": "Contribution attendue",
+    "standardOffer": "Prix indicatif",
+    "standardOfferFormula": "Base de coûts {baseline} ÷ (1 − {margin} de marge cible), arrondi au supérieur à {step}",
+    "unpricedExcluded": "Toutes les positions sont chiffrées | Une position sans prix n’est pas incluse | {count} positions sans prix ne sont pas incluses",
+    "input": {
+      "margin": "Marge {scenario} (%)",
+      "strategic": "Intérêt stratégique (pts)",
+      "strategicHint": "Positif = nous voulons absolument ce mandat (p. ex. projet de référence, capacité libre)",
+      "competition": "Concurrence (pts)",
+      "competitionHint": "Négatif = concurrents nombreux ou agressifs",
+      "sensitivity": "Sensibilité au prix (pts par 1 %)",
+      "sensitivityHint": "Baisse de la probabilité de gain pour chaque 1 % de prix au-dessus du prix indicatif",
+      "base": "Probabilité de gain de base (%)",
+      "baseHint": "Probabilité de gain au prix indicatif"
+    },
+    "save": "Enregistrer les hypothèses",
+    "reset": "Revenir aux paramètres du projet",
+    "previewState": "Aperçu – pas encore enregistré",
+    "savedState": "Enregistré",
+    "previewFailed": "Échec de l’aperçu"
+  },
+  "buildUp": {
+    "catalog_material": {
+      "label": "Matériel du catalogue",
+      "note": "y c. {waste} de chute"
+    },
+    "supplier_material": {
+      "label": "Lots fournisseurs",
+      "note": "Prix catalogue ou offre"
+    },
+    "labour": {
+      "label": "Montage",
+      "note": "Heures × tarif, avec facteurs de projet"
+    },
+    "small_material": {
+      "label": "Petit matériel",
+      "note": "{pct} du matériel du catalogue"
+    },
+    "supplier_contingency": {
+      "label": "Réserve lots fournisseurs",
+      "note": "{pct}"
+    },
+    "project_costs": {
+      "label": "Coûts de projet",
+      "note": "Ingénierie, mise en service, hygiène, documentation"
+    },
+    "direct_cost": {
+      "label": "Coûts directs",
+      "note": ""
+    },
+    "transport_equipment": {
+      "label": "Transport et équipement",
+      "note": "{pct}"
+    },
+    "overhead": {
+      "label": "Frais généraux",
+      "note": "{pct}"
+    },
+    "cost_baseline": {
+      "label": "Base de coûts",
+      "note": ""
+    }
+  },
+  "pdf": {
+    "page": "p. {page} / {count}",
+    "highlighted": "Aucune ligne surlignée | Une ligne surlignée à la page {page} | {count} lignes surlignées à la page {page}",
+    "notHighlighted": "Emplacement non surligné automatiquement sur cette page",
+    "loadFailed": "Impossible de charger le PDF : {error}"
+  },
+  "status": {
+    "calculated": "Calculé",
+    "supplier_quote_required": "Offre requise",
+    "assumption_applied": "Hypothèse appliquée",
+    "review_required": "Vérification requise",
+    "insufficient_information": "Informations insuffisantes",
+    "out_of_scope": "Hors périmètre",
+    "non_priceable": "Non chiffrable"
+  },
+  "unit": {
+    "pc": "pce",
+    "m": "m",
+    "m2": "m²",
+    "m3": "m³",
+    "h": "h",
+    "LS": "forfait",
+    "system": "installation"
+  },
+  "scenario": {
+    "Aggressive": "Agressif",
+    "Target": "Marge cible",
+    "Conservative": "Prudent"
+  },
+  "priceSource": {
+    "catalog": "Catalogue",
+    "supplier_package": "Lot fournisseur",
+    "supplier_quote": "Offre fournisseur"
+  },
+  "family": {
+    "supply_valve": "bouche d’air soufflé",
+    "exhaust_valve": "bouche d’air repris",
+    "fire_damper": "clapet coupe-feu",
+    "manual_damper": "registre de réglage",
+    "silencer": "silencieux",
+    "vav": "régulateur de débit variable (VAV)",
+    "cav": "régulateur de débit constant",
+    "insulation": "isolation de gaine",
+    "fire_seal": "obturation coupe-feu",
+    "support_set": "jeu de cornières de fixation",
+    "inspection_cover": "trappe de visite",
+    "duct_round": "gaine circulaire",
+    "duct_rect": "gaine rectangulaire",
+    "bend": "coude circulaire",
+    "ahu": "monobloc de ventilation",
+    "fan": "ventilateur",
+    "field_device": "appareil de terrain",
+    "dp_transmitter": "transmetteur de pression différentielle",
+    "temp_sensor": "sonde de température",
+    "actuator": "servomoteur",
+    "flow_transmitter": "transmetteur de débit",
+    "grille": "grille d’air",
+    "air_outlet": "bouche d’air / élément de transfert",
+    "fire_insulation": "isolation coupe-feu",
+    "humidity_sensor": "sonde d’humidité",
+    "frost_thermostat": "thermostat antigel",
+    "thermometer": "thermomètre à cadran",
+    "cleaning_cover": "trappe de contrôle / de nettoyage",
+    "rain_hat": "chapeau pare-pluie / à lamelles",
+    "earth_duct": "conduite d’air enterrée",
+    "labels": "plaques signalétiques",
+    "leak_test": "essai d’étanchéité des gaines (prestation)",
+    "service": "prestation de montage / mise en service",
+    "fitting_round": "raccord circulaire",
+    "fitting_rect": "raccord de gaine rectangulaire"
+  },
+  "reason": {
+    "family_unknown": "Famille de produits non reconnue",
+    "no_catalog_item": "Aucun article de catalogue pour {family} : calculer manuellement ou demander une offre",
+    "unit_mismatch": "L’unité {unit} diffère de l’unité du catalogue {catalog_unit}",
+    "several_fit": "{count} articles du catalogue conviennent ; meilleure correspondance textuelle retenue",
+    "exact_match": "Famille de produits et dimension conformes au catalogue",
+    "priced_as": "Calculé comme {product} : {detail}",
+    "nearest_item": "Article le plus proche {product} : {detail}",
+    "nearest_size_class": "Pas de dimension exacte au catalogue ; calculé au m² avec la classe la plus proche {size} mm",
+    "dn_mismatch": "DN{dn} absent de la position",
+    "size_mismatch": "la dimension {size} mm ne correspond pas",
+    "thickness_mismatch": "l’épaisseur d’isolation {thickness} mm ne correspond pas",
+    "weatherproof_mismatch": "l’exécution résistante aux intempéries diffère",
+    "angle_mismatch": "angle de {angle}° au lieu de {catalog_angle}° au catalogue",
+    "attributes_agree": "les caractéristiques correspondent",
+    "quantity_missing": "La colonne des quantités du descriptif est vide",
+    "supplier_package_provisional": "Lot fournisseur : prix catalogue provisoire jusqu’à la saisie d’une offre",
+    "llm_classified": "Classé par le LLM comme {family}. {detail}",
+    "no_productivity_rule": "Aucune règle de productivité {install_code}",
+    "product_set_by_estimator": "Produit défini par le calculateur",
+    "status_set_by_estimator": "Statut défini par le calculateur"
+  },
+  "warning": {
+    "header_conflict": "L’en-tête de page indique « {header} », le document source est « {source}.docx »"
+  }
+}

@@ -1,0 +1,39 @@
+{
+ "creation": "2026-10-10 22:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pattern",
+  "note"
+ ],
+ "fields": [
+  {
+   "description": "Regular expression on the lower-cased tender text",
+   "fieldname": "pattern",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Pattern",
+   "reqd": 1
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Note"
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-10-10 22:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bid Intelligence",
+ "name": "Product Family Pattern",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0
+}

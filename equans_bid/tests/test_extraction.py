@@ -62,7 +62,8 @@ class TestMatcher(unittest.TestCase):
 	def test_family_without_catalogue_item_is_named(self):
 		m = matcher.match("thermometer", {}, "Zeigerthermometer", CATALOG, "pc")
 		self.assertIsNone(m.product_id)
-		self.assertIn("Zeigerthermometer", m.reason)
+		self.assertEqual((m.reason_code, m.reason_args), ("no_catalog_item", {"family": "thermometer"}))
+		self.assertIn("dial thermometer", m.reason)  # English fallback text
 
 
 class TestPageSystem(unittest.TestCase):
@@ -73,11 +74,13 @@ class TestPageSystem(unittest.TestCase):
 		)
 		system, conflict = page_system(text)
 		self.assertEqual(system, "244.05 LA05 Turnhalle")
-		self.assertIn("244.03", conflict)
+		self.assertEqual(
+			conflict, {"header": "244.03 LA03 Küche/Abwaschen", "source": "244.05 LA05 Turnhalle"}
+		)
 
 	def test_header_kept_when_consistent(self):
 		text = "SH Erlenstrasse Oberglatt 244.04 Schulzimmer OG Seite 1 / 24\nx\nH:\\a\\244.04 LA04 Schulzimmer OG.docx 28.07.2026"
-		self.assertEqual(page_system(text), ("244.04 Schulzimmer OG", ""))
+		self.assertEqual(page_system(text), ("244.04 Schulzimmer OG", {}))
 
 
 class TestComponentList(unittest.TestCase):

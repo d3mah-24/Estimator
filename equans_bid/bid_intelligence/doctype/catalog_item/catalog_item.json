@@ -18,7 +18,13 @@
   "net_cost_chf",
   "install_code",
   "source_type",
-  "supplier_quote_required"
+  "supplier_quote_required",
+  "section_family",
+  "trade",
+  "family",
+  "attributes",
+  "price_version",
+  "valid_from"
  ],
  "fields": [
   {
@@ -100,9 +106,46 @@
    "fieldname": "supplier_quote_required",
    "fieldtype": "Check",
    "label": "Supplier Quote Required"
+  },
+  {
+   "fieldname": "section_family",
+   "fieldtype": "Section Break",
+   "label": "Family and attributes"
+  },
+  {
+   "fieldname": "trade",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Trade",
+   "options": "Trade"
+  },
+  {
+   "fieldname": "family",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Family",
+   "options": "Product Family"
+  },
+  {
+   "description": "Normalised attributes, canonical keys (e.g. {\"dn_mm\": 100})",
+   "fieldname": "attributes",
+   "fieldtype": "JSON",
+   "label": "Attributes"
+  },
+  {
+   "description": "Catalogue import version, e.g. 2026-10",
+   "fieldname": "price_version",
+   "fieldtype": "Data",
+   "label": "Price Version"
+  },
+  {
+   "fieldname": "valid_from",
+   "fieldtype": "Date",
+   "label": "Valid From"
   }
  ],
- "modified": "2026-10-10 11:00:00.000000",
+ "modified": "2026-10-10 22:00:00.000000",
  "modified_by": "Administrator",
  "module": "Bid Intelligence",
  "name": "Catalog Item",
@@ -120,6 +163,25 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Catalogue Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Estimator"
   }
  ],
  "row_format": "Dynamic",

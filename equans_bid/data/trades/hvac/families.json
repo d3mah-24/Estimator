@@ -1,0 +1,685 @@
+{
+  "trade": "HVAC",
+  "families": [
+    {
+      "code": "inspection_cover",
+      "priority": 10,
+      "labels": {
+        "de-CH": "Revisionsdeckel",
+        "fr-CH": "trappe de visite",
+        "en": "inspection cover"
+      },
+      "patterns": [
+        "revisi\\w*deckel|revisionsdeckel"
+      ],
+      "key_attributes": [
+        "dims_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Inspection cover"
+        }
+      ]
+    },
+    {
+      "code": "support_set",
+      "priority": 20,
+      "labels": {
+        "de-CH": "Anschlusswinkel-Set",
+        "fr-CH": "jeu de cornières de fixation",
+        "en": "connection-angle set"
+      },
+      "patterns": [
+        "anschlusswink|befestigungswink"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Angle set"
+        }
+      ]
+    },
+    {
+      "code": "fire_damper",
+      "priority": 30,
+      "labels": {
+        "de-CH": "Brandschutzklappe",
+        "fr-CH": "clapet coupe-feu",
+        "en": "fire damper"
+      },
+      "patterns": [
+        "brandschutzklappe"
+      ],
+      "key_attributes": [
+        "dn_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Fire damper"
+        }
+      ]
+    },
+    {
+      "code": "fire_seal",
+      "priority": 40,
+      "labels": {
+        "de-CH": "Brandabschottung",
+        "fr-CH": "obturation coupe-feu",
+        "en": "fire seal"
+      },
+      "patterns": [
+        "durchdringung|abschottung"
+      ],
+      "key_attributes": [
+        "dn_mm",
+        "dims_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Rectangular seal"
+        },
+        {
+          "subcategory": "Circular seal"
+        }
+      ]
+    },
+    {
+      "code": "fire_insulation",
+      "priority": 50,
+      "labels": {
+        "de-CH": "Brandschutzdämmung",
+        "fr-CH": "isolation coupe-feu",
+        "en": "fire protection insulation"
+      },
+      "patterns": [
+        "brandschutzdämm|dämmung ei\\s?\\d"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "insulation",
+      "priority": 60,
+      "labels": {
+        "de-CH": "Kanaldämmung",
+        "fr-CH": "isolation de gaine",
+        "en": "duct insulation"
+      },
+      "patterns": [
+        "ummantelung|wetterfest|aussendämmung|dämmung"
+      ],
+      "key_attributes": [
+        "thickness_mm",
+        "weatherproof"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Thermal 30 mm"
+        },
+        {
+          "subcategory": "Thermal 60 mm"
+        },
+        {
+          "subcategory": "Weatherproof 100 mm"
+        }
+      ]
+    },
+    {
+      "code": "supply_valve",
+      "priority": 70,
+      "labels": {
+        "de-CH": "Zuluftventil",
+        "fr-CH": "bouche d’air soufflé",
+        "en": "supply air valve"
+      },
+      "patterns": [
+        "zuluft\\W+tellerventil|tellerventil.*zuluft"
+      ],
+      "key_attributes": [
+        "dn_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Supply valve"
+        }
+      ]
+    },
+    {
+      "code": "exhaust_valve",
+      "priority": 80,
+      "labels": {
+        "de-CH": "Abluftventil",
+        "fr-CH": "bouche d’air repris",
+        "en": "exhaust air valve"
+      },
+      "patterns": [
+        "abluft\\W+tellerventil|tellerventil.*abluft"
+      ],
+      "key_attributes": [
+        "dn_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Exhaust valve"
+        }
+      ]
+    },
+    {
+      "code": "manual_damper",
+      "priority": 90,
+      "labels": {
+        "de-CH": "Drosselklappe",
+        "fr-CH": "registre de réglage",
+        "en": "balancing damper"
+      },
+      "patterns": [
+        "drosselklappe"
+      ],
+      "key_attributes": [
+        "dn_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Manual damper"
+        }
+      ]
+    },
+    {
+      "code": "silencer",
+      "priority": 100,
+      "labels": {
+        "de-CH": "Schalldämpfer",
+        "fr-CH": "silencieux",
+        "en": "silencer"
+      },
+      "patterns": [
+        "schalldämpfer"
+      ],
+      "key_attributes": [
+        "dn_mm",
+        "dims_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Rectangular"
+        },
+        {
+          "subcategory": "Compact"
+        }
+      ]
+    },
+    {
+      "code": "cav",
+      "priority": 110,
+      "labels": {
+        "de-CH": "Konstant-Volumenstromregler",
+        "fr-CH": "régulateur de débit constant",
+        "en": "constant air-volume controller"
+      },
+      "patterns": [
+        "volumenstromregler.*konstant|konstant.*volumenstromregler|\\bvfc\\b"
+      ],
+      "key_attributes": [
+        "dn_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "CAV circular"
+        }
+      ]
+    },
+    {
+      "code": "vav",
+      "priority": 120,
+      "labels": {
+        "de-CH": "VVS-Regler (variabler Volumenstrom)",
+        "fr-CH": "régulateur de débit variable (VAV)",
+        "en": "variable air-volume controller"
+      },
+      "patterns": [
+        "volumenstromregler|\\bvvs\\b|tvj-d|tvr-d"
+      ],
+      "key_attributes": [
+        "dn_mm",
+        "dims_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "VAV rectangular"
+        },
+        {
+          "subcategory": "VAV circular"
+        }
+      ]
+    },
+    {
+      "code": "grille",
+      "priority": 130,
+      "labels": {
+        "de-CH": "Luftgitter",
+        "fr-CH": "grille d’air",
+        "en": "air grille"
+      },
+      "patterns": [
+        "gitter"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "air_outlet",
+      "priority": 140,
+      "labels": {
+        "de-CH": "Luftauslass / Überströmer",
+        "fr-CH": "bouche d’air / élément de transfert",
+        "en": "air outlet / transfer element"
+      },
+      "patterns": [
+        "wirbelstrahl|düsenrohr|überströmer|überströmelement|durchlass"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "ahu",
+      "priority": 150,
+      "labels": {
+        "de-CH": "Lüftungsgerät",
+        "fr-CH": "monobloc de ventilation",
+        "en": "air-handling unit"
+      },
+      "patterns": [
+        "lüftungsgerät|monoblock|klimagerät"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Air-handling unit"
+        }
+      ]
+    },
+    {
+      "code": "fan",
+      "priority": 160,
+      "labels": {
+        "de-CH": "Ventilator",
+        "fr-CH": "ventilateur",
+        "en": "fan"
+      },
+      "patterns": [
+        "ventilator"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Fan"
+        }
+      ]
+    },
+    {
+      "code": "humidity_sensor",
+      "priority": 170,
+      "labels": {
+        "de-CH": "Feuchtefühler",
+        "fr-CH": "sonde d’humidité",
+        "en": "humidity sensor"
+      },
+      "patterns": [
+        "feuchtefühler"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "frost_thermostat",
+      "priority": 180,
+      "labels": {
+        "de-CH": "Frostschutzwächter",
+        "fr-CH": "thermostat antigel",
+        "en": "frost protection thermostat"
+      },
+      "patterns": [
+        "frostschutz"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "dp_transmitter",
+      "priority": 190,
+      "labels": {
+        "de-CH": "Druckdifferenzfühler",
+        "fr-CH": "transmetteur de pression différentielle",
+        "en": "differential pressure transmitter"
+      },
+      "patterns": [
+        "druckdifferenz"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Field device",
+          "description_contains": "differential pressure"
+        }
+      ]
+    },
+    {
+      "code": "temp_sensor",
+      "priority": 200,
+      "labels": {
+        "de-CH": "Temperaturfühler",
+        "fr-CH": "sonde de température",
+        "en": "temperature sensor"
+      },
+      "patterns": [
+        "temperaturfühler"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Field device",
+          "description_contains": "temperature sensor"
+        }
+      ]
+    },
+    {
+      "code": "thermometer",
+      "priority": 210,
+      "labels": {
+        "de-CH": "Zeigerthermometer",
+        "fr-CH": "thermomètre à cadran",
+        "en": "dial thermometer"
+      },
+      "patterns": [
+        "thermometer"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "cleaning_cover",
+      "priority": 220,
+      "labels": {
+        "de-CH": "Kontroll- / Putzdeckel",
+        "fr-CH": "trappe de contrôle / de nettoyage",
+        "en": "cleaning / access cover"
+      },
+      "patterns": [
+        "putzdeckel|kontrolldeckel"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "rain_hat",
+      "priority": 230,
+      "labels": {
+        "de-CH": "Regenhut / Lamellenhut",
+        "fr-CH": "chapeau pare-pluie / à lamelles",
+        "en": "rain hat / louvre cap"
+      },
+      "patterns": [
+        "regenhut|lamellenhut"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "earth_duct",
+      "priority": 240,
+      "labels": {
+        "de-CH": "erdverlegte Lüftungsleitung",
+        "fr-CH": "conduite d’air enterrée",
+        "en": "earth-laid ventilation duct"
+      },
+      "patterns": [
+        "erdverlegung|erdverlegt"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "labels",
+      "priority": 250,
+      "labels": {
+        "de-CH": "Bezeichnungsschilder",
+        "fr-CH": "plaques signalétiques",
+        "en": "labels and marking"
+      },
+      "patterns": [
+        "bezeichnungsschild"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "leak_test",
+      "priority": 260,
+      "labels": {
+        "de-CH": "Kanaldichtheitsprüfung (Dienstleistung)",
+        "fr-CH": "essai d’étanchéité des gaines (prestation)",
+        "en": "duct leakage test (service)"
+      },
+      "patterns": [
+        "dichtheitsprüfung"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "service",
+      "priority": 270,
+      "labels": {
+        "de-CH": "Montage- / Inbetriebsetzungsleistung",
+        "fr-CH": "prestation de montage / mise en service",
+        "en": "installation / commissioning service"
+      },
+      "patterns": [
+        "^montage\\b|montage und transport|inbetriebsetz|einregulierung"
+      ],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "duct_round",
+      "priority": 280,
+      "labels": {
+        "de-CH": "Rundrohr",
+        "fr-CH": "gaine circulaire",
+        "en": "round duct"
+      },
+      "patterns": [],
+      "key_attributes": [
+        "dn_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Circular duct"
+        }
+      ]
+    },
+    {
+      "code": "duct_rect",
+      "priority": 290,
+      "labels": {
+        "de-CH": "Rechteckkanal",
+        "fr-CH": "gaine rectangulaire",
+        "en": "rectangular duct"
+      },
+      "patterns": [],
+      "key_attributes": [
+        "dims_mm"
+      ],
+      "soft_attributes": [],
+      "size_strategy": "nearest_class",
+      "catalog_match": [
+        {
+          "subcategory": "Rectangular duct"
+        }
+      ]
+    },
+    {
+      "code": "bend",
+      "priority": 300,
+      "labels": {
+        "de-CH": "Rohrbogen",
+        "fr-CH": "coude circulaire",
+        "en": "round bend"
+      },
+      "patterns": [],
+      "key_attributes": [
+        "dn_mm",
+        "angle"
+      ],
+      "soft_attributes": [
+        "angle"
+      ],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Circular bend"
+        }
+      ]
+    },
+    {
+      "code": "field_device",
+      "priority": 310,
+      "labels": {
+        "de-CH": "Feldgerät",
+        "fr-CH": "appareil de terrain",
+        "en": "field device"
+      },
+      "patterns": [],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Field device"
+        }
+      ]
+    },
+    {
+      "code": "actuator",
+      "priority": 320,
+      "labels": {
+        "de-CH": "Stellantrieb",
+        "fr-CH": "servomoteur",
+        "en": "actuator"
+      },
+      "patterns": [],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Field device",
+          "description_contains": "actuator"
+        }
+      ]
+    },
+    {
+      "code": "flow_transmitter",
+      "priority": 330,
+      "labels": {
+        "de-CH": "Volumenstrom-Messumformer",
+        "fr-CH": "transmetteur de débit",
+        "en": "volume flow transmitter"
+      },
+      "patterns": [],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": [
+        {
+          "subcategory": "Field device",
+          "description_contains": "volume flow"
+        }
+      ]
+    },
+    {
+      "code": "fitting_round",
+      "priority": 340,
+      "labels": {
+        "de-CH": "Formstück rund",
+        "fr-CH": "raccord circulaire",
+        "en": "round duct fitting"
+      },
+      "patterns": [],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    },
+    {
+      "code": "fitting_rect",
+      "priority": 350,
+      "labels": {
+        "de-CH": "Kanalformstück",
+        "fr-CH": "raccord de gaine rectangulaire",
+        "en": "rectangular duct fitting"
+      },
+      "patterns": [],
+      "key_attributes": [],
+      "soft_attributes": [],
+      "size_strategy": "exact",
+      "catalog_match": []
+    }
+  ]
+}

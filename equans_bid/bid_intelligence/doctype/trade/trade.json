@@ -1,0 +1,133 @@
+{
+ "autoname": "field:trade_code",
+ "creation": "2026-10-10 22:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "trade_code",
+  "labels",
+  "system_header_pattern",
+  "section_lists",
+  "continuation_labels",
+  "attribute_labels",
+  "attribute_rules",
+  "catalog_attribute_rules",
+  "table_parsers",
+  "section_pricing",
+  "factor_rules"
+ ],
+ "fields": [
+  {
+   "fieldname": "trade_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Trade Code",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "description": "Display name per UI locale: {\"de-CH\": \u2026, \"fr-CH\": \u2026, \"en\": \u2026}",
+   "fieldname": "labels",
+   "fieldtype": "JSON",
+   "label": "Labels"
+  },
+  {
+   "description": "Regex with a named group (?P<system>\u2026) for the LV page header",
+   "fieldname": "system_header_pattern",
+   "fieldtype": "Small Text",
+   "label": "System Header Pattern"
+  },
+  {
+   "fieldname": "section_lists",
+   "fieldtype": "Section Break",
+   "label": "Extraction"
+  },
+  {
+   "description": "Line prefixes that continue the previous position family",
+   "fieldname": "continuation_labels",
+   "fieldtype": "JSON",
+   "label": "Continuation Labels"
+  },
+  {
+   "description": "Labels whose lines become custom_attributes (as printed)",
+   "fieldname": "attribute_labels",
+   "fieldtype": "JSON",
+   "label": "Attribute Labels"
+  },
+  {
+   "description": "Rules that derive normalised attributes from tender text",
+   "fieldname": "attribute_rules",
+   "fieldtype": "JSON",
+   "label": "Attribute Rules"
+  },
+  {
+   "description": "Rules that derive normalised attributes from catalogue rows",
+   "fieldname": "catalog_attribute_rules",
+   "fieldtype": "JSON",
+   "label": "Catalog Attribute Rules"
+  },
+  {
+   "description": "Dotted paths of table-parser plug-in modules",
+   "fieldname": "table_parsers",
+   "fieldtype": "JSON",
+   "label": "Table Parsers"
+  },
+  {
+   "fieldname": "section_pricing",
+   "fieldtype": "Section Break",
+   "label": "Pricing"
+  },
+  {
+   "description": "Productivity factor substitutions by system/page pattern",
+   "fieldname": "factor_rules",
+   "fieldtype": "JSON",
+   "label": "Factor Rules"
+  }
+ ],
+ "modified": "2026-10-10 22:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bid Intelligence",
+ "name": "Trade",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Catalogue Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Estimator"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "trade_code",
+ "track_changes": 1
+}

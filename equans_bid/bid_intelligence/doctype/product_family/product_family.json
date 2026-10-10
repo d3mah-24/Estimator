@@ -1,0 +1,140 @@
+{
+ "autoname": "field:family_code",
+ "creation": "2026-10-10 22:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "family_code",
+  "trade",
+  "priority",
+  "labels",
+  "section_match",
+  "key_attributes",
+  "soft_attributes",
+  "size_strategy",
+  "catalog_match",
+  "section_patterns",
+  "patterns"
+ ],
+ "fields": [
+  {
+   "fieldname": "family_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Family Code",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "trade",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Trade",
+   "options": "Trade",
+   "reqd": 1
+  },
+  {
+   "default": "1000",
+   "description": "Lower is tried first",
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Priority"
+  },
+  {
+   "description": "Display label per UI locale: {\"de-CH\": \u2026, \"fr-CH\": \u2026, \"en\": \u2026}",
+   "fieldname": "labels",
+   "fieldtype": "JSON",
+   "label": "Labels"
+  },
+  {
+   "fieldname": "section_match",
+   "fieldtype": "Section Break",
+   "label": "Matching"
+  },
+  {
+   "description": "Canonical attribute keys that must agree (e.g. [\"dn_mm\"])",
+   "fieldname": "key_attributes",
+   "fieldtype": "JSON",
+   "label": "Key Attributes"
+  },
+  {
+   "description": "Keys that may differ: priced as the nearest item, status assumption",
+   "fieldname": "soft_attributes",
+   "fieldtype": "JSON",
+   "label": "Soft Attributes"
+  },
+  {
+   "default": "exact",
+   "fieldname": "size_strategy",
+   "fieldtype": "Select",
+   "label": "Size Strategy",
+   "options": "exact\nnearest_class"
+  },
+  {
+   "description": "Rules that assign catalogue rows without a family column",
+   "fieldname": "catalog_match",
+   "fieldtype": "JSON",
+   "label": "Catalog Match"
+  },
+  {
+   "fieldname": "section_patterns",
+   "fieldtype": "Section Break",
+   "label": "Recognition"
+  },
+  {
+   "fieldname": "patterns",
+   "fieldtype": "Table",
+   "label": "Patterns",
+   "options": "Product Family Pattern"
+  }
+ ],
+ "modified": "2026-10-10 22:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bid Intelligence",
+ "name": "Product Family",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Catalogue Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Estimator"
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "trade",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "family_code",
+ "track_changes": 1
+}

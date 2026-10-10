@@ -1,6 +1,8 @@
 [pre_model_sync]
 # Patches added in this section will be executed before doctypes are migrated
-# Read docs to understand patches: https://frappeframework.com/docs/v14/user/en/database-migrations
+equans_bid.patches.v1_0.create_roles
 
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
+equans_bid.patches.v1_0.sync_trade_master_data
+equans_bid.patches.v1_0.backfill_tender_trade

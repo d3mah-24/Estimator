@@ -1,0 +1,272 @@
+{
+  "app": {
+    "language": "Sprache"
+  },
+  "common": {
+    "loading": "Lädt …",
+    "choose": "— wählen —",
+    "saveFailed": "Speichern fehlgeschlagen"
+  },
+  "tenderStatus": {
+    "Draft": "Entwurf",
+    "Processing": "In Verarbeitung",
+    "Completed": "Bereit zur Prüfung",
+    "Failed": "Fehlgeschlagen"
+  },
+  "list": {
+    "title": "Ausschreibungen",
+    "intro": "Leistungsverzeichnis hochladen, Positionen prüfen, Erstpreis erstellen.",
+    "new": "Neue Ausschreibung",
+    "col": {
+      "project": "Projekt",
+      "status": "Status",
+      "directCost": "Direkte Kosten",
+      "baseline": "Kostenbasis",
+      "open": "Offene Positionen"
+    },
+    "empty": "Noch keine Ausschreibung erfasst.",
+    "dialog": {
+      "projectName": "Projektname",
+      "placeholder": "z. B. Schulhaus Oberglatt – Lüftung",
+      "uploading": "Hochladen {progress}",
+      "choose": "Leistungsverzeichnis (PDF) wählen",
+      "submit": "Hochladen und verarbeiten",
+      "notPdf": "Bitte eine PDF-Datei wählen.",
+      "tooLarge": "Die Datei ist grösser als {size} MB.",
+      "createFailed": "Erstellen fehlgeschlagen"
+    }
+  },
+  "review": {
+    "export": "Export (CSV)",
+    "reprocess": "Erneut verarbeiten",
+    "bySystem": "Nach Anlage ({count})",
+    "positionsShort": "{count} Pos.",
+    "search": "Suchen (Beschreibung, Produkt, LV-ID)",
+    "allStatuses": "Alle Status ({count})",
+    "allSystems": "Alle Anlagen",
+    "positions": "keine Positionen | eine Position | {count} Positionen",
+    "col": {
+      "lvId": "LV-ID",
+      "description": "Beschreibung",
+      "quantity": "Menge",
+      "unit": "Einh.",
+      "product": "Produkt",
+      "directCost": "Direkte Kosten",
+      "status": "Status",
+      "source": "Quelle"
+    },
+    "loadingPositions": "Positionen werden geladen …",
+    "verifiedReference": "Verifizierte Referenzposition",
+    "quotePlaceholder": "Katalog {amount}",
+    "quoteTitle": "Offertpreis Lieferant (Material total, CHF)",
+    "quoted": "Offerte",
+    "provisional": "provisorisch",
+    "noPriceYet": "Kein Preis bis zur Prüfung",
+    "page": "S. {page}",
+    "traceability": "Dokumenten-Rückverfolgbarkeit",
+    "documentConflict": "Widerspruch im Dokument",
+    "technicalError": "Technischer Fehler",
+    "confidence": "Erkennung / Zuordnung",
+    "material": "Material",
+    "materialFormula": "{quantity} × {price} + {waste} Verschnitt",
+    "labour": "Arbeit",
+    "labourFormula": "{hours} Std × {rate}",
+    "selectHint": "Position wählen, um Herkunft und Berechnung zu sehen.",
+    "noSystem": "Ohne Anlage",
+    "processed": "Keine Positionen aus {file} extrahiert. | Eine Position aus {file} extrahiert. | {count} Positionen aus {file} extrahiert.",
+    "llmUsed": "LLM {model}: {calls} Aufrufe, {cached} aus Cache, {errors} Fehler.",
+    "llmNone": "LLM nicht konfiguriert (nur Regeln).",
+    "saved": "Gespeichert und neu berechnet in {ms} ms"
+  },
+  "kpi": {
+    "direct": {
+      "label": "Direkte Kosten",
+      "hint": "Material + Arbeit, bepreiste Positionen"
+    },
+    "confirmed": {
+      "label": "Davon bestätigt",
+      "hint": "Katalog oder Offerte"
+    },
+    "provisional": {
+      "label": "Davon provisorisch",
+      "hint": "Offerte ausstehend / Annahme"
+    },
+    "open": {
+      "label": "Offene Positionen",
+      "hint": "Ohne Preis, Prüfung nötig"
+    },
+    "baseline": {
+      "label": "Kostenbasis",
+      "hint": "inkl. Projektkosten, Zuschläge, Gemeinkosten"
+    }
+  },
+  "bid": {
+    "title": "Empfohlene Angebotsspanne",
+    "modelNote": "Gewinnchance: Modellschätzung, nicht auf historische Angebote kalibriert",
+    "custom": "Eigene Annahmen",
+    "buildUp": "Kostenaufbau",
+    "assumptions": "Annahmen",
+    "recommended": "Empfohlen",
+    "margin": "Marge",
+    "winProbability": "Gewinnchance",
+    "contributionIfWon": "DB bei Zuschlag",
+    "expectedContribution": "Erwarteter DB",
+    "standardOffer": "Richtpreis",
+    "standardOfferFormula": "Kostenbasis {baseline} ÷ (1 − {margin} Zielmarge), aufgerundet auf {step}",
+    "unpricedExcluded": "Alle Positionen sind bepreist | Eine Position ohne Preis ist nicht enthalten | {count} Positionen ohne Preis sind nicht enthalten",
+    "input": {
+      "margin": "Marge {scenario} (%)",
+      "strategic": "Strategisches Interesse (Pp.)",
+      "strategicHint": "Positiv = wir wollen den Auftrag unbedingt (z. B. Referenzprojekt, freie Kapazität)",
+      "competition": "Wettbewerb (Pp.)",
+      "competitionHint": "Negativ = viele oder aggressive Mitbewerber",
+      "sensitivity": "Preissensitivität (Pp. je 1 %)",
+      "sensitivityHint": "Wie stark sinkt die Gewinnchance pro 1 % höherem Preis gegenüber dem Richtpreis",
+      "base": "Basis-Gewinnchance (%)",
+      "baseHint": "Gewinnchance beim Richtpreis"
+    },
+    "save": "Annahmen speichern",
+    "reset": "Auf Projektparameter zurücksetzen",
+    "previewState": "Vorschau – noch nicht gespeichert",
+    "savedState": "Gespeichert",
+    "previewFailed": "Vorschau fehlgeschlagen"
+  },
+  "buildUp": {
+    "catalog_material": {
+      "label": "Material Katalog",
+      "note": "inkl. {waste} Verschnitt"
+    },
+    "supplier_material": {
+      "label": "Lieferpakete",
+      "note": "Katalogpreis oder Offerte"
+    },
+    "labour": {
+      "label": "Montage",
+      "note": "Stunden × Ansatz, mit Projektfaktoren"
+    },
+    "small_material": {
+      "label": "Kleinmaterial",
+      "note": "{pct} auf Katalogmaterial"
+    },
+    "supplier_contingency": {
+      "label": "Reserve Lieferpakete",
+      "note": "{pct}"
+    },
+    "project_costs": {
+      "label": "Projektkosten",
+      "note": "Engineering, Inbetriebsetzung, Hygiene, Dokumentation"
+    },
+    "direct_cost": {
+      "label": "Direkte Kosten",
+      "note": ""
+    },
+    "transport_equipment": {
+      "label": "Transport und Geräte",
+      "note": "{pct}"
+    },
+    "overhead": {
+      "label": "Gemeinkosten",
+      "note": "{pct}"
+    },
+    "cost_baseline": {
+      "label": "Kostenbasis",
+      "note": ""
+    }
+  },
+  "pdf": {
+    "page": "S. {page} / {count}",
+    "highlighted": "Keine Zeile markiert | Eine Zeile auf Seite {page} markiert | {count} Zeilen auf Seite {page} markiert",
+    "notHighlighted": "Fundstelle auf dieser Seite nicht automatisch markiert",
+    "loadFailed": "PDF konnte nicht geladen werden: {error}"
+  },
+  "status": {
+    "calculated": "Berechnet",
+    "supplier_quote_required": "Offerte nötig",
+    "assumption_applied": "Annahme",
+    "review_required": "Prüfung nötig",
+    "insufficient_information": "Angaben fehlen",
+    "out_of_scope": "Ausser Umfang",
+    "non_priceable": "Nicht kalkulierbar"
+  },
+  "unit": {
+    "pc": "Stk",
+    "m": "m",
+    "m2": "m²",
+    "m3": "m³",
+    "h": "Std",
+    "LS": "psch",
+    "system": "Anlage"
+  },
+  "scenario": {
+    "Aggressive": "Aggressiv",
+    "Target": "Zielmarge",
+    "Conservative": "Konservativ"
+  },
+  "priceSource": {
+    "catalog": "Katalog",
+    "supplier_package": "Lieferpaket",
+    "supplier_quote": "Offerte"
+  },
+  "family": {
+    "supply_valve": "Zuluftventil",
+    "exhaust_valve": "Abluftventil",
+    "fire_damper": "Brandschutzklappe",
+    "manual_damper": "Drosselklappe",
+    "silencer": "Schalldämpfer",
+    "vav": "VVS-Regler (variabler Volumenstrom)",
+    "cav": "Konstant-Volumenstromregler",
+    "insulation": "Kanaldämmung",
+    "fire_seal": "Brandabschottung",
+    "support_set": "Anschlusswinkel-Set",
+    "inspection_cover": "Revisionsdeckel",
+    "duct_round": "Rundrohr",
+    "duct_rect": "Rechteckkanal",
+    "bend": "Rohrbogen",
+    "ahu": "Lüftungsgerät",
+    "fan": "Ventilator",
+    "field_device": "Feldgerät",
+    "dp_transmitter": "Druckdifferenzfühler",
+    "temp_sensor": "Temperaturfühler",
+    "actuator": "Stellantrieb",
+    "flow_transmitter": "Volumenstrom-Messumformer",
+    "grille": "Luftgitter",
+    "air_outlet": "Luftauslass / Überströmer",
+    "fire_insulation": "Brandschutzdämmung",
+    "humidity_sensor": "Feuchtefühler",
+    "frost_thermostat": "Frostschutzwächter",
+    "thermometer": "Zeigerthermometer",
+    "cleaning_cover": "Kontroll- / Putzdeckel",
+    "rain_hat": "Regenhut / Lamellenhut",
+    "earth_duct": "erdverlegte Lüftungsleitung",
+    "labels": "Bezeichnungsschilder",
+    "leak_test": "Kanaldichtheitsprüfung (Dienstleistung)",
+    "service": "Montage- / Inbetriebsetzungsleistung",
+    "fitting_round": "Formstück rund",
+    "fitting_rect": "Kanalformstück"
+  },
+  "reason": {
+    "family_unknown": "Produktfamilie nicht erkannt",
+    "no_catalog_item": "Kein Katalogartikel für {family}: manuell kalkulieren oder Offerte einholen",
+    "unit_mismatch": "Einheit {unit} weicht von der Katalogeinheit {catalog_unit} ab",
+    "several_fit": "{count} Katalogartikel passen; beste Textübereinstimmung gewählt",
+    "exact_match": "Produktfamilie und Grösse stimmen mit dem Katalog überein",
+    "priced_as": "Kalkuliert als {product}: {detail}",
+    "nearest_item": "Nächster Artikel {product}: {detail}",
+    "nearest_size_class": "Keine exakte Grösse im Katalog; pro m² mit nächster Grössenklasse {size} mm kalkuliert",
+    "dn_mismatch": "DN{dn} kommt in der Position nicht vor",
+    "size_mismatch": "Grösse {size} mm passt nicht",
+    "thickness_mismatch": "Dämmstärke {thickness} mm passt nicht",
+    "weatherproof_mismatch": "wetterfeste Ausführung weicht ab",
+    "angle_mismatch": "Winkel {angle}° statt Katalog {catalog_angle}°",
+    "attributes_agree": "Merkmale stimmen überein",
+    "quantity_missing": "Mengenspalte im LV ist leer",
+    "supplier_package_provisional": "Lieferpaket: Katalogpreis ist provisorisch, bis eine Offerte erfasst ist",
+    "llm_classified": "Vom LLM klassifiziert als {family}. {detail}",
+    "no_productivity_rule": "Keine Leistungsregel {install_code}",
+    "product_set_by_estimator": "Produkt durch Kalkulator gesetzt",
+    "status_set_by_estimator": "Status durch Kalkulator gesetzt"
+  },
+  "warning": {
+    "header_conflict": "Seitenkopf nennt «{header}», Quelldokument ist «{source}.docx»"
+  }
+}

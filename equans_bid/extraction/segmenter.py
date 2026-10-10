@@ -19,13 +19,22 @@ QTY_LINE = re.compile(rf"^(?P<label>.*?)(?:^|\s)(?P<unit>{UNITS})\s+(?P<qty>\d[\
 # A quantity column left blank ("... gestiftet m2"). Only m2: "Anzahl Kulissen 2 Stk" is an attribute.
 UNIT_ONLY_LINE = re.compile(r"^(?P<label>.*[^\d\s])\s+(?P<unit>m2|m²)\s*$")
 # "244.01 LA01 Nebenräume Seite 10 / 20"; some sections have no LA code ("244.04 Schulzimmer OG").
-SYSTEM_HEADER = re.compile(r"(?P<system>24\d\.\d+\s+(?:LA\s?\d+\s+)?\S.*?)\s+Seite\s+\d+\s*/\s*\d+")
+# Generic Swiss LV page header "<BKP code> <system> Seite n / m"; a trade may refine it
+# (TradeConfig.system_header_pattern).
+SYSTEM_HEADER = re.compile(r"(?P<system>\d{3}\.\d+\s+\S.*?)\s+Seite\s+\d+\s*/\s*\d+")
 # Footer: "H:\\Projekt\\...\\02 L\\244.05 LA05 Turnhalle.docx 31.07.2026" (the source document).
-FOOTER_SOURCE = re.compile(r"[\\/](?P<system>24\d\.\d+\s[^\\/]*?)\.docx")
-SECTION_CODE = re.compile(r"^(24\d\.\d+)")
+FOOTER_SOURCE = re.compile(r"[\\/](?P<system>\d{3}\.\d+\s[^\\/]*?)\.docx")
+SECTION_CODE = re.compile(r"^(\d{3}\.\d+)")
 SECTION_HEADING = re.compile(r"^[A-Z]\s+[A-ZÄÖÜ][A-ZÄÖÜ ,/&-]+$")
 TRAILING_DOTS = re.compile(r"[\s.…_]{3,}$")
-ATTRIBUTE_PREFIX = re.compile(r"^(Fabrikat|Typ|Grösse|Grösse|Mod\.|Material|Farbe|Luftmenge|Offerte)\b")
+
+
+def _prefix_pattern(labels: list[str]) -> re.Pattern | None:
+	"""Lines starting with one of the trade's continuation labels continue the previous family."""
+	# "\b" as before: a label ending in "." (e.g. "Mod.") then never matches, which is the
+	# established behaviour the regression fixture pins.
+	return re.compile(r"^(" + "|".join(re.escape(l) for l in labels) + r")\b") if labels else None
+
 
 UNIT_MAP = {
 	"Stk": "pc",
@@ -52,7 +61,8 @@ class RawPosition:
 	quantity: float | None = None
 	unit: str = ""
 	lines: list[str] = field(default_factory=list)
-	system_conflict: str = ""
+	system_conflict: dict = field(default_factory=dict)
+	block_id: int = 0  # positions from one description block share it (variant lines)
 
 	@property
 	def text(self) -> str:
@@ -63,32 +73,33 @@ def parse_quantity(raw: str) -> float:
 	return float(raw.replace("'", "").replace("`", "").replace("\u2019", "").replace(",", "."))
 
 
-def page_system(text: str) -> tuple[str, str]:
+def page_system(text: str, header: re.Pattern = SYSTEM_HEADER) -> tuple[str, dict]:
 	"""(system, conflict) of an LV page.
 
 	The header names the system; the footer names the source document. When their section
 	codes disagree (the tender has Turnhalle pages headed "244.03 Küche"), the footer wins
-	and the conflict is returned so the estimator sees it.
+	and the conflict ({"header", "source"}, displayed as warning `header_conflict`) is returned
+	so the estimator sees it.
 	"""
 	lines = [l.strip() for l in text.splitlines() if l.strip()]
 	if not lines:
-		return "", ""
-	m = SYSTEM_HEADER.search(lines[0])
-	header = re.sub(r"\s+", " ", m.group("system")) if m else ""
+		return "", {}
+	m = header.search(lines[0])
+	head = re.sub(r"\s+", " ", m.group("system")) if m else ""
 	f = FOOTER_SOURCE.search(lines[-1])
 	footer = re.sub(r"\s+", " ", f.group("system")) if f else ""
-	if header and footer:
-		hc, fc = SECTION_CODE.match(header), SECTION_CODE.match(footer)
+	if head and footer:
+		hc, fc = SECTION_CODE.match(head), SECTION_CODE.match(footer)
 		if hc and fc and hc.group(1) != fc.group(1):
-			return footer, f"Seitenkopf nennt '{header}', Quelldokument ist '{footer}.docx'"
-	return header or footer, ""
+			return footer, {"header": head, "source": footer}
+	return head or footer, {}
 
 
-def _body_lines(text: str) -> tuple[str, list[str]]:
+def _body_lines(text: str, header: re.Pattern = SYSTEM_HEADER) -> tuple[str, list[str]]:
 	lines = [l.strip() for l in text.splitlines() if l.strip()]
 	system = ""
-	if lines and SYSTEM_HEADER.search(lines[0]):
-		system = re.sub(r"\s+", " ", SYSTEM_HEADER.search(lines[0]).group("system"))
+	if lines and header.search(lines[0]):
+		system = re.sub(r"\s+", " ", header.search(lines[0]).group("system"))
 	body = []
 	for i, line in enumerate(lines):
 		if i == 0 and (system or "Seite" in line):
@@ -101,12 +112,17 @@ def _body_lines(text: str) -> tuple[str, list[str]]:
 	return system, [l for l in body if l]
 
 
-def segment(pages, title_picker=None) -> list[RawPosition]:
+def segment(
+	pages, title_picker=None, header: re.Pattern = SYSTEM_HEADER, continuation_labels: list[str] = ()
+) -> list[RawPosition]:
 	"""`pages`: iterable of objects with `.number` and `.text`.
 
 	`title_picker(block_lines) -> str` chooses the block title; defaults to the first line.
+	`header` and `continuation_labels` come from the trade config.
 	State carries across pages because a description can start on the previous page.
 	"""
+	attribute_prefix = _prefix_pattern(list(continuation_labels))
+	block_id = 0
 	positions: list[RawPosition] = []
 	block: list[str] = []
 	after_qty = False
@@ -114,14 +130,16 @@ def segment(pages, title_picker=None) -> list[RawPosition]:
 	system = ""
 
 	for page in pages:
-		_, lines = _body_lines(page.text)
-		this_system, conflict = page_system(page.text)
+		_, lines = _body_lines(page.text, header)
+		this_system, conflict = page_system(page.text, header)
 		if this_system and this_system != system:
 			system = this_system
 			block, after_qty = [], False
+			block_id += 1
 		for line in lines:
 			if SECTION_HEADING.match(line):
 				block, after_qty = [], False
+				block_id += 1
 				continue
 			if line.startswith(("Total ", "Zwischentotal")):
 				# "Total aller ... (exkl. Montage)" closes a family; the next line opens a new block.
@@ -149,6 +167,7 @@ def segment(pages, title_picker=None) -> list[RawPosition]:
 						quantity=parse_quantity(qty_raw) if qty_raw else None,
 						unit=UNIT_MAP.get(unit_raw, unit_raw),
 						system_conflict=conflict,
+						block_id=block_id,
 					)
 				)
 				last_title = title
@@ -156,7 +175,9 @@ def segment(pages, title_picker=None) -> list[RawPosition]:
 				continue
 			if after_qty:
 				# A block that opens with an attribute line continues the previous position family.
-				block = [last_title, line] if ATTRIBUTE_PREFIX.match(line) and last_title else [line]
+				continues = attribute_prefix and attribute_prefix.match(line) and last_title
+				block = [last_title, line] if continues else [line]
+				block_id += 1
 				after_qty = False
 			else:
 				block.append(line)

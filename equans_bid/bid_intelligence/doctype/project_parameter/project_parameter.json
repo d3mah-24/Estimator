@@ -15,7 +15,7 @@
   }
  ],
  "issingle": 1,
- "modified": "2026-10-10 11:00:00.000000",
+ "modified": "2026-10-10 22:00:00.000000",
  "modified_by": "Administrator",
  "module": "Bid Intelligence",
  "name": "Project Parameter",
@@ -32,6 +32,25 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Catalogue Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Estimator"
   }
  ],
  "row_format": "Dynamic",

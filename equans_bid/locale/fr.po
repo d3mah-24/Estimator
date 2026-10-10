@@ -1,0 +1,481 @@
+# French (Switzerland) translations for equans_bid.
+# NEEDS NATIVE REVIEW: drafted by a non-native speaker (AI). Check HVAC terms such as
+# "calculateur" (estimator), "descriptif", "lot fournisseur" with a Swiss French estimator.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the equans_bid project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: equans_bid VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-10-10 12:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+msgid "A supplier quote cannot be negative"
+msgstr "Une offre fournisseur ne peut pas être négative"
+
+msgctxt "Bid scenario"
+msgid "Aggressive"
+msgstr "Agressif"
+
+msgctxt "Tender export"
+msgid "Amount"
+msgstr "Montant"
+
+msgctxt "Tender export"
+msgid "As of"
+msgstr "État au"
+
+msgctxt "Tender Item status"
+msgid "Assumption applied"
+msgstr "Hypothèse appliquée"
+
+msgctxt "Tender export"
+msgid "Bid price"
+msgstr "Prix de l’offre"
+
+msgctxt "Tender Item status"
+msgid "Calculated"
+msgstr "Calculé"
+
+msgctxt "Price source"
+msgid "Catalogue"
+msgstr "Catalogue"
+
+msgctxt "Tender export"
+msgid "Catalogue material"
+msgstr "Matériel du catalogue"
+
+msgid "Classified by LLM as {family}. {detail}"
+msgstr "Classé par le LLM comme {family}. {detail}"
+
+msgctxt "Bid scenario"
+msgid "Conservative"
+msgstr "Prudent"
+
+msgctxt "Tender export"
+msgid "Contribution if won"
+msgstr "Contribution en cas d’adjudication"
+
+msgctxt "Tender export"
+msgid "Cost baseline"
+msgstr "Base de coûts"
+
+msgctxt "Tender export"
+msgid "Cost build-up"
+msgstr "Structure des coûts"
+
+msgid "DN{dn} not found in the position"
+msgstr "DN{dn} absent de la position"
+
+msgctxt "Tender export"
+msgid "Description"
+msgstr "Description"
+
+msgctxt "Tender export"
+msgid "Direct cost"
+msgstr "Coûts directs"
+
+msgctxt "Tender export"
+msgid "Expected contribution"
+msgstr "Contribution attendue"
+
+msgctxt "Tender export"
+msgid "First price"
+msgstr "Premier prix"
+
+msgctxt "Tender export"
+msgid "Hourly rate"
+msgstr "Tarif horaire"
+
+msgctxt "Tender export"
+msgid "Installation labour"
+msgstr "Montage (main-d’œuvre)"
+
+msgctxt "Tender Item status"
+msgid "Insufficient information"
+msgstr "Informations insuffisantes"
+
+msgctxt "Unit of measure"
+msgid "LS"
+msgstr "forfait"
+
+msgctxt "Tender export"
+msgid "LV ID"
+msgstr "N° de position"
+
+msgctxt "Tender export"
+msgid "Labour"
+msgstr "Main-d’œuvre"
+
+msgctxt "Tender export"
+msgid "Margin"
+msgstr "Marge"
+
+msgctxt "Tender export"
+msgid "Material"
+msgstr "Matériel"
+
+msgid "Nearest item {product}: {detail}"
+msgstr "Article le plus proche {product} : {detail}"
+
+msgid "No catalogue item for {family}: price manually or request a quote"
+msgstr "Aucun article de catalogue pour {family} : calculer manuellement ou demander une offre"
+
+msgid "No exact size in catalogue; priced per m² at nearest size class {size} mm"
+msgstr "Pas de dimension exacte au catalogue ; calculé au m² avec la classe la plus proche {size} mm"
+
+msgid "No productivity rule {install_code}"
+msgstr "Aucune règle de productivité {install_code}"
+
+msgctxt "Tender Item status"
+msgid "Not priceable"
+msgstr "Non chiffrable"
+
+msgctxt "Tender Item status"
+msgid "Out of scope"
+msgstr "Hors périmètre"
+
+msgctxt "Tender export"
+msgid "Overhead"
+msgstr "Frais généraux"
+
+msgctxt "Tender export"
+msgid "Page"
+msgstr "Page"
+
+msgid "Page header says '{header}', source document is '{source}.docx'"
+msgstr "L’en-tête de page indique « {header} », le document source est « {source}.docx »"
+
+msgid "Position {0} not found in tender {1}"
+msgstr "Position {0} introuvable dans l’appel d’offres {1}"
+
+msgctxt "Tender export"
+msgid "Positions without a price"
+msgstr "Positions sans prix"
+
+msgctxt "Tender export"
+msgid "Price source"
+msgstr "Source du prix"
+
+msgid "Priced as {product}: {detail}"
+msgstr "Calculé comme {product} : {detail}"
+
+msgctxt "Tender export"
+msgid "Product"
+msgstr "Produit"
+
+msgid "Product family and size match the catalogue"
+msgstr "Famille de produits et dimension conformes au catalogue"
+
+msgid "Product family not recognised"
+msgstr "Famille de produits non reconnue"
+
+msgid "Product set by estimator"
+msgstr "Produit défini par le calculateur"
+
+msgctxt "Tender export"
+msgid "Project costs (engineering, commissioning, hygiene, documentation)"
+msgstr "Coûts de projet (ingénierie, mise en service, hygiène, documentation)"
+
+msgid "Project parameters are missing. Run equans_bid.commands.seed_data.run first."
+msgstr "Les paramètres du projet manquent. Exécutez d’abord equans_bid.commands.seed_data.run."
+
+msgctxt "Tender export"
+msgid "Quantity"
+msgstr "Quantité"
+
+msgid "Quantity column is empty in the tender"
+msgstr "La colonne des quantités du descriptif est vide"
+
+msgctxt "Tender export"
+msgid "Reason"
+msgstr "Justification"
+
+msgctxt "Tender export"
+msgid "Recommended"
+msgstr "Recommandé"
+
+msgctxt "Tender export"
+msgid "Reference LV"
+msgstr "Position de référence"
+
+msgctxt "Tender Item status"
+msgid "Review required"
+msgstr "Vérification requise"
+
+msgctxt "Tender export"
+msgid "Scenario"
+msgstr "Scénario"
+
+msgctxt "Tender export"
+msgid "Small material"
+msgstr "Petit matériel"
+
+msgctxt "Tender export"
+msgid "Standard offer (target margin)"
+msgstr "Prix indicatif (marge cible)"
+
+msgctxt "Tender export"
+msgid "Status"
+msgstr "Statut"
+
+msgid "Status set by estimator"
+msgstr "Statut défini par le calculateur"
+
+msgctxt "Price source"
+msgid "Supplier package"
+msgstr "Lot fournisseur"
+
+msgctxt "Tender export"
+msgid "Supplier package contingency"
+msgstr "Réserve lots fournisseurs"
+
+msgid "Supplier package: catalogue price is provisional until a quote is entered"
+msgstr "Lot fournisseur : prix catalogue provisoire jusqu’à la saisie d’une offre"
+
+msgctxt "Tender export"
+msgid "Supplier packages"
+msgstr "Lots fournisseurs"
+
+msgctxt "Price source"
+msgid "Supplier quote"
+msgstr "Offre fournisseur"
+
+msgctxt "Tender export"
+msgid "Supplier quote"
+msgstr "Offre fournisseur"
+
+msgctxt "Tender Item status"
+msgid "Supplier quote required"
+msgstr "Offre requise"
+
+msgctxt "Tender export"
+msgid "System"
+msgstr "Installation"
+
+msgctxt "Bid scenario"
+msgid "Target"
+msgstr "Marge cible"
+
+msgctxt "Tender export"
+msgid "Transport and equipment"
+msgstr "Transport et équipement"
+
+msgctxt "Tender export"
+msgid "Unit"
+msgstr "Unité"
+
+msgid "Unit {unit} differs from catalogue unit {catalog_unit}"
+msgstr "L’unité {unit} diffère de l’unité du catalogue {catalog_unit}"
+
+msgid "Unknown status {0}"
+msgstr "Statut inconnu {0}"
+
+msgctxt "Tender export"
+msgid "Win probability"
+msgstr "Probabilité de gain"
+
+msgctxt "Tender export"
+msgid "Win probability is a model estimate from the project parameters, not calibrated on past bids."
+msgstr "Probabilité de gain : estimation du modèle à partir des paramètres du projet, non calibrée sur des offres passées."
+
+msgctxt "Product family"
+msgid "actuator"
+msgstr "servomoteur"
+
+msgctxt "Product family"
+msgid "air grille"
+msgstr "grille d’air"
+
+msgctxt "Product family"
+msgid "air outlet / transfer element"
+msgstr "bouche d’air / élément de transfert"
+
+msgctxt "Product family"
+msgid "air-handling unit"
+msgstr "monobloc de ventilation"
+
+msgid "angle {angle}° instead of catalogue {catalog_angle}°"
+msgstr "angle de {angle}° au lieu de {catalog_angle}° au catalogue"
+
+msgid "attributes agree"
+msgstr "les caractéristiques correspondent"
+
+msgctxt "Product family"
+msgid "balancing damper"
+msgstr "registre de réglage"
+
+msgctxt "Product family"
+msgid "cleaning / access cover"
+msgstr "trappe de contrôle / de nettoyage"
+
+msgctxt "Product family"
+msgid "connection-angle set"
+msgstr "jeu de cornières de fixation"
+
+msgctxt "Product family"
+msgid "constant air-volume controller"
+msgstr "régulateur de débit constant"
+
+msgctxt "Product family"
+msgid "dial thermometer"
+msgstr "thermomètre à cadran"
+
+msgctxt "Product family"
+msgid "differential pressure transmitter"
+msgstr "transmetteur de pression différentielle"
+
+msgctxt "Product family"
+msgid "duct insulation"
+msgstr "isolation de gaine"
+
+msgctxt "Product family"
+msgid "duct leakage test (service)"
+msgstr "essai d’étanchéité des gaines (prestation)"
+
+msgctxt "Product family"
+msgid "earth-laid ventilation duct"
+msgstr "conduite d’air enterrée"
+
+msgctxt "Product family"
+msgid "exhaust air valve"
+msgstr "bouche d’air repris"
+
+msgctxt "Product family"
+msgid "fan"
+msgstr "ventilateur"
+
+msgctxt "Product family"
+msgid "field device"
+msgstr "appareil de terrain"
+
+msgctxt "Product family"
+msgid "fire damper"
+msgstr "clapet coupe-feu"
+
+msgctxt "Product family"
+msgid "fire protection insulation"
+msgstr "isolation coupe-feu"
+
+msgctxt "Product family"
+msgid "fire seal"
+msgstr "obturation coupe-feu"
+
+msgctxt "Product family"
+msgid "frost protection thermostat"
+msgstr "thermostat antigel"
+
+msgctxt "Unit of measure"
+msgid "h"
+msgstr "h"
+
+msgctxt "Product family"
+msgid "humidity sensor"
+msgstr "sonde d’humidité"
+
+msgctxt "Product family"
+msgid "inspection cover"
+msgstr "trappe de visite"
+
+msgctxt "Product family"
+msgid "installation / commissioning service"
+msgstr "prestation de montage / mise en service"
+
+msgid "insulation thickness {thickness} mm does not match"
+msgstr "l’épaisseur d’isolation {thickness} mm ne correspond pas"
+
+msgctxt "Product family"
+msgid "labels and marking"
+msgstr "plaques signalétiques"
+
+msgctxt "Unit of measure"
+msgid "m"
+msgstr "m"
+
+msgctxt "Unit of measure"
+msgid "m²"
+msgstr "m²"
+
+msgctxt "Unit of measure"
+msgid "m³"
+msgstr "m³"
+
+msgctxt "Tender export"
+msgid "number, CHF"
+msgstr "nombre, CHF"
+
+msgctxt "Unit of measure"
+msgid "pc"
+msgstr "pce"
+
+msgctxt "Product family"
+msgid "rain hat / louvre cap"
+msgstr "chapeau pare-pluie / à lamelles"
+
+msgctxt "Product family"
+msgid "rectangular duct"
+msgstr "gaine rectangulaire"
+
+msgctxt "Product family"
+msgid "rectangular duct fitting"
+msgstr "raccord de gaine rectangulaire"
+
+msgctxt "Product family"
+msgid "round bend"
+msgstr "coude circulaire"
+
+msgctxt "Product family"
+msgid "round duct"
+msgstr "gaine circulaire"
+
+msgctxt "Product family"
+msgid "round duct fitting"
+msgstr "raccord circulaire"
+
+msgctxt "Product family"
+msgid "silencer"
+msgstr "silencieux"
+
+msgid "size {size} mm does not match"
+msgstr "la dimension {size} mm ne correspond pas"
+
+msgctxt "Product family"
+msgid "supply air valve"
+msgstr "bouche d’air soufflé"
+
+msgctxt "Unit of measure"
+msgid "system"
+msgstr "installation"
+
+msgctxt "Product family"
+msgid "temperature sensor"
+msgstr "sonde de température"
+
+msgctxt "Product family"
+msgid "variable air-volume controller"
+msgstr "régulateur de débit variable (VAV)"
+
+msgctxt "Product family"
+msgid "volume flow transmitter"
+msgstr "transmetteur de débit"
+
+msgid "weatherproof finish differs"
+msgstr "l’exécution résistante aux intempéries diffère"
+
+msgctxt "Tender export"
+msgid "yes"
+msgstr "oui"
+
+msgid "{count} catalogue items fit; best text match chosen"
+msgstr "{count} articles du catalogue conviennent ; meilleure correspondance textuelle retenue"
+

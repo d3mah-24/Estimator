@@ -91,6 +91,16 @@ def smoke():
 		not frappe.conf.get("ignore_csrf"),
 		fix="ignore_csrf is set; use it only with yarn dev",
 	)
+	from frappe.gettext.translate import get_mo_path
+
+	missing_mo = [lang for lang in ("de", "fr") if not get_mo_path("equans_bid", lang).exists()]
+	_check(
+		r,
+		"Translations compiled (de, fr)",
+		not missing_mo,
+		", ".join(missing_mo),
+		fix="bench compile-po-to-mo --app equans_bid",
+	)
 	try:
 		from frappe.utils.background_jobs import get_workers
 

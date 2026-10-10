@@ -1,0 +1,6631 @@
+[
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P075-01",
+"quantity": 6.964,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P075-02",
+"quantity": 5.999,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P075-03",
+"quantity": 9.357,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P075-04",
+"quantity": 8.319,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P075-05",
+"quantity": 5.789,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P075-06",
+"quantity": 3.644,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P075-07",
+"quantity": 26.054,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P075-08",
+"quantity": 2.484,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-1000x800",
+"position_id": "P075-09",
+"quantity": 11.671,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 75,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P075-10",
+"quantity": 45.588,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P075-11",
+"quantity": 0.246,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P075-12",
+"quantity": 0.151,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P075-13",
+"quantity": 0.653,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P075-14",
+"quantity": 1.548,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P075-15",
+"quantity": 0.931,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P075-16",
+"quantity": 0.612,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P075-17",
+"quantity": 0.212,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-1000x800",
+"position_id": "P075-18",
+"quantity": 0.066,
+"reason_args": {
+"size": "1000x800"
+},
+"reason_code": "nearest_size_class",
+"source_page": 75,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P075-19",
+"quantity": 8.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 75,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P075-20",
+"quantity": 22.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 75,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P075-21",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 75,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P075-22",
+"quantity": 1.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 75,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P075-23",
+"quantity": 10.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 75,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P075-24",
+"quantity": 4.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 75,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-100",
+"position_id": "P076-01",
+"quantity": 33.86,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 76,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-125",
+"position_id": "P076-02",
+"quantity": 18.996,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 76,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-160",
+"position_id": "P076-03",
+"quantity": 50.419,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 76,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-200",
+"position_id": "P076-04",
+"quantity": 7.99,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 76,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P076-05",
+"quantity": 10.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 76,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P076-06",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 76,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-30",
+"position_id": "P076-07",
+"quantity": 3.0,
+"reason_args": {
+"detail": {
+"args": {
+"angle": 45,
+"catalog_angle": 30
+},
+"code": "angle_mismatch"
+},
+"product": "P-FTG-B-125-30"
+},
+"reason_code": "priced_as",
+"source_page": 76,
+"status": "assumption_applied",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-90",
+"position_id": "P076-08",
+"quantity": 3.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 76,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-160-45",
+"position_id": "P076-09",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 76,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-160-90",
+"position_id": "P076-10",
+"quantity": 7.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 76,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P076-11",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 76,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P076-12",
+"quantity": 12.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 76,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P076-13",
+"quantity": 7.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 76,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "leak_test",
+"matched_product": null,
+"position_id": "P077-01",
+"quantity": 2.0,
+"reason_args": {
+"family": "leak_test"
+},
+"reason_code": "no_catalog_item",
+"source_page": 77,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "rain_hat",
+"matched_product": null,
+"position_id": "P078-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "rain_hat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 78,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P078-02",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 78,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "rain_hat",
+"matched_product": null,
+"position_id": "P078-03",
+"quantity": 1.0,
+"reason_args": {
+"family": "rain_hat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 78,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P078-04",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 78,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P078-05",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 78,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0001",
+"kind": "supply_valve",
+"matched_product": "P-AIR-001",
+"position_id": "P078-06",
+"quantity": 5.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 78,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0002",
+"kind": "supply_valve",
+"matched_product": "P-AIR-002",
+"position_id": "P078-07",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 78,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0003",
+"kind": "exhaust_valve",
+"matched_product": "P-AIR-003",
+"position_id": "P079-01",
+"quantity": 5.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 79,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "exhaust_valve",
+"matched_product": "P-AIR-003",
+"position_id": "P079-02",
+"quantity": 6.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 100
+},
+"code": "dn_mismatch"
+},
+"product": "P-AIR-003"
+},
+"reason_code": "nearest_item",
+"source_page": 79,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0004",
+"kind": "fire_damper",
+"matched_product": "P-FIR-001",
+"position_id": "P079-03",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 79,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P079-04",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 79,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0005",
+"kind": "manual_damper",
+"matched_product": "P-DAM-001",
+"position_id": "P080-01",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 80,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "manual_damper",
+"matched_product": "P-DAM-001",
+"position_id": "P080-02",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 125
+},
+"code": "dn_mismatch"
+},
+"product": "P-DAM-001"
+},
+"reason_code": "nearest_item",
+"source_page": 80,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0006",
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P080-03",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "supplier_package_provisional",
+"source_page": 80,
+"status": "supplier_quote_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "grille",
+"matched_product": null,
+"position_id": "P080-04",
+"quantity": 2.0,
+"reason_args": {
+"family": "grille"
+},
+"reason_code": "no_catalog_item",
+"source_page": 80,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "grille",
+"matched_product": null,
+"position_id": "P080-05",
+"quantity": 2.0,
+"reason_args": {
+"family": "grille"
+},
+"reason_code": "no_catalog_item",
+"source_page": 80,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P081-01",
+"quantity": 4.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 81,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P081-02",
+"quantity": 2.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 81,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P081-03",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 81,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P081-04",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 81,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P081-05",
+"quantity": 10.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 81,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P081-06",
+"quantity": 50.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 81,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P081-07",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 81,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "frost_thermostat",
+"matched_product": null,
+"position_id": "P082-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "frost_thermostat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 82,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "temp_sensor",
+"matched_product": "P-CTL-002",
+"position_id": "P082-02",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 82,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "dp_transmitter",
+"matched_product": "P-CTL-001",
+"position_id": "P082-03",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 82,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "service",
+"matched_product": null,
+"position_id": "P084-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "service"
+},
+"reason_code": "no_catalog_item",
+"source_page": 84,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-002",
+"position_id": "P085-01",
+"quantity": 18.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 85,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P085-02",
+"quantity": 220.0,
+"reason_args": {
+"detail": {
+"args": {},
+"code": "weatherproof_mismatch"
+},
+"product": "P-INS-003"
+},
+"reason_code": "nearest_item",
+"source_page": 85,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P085-03",
+"quantity": 10.0,
+"reason_args": {
+"detail": {
+"args": {
+"thickness": 100
+},
+"code": "thickness_mismatch"
+},
+"product": "P-INS-003"
+},
+"reason_code": "nearest_item",
+"source_page": 85,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_insulation",
+"matched_product": null,
+"position_id": "P085-04",
+"quantity": 18.0,
+"reason_args": {
+"family": "fire_insulation"
+},
+"reason_code": "no_catalog_item",
+"source_page": 85,
+"status": "review_required",
+"system": "244.01 LA01 Nebenräume",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-003",
+"position_id": "P086-01",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 86,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "support_set",
+"matched_product": "P-SUP-001",
+"position_id": "P087-01",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 87,
+"status": "calculated",
+"system": "244.01 LA01 Nebenräume",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "support_set",
+"matched_product": "P-SUP-001",
+"position_id": "P089-01",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 89,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "support_set",
+"matched_product": "P-SUP-001",
+"position_id": "P095-01",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 95,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-100",
+"position_id": "P099-01",
+"quantity": 12.54,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 99,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-125",
+"position_id": "P099-02",
+"quantity": 80.899,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 99,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-125",
+"position_id": "P099-03",
+"quantity": 7.945,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 99,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P099-04",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"angle": 45,
+"catalog_angle": 90
+},
+"code": "angle_mismatch"
+},
+"product": "P-FTG-B-100-90"
+},
+"reason_code": "priced_as",
+"source_page": 99,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P099-05",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 99,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-30",
+"position_id": "P099-06",
+"quantity": 10.0,
+"reason_args": {
+"detail": {
+"args": {
+"angle": 45,
+"catalog_angle": 30
+},
+"code": "angle_mismatch"
+},
+"product": "P-FTG-B-125-30"
+},
+"reason_code": "priced_as",
+"source_page": 99,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-90",
+"position_id": "P099-07",
+"quantity": 14.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 99,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-90",
+"position_id": "P099-08",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 99,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P099-09",
+"quantity": 1.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 99,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P100-01",
+"quantity": 24.66,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 100,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P100-02",
+"quantity": 13.257,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P100-03",
+"quantity": 38.793,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P100-04",
+"quantity": 8.269,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P100-05",
+"quantity": 18.193,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 100,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P100-06",
+"quantity": 12.322,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P100-07",
+"quantity": 4.296,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P100-08",
+"quantity": 6.921,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P100-09",
+"quantity": 27.628,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P100-10",
+"quantity": 14.522,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P100-11",
+"quantity": 8.043,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P100-12",
+"quantity": 1.269,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P100-13",
+"quantity": 1.201,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P100-14",
+"quantity": 0.895,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P100-15",
+"quantity": 0.036,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P100-16",
+"quantity": 2.09,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P100-17",
+"quantity": 0.036,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 100,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P100-18",
+"quantity": 14.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 100,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P100-19",
+"quantity": 26.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 100,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P100-20",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 100,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P100-21",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 100,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P100-22",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 100,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P100-23",
+"quantity": 19.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 100,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P100-24",
+"quantity": 9.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 100,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P100-25",
+"quantity": 9.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 100,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P101-01",
+"quantity": 16.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 101,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P101-02",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 101,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-100",
+"position_id": "P101-03",
+"quantity": 11.44,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-100",
+"position_id": "P101-04",
+"quantity": 14.928,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-125",
+"position_id": "P101-05",
+"quantity": 35.583,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-125",
+"position_id": "P101-06",
+"quantity": 23.034,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-100",
+"position_id": "P101-07",
+"quantity": 2.55,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 100
+},
+"code": "dn_mismatch"
+},
+"product": "P-DCT-R-100"
+},
+"reason_code": "nearest_item",
+"source_page": 101,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-160",
+"position_id": "P101-08",
+"quantity": 0.348,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-250",
+"position_id": "P101-09",
+"quantity": 10.488,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P101-10",
+"quantity": 3.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 101,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P101-11",
+"quantity": 1.0,
+"reason_args": {
+"detail": {
+"args": {
+"angle": 45,
+"catalog_angle": 90
+},
+"code": "angle_mismatch"
+},
+"product": "P-FTG-B-100-90"
+},
+"reason_code": "priced_as",
+"source_page": 101,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P101-12",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P101-13",
+"quantity": 12.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-30",
+"position_id": "P101-14",
+"quantity": 1.0,
+"reason_args": {
+"detail": {
+"args": {
+"angle": 45,
+"catalog_angle": 30
+},
+"code": "angle_mismatch"
+},
+"product": "P-FTG-B-125-30"
+},
+"reason_code": "priced_as",
+"source_page": 101,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-90",
+"position_id": "P101-15",
+"quantity": 20.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-90",
+"position_id": "P101-16",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P101-17",
+"quantity": 7.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 100
+},
+"code": "dn_mismatch"
+},
+"product": "P-FTG-B-100-90"
+},
+"reason_code": "nearest_item",
+"source_page": 101,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-160-90",
+"position_id": "P101-18",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-250-90",
+"position_id": "P101-19",
+"quantity": 13.0,
+"reason_args": {
+"detail": {
+"args": {
+"angle": 45,
+"catalog_angle": 90
+},
+"code": "angle_mismatch"
+},
+"product": "P-FTG-B-250-90"
+},
+"reason_code": "priced_as",
+"source_page": 101,
+"status": "assumption_applied",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-250-90",
+"position_id": "P101-20",
+"quantity": 5.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 101,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P101-21",
+"quantity": 10.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 101,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P101-22",
+"quantity": 10.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 101,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "leak_test",
+"matched_product": null,
+"position_id": "P102-01",
+"quantity": 2.0,
+"reason_args": {
+"family": "leak_test"
+},
+"reason_code": "no_catalog_item",
+"source_page": 102,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "earth_duct",
+"matched_product": null,
+"position_id": "P103-01",
+"quantity": 16.0,
+"reason_args": {
+"family": "earth_duct"
+},
+"reason_code": "no_catalog_item",
+"source_page": 103,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "earth_duct",
+"matched_product": null,
+"position_id": "P103-02",
+"quantity": 2.0,
+"reason_args": {
+"family": "earth_duct"
+},
+"reason_code": "no_catalog_item",
+"source_page": 103,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "earth_duct",
+"matched_product": null,
+"position_id": "P103-03",
+"quantity": 14.0,
+"reason_args": {
+"family": "earth_duct"
+},
+"reason_code": "no_catalog_item",
+"source_page": 103,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "earth_duct",
+"matched_product": null,
+"position_id": "P103-04",
+"quantity": 2.0,
+"reason_args": {
+"family": "earth_duct"
+},
+"reason_code": "no_catalog_item",
+"source_page": 103,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "earth_duct",
+"matched_product": null,
+"position_id": "P103-05",
+"quantity": 8.0,
+"reason_args": {
+"family": "earth_duct"
+},
+"reason_code": "no_catalog_item",
+"source_page": 103,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "earth_duct",
+"matched_product": null,
+"position_id": "P103-06",
+"quantity": 42.0,
+"reason_args": {
+"family": "earth_duct"
+},
+"reason_code": "no_catalog_item",
+"source_page": 103,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P103-07",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 103,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P104-01",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 104,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P104-02",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 104,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "earth_duct",
+"matched_product": null,
+"position_id": "P104-03",
+"quantity": 1.0,
+"reason_args": {
+"family": "earth_duct"
+},
+"reason_code": "no_catalog_item",
+"source_page": 104,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "leak_test",
+"matched_product": null,
+"position_id": "P104-04",
+"quantity": 8.0,
+"reason_args": {
+"family": "leak_test"
+},
+"reason_code": "no_catalog_item",
+"source_page": 104,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P105-01",
+"quantity": 12.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 105,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P105-02",
+"quantity": 12.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 105,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "supply_valve",
+"matched_product": "P-AIR-001",
+"position_id": "P105-03",
+"quantity": 5.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 105,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "supply_valve",
+"matched_product": "P-AIR-001",
+"position_id": "P105-04",
+"quantity": 3.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 100
+},
+"code": "dn_mismatch"
+},
+"product": "P-AIR-001"
+},
+"reason_code": "nearest_item",
+"source_page": 105,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "exhaust_valve",
+"matched_product": "P-AIR-003",
+"position_id": "P105-05",
+"quantity": 6.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 100
+},
+"code": "dn_mismatch"
+},
+"product": "P-AIR-003"
+},
+"reason_code": "nearest_item",
+"source_page": 105,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0007",
+"kind": "vav",
+"matched_product": "P-VAV-001",
+"position_id": "P106-01",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "supplier_package_provisional",
+"source_page": 106,
+"status": "supplier_quote_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0008",
+"kind": "cav",
+"matched_product": "P-CAV-001",
+"position_id": "P107-01",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 107,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0009",
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P107-02",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 107,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P107-03",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 107,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0010",
+"kind": "silencer",
+"matched_product": "P-SIL-003",
+"position_id": "P107-04",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "supplier_package_provisional",
+"source_page": 107,
+"status": "supplier_quote_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P108-01",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 108,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P108-02",
+"quantity": 6.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 108,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P108-03",
+"quantity": 6.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 108,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P108-04",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 108,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P108-05",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 108,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P108-06",
+"quantity": 20.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 108,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P108-07",
+"quantity": 100.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 108,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P108-08",
+"quantity": 6.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 108,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "frost_thermostat",
+"matched_product": null,
+"position_id": "P110-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "frost_thermostat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 110,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "humidity_sensor",
+"matched_product": null,
+"position_id": "P110-02",
+"quantity": 6.0,
+"reason_args": {
+"family": "humidity_sensor"
+},
+"reason_code": "no_catalog_item",
+"source_page": 110,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "dp_transmitter",
+"matched_product": "P-CTL-001",
+"position_id": "P110-03",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 110,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "service",
+"matched_product": null,
+"position_id": "P112-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "service"
+},
+"reason_code": "no_catalog_item",
+"source_page": 112,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-001",
+"position_id": "P113-01",
+"quantity": 20.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 113,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-002",
+"position_id": "P113-02",
+"quantity": 310.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 113,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P113-03",
+"quantity": 68.0,
+"reason_args": {
+"detail": {
+"args": {},
+"code": "weatherproof_mismatch"
+},
+"product": "P-INS-003"
+},
+"reason_code": "nearest_item",
+"source_page": 113,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P113-04",
+"quantity": 20.0,
+"reason_args": {
+"detail": {
+"args": {
+"thickness": 100
+},
+"code": "thickness_mismatch"
+},
+"product": "P-INS-003"
+},
+"reason_code": "nearest_item",
+"source_page": 113,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_insulation",
+"matched_product": null,
+"position_id": "P113-05",
+"quantity": 98.0,
+"reason_args": {
+"family": "fire_insulation"
+},
+"reason_code": "no_catalog_item",
+"source_page": 113,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P114-01",
+"quantity": 6.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "300x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-002"
+},
+"reason_code": "nearest_item",
+"source_page": 114,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P114-02",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "300x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-002"
+},
+"reason_code": "nearest_item",
+"source_page": 114,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P114-03",
+"quantity": 6.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "300x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-002"
+},
+"reason_code": "nearest_item",
+"source_page": 114,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P114-04",
+"quantity": 8.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "300x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-002"
+},
+"reason_code": "nearest_item",
+"source_page": 114,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P115-01",
+"quantity": 6.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "300x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-002"
+},
+"reason_code": "nearest_item",
+"source_page": 115,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "support_set",
+"matched_product": "P-SUP-001",
+"position_id": "P115-02",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 115,
+"status": "calculated",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "inspection_cover",
+"matched_product": "P-FIR-004",
+"position_id": "P116-01",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-004"
+},
+"reason_code": "nearest_item",
+"source_page": 116,
+"status": "review_required",
+"system": "244.02 LA02 Essenräume EG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "inspection_cover",
+"matched_product": "P-FIR-004",
+"position_id": "P119-01",
+"quantity": 1.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-004"
+},
+"reason_code": "nearest_item",
+"source_page": 119,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-200x200",
+"position_id": "P131-01",
+"quantity": 3.716,
+"reason_args": {
+"size": "200x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P131-02",
+"quantity": 14.939,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-03",
+"quantity": 11.971,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P131-04",
+"quantity": 1.833,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-200x200",
+"position_id": "P131-05",
+"quantity": 2.68,
+"reason_args": {
+"size": "200x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P131-06",
+"quantity": 22.025,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-07",
+"quantity": 12.306,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-08",
+"quantity": 12.582,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-09",
+"quantity": 12.542,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P131-10",
+"quantity": 4.067,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-11",
+"quantity": 9.4,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-12",
+"quantity": 2.337,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-13",
+"quantity": 31.44,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-14",
+"quantity": 7.479,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P131-15",
+"quantity": 0.445,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-16",
+"quantity": 0.227,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P131-17",
+"quantity": 0.04,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P131-18",
+"quantity": 0.104,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P131-19",
+"quantity": 0.396,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P131-20",
+"quantity": 0.846,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 131,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P131-21",
+"quantity": 16.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 131,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P131-22",
+"quantity": 4.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 131,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P131-23",
+"quantity": 22.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 131,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P131-24",
+"quantity": 1.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 131,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P131-25",
+"quantity": 4.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 131,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P132-01",
+"quantity": 17.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 132,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P132-02",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 132,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-100",
+"position_id": "P132-03",
+"quantity": 11.8,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 132,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-125",
+"position_id": "P132-04",
+"quantity": 7.408,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 132,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-160",
+"position_id": "P132-05",
+"quantity": 24.986,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 132,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P132-06",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 132,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P132-07",
+"quantity": 7.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 132,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-30",
+"position_id": "P132-08",
+"quantity": 3.0,
+"reason_args": {
+"detail": {
+"args": {
+"angle": 45,
+"catalog_angle": 30
+},
+"code": "angle_mismatch"
+},
+"product": "P-FTG-B-125-30"
+},
+"reason_code": "priced_as",
+"source_page": 132,
+"status": "assumption_applied",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-160-90",
+"position_id": "P132-09",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 132,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P132-10",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 132,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P132-11",
+"quantity": 7.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 132,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P132-12",
+"quantity": 3.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 132,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "leak_test",
+"matched_product": null,
+"position_id": "P133-01",
+"quantity": 2.0,
+"reason_args": {
+"family": "leak_test"
+},
+"reason_code": "no_catalog_item",
+"source_page": 133,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-01",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-02",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-03",
+"quantity": 46.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-04",
+"quantity": 9.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-05",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-06",
+"quantity": 132.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-07",
+"quantity": 5.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-08",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-09",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-10",
+"quantity": 14.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P134-11",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 134,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P135-01",
+"quantity": 43.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 135,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P135-02",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 135,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "service",
+"matched_product": null,
+"position_id": "P135-03",
+"quantity": 47.0,
+"reason_args": {
+"family": "service"
+},
+"reason_code": "no_catalog_item",
+"source_page": 135,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "service",
+"matched_product": null,
+"position_id": "P135-04",
+"quantity": 1.0,
+"reason_args": {
+"family": "service"
+},
+"reason_code": "no_catalog_item",
+"source_page": 135,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P135-05",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 135,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "supply_valve",
+"matched_product": "P-AIR-001",
+"position_id": "P135-06",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 135,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "exhaust_valve",
+"matched_product": "P-AIR-003",
+"position_id": "P135-07",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 135,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cav",
+"matched_product": "P-CAV-001",
+"position_id": "P136-01",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 136,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P136-02",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 136,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P136-03",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 136,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P137-01",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 137,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P137-02",
+"quantity": 4.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 137,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P137-03",
+"quantity": 2.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 137,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P137-04",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 137,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P137-05",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 137,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P137-06",
+"quantity": 20.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 137,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P137-07",
+"quantity": 30.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 137,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P137-08",
+"quantity": 2.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 137,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "frost_thermostat",
+"matched_product": null,
+"position_id": "P139-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "frost_thermostat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 139,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "humidity_sensor",
+"matched_product": null,
+"position_id": "P139-02",
+"quantity": 6.0,
+"reason_args": {
+"family": "humidity_sensor"
+},
+"reason_code": "no_catalog_item",
+"source_page": 139,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "dp_transmitter",
+"matched_product": "P-CTL-001",
+"position_id": "P139-03",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 139,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "service",
+"matched_product": null,
+"position_id": "P141-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "service"
+},
+"reason_code": "no_catalog_item",
+"source_page": 141,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-001",
+"position_id": "P142-01",
+"quantity": 32.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 142,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-002",
+"position_id": "P142-02",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 142,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P142-03",
+"quantity": 22.0,
+"reason_args": {
+"detail": {
+"args": {},
+"code": "weatherproof_mismatch"
+},
+"product": "P-INS-003"
+},
+"reason_code": "nearest_item",
+"source_page": 142,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P142-04",
+"quantity": 10.0,
+"reason_args": {
+"detail": {
+"args": {
+"thickness": 100
+},
+"code": "thickness_mismatch"
+},
+"product": "P-INS-003"
+},
+"reason_code": "nearest_item",
+"source_page": 142,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_insulation",
+"matched_product": null,
+"position_id": "P142-05",
+"quantity": 38.0,
+"reason_args": {
+"family": "fire_insulation"
+},
+"reason_code": "no_catalog_item",
+"source_page": 142,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_insulation",
+"matched_product": null,
+"position_id": "P142-06",
+"quantity": 48.0,
+"reason_args": {
+"family": "fire_insulation"
+},
+"reason_code": "no_catalog_item",
+"source_page": 142,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_insulation",
+"matched_product": null,
+"position_id": "P142-07",
+"quantity": 110.0,
+"reason_args": {
+"family": "fire_insulation"
+},
+"reason_code": "no_catalog_item",
+"source_page": 142,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P143-01",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "300x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-002"
+},
+"reason_code": "nearest_item",
+"source_page": 143,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P143-02",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "300x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-002"
+},
+"reason_code": "nearest_item",
+"source_page": 143,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P143-03",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "300x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-002"
+},
+"reason_code": "nearest_item",
+"source_page": 143,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "support_set",
+"matched_product": "P-SUP-001",
+"position_id": "P143-04",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 143,
+"status": "calculated",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "inspection_cover",
+"matched_product": "P-FIR-004",
+"position_id": "P144-01",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x200"
+},
+"code": "size_mismatch"
+},
+"product": "P-FIR-004"
+},
+"reason_code": "nearest_item",
+"source_page": 144,
+"status": "review_required",
+"system": "244.03 LA03 Küche/Abwaschen",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fan",
+"matched_product": "P-FAN-1500",
+"position_id": "P153-01",
+"quantity": 1.0,
+"reason_args": {
+"count": 5
+},
+"reason_code": "several_fit",
+"source_page": 153,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-01",
+"quantity": 17.991,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-200x200",
+"position_id": "P156-02",
+"quantity": 15.628,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 156,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-03",
+"quantity": 47.14,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-04",
+"quantity": 7.295,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-05",
+"quantity": 3.5,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-06",
+"quantity": 6.93,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-07",
+"quantity": 4.494,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-08",
+"quantity": 1.109,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-09",
+"quantity": 4.931,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-10",
+"quantity": 19.68,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-11",
+"quantity": 14.768,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-12",
+"quantity": 16.71,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-13",
+"quantity": 7.007,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-14",
+"quantity": 4.935,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-15",
+"quantity": 8.127,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-16",
+"quantity": 14.624,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-17",
+"quantity": 2.295,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-18",
+"quantity": 32.182,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P156-19",
+"quantity": 31.55,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-20",
+"quantity": 3.15,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-21",
+"quantity": 19.08,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-1000x800",
+"position_id": "P156-22",
+"quantity": 9.472,
+"reason_args": {
+"size": "1000x800"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-23",
+"quantity": 4.158,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-24",
+"quantity": 1.559,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P156-25",
+"quantity": 1.44,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 156,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-26",
+"quantity": 0.384,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P156-27",
+"quantity": 1.12,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 156,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-1000x800",
+"position_id": "P156-28",
+"quantity": 0.23,
+"reason_args": {
+"size": "1000x800"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-1000x800",
+"position_id": "P156-29",
+"quantity": 0.9,
+"reason_args": {
+"size": "1000x800"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-1000x800",
+"position_id": "P156-30",
+"quantity": 0.72,
+"reason_args": {
+"size": "1000x800"
+},
+"reason_code": "nearest_size_class",
+"source_page": 156,
+"status": "assumption_applied",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P156-31",
+"quantity": 21.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 156,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P156-32",
+"quantity": 1.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 156,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P156-33",
+"quantity": 21.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 156,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P157-01",
+"quantity": 17.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 157,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P157-02",
+"quantity": 3.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 157,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P157-03",
+"quantity": 5.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 157,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P157-04",
+"quantity": 1.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 157,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P157-05",
+"quantity": 14.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 157,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P157-06",
+"quantity": 27.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 157,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P157-07",
+"quantity": 35.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 157,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P157-08",
+"quantity": 20.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 157,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-100",
+"position_id": "P158-01",
+"quantity": 9.72,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-125",
+"position_id": "P158-02",
+"quantity": 26.512,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-160",
+"position_id": "P158-03",
+"quantity": 52.956,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-200",
+"position_id": "P158-04",
+"quantity": 7.805,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-224",
+"position_id": "P158-05",
+"quantity": 9.688,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-250",
+"position_id": "P158-06",
+"quantity": 1.032,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P158-07",
+"quantity": 1.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 158,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P158-08",
+"quantity": 9.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-30",
+"position_id": "P158-09",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-90",
+"position_id": "P158-10",
+"quantity": 16.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-160-45",
+"position_id": "P158-11",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-160-90",
+"position_id": "P158-12",
+"quantity": 57.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-200-90",
+"position_id": "P158-13",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-224-90",
+"position_id": "P158-14",
+"quantity": 7.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 158,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P158-15",
+"quantity": 33.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 158,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P158-16",
+"quantity": 21.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 158,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "leak_test",
+"matched_product": null,
+"position_id": "P159-01",
+"quantity": 4.0,
+"reason_args": {
+"family": "leak_test"
+},
+"reason_code": "no_catalog_item",
+"source_page": 159,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "grille",
+"matched_product": null,
+"position_id": "P160-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "grille"
+},
+"reason_code": "no_catalog_item",
+"source_page": 160,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "rain_hat",
+"matched_product": null,
+"position_id": "P160-02",
+"quantity": 1.0,
+"reason_args": {
+"family": "rain_hat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 160,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P160-03",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 160,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "exhaust_valve",
+"matched_product": "P-AIR-003",
+"position_id": "P160-04",
+"quantity": 18.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 160,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "exhaust_valve",
+"matched_product": "P-AIR-003",
+"position_id": "P160-05",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 100
+},
+"code": "dn_mismatch"
+},
+"product": "P-AIR-003"
+},
+"reason_code": "nearest_item",
+"source_page": 160,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P161-01",
+"quantity": 24.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 161,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P161-02",
+"quantity": 24.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 161,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P161-03",
+"quantity": 10.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 161,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P161-04",
+"quantity": 10.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 161,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P161-05",
+"quantity": 10.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 161,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P161-06",
+"quantity": 12.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 161,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P162-01",
+"quantity": 3.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 162,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P162-02",
+"quantity": 18.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 162,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P162-03",
+"quantity": 10.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 100
+},
+"code": "dn_mismatch"
+},
+"product": "P-SIL-002"
+},
+"reason_code": "nearest_item",
+"source_page": 162,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P162-04",
+"quantity": 6.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 100
+},
+"code": "dn_mismatch"
+},
+"product": "P-SIL-002"
+},
+"reason_code": "nearest_item",
+"source_page": 162,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P162-05",
+"quantity": 12.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 162,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P162-06",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 162,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0011",
+"kind": "silencer",
+"matched_product": "P-SIL-004",
+"position_id": "P163-01",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "supplier_package_provisional",
+"source_page": 163,
+"status": "supplier_quote_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0012",
+"kind": "vav",
+"matched_product": "P-VAV-002",
+"position_id": "P163-02",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "supplier_package_provisional",
+"source_page": 163,
+"status": "supplier_quote_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0013",
+"kind": "vav",
+"matched_product": "P-VAV-003",
+"position_id": "P164-01",
+"quantity": 10.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 164,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0014",
+"kind": "vav",
+"matched_product": "P-VAV-004",
+"position_id": "P164-02",
+"quantity": 6.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 164,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0015",
+"kind": "vav",
+"matched_product": "P-VAV-005",
+"position_id": "P164-03",
+"quantity": 12.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 164,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cav",
+"matched_product": "P-CAV-001",
+"position_id": "P164-04",
+"quantity": 12.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 250
+},
+"code": "dn_mismatch"
+},
+"product": "P-CAV-001"
+},
+"reason_code": "nearest_item",
+"source_page": 164,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "manual_damper",
+"matched_product": "P-DAM-001",
+"position_id": "P165-01",
+"quantity": 6.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 125
+},
+"code": "dn_mismatch"
+},
+"product": "P-DAM-001"
+},
+"reason_code": "nearest_item",
+"source_page": 165,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P165-02",
+"quantity": 20.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 165,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P165-03",
+"quantity": 20.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 165,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P165-04",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 165,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P165-05",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 165,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P165-06",
+"quantity": 40.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 165,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P165-07",
+"quantity": 150.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 165,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "frost_thermostat",
+"matched_product": null,
+"position_id": "P166-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "frost_thermostat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 166,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "humidity_sensor",
+"matched_product": null,
+"position_id": "P166-02",
+"quantity": 6.0,
+"reason_args": {
+"family": "humidity_sensor"
+},
+"reason_code": "no_catalog_item",
+"source_page": 166,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "dp_transmitter",
+"matched_product": "P-CTL-001",
+"position_id": "P166-03",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 166,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "service",
+"matched_product": null,
+"position_id": "P168-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "service"
+},
+"reason_code": "no_catalog_item",
+"source_page": 168,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P168-02",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 168,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0016",
+"kind": "insulation",
+"matched_product": "P-INS-001",
+"position_id": "P169-01",
+"quantity": 52.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 169,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": "LV0017",
+"kind": "insulation",
+"matched_product": "P-INS-002",
+"position_id": "P169-02",
+"quantity": 12.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 169,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P169-03",
+"quantity": null,
+"reason_args": {},
+"reason_code": "quantity_missing",
+"source_page": 169,
+"status": "insufficient_information",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P169-04",
+"quantity": 30.0,
+"reason_args": {
+"detail": {
+"args": {
+"thickness": 100
+},
+"code": "thickness_mismatch"
+},
+"product": "P-INS-003"
+},
+"reason_code": "nearest_item",
+"source_page": 169,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": "LV0018",
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P169-05",
+"quantity": 440.0,
+"reason_args": {},
+"reason_code": "supplier_package_provisional",
+"source_page": 169,
+"status": "supplier_quote_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fire_insulation",
+"matched_product": null,
+"position_id": "P169-06",
+"quantity": 42.0,
+"reason_args": {
+"family": "fire_insulation"
+},
+"reason_code": "no_catalog_item",
+"source_page": 169,
+"status": "review_required",
+"system": "244.04 Schulzimmer OG",
+"unit": "m2"
+},
+{
+"golden_lv_id": "LV0019",
+"kind": "fire_seal",
+"matched_product": "P-FIR-002",
+"position_id": "P170-01",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 170,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0020",
+"kind": "fire_seal",
+"matched_product": "P-FIR-003",
+"position_id": "P170-02",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 170,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0021",
+"kind": "support_set",
+"matched_product": "P-SUP-001",
+"position_id": "P171-01",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 171,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": "LV0022",
+"kind": "inspection_cover",
+"matched_product": "P-FIR-004",
+"position_id": "P171-02",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 171,
+"status": "calculated",
+"system": "244.04 Schulzimmer OG",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-01",
+"quantity": 5.695,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-02",
+"quantity": 2.029,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-03",
+"quantity": 36.63,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P182-04",
+"quantity": 1.815,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-05",
+"quantity": 2.97,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-06",
+"quantity": 24.278,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-07",
+"quantity": 3.628,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-08",
+"quantity": 7.427,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-09",
+"quantity": 0.594,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-400x200",
+"position_id": "P182-10",
+"quantity": 0.497,
+"reason_args": {
+"size": "400x200"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-600x400",
+"position_id": "P182-11",
+"quantity": 2.12,
+"reason_args": {
+"size": "600x400"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P182-12",
+"quantity": 2.304,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_rect",
+"matched_product": "P-DCT-X-800x600",
+"position_id": "P182-13",
+"quantity": 0.592,
+"reason_args": {
+"size": "800x600"
+},
+"reason_code": "nearest_size_class",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P182-14",
+"quantity": 10.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 182,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P182-15",
+"quantity": 7.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 182,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P182-16",
+"quantity": 10.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 182,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P182-17",
+"quantity": 1.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 182,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P182-18",
+"quantity": 2.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 182,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_rect",
+"matched_product": null,
+"position_id": "P182-19",
+"quantity": 1.0,
+"reason_args": {
+"family": "fitting_rect"
+},
+"reason_code": "no_catalog_item",
+"source_page": 182,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-100",
+"position_id": "P182-20",
+"quantity": 29.916,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 182,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-125",
+"position_id": "P182-21",
+"quantity": 1.849,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 182,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-160",
+"position_id": "P182-22",
+"quantity": 0.419,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 182,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-200",
+"position_id": "P182-23",
+"quantity": 40.3,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 182,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-250",
+"position_id": "P182-24",
+"quantity": 24.214,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 182,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "duct_round",
+"matched_product": "P-DCT-R-315",
+"position_id": "P182-25",
+"quantity": 18.802,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 182,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P182-26",
+"quantity": 21.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 182,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P182-27",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"angle": 30,
+"catalog_angle": 90
+},
+"code": "angle_mismatch"
+},
+"product": "P-FTG-B-100-90"
+},
+"reason_code": "priced_as",
+"source_page": 182,
+"status": "assumption_applied",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-100-90",
+"position_id": "P182-28",
+"quantity": 13.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 182,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-90",
+"position_id": "P183-01",
+"quantity": 3.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 183,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-200-90",
+"position_id": "P183-02",
+"quantity": 7.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 183,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-250-90",
+"position_id": "P183-03",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 183,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "bend",
+"matched_product": "P-FTG-B-125-90",
+"position_id": "P183-04",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 125
+},
+"code": "dn_mismatch"
+},
+"product": "P-FTG-B-125-90"
+},
+"reason_code": "nearest_item",
+"source_page": 183,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P183-05",
+"quantity": 10.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 183,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P183-06",
+"quantity": 15.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 183,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "fitting_round",
+"matched_product": null,
+"position_id": "P183-07",
+"quantity": 15.0,
+"reason_args": {
+"family": "fitting_round"
+},
+"reason_code": "no_catalog_item",
+"source_page": 183,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "leak_test",
+"matched_product": null,
+"position_id": "P184-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "leak_test"
+},
+"reason_code": "no_catalog_item",
+"source_page": 184,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "grille",
+"matched_product": null,
+"position_id": "P185-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "grille"
+},
+"reason_code": "no_catalog_item",
+"source_page": 185,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "rain_hat",
+"matched_product": null,
+"position_id": "P185-02",
+"quantity": 1.0,
+"reason_args": {
+"family": "rain_hat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 185,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P185-03",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 185,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "supply_valve",
+"matched_product": "P-AIR-001",
+"position_id": "P185-04",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 185,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "exhaust_valve",
+"matched_product": "P-AIR-003",
+"position_id": "P185-05",
+"quantity": 14.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 185,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "grille",
+"matched_product": null,
+"position_id": "P186-01",
+"quantity": 4.0,
+"reason_args": {
+"family": "grille"
+},
+"reason_code": "no_catalog_item",
+"source_page": 186,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "grille",
+"matched_product": null,
+"position_id": "P186-02",
+"quantity": 10.0,
+"reason_args": {
+"family": "grille"
+},
+"reason_code": "no_catalog_item",
+"source_page": 186,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P186-03",
+"quantity": 1.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 186,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P186-04",
+"quantity": 1.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 186,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P186-05",
+"quantity": 1.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 186,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "air_outlet",
+"matched_product": null,
+"position_id": "P186-06",
+"quantity": 1.0,
+"reason_args": {
+"family": "air_outlet"
+},
+"reason_code": "no_catalog_item",
+"source_page": 186,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cav",
+"matched_product": "P-CAV-001",
+"position_id": "P187-01",
+"quantity": 12.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 250
+},
+"code": "dn_mismatch"
+},
+"product": "P-CAV-001"
+},
+"reason_code": "nearest_item",
+"source_page": 187,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cav",
+"matched_product": "P-CAV-001",
+"position_id": "P187-02",
+"quantity": 1.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 250
+},
+"code": "dn_mismatch"
+},
+"product": "P-CAV-001"
+},
+"reason_code": "nearest_item",
+"source_page": 187,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cav",
+"matched_product": "P-CAV-001",
+"position_id": "P187-03",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 250
+},
+"code": "dn_mismatch"
+},
+"product": "P-CAV-001"
+},
+"reason_code": "nearest_item",
+"source_page": 187,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cav",
+"matched_product": "P-CAV-001",
+"position_id": "P187-04",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 250
+},
+"code": "dn_mismatch"
+},
+"product": "P-CAV-001"
+},
+"reason_code": "nearest_item",
+"source_page": 187,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "manual_damper",
+"matched_product": "P-DAM-001",
+"position_id": "P187-05",
+"quantity": 6.0,
+"reason_args": {
+"detail": {
+"args": {
+"dn": 125
+},
+"code": "dn_mismatch"
+},
+"product": "P-DAM-001"
+},
+"reason_code": "nearest_item",
+"source_page": 187,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P187-06",
+"quantity": 8.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 187,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P187-07",
+"quantity": 4.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 187,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P187-08",
+"quantity": 1.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 187,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P187-09",
+"quantity": 4.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 187,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-002",
+"position_id": "P187-10",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 187,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-003",
+"position_id": "P188-01",
+"quantity": 2.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "600x600x1750"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-003"
+},
+"reason_code": "nearest_item",
+"source_page": 188,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P188-02",
+"quantity": 1.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 188,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-001",
+"position_id": "P188-03",
+"quantity": 1.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "400x300x1250"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-001"
+},
+"reason_code": "nearest_item",
+"source_page": 188,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "silencer",
+"matched_product": "P-SIL-003",
+"position_id": "P189-01",
+"quantity": 1.0,
+"reason_args": {
+"detail": {
+"args": {
+"size": "600x600x1750"
+},
+"code": "size_mismatch"
+},
+"product": "P-SIL-003"
+},
+"reason_code": "nearest_item",
+"source_page": 189,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P190-01",
+"quantity": 4.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 190,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "cleaning_cover",
+"matched_product": null,
+"position_id": "P190-02",
+"quantity": 4.0,
+"reason_args": {
+"family": "cleaning_cover"
+},
+"reason_code": "no_catalog_item",
+"source_page": 190,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P190-03",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 190,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "thermometer",
+"matched_product": null,
+"position_id": "P190-04",
+"quantity": 4.0,
+"reason_args": {
+"family": "thermometer"
+},
+"reason_code": "no_catalog_item",
+"source_page": 190,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P190-05",
+"quantity": 10.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 190,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "labels",
+"matched_product": null,
+"position_id": "P190-06",
+"quantity": 40.0,
+"reason_args": {
+"family": "labels"
+},
+"reason_code": "no_catalog_item",
+"source_page": 190,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "frost_thermostat",
+"matched_product": null,
+"position_id": "P191-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "frost_thermostat"
+},
+"reason_code": "no_catalog_item",
+"source_page": 191,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "humidity_sensor",
+"matched_product": null,
+"position_id": "P191-02",
+"quantity": 6.0,
+"reason_args": {
+"family": "humidity_sensor"
+},
+"reason_code": "no_catalog_item",
+"source_page": 191,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "dp_transmitter",
+"matched_product": "P-CTL-001",
+"position_id": "P191-03",
+"quantity": 2.0,
+"reason_args": {},
+"reason_code": "exact_match",
+"source_page": 191,
+"status": "calculated",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "service",
+"matched_product": null,
+"position_id": "P193-01",
+"quantity": 1.0,
+"reason_args": {
+"family": "service"
+},
+"reason_code": "no_catalog_item",
+"source_page": 193,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P193-02",
+"quantity": 1.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 193,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P194-01",
+"quantity": 150.0,
+"reason_args": {},
+"reason_code": "supplier_package_provisional",
+"source_page": 194,
+"status": "supplier_quote_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": "insulation",
+"matched_product": "P-INS-003",
+"position_id": "P194-02",
+"quantity": 10.0,
+"reason_args": {
+"detail": {
+"args": {
+"thickness": 100
+},
+"code": "thickness_mismatch"
+},
+"product": "P-INS-003"
+},
+"reason_code": "nearest_item",
+"source_page": 194,
+"status": "review_required",
+"system": "244.05 LA05 Turnhalle",
+"unit": "m2"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P197-01",
+"quantity": 150.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 197,
+"status": "review_required",
+"system": "244.06 Montagesystem Flachdach",
+"unit": "pc"
+},
+{
+"golden_lv_id": null,
+"kind": null,
+"matched_product": null,
+"position_id": "P197-02",
+"quantity": 500.0,
+"reason_args": {},
+"reason_code": "family_unknown",
+"source_page": 197,
+"status": "review_required",
+"system": "244.06 Montagesystem Flachdach",
+"unit": "m"
+}
+]

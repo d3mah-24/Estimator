@@ -12,6 +12,9 @@
   "description_original",
   "description",
   "attributes",
+  "custom_attributes",
+  "family",
+  "position_ref",
   "extraction_confidence",
   "column_break_q",
   "quantity_raw",
@@ -25,6 +28,9 @@
   "price_source",
   "section_cost",
   "net_unit_cost",
+  "base_hours_per_unit",
+  "factor_keys",
+  "price_version",
   "quote_override",
   "material_cost",
   "column_break_c",
@@ -34,6 +40,8 @@
   "direct_cost",
   "section_status",
   "status",
+  "reason_code",
+  "reason_args",
   "status_reason",
   "error"
  ],
@@ -75,6 +83,24 @@
    "fieldname": "attributes",
    "fieldtype": "JSON",
    "label": "Attributes"
+  },
+  {
+   "description": "Project columns as printed in the tender: {label: value}",
+   "fieldname": "custom_attributes",
+   "fieldtype": "JSON",
+   "label": "Custom Attributes"
+  },
+  {
+   "fieldname": "family",
+   "fieldtype": "Link",
+   "label": "Family",
+   "options": "Product Family"
+  },
+  {
+   "description": "LV number printed in the tender, when there is one",
+   "fieldname": "position_ref",
+   "fieldtype": "Data",
+   "label": "Position Ref"
   },
   {
    "fieldname": "extraction_confidence",
@@ -147,6 +173,25 @@
    "label": "Net Unit Cost (CHF)"
   },
   {
+   "description": "Snapshot from the productivity rule",
+   "fieldname": "base_hours_per_unit",
+   "fieldtype": "Float",
+   "label": "Base Hours Per Unit",
+   "precision": "4"
+  },
+  {
+   "description": "Snapshot: factors applied",
+   "fieldname": "factor_keys",
+   "fieldtype": "Data",
+   "label": "Factor Keys"
+  },
+  {
+   "description": "Snapshot: catalogue version",
+   "fieldname": "price_version",
+   "fieldtype": "Data",
+   "label": "Price Version"
+  },
+  {
    "description": "Replaces catalogue material cost when set",
    "fieldname": "quote_override",
    "fieldtype": "Currency",
@@ -198,6 +243,20 @@
    "options": "calculated\nsupplier_quote_required\nassumption_applied\nreview_required\ninsufficient_information\nout_of_scope\nnon_priceable"
   },
   {
+   "description": "Code from equans_bid/reasons.py; translated at display time",
+   "fieldname": "reason_code",
+   "fieldtype": "Data",
+   "label": "Reason Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reason_args",
+   "fieldtype": "JSON",
+   "label": "Reason Arguments",
+   "read_only": 1
+  },
+  {
+   "description": "English rendering of the reason code (logs); never translated",
    "fieldname": "status_reason",
    "fieldtype": "Small Text",
    "label": "Status Reason"
@@ -209,7 +268,7 @@
   }
  ],
  "istable": 1,
- "modified": "2026-10-10 11:00:00.000000",
+ "modified": "2026-10-10 22:00:00.000000",
  "modified_by": "Administrator",
  "module": "Bid Intelligence",
  "name": "Tender Item",

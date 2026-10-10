@@ -56,6 +56,36 @@ Statuses: calculated, supplier_quote_required, assumption_applied, review_requir
 insufficient_information, out_of_scope, non_priceable. A missing price never counts as CHF 0:
 unpriced positions are counted and shown separately.
 
+#### Localization (de-CH default, fr-CH, en fallback)
+
+Rules: the database and API keep **codes** (statuses, units, scenarios, `reason_code` +
+`reason_args`); text is produced only for display. Amounts stay numbers until formatted. Tender
+text extracted from the PDF is never translated. The LLM prompt and schema stay English.
+
+| Where | What |
+| --- | --- |
+| `frontend/src/locales/<locale>.json` | UI strings, plus labels for every code (`status.*`, `unit.*`, `reason.*`, `family.*`, …) |
+| `frontend/src/utils/format.js` | the only place that formats numbers, CHF, percentages, dates (`Intl`); `—` for missing |
+| `frontend/src/i18n.js` | vue-i18n setup, language switcher persistence (`localStorage`), `_lang` sent to the API |
+| `equans_bid/reasons.py` | reason, warning and product-family codes with English templates |
+| `equans_bid/localization.py` | backend labels (gettext contexts), babel formatting for exports |
+| `equans_bid/locale/{de,fr}.po` | Frappe (gettext) translations; English is the source language |
+
+Run `cd frontend && yarn test` to check that all locales have the same keys, placeholders and plural
+forms, that every code has a label, and that no component formats numbers itself.
+
+**Add a language** (example: Italian, `it-CH`):
+
+1. `frontend/src/locales/it-CH.json`: copy `de-CH.json`, translate every value, keep placeholders
+   like `{count}` and the ` | ` plural separators.
+2. `frontend/src/i18n.js`: import it, add `{ code: 'it-CH', label: 'Italiano' }` to `LOCALES` and
+   `'it-CH': 'it'` to `FRAPPE_LANG`; add `'it-CH'` to `OTHERS` in `frontend/tests/locales.test.mjs`.
+3. `equans_bid/localization.py`: add `"it-CH": ("it", "it_CH")` to `UI_LOCALES`.
+4. `equans_bid/locale/it.po`: copy `de.po`, set `Language: it`, translate every `msgstr`
+   (keep each `msgctxt`); add `"it"` to the loop in `tests/test_localization.py`.
+5. `bench compile-po-to-mo --app equans_bid && bench --site equans.localhost clear-cache`,
+   `cd frontend && yarn test && yarn build`, `bench run-tests --app equans_bid`.
+
 #### Extending to another trade
 
 Swap `data/starter/catalog.csv`, `productivity.csv` and `project_parameters.json`, add the trade's

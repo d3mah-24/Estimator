@@ -1,0 +1,272 @@
+{
+  "app": {
+    "language": "Language"
+  },
+  "common": {
+    "loading": "Loading …",
+    "choose": "— choose —",
+    "saveFailed": "Saving failed"
+  },
+  "tenderStatus": {
+    "Draft": "Draft",
+    "Processing": "Processing",
+    "Completed": "Ready for review",
+    "Failed": "Failed"
+  },
+  "list": {
+    "title": "Tenders",
+    "intro": "Upload the bill of quantities, review positions, build a first price.",
+    "new": "New tender",
+    "col": {
+      "project": "Project",
+      "status": "Status",
+      "directCost": "Direct cost",
+      "baseline": "Cost baseline",
+      "open": "Open positions"
+    },
+    "empty": "No tenders yet.",
+    "dialog": {
+      "projectName": "Project name",
+      "placeholder": "e.g. Oberglatt school – ventilation",
+      "uploading": "Uploading {progress}",
+      "choose": "Choose bill of quantities (PDF)",
+      "submit": "Upload and process",
+      "notPdf": "Please choose a PDF file.",
+      "tooLarge": "The file is larger than {size} MB.",
+      "createFailed": "Creating the tender failed"
+    }
+  },
+  "review": {
+    "export": "Export (CSV)",
+    "reprocess": "Process again",
+    "bySystem": "By system ({count})",
+    "positionsShort": "{count} pos.",
+    "search": "Search (description, product, LV ID)",
+    "allStatuses": "All statuses ({count})",
+    "allSystems": "All systems",
+    "positions": "no positions | one position | {count} positions",
+    "col": {
+      "lvId": "LV ID",
+      "description": "Description",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "product": "Product",
+      "directCost": "Direct cost",
+      "status": "Status",
+      "source": "Source"
+    },
+    "loadingPositions": "Loading positions …",
+    "verifiedReference": "Verified reference position",
+    "quotePlaceholder": "Catalogue {amount}",
+    "quoteTitle": "Supplier quote (total material, CHF)",
+    "quoted": "quote",
+    "provisional": "provisional",
+    "noPriceYet": "No price until reviewed",
+    "page": "p. {page}",
+    "traceability": "Document traceability",
+    "documentConflict": "Contradiction in the document",
+    "technicalError": "Technical error",
+    "confidence": "Extraction / match",
+    "material": "Material",
+    "materialFormula": "{quantity} × {price} + {waste} waste",
+    "labour": "Labour",
+    "labourFormula": "{hours} h × {rate}",
+    "selectHint": "Select a position to see where it comes from and how it is priced.",
+    "noSystem": "No system",
+    "processed": "No positions extracted from {file}. | One position extracted from {file}. | {count} positions extracted from {file}.",
+    "llmUsed": "LLM {model}: {calls} calls, {cached} cached, {errors} errors.",
+    "llmNone": "LLM not configured (rules only).",
+    "saved": "Saved and repriced in {ms} ms"
+  },
+  "kpi": {
+    "direct": {
+      "label": "Direct cost",
+      "hint": "Material + labour, priced positions"
+    },
+    "confirmed": {
+      "label": "Of which confirmed",
+      "hint": "Catalogue or quote"
+    },
+    "provisional": {
+      "label": "Of which provisional",
+      "hint": "Quote pending / assumption"
+    },
+    "open": {
+      "label": "Open positions",
+      "hint": "No price, review required"
+    },
+    "baseline": {
+      "label": "Cost baseline",
+      "hint": "incl. project costs, allowances, overhead"
+    }
+  },
+  "bid": {
+    "title": "Recommended bid range",
+    "modelNote": "Win probability: model estimate, not calibrated on past bids",
+    "custom": "Custom assumptions",
+    "buildUp": "Cost build-up",
+    "assumptions": "Assumptions",
+    "recommended": "Recommended",
+    "margin": "Margin",
+    "winProbability": "Win probability",
+    "contributionIfWon": "Contribution if won",
+    "expectedContribution": "Expected contribution",
+    "standardOffer": "Standard offer",
+    "standardOfferFormula": "Cost baseline {baseline} ÷ (1 − {margin} target margin), rounded up to {step}",
+    "unpricedExcluded": "All positions are priced | One position without a price is not included | {count} positions without a price are not included",
+    "input": {
+      "margin": "Margin {scenario} (%)",
+      "strategic": "Strategic interest (pts)",
+      "strategicHint": "Positive = we really want this job (e.g. reference project, free capacity)",
+      "competition": "Competition (pts)",
+      "competitionHint": "Negative = many or aggressive competitors",
+      "sensitivity": "Price sensitivity (pts per 1 %)",
+      "sensitivityHint": "How much the win probability drops for each 1 % above the standard offer",
+      "base": "Base win probability (%)",
+      "baseHint": "Win probability at the standard offer"
+    },
+    "save": "Save assumptions",
+    "reset": "Reset to project parameters",
+    "previewState": "Preview – not saved yet",
+    "savedState": "Saved",
+    "previewFailed": "Preview failed"
+  },
+  "buildUp": {
+    "catalog_material": {
+      "label": "Catalogue material",
+      "note": "incl. {waste} waste"
+    },
+    "supplier_material": {
+      "label": "Supplier packages",
+      "note": "Catalogue price or quote"
+    },
+    "labour": {
+      "label": "Installation",
+      "note": "Hours × rate, with project factors"
+    },
+    "small_material": {
+      "label": "Small material",
+      "note": "{pct} on catalogue material"
+    },
+    "supplier_contingency": {
+      "label": "Supplier package contingency",
+      "note": "{pct}"
+    },
+    "project_costs": {
+      "label": "Project costs",
+      "note": "Engineering, commissioning, hygiene, documentation"
+    },
+    "direct_cost": {
+      "label": "Direct cost",
+      "note": ""
+    },
+    "transport_equipment": {
+      "label": "Transport and equipment",
+      "note": "{pct}"
+    },
+    "overhead": {
+      "label": "Overhead",
+      "note": "{pct}"
+    },
+    "cost_baseline": {
+      "label": "Cost baseline",
+      "note": ""
+    }
+  },
+  "pdf": {
+    "page": "p. {page} / {count}",
+    "highlighted": "No line highlighted | One line highlighted on page {page} | {count} lines highlighted on page {page}",
+    "notHighlighted": "Not highlighted automatically on this page",
+    "loadFailed": "The PDF could not be loaded: {error}"
+  },
+  "status": {
+    "calculated": "Calculated",
+    "supplier_quote_required": "Supplier quote required",
+    "assumption_applied": "Assumption applied",
+    "review_required": "Review required",
+    "insufficient_information": "Insufficient information",
+    "out_of_scope": "Out of scope",
+    "non_priceable": "Not priceable"
+  },
+  "unit": {
+    "pc": "pc",
+    "m": "m",
+    "m2": "m²",
+    "m3": "m³",
+    "h": "h",
+    "LS": "LS",
+    "system": "system"
+  },
+  "scenario": {
+    "Aggressive": "Aggressive",
+    "Target": "Target",
+    "Conservative": "Conservative"
+  },
+  "priceSource": {
+    "catalog": "Catalogue",
+    "supplier_package": "Supplier package",
+    "supplier_quote": "Supplier quote"
+  },
+  "family": {
+    "supply_valve": "supply air valve",
+    "exhaust_valve": "exhaust air valve",
+    "fire_damper": "fire damper",
+    "manual_damper": "balancing damper",
+    "silencer": "silencer",
+    "vav": "variable air-volume controller",
+    "cav": "constant air-volume controller",
+    "insulation": "duct insulation",
+    "fire_seal": "fire seal",
+    "support_set": "connection-angle set",
+    "inspection_cover": "inspection cover",
+    "duct_round": "round duct",
+    "duct_rect": "rectangular duct",
+    "bend": "round bend",
+    "ahu": "air-handling unit",
+    "fan": "fan",
+    "field_device": "field device",
+    "dp_transmitter": "differential pressure transmitter",
+    "temp_sensor": "temperature sensor",
+    "actuator": "actuator",
+    "flow_transmitter": "volume flow transmitter",
+    "grille": "air grille",
+    "air_outlet": "air outlet / transfer element",
+    "fire_insulation": "fire protection insulation",
+    "humidity_sensor": "humidity sensor",
+    "frost_thermostat": "frost protection thermostat",
+    "thermometer": "dial thermometer",
+    "cleaning_cover": "cleaning / access cover",
+    "rain_hat": "rain hat / louvre cap",
+    "earth_duct": "earth-laid ventilation duct",
+    "labels": "labels and marking",
+    "leak_test": "duct leakage test (service)",
+    "service": "installation / commissioning service",
+    "fitting_round": "round duct fitting",
+    "fitting_rect": "rectangular duct fitting"
+  },
+  "reason": {
+    "family_unknown": "Product family not recognised",
+    "no_catalog_item": "No catalogue item for {family}: price manually or request a quote",
+    "unit_mismatch": "Unit {unit} differs from catalogue unit {catalog_unit}",
+    "several_fit": "{count} catalogue items fit; best text match chosen",
+    "exact_match": "Product family and size match the catalogue",
+    "priced_as": "Priced as {product}: {detail}",
+    "nearest_item": "Nearest item {product}: {detail}",
+    "nearest_size_class": "No exact size in catalogue; priced per m² at nearest size class {size} mm",
+    "dn_mismatch": "DN{dn} not found in the position",
+    "size_mismatch": "size {size} mm does not match",
+    "thickness_mismatch": "insulation thickness {thickness} mm does not match",
+    "weatherproof_mismatch": "weatherproof finish differs",
+    "angle_mismatch": "angle {angle}° instead of catalogue {catalog_angle}°",
+    "attributes_agree": "attributes agree",
+    "quantity_missing": "Quantity column is empty in the tender",
+    "supplier_package_provisional": "Supplier package: catalogue price is provisional until a quote is entered",
+    "llm_classified": "Classified by LLM as {family}. {detail}",
+    "no_productivity_rule": "No productivity rule {install_code}",
+    "product_set_by_estimator": "Product set by estimator",
+    "status_set_by_estimator": "Status set by estimator"
+  },
+  "warning": {
+    "header_conflict": "Page header says '{header}', source document is '{source}.docx'"
+  }
+}

@@ -2,54 +2,55 @@
   <div class="mx-auto max-w-5xl px-6 py-10">
     <div class="mb-8 flex items-end justify-between gap-4">
       <div>
-        <h1 class="text-2xl font-semibold text-ink-gray-9">Ausschreibungen</h1>
-        <p class="mt-1 text-base text-ink-gray-6">
-          Leistungsverzeichnis hochladen, Positionen prüfen, Erstpreis erstellen.
-        </p>
+        <h1 class="text-2xl font-semibold text-ink-gray-9">{{ t('list.title') }}</h1>
+        <p class="mt-1 text-base text-ink-gray-6">{{ t('list.intro') }}</p>
       </div>
-      <Button variant="solid" icon-left="upload" @click="showNew = true">Neue Ausschreibung</Button>
+      <div class="flex items-center gap-3">
+        <LanguageSwitcher />
+        <Button variant="solid" icon-left="upload" @click="showNew = true">{{ t('list.new') }}</Button>
+      </div>
     </div>
 
     <div class="overflow-hidden rounded-lg border">
       <table class="w-full text-left text-base">
         <thead class="bg-surface-gray-2 text-sm text-ink-gray-6">
           <tr>
-            <th class="px-4 py-2 font-medium">Projekt</th>
-            <th class="px-4 py-2 font-medium">Status</th>
-            <th class="px-4 py-2 text-right font-medium">Direkte Kosten</th>
-            <th class="px-4 py-2 text-right font-medium">Kostenbasis</th>
-            <th class="px-4 py-2 text-right font-medium">Offene Positionen</th>
+            <th class="px-4 py-2 font-medium">{{ t('list.col.project') }}</th>
+            <th class="px-4 py-2 font-medium">{{ t('list.col.status') }}</th>
+            <th class="px-4 py-2 text-right font-medium">{{ t('list.col.directCost') }}</th>
+            <th class="px-4 py-2 text-right font-medium">{{ t('list.col.baseline') }}</th>
+            <th class="px-4 py-2 text-right font-medium">{{ t('list.col.open') }}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-if="tenders.loading && !tenders.data?.length">
-            <td colspan="5" class="px-4 py-6 text-center text-ink-gray-5">Lädt …</td>
+            <td colspan="5" class="px-4 py-6 text-center text-ink-gray-5">{{ t('common.loading') }}</td>
           </tr>
           <tr v-else-if="!tenders.data?.length">
-            <td colspan="5" class="px-4 py-6 text-center text-ink-gray-5">Noch keine Ausschreibung erfasst.</td>
+            <td colspan="5" class="px-4 py-6 text-center text-ink-gray-5">{{ t('list.empty') }}</td>
           </tr>
           <tr
-            v-for="t in tenders.data"
-            :key="t.name"
+            v-for="row in tenders.data"
+            :key="row.name"
             class="cursor-pointer border-t hover:bg-surface-gray-1"
-            @click="open(t.name)"
+            @click="open(row.name)"
           >
-            <td class="px-4 py-3 font-medium text-ink-gray-9">{{ t.project_name }}</td>
+            <td class="px-4 py-3 font-medium text-ink-gray-9">{{ row.project_name }}</td>
             <td class="px-4 py-3">
-              <Badge :theme="TENDER_STATUS[t.status]?.theme" :label="TENDER_STATUS[t.status]?.label || t.status" />
+              <Badge :theme="TENDER_STATUS[row.status]?.theme" :label="t(`tenderStatus.${row.status}`)" />
             </td>
-            <td class="px-4 py-3 text-right tabular-nums">{{ chf(t.direct_cost, 0) }}</td>
-            <td class="px-4 py-3 text-right tabular-nums">{{ chf(t.cost_baseline, 0) }}</td>
-            <td class="px-4 py-3 text-right tabular-nums">{{ t.unresolved_count }}</td>
+            <td class="px-4 py-3 text-right tabular-nums">{{ formatCHF(row.direct_cost, { digits: 0 }) }}</td>
+            <td class="px-4 py-3 text-right tabular-nums">{{ formatCHF(row.cost_baseline, { digits: 0 }) }}</td>
+            <td class="px-4 py-3 text-right tabular-nums">{{ formatNumber(row.unresolved_count, { maxDigits: 0 }) }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <Dialog v-model="showNew" :options="{ title: 'Neue Ausschreibung' }">
+    <Dialog v-model="showNew" :options="{ title: t('list.new') }">
       <template #body-content>
         <div class="space-y-4">
-          <FormControl v-model="projectName" label="Projektname" placeholder="z. B. Schulhaus Oberglatt – Lüftung" />
+          <FormControl v-model="projectName" :label="t('list.dialog.projectName')" :placeholder="t('list.dialog.placeholder')" />
           <FileUploader
             file-types=".pdf"
             :upload-args="{ private: true }"
@@ -59,7 +60,7 @@
             <template #default="{ openFileSelector, uploading, progress, error }">
               <div class="flex items-center gap-3">
                 <Button :loading="uploading" icon-left="file-text" @click="openFileSelector">
-                  {{ uploading ? `Hochladen ${progress} %` : 'Leistungsverzeichnis (PDF) wählen' }}
+                  {{ uploading ? t('list.dialog.uploading', { progress: formatPercent(progress / 100, { maxDigits: 0 }) }) : t('list.dialog.choose') }}
                 </Button>
                 <span v-if="uploaded" class="truncate text-sm text-ink-gray-7">{{ uploaded.file_name }}</span>
               </div>
@@ -77,7 +78,7 @@
           :disabled="!projectName || !uploaded"
           @click="create"
         >
-          Hochladen und verarbeiten
+          {{ t('list.dialog.submit') }}
         </Button>
       </template>
     </Dialog>
@@ -85,11 +86,16 @@
 </template>
 
 <script setup lang="ts">
-import { Badge, Dialog, ErrorMessage, FileUploader, FormControl, call, createListResource } from 'frappe-ui'
+import { Badge, Dialog, ErrorMessage, FileUploader, FormControl, createListResource } from 'frappe-ui'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { TENDER_STATUS, chf } from '@/utils/format'
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
+import { api, errorText } from '@/utils/api'
+import { TENDER_STATUS } from '@/utils/codes'
+import { formatCHF, formatNumber, formatPercent } from '@/utils/format'
 
+const { t } = useI18n()
 const router = useRouter()
 const showNew = ref(false)
 const projectName = ref('')
@@ -106,8 +112,8 @@ const tenders = createListResource({
 })
 
 function validatePdf(file: File) {
-  if (!file.name.toLowerCase().endsWith('.pdf')) return 'Bitte eine PDF-Datei wählen.'
-  if (file.size > 50 * 1024 * 1024) return 'Die Datei ist grösser als 50 MB.'
+  if (!file.name.toLowerCase().endsWith('.pdf')) return t('list.dialog.notPdf')
+  if (file.size > 50 * 1024 * 1024) return t('list.dialog.tooLarge', { size: formatNumber(50, { maxDigits: 0 }) })
 }
 
 function open(name: string) {
@@ -119,11 +125,11 @@ async function create() {
   createError.value = ''
   try {
     const doc = await tenders.insert.submit({ project_name: projectName.value, tender_file: uploaded.value.file_url })
-    await call('equans_bid.api.start_processing', { tender: doc.name })
+    await api('equans_bid.api.start_processing', { tender: doc.name })
     showNew.value = false
     open(doc.name)
   } catch (e: any) {
-    createError.value = e?.messages?.join(', ') || e?.message || 'Erstellen fehlgeschlagen'
+    createError.value = errorText(e, t('list.dialog.createFailed'))
   } finally {
     creating.value = false
   }

@@ -1,0 +1,82 @@
+{
+  "code": "HVAC",
+  "labels": {
+    "de-CH": "Lüftung (BKP 244)",
+    "fr-CH": "Ventilation (CFC 244)",
+    "en": "Ventilation (BKP 244)"
+  },
+  "catalog": "../../starter/catalog.csv",
+  "productivity": "../../starter/productivity.csv",
+  "system_header_pattern": "(?P<system>24\\d\\.\\d+\\s+(?:LA\\s?\\d+\\s+)?\\S.*?)\\s+Seite\\s+\\d+\\s*/\\s*\\d+",
+  "continuation_labels": [
+    "Fabrikat",
+    "Typ",
+    "Grösse",
+    "Mod.",
+    "Material",
+    "Farbe",
+    "Luftmenge",
+    "Offerte"
+  ],
+  "attribute_labels": [
+    "Fabrikat",
+    "Typ",
+    "Grösse",
+    "Grösse (B x H)",
+    "B x H x L",
+    "B x H",
+    "Material",
+    "Farbe",
+    "Luftmenge",
+    "Offerte",
+    "Druckverlust",
+    "Kulissendicke",
+    "Kulissenlänge",
+    "Anzahl Kulissen",
+    "Spaltbreite",
+    "Feuerwiderstandsklasse",
+    "Regelfabrikat"
+  ],
+  "attribute_rules": [
+    {
+      "key": "thickness_mm",
+      "pattern": "aus\\s+(\\d+)\\s*mm\\s+mineralwoll|(\\d+)\\s*mm\\s+(?:mineral wool|external)",
+      "flags": "i",
+      "type": "int"
+    },
+    {
+      "key": "weatherproof",
+      "pattern": "wetterfest|ummantelung",
+      "flags": "i",
+      "type": "flag"
+    }
+  ],
+  "catalog_attribute_rules": [
+    {
+      "key": "thickness_mm",
+      "pattern": "aus\\s+(\\d+)\\s*mm\\s+mineralwoll|(\\d+)\\s*mm\\s+(?:mineral wool|external)",
+      "flags": "i",
+      "type": "int"
+    },
+    {
+      "key": "weatherproof",
+      "field": "subcategory",
+      "pattern": "^weatherproof",
+      "flags": "i",
+      "type": "flag"
+    }
+  ],
+  "table_parsers": [
+    "equans_bid.trades.hvac.component_list"
+  ],
+  "factor_rules": [
+    {
+      "field": "system",
+      "pattern": "turnhalle",
+      "flags": "i",
+      "replace": {
+        "mounting_height_school": "mounting_height_sports_hall"
+      }
+    }
+  ]
+}

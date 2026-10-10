@@ -1,4 +1,8 @@
-"""Parse the CAD component lists ("Bauteilliste Lüftung") that carry the ductwork quantities.
+"""HVAC table-parser plug-in: the CAD component lists ("Bauteilliste Lüftung") with the ductwork.
+
+Registered in data/trades/hvac/trade.json ("table_parsers"); the pipeline calls
+`is_table_page(text)` and `parse_page(page_number, text, system)` and knows nothing of HVAC.
+
 
 These pages are machine-generated tables, not LV prose. Count / length and the code are glued:
 	33860R-R Wickelfalzrohr 100          -> 33,860 mm round duct DN100
@@ -19,11 +23,11 @@ ROW = re.compile(
 SECTION = re.compile(r"^Auflistung der (?P<section>Rohre|Kanäle|Formstücke rund|Kanalformstücke)")
 
 
-def is_component_page(text: str) -> bool:
+def is_table_page(text: str) -> bool:
 	return text.lstrip().startswith("Bauteilliste")
 
 
-def parse_component_page(page_number: int, text: str, system: str) -> list[dict]:
+def parse_page(page_number: int, text: str, system: str) -> list[dict]:
 	"""Return position dicts with kind, attributes, quantity and unit already set."""
 	groups: "OrderedDict[tuple, dict]" = OrderedDict()
 	section = None
@@ -77,7 +81,11 @@ def parse_component_page(page_number: int, text: str, system: str) -> list[dict]
 	out = []
 	for g in groups.values():
 		g["quantity"] = round(g["quantity"], 3)
-		g["description_original"] = "Bauteilliste Lüftung\n" + "\n".join(g.pop("lines"))
+		lines = g.pop("lines")
+		g["description_original"] = "Bauteilliste Lüftung\n" + "\n".join(lines)
+		g["evidence_lines"] = lines  # what the viewer highlights on the page
+		g["custom_attributes"] = {"Bauteilliste": g["label"], "Zeilen": str(len(lines))}
+		g["source_kind"] = "table"
 		out.append(g)
 	return out
 

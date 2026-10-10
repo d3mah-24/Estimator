@@ -3,20 +3,21 @@
     <!-- Header -->
     <header class="flex items-center justify-between gap-4 border-b px-5 py-3">
       <div class="min-w-0">
-        <router-link to="/" class="text-sm text-ink-gray-5 hover:text-ink-gray-8">← Ausschreibungen</router-link>
+        <router-link to="/" class="text-sm text-ink-gray-5 hover:text-ink-gray-8">← {{ t('list.title') }}</router-link>
         <div class="flex items-center gap-3">
           <h1 class="truncate text-xl font-semibold text-ink-gray-9">{{ tender.doc?.project_name || '…' }}</h1>
           <Badge
             v-if="tender.doc"
             :theme="TENDER_STATUS[tender.doc.status]?.theme"
-            :label="TENDER_STATUS[tender.doc.status]?.label"
+            :label="t(`tenderStatus.${tender.doc.status}`)"
           />
         </div>
-        <p v-if="tender.doc?.processing_log" class="truncate text-sm text-ink-gray-5">{{ tender.doc.processing_log }}</p>
+        <p v-if="processingText" class="truncate text-sm text-ink-gray-5">{{ processingText }}</p>
       </div>
-      <div class="flex shrink-0 gap-2">
-        <Button icon-left="download" :disabled="!summary.data" @click="exportCsv">Export (CSV)</Button>
-        <Button icon-left="refresh-cw" :loading="reprocessing" @click="reprocess">Erneut verarbeiten</Button>
+      <div class="flex shrink-0 items-center gap-2">
+        <LanguageSwitcher />
+        <Button icon-left="download" :disabled="!summary.data" @click="exportCsv">{{ t('review.export') }}</Button>
+        <Button icon-left="refresh-cw" :loading="reprocessing" @click="reprocess">{{ t('review.reprocess') }}</Button>
       </div>
     </header>
 
@@ -34,7 +35,7 @@
     <!-- Subtotals by system -->
     <section v-if="summary.data" class="border-b px-5 py-2">
       <button class="text-sm font-medium text-ink-gray-7 hover:text-ink-gray-9" @click="showSystems = !showSystems">
-        {{ showSystems ? '▾' : '▸' }} Nach Anlage ({{ systemRows.length }})
+        {{ showSystems ? '▾' : '▸' }} {{ t('review.bySystem', { count: systemRows.length }) }}
       </button>
       <div v-if="showSystems" class="mt-2 grid grid-cols-1 gap-x-6 gap-y-1 text-sm md:grid-cols-2 xl:grid-cols-3">
         <button
@@ -46,7 +47,9 @@
           @click="systemFilter = systemFilter === r.key ? '' : r.key"
         >
           <span class="truncate text-ink-gray-8">{{ r.system }}</span>
-          <span class="shrink-0 tabular-nums text-ink-gray-6">{{ r.positions }} Pos. · {{ chf(r.direct_cost, 0) }}</span>
+          <span class="shrink-0 tabular-nums text-ink-gray-6">
+            {{ t('review.positionsShort', { count: r.positions }) }} · {{ formatCHF(r.direct_cost, { digits: 0 }) }}
+          </span>
         </button>
       </div>
     </section>
@@ -58,39 +61,41 @@
           <input
             v-model="search"
             type="search"
-            placeholder="Suchen (Beschreibung, Produkt, LV-ID)"
+            :placeholder="t('review.search')"
             class="form-input h-7 w-64 rounded border-outline-gray-2 text-sm"
           />
           <select v-model="statusFilter" class="form-select h-7 rounded border-outline-gray-2 py-0 text-sm">
-            <option value="">Alle Status ({{ items.data?.length || 0 }})</option>
-            <option v-for="(meta, key) in STATUS" :key="key" :value="key">
-              {{ meta.label }} ({{ summary.data?.by_status?.[key]?.positions || 0 }})
+            <option value="">{{ t('review.allStatuses', { count: items.data?.length || 0 }) }}</option>
+            <option v-for="code in STATUS_CODES" :key="code" :value="code">
+              {{ t(`status.${code}`) }} ({{ summary.data?.by_status?.[code]?.positions || 0 }})
             </option>
           </select>
           <select v-model="systemFilter" class="form-select h-7 max-w-xs rounded border-outline-gray-2 py-0 text-sm">
-            <option value="">Alle Anlagen</option>
+            <option value="">{{ t('review.allSystems') }}</option>
             <option v-for="s in systems" :key="s" :value="s">{{ s }}</option>
           </select>
-          <span class="ml-auto text-sm text-ink-gray-5">{{ filtered.length }} Positionen · {{ chf(filteredTotal, 0) }}</span>
+          <span class="ml-auto text-sm text-ink-gray-5">
+            {{ t('review.positions', { count: filtered.length }, filtered.length) }} · {{ formatCHF(filteredTotal, { digits: 0 }) }}
+          </span>
         </div>
 
         <div class="min-h-0 flex-1 overflow-auto">
           <table class="w-full text-left text-sm">
             <thead class="sticky top-0 z-10 bg-surface-gray-2 text-ink-gray-6">
               <tr>
-                <th class="px-3 py-2 font-medium">LV-ID</th>
-                <th class="px-3 py-2 font-medium">Beschreibung</th>
-                <th class="px-3 py-2 text-right font-medium">Menge</th>
-                <th class="px-3 py-2 font-medium">Einh.</th>
-                <th class="px-3 py-2 font-medium">Produkt</th>
-                <th class="px-3 py-2 text-right font-medium">Direkte Kosten</th>
-                <th class="px-3 py-2 font-medium">Status</th>
-                <th class="px-3 py-2 font-medium">Quelle</th>
+                <th class="px-3 py-2 font-medium">{{ t('review.col.lvId') }}</th>
+                <th class="px-3 py-2 font-medium">{{ t('review.col.description') }}</th>
+                <th class="px-3 py-2 text-right font-medium">{{ t('review.col.quantity') }}</th>
+                <th class="px-3 py-2 font-medium">{{ t('review.col.unit') }}</th>
+                <th class="px-3 py-2 font-medium">{{ t('review.col.product') }}</th>
+                <th class="px-3 py-2 text-right font-medium">{{ t('review.col.directCost') }}</th>
+                <th class="px-3 py-2 font-medium">{{ t('review.col.status') }}</th>
+                <th class="px-3 py-2 font-medium">{{ t('review.col.source') }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-if="items.loading && !items.data?.length">
-                <td colspan="8" class="px-3 py-6 text-center text-ink-gray-5">Positionen werden geladen …</td>
+                <td colspan="8" class="px-3 py-6 text-center text-ink-gray-5">{{ t('review.loadingPositions') }}</td>
               </tr>
               <tr
                 v-for="row in filtered"
@@ -101,7 +106,7 @@
               >
                 <td class="whitespace-nowrap px-3 py-2 font-mono text-xs">
                   <div>{{ row.position_id }}</div>
-                  <div v-if="row.golden_lv_id" class="text-ink-green-3" title="Verifizierte Referenzposition">
+                  <div v-if="row.golden_lv_id" class="text-ink-green-3" :title="t('review.verifiedReference')">
                     {{ row.golden_lv_id }} ✓
                   </div>
                 </td>
@@ -109,9 +114,9 @@
                   <div class="line-clamp-2 text-ink-gray-9">{{ row.description }}</div>
                   <div class="truncate text-xs text-ink-gray-5">{{ row.system }}</div>
                 </td>
-                <td class="whitespace-nowrap px-3 py-2 text-right tabular-nums">{{ num(row.quantity, 3) }}</td>
-                <td class="px-3 py-2">{{ UNIT[row.unit] || row.unit }}</td>
-                <td class="whitespace-nowrap px-3 py-2 font-mono text-xs">{{ row.matched_product || '—' }}</td>
+                <td class="whitespace-nowrap px-3 py-2 text-right tabular-nums">{{ formatQuantity(row.quantity) }}</td>
+                <td class="px-3 py-2">{{ unitLabel(row.unit) }}</td>
+                <td class="whitespace-nowrap px-3 py-2 font-mono text-xs">{{ row.matched_product || MISSING }}</td>
                 <td class="whitespace-nowrap px-3 py-2 text-right tabular-nums" @click.stop>
                   <template v-if="row.status === 'supplier_quote_required'">
                     <input
@@ -119,23 +124,23 @@
                       min="0"
                       step="0.01"
                       :value="row.quote_override || ''"
-                      :placeholder="`Katalog ${num(row.material_cost, 0)}`"
-                      title="Offertpreis Lieferant (Material total, CHF)"
+                      :placeholder="t('review.quotePlaceholder', { amount: formatNumber(row.material_cost, { maxDigits: 0 }) })"
+                      :title="t('review.quoteTitle')"
                       class="form-input h-7 w-32 rounded border-outline-amber-2 text-right text-sm"
                       @change="(e) => saveQuote(row, (e.target as HTMLInputElement).value)"
                       @focus="select(row)"
                     />
                     <div class="mt-0.5 text-xs" :class="row.quote_override ? 'text-ink-green-3' : 'text-ink-amber-3'">
-                      {{ chf(row.direct_cost) }} {{ row.quote_override ? '· Offerte' : '· provisorisch' }}
+                      {{ formatCHF(row.direct_cost) }} · {{ row.quote_override ? t('review.quoted') : t('review.provisional') }}
                     </div>
                   </template>
-                  <template v-else-if="STATUS[row.status]?.priced">{{ chf(row.direct_cost) }}</template>
-                  <span v-else class="text-ink-gray-4" title="Kein Preis bis zur Prüfung">—</span>
+                  <template v-else-if="STATUS[row.status]?.priced">{{ formatCHF(row.direct_cost) }}</template>
+                  <span v-else class="text-ink-gray-4" :title="t('review.noPriceYet')">{{ MISSING }}</span>
                 </td>
                 <td class="px-3 py-2">
-                  <Badge :theme="STATUS[row.status]?.theme" :label="STATUS[row.status]?.label || row.status" />
+                  <Badge :theme="STATUS[row.status]?.theme" :label="statusLabel(row.status)" />
                 </td>
-                <td class="whitespace-nowrap px-3 py-2 text-ink-blue-3">S. {{ row.source_page }}</td>
+                <td class="whitespace-nowrap px-3 py-2 text-ink-blue-3">{{ t('review.page', { page: row.source_page }) }}</td>
               </tr>
             </tbody>
           </table>
@@ -145,7 +150,7 @@
       <!-- Traceability -->
       <aside class="flex min-w-[360px] flex-[3] flex-col">
         <div class="border-b px-4 py-2">
-          <h2 class="text-base font-semibold text-ink-gray-9">Dokumenten-Rückverfolgbarkeit</h2>
+          <h2 class="text-base font-semibold text-ink-gray-9">{{ t('review.traceability') }}</h2>
         </div>
 
         <div v-if="selected" class="max-h-[45%] overflow-auto border-b px-4 py-3 text-sm">
@@ -156,67 +161,81 @@
               </div>
               <div class="font-medium text-ink-gray-9">{{ selected.description }}</div>
             </div>
-            <Badge :theme="STATUS[selected.status]?.theme" :label="STATUS[selected.status]?.label" />
+            <Badge :theme="STATUS[selected.status]?.theme" :label="statusLabel(selected.status)" />
           </div>
-          <p class="mb-3 rounded bg-surface-gray-2 px-2 py-1.5 text-ink-gray-7">{{ selected.status_reason }}</p>
-          <p v-if="attrs.system_conflict" class="mb-3 rounded bg-surface-amber-1 px-2 py-1.5 text-ink-amber-3">
-            Widerspruch im Dokument: {{ attrs.system_conflict }}
+          <p class="mb-3 rounded bg-surface-gray-2 px-2 py-1.5 text-ink-gray-7">
+            {{ reasonText(t, selected.reason_code, selected.reason_args, selected.status_reason) }}
           </p>
-          <p v-if="selected.error" class="mb-3 rounded bg-surface-red-1 px-2 py-1.5 text-ink-red-4">{{ selected.error }}</p>
+          <p v-if="attrs.system_conflict" class="mb-3 rounded bg-surface-amber-1 px-2 py-1.5 text-ink-amber-3">
+            {{ t('review.documentConflict') }}: {{ conflictText }}
+          </p>
+          <p v-if="selected.error" class="mb-3 rounded bg-surface-red-1 px-2 py-1.5 text-ink-red-4">
+            {{ t('review.technicalError') }}: {{ selected.error }}
+          </p>
 
           <dl class="grid grid-cols-2 gap-x-3 gap-y-1">
-            <dt class="text-ink-gray-5">Menge</dt>
-            <dd class="tabular-nums">{{ num(selected.quantity, 3) }} {{ UNIT[selected.unit] || selected.unit }}</dd>
-            <dt class="text-ink-gray-5">Erkennung / Zuordnung</dt>
-            <dd class="tabular-nums">{{ pct(selected.extraction_confidence) }} / {{ pct(selected.match_confidence) }}</dd>
+            <dt class="text-ink-gray-5">{{ t('review.col.quantity') }}</dt>
+            <dd class="tabular-nums">{{ formatQuantity(selected.quantity) }} {{ unitLabel(selected.unit) }}</dd>
+            <dt class="text-ink-gray-5">{{ t('review.confidence') }}</dt>
+            <dd class="tabular-nums">
+              {{ formatPercent(selected.extraction_confidence, { maxDigits: 0 }) }} /
+              {{ formatPercent(selected.match_confidence, { maxDigits: 0 }) }}
+            </dd>
             <template v-if="STATUS[selected.status]?.priced">
-              <dt class="text-ink-gray-5">Material</dt>
+              <dt class="text-ink-gray-5">{{ t('review.material') }}</dt>
               <dd class="tabular-nums">
-                {{ chf(selected.material_cost) }}
+                {{ formatCHF(selected.material_cost) }}
                 <span class="text-xs text-ink-gray-5" v-if="!selected.quote_override">
-                  ({{ num(selected.quantity, 3) }} × {{ chf(selected.net_unit_cost) }} + {{ wastePct }} % Verschnitt)
+                  ({{ t('review.materialFormula', {
+                    quantity: formatQuantity(selected.quantity),
+                    price: formatCHF(selected.net_unit_cost),
+                    waste: formatPercent(wasteFraction),
+                  }) }})
                 </span>
-                <span class="text-xs text-ink-green-3" v-else>(Offerte)</span>
+                <span class="text-xs text-ink-green-3" v-else>({{ t('review.quoted') }})</span>
               </dd>
-              <dt class="text-ink-gray-5">Arbeit</dt>
+              <dt class="text-ink-gray-5">{{ t('review.labour') }}</dt>
               <dd class="tabular-nums">
-                {{ chf(selected.labour_cost) }}
-                <span class="text-xs text-ink-gray-5">({{ num(selected.labour_hours, 2) }} h × {{ chf(selected.labour_rate, 0) }})</span>
+                {{ formatCHF(selected.labour_cost) }}
+                <span class="text-xs text-ink-gray-5">
+                  ({{ t('review.labourFormula', {
+                    hours: formatNumber(selected.labour_hours, { maxDigits: 2 }),
+                    rate: formatCHF(selected.labour_rate, { digits: 0 }),
+                  }) }})
+                </span>
               </dd>
-              <dt class="font-medium text-ink-gray-7">Direkte Kosten</dt>
-              <dd class="font-semibold tabular-nums">{{ chf(selected.direct_cost) }}</dd>
+              <dt class="font-medium text-ink-gray-7">{{ t('review.col.directCost') }}</dt>
+              <dd class="font-semibold tabular-nums">{{ formatCHF(selected.direct_cost) }}</dd>
             </template>
           </dl>
 
           <div class="mt-3 grid grid-cols-2 gap-2">
             <label class="text-xs text-ink-gray-5">
-              Produkt
+              {{ t('review.col.product') }}
               <select
                 class="form-select mt-0.5 h-7 w-full rounded border-outline-gray-2 py-0 text-sm"
                 :value="selected.matched_product || ''"
                 @change="(e) => saveProduct(selected, (e.target as HTMLSelectElement).value)"
               >
-                <option value="" disabled>— wählen —</option>
+                <option value="" disabled>{{ t('common.choose') }}</option>
                 <option v-for="p in catalog.data" :key="p.name" :value="p.name">{{ p.name }} · {{ p.description }}</option>
               </select>
             </label>
             <label class="text-xs text-ink-gray-5">
-              Status
+              {{ t('review.col.status') }}
               <select
                 class="form-select mt-0.5 h-7 w-full rounded border-outline-gray-2 py-0 text-sm"
                 :value="selected.status"
                 @change="(e) => saveStatus(selected, (e.target as HTMLSelectElement).value)"
               >
-                <option v-for="(meta, key) in STATUS" :key="key" :value="key">{{ meta.label }}</option>
+                <option v-for="code in STATUS_CODES" :key="code" :value="code">{{ statusLabel(code) }}</option>
               </select>
             </label>
           </div>
           <p v-if="lastSave" class="mt-2 text-xs text-ink-gray-5">{{ lastSave }}</p>
           <ErrorMessage class="mt-2" :message="saveError" />
         </div>
-        <div v-else class="border-b px-4 py-3 text-sm text-ink-gray-5">
-          Position wählen, um Herkunft und Berechnung zu sehen.
-        </div>
+        <div v-else class="border-b px-4 py-3 text-sm text-ink-gray-5">{{ t('review.selectHint') }}</div>
 
         <div class="min-h-0 flex-1">
           <PdfViewer
@@ -233,11 +252,22 @@
 </template>
 
 <script setup lang="ts">
-import { Badge, ErrorMessage, call, createDocumentResource, createListResource, createResource } from 'frappe-ui'
+import { Badge, ErrorMessage, createDocumentResource, createListResource, createResource } from 'frappe-ui'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import BidPanel from '@/components/BidPanel.vue'
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import PdfViewer from '@/components/PdfViewer.vue'
-import { STATUS, TENDER_STATUS, UNIT, chf, num, pct } from '@/utils/format'
+import { currentLocale } from '@/i18n'
+import { api, errorText } from '@/utils/api'
+import { STATUS, STATUS_CODES, TENDER_STATUS, UNIT_CODES } from '@/utils/codes'
+import { MISSING, formatCHF, formatNumber, formatPercent, formatQuantity } from '@/utils/format'
+import { reasonText, warningText } from '@/utils/reasons'
+
+const { t } = useI18n()
+// Codes stay codes; unknown ones are shown as they are rather than hidden.
+const statusLabel = (code: string) => (STATUS_CODES.includes(code) ? t(`status.${code}`) : code)
+const unitLabel = (code: string) => (UNIT_CODES.includes(code) ? t(`unit.${code}`) : code || '')
 
 const props = defineProps<{ name: string }>()
 
@@ -253,7 +283,7 @@ const ITEM_FIELDS = [
   'name', 'idx', 'position_id', 'golden_lv_id', 'system', 'source_page', 'description', 'description_original',
   'quantity_raw', 'unit_raw', 'quantity', 'unit', 'matched_product', 'match_confidence', 'extraction_confidence',
   'net_unit_cost', 'quote_override', 'material_cost', 'labour_hours', 'labour_rate', 'labour_cost', 'direct_cost',
-  'status', 'status_reason', 'error', 'attributes',
+  'status', 'status_reason', 'reason_code', 'reason_args', 'error', 'attributes',
 ]
 
 const items = createListResource({
@@ -294,21 +324,22 @@ const filteredTotal = computed(() => filtered.value.reduce((s: number, i: any) =
 const kpis = computed(() => {
   const s = summary.data
   if (!s) return []
-  const t = s.totals
+  const totals = s.totals
+  const c = { digits: 0 }
   return [
-    { label: 'Direkte Kosten', value: chf(t.direct_cost, 0), hint: 'Material + Arbeit, bepreiste Positionen' },
-    { label: 'Davon bestätigt', value: chf(t.confirmed_cost, 0), tone: 'text-ink-green-3', hint: 'Katalog oder Offerte' },
-    { label: 'Davon provisorisch', value: chf(t.provisional_cost, 0), tone: 'text-ink-amber-3', hint: 'Offerte ausstehend / Annahme' },
-    { label: 'Offene Positionen', value: String(t.unresolved_count), tone: 'text-ink-red-4', hint: 'Ohne Preis, Prüfung nötig' },
-    { label: 'Kostenbasis', value: chf(s.build_up.cost_baseline, 0), hint: 'inkl. Projektkosten, Zuschläge, Overhead' },
-  ]
+    { key: 'direct', value: formatCHF(totals.direct_cost, c) },
+    { key: 'confirmed', value: formatCHF(totals.confirmed_cost, c), tone: 'text-ink-green-3' },
+    { key: 'provisional', value: formatCHF(totals.provisional_cost, c), tone: 'text-ink-amber-3' },
+    { key: 'open', value: formatNumber(totals.unresolved_count, { maxDigits: 0 }), tone: 'text-ink-red-4' },
+    { key: 'baseline', value: formatCHF(s.build_up.cost_baseline, c) },
+  ].map((k) => ({ ...k, label: t(`kpi.${k.key}.label`), hint: t(`kpi.${k.key}.hint`) }))
 })
 
 // Subtotals by system, largest first (from the backend summary).
 const showSystems = ref(false)
 const systemRows = computed(() =>
   Object.entries(summary.data?.by_system || {})
-    .map(([key, v]: [string, any]) => ({ key: key === '-' ? '' : key, system: key === '-' ? 'Ohne Anlage' : key, ...v }))
+    .map(([key, v]: [string, any]) => ({ key: key === '-' ? '' : key, system: key === '-' ? t('review.noSystem') : key, ...v }))
     .sort((a, b) => b.direct_cost - a.direct_cost),
 )
 
@@ -335,10 +366,30 @@ const attrs = computed(() => {
 })
 
 // Material waste as applied by the backend (material / (qty x net) - 1), shown in the breakdown.
-const wastePct = computed(() => {
+const wasteFraction = computed(() => {
   const s = selected.value
   const base = (s?.quantity || 0) * (s?.net_unit_cost || 0)
-  return base ? Math.round((s.material_cost / base - 1) * 1000) / 10 : 0
+  return base ? Math.round((s.material_cost / base - 1) * 1000) / 1000 : 0
+})
+
+const conflictText = computed(() => {
+  const c = attrs.value.system_conflict
+  return c && typeof c === 'object' ? warningText(t, 'header_conflict', c) : c || ''
+})
+
+// Processing summary from structured info (translated); the raw log only as a fallback.
+const processingText = computed(() => {
+  const doc = tender.doc
+  if (!doc) return ''
+  let info: any = doc.processing_info
+  try {
+    info = typeof info === 'string' ? JSON.parse(info) : info
+  } catch {
+    info = null
+  }
+  if (!info || doc.status === 'Failed') return doc.processing_log || ''
+  const llm = info.llm ? t('review.llmUsed', info.llm) : t('review.llmNone')
+  return `${t('review.processed', { count: info.positions, file: info.file }, info.positions)} ${llm}`
 })
 
 // Lines to highlight: the quantity line for LV positions, the table rows for component lists.
@@ -359,12 +410,12 @@ async function update(row: any, args: Record<string, any>) {
   saveError.value = ''
   const started = performance.now()
   try {
-    const res = await call('equans_bid.api.update_item', { tender: props.name, item: row.name, ...args })
+    const res = await api('equans_bid.api.update_item', { tender: props.name, item: row.name, ...args })
     for (const f of ITEM_FIELDS) if (f in res.item) row[f] = res.item[f]
     summary.setData(res.summary)
-    lastSave.value = `Gespeichert und neu berechnet in ${Math.round(performance.now() - started)} ms`
+    lastSave.value = t('review.saved', { ms: formatNumber(Math.round(performance.now() - started), { maxDigits: 0 }) })
   } catch (e: any) {
-    saveError.value = e?.messages?.join(', ') || e?.message || 'Speichern fehlgeschlagen'
+    saveError.value = errorText(e, t('common.saveFailed'))
   }
 }
 const saveQuote = (row: any, value: string) => update(row, { quote_override: value === '' ? 0 : Number(value) })
@@ -372,7 +423,8 @@ const saveProduct = (row: any, product: string) => product && update(row, { matc
 const saveStatus = (row: any, status: string) => update(row, { status })
 
 function exportCsv() {
-  window.location.href = `/api/method/equans_bid.api.export_tender?tender=${encodeURIComponent(props.name)}`
+  const q = new URLSearchParams({ tender: props.name, lang: currentLocale() })
+  window.location.href = `/api/method/equans_bid.api.export_tender?${q}`
 }
 
 // Background processing: poll until the job finishes, then load the positions.
@@ -396,7 +448,7 @@ watch(() => tender.doc?.status, (s) => s === 'Processing' && poll(), { immediate
 
 async function reprocess() {
   reprocessing.value = true
-  await call('equans_bid.api.start_processing', { tender: props.name })
+  await api('equans_bid.api.start_processing', { tender: props.name })
   await tender.reload()
   poll()
 }
