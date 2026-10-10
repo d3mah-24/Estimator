@@ -10,7 +10,13 @@ from decimal import Decimal
 from pathlib import Path
 
 from equans_bid.pricing.engine import factor_keys_for_system, labour_factor, money, price_position
-from equans_bid.pricing.project import bid_range, project_baseline, subset_baseline
+from equans_bid.pricing.project import (
+	bid_range,
+	effective_assumptions,
+	indicative_price,
+	project_baseline,
+	subset_baseline,
+)
 
 STARTER = Path(__file__).resolve().parent.parent / "data" / "starter"
 
@@ -130,6 +136,30 @@ class TestProjectPricing(unittest.TestCase):
 				self.assertAlmostEqual(
 					g["expected_contribution_chf"], w["expected_contribution_chf"], delta=0.01
 				)
+
+	def test_recommendation_is_best_expected_contribution(self):
+		baseline = subset_baseline(sum(c.direct_cost for c in self.costs), PARAMS)
+		got = bid_range(baseline, PARAMS)
+		self.assertEqual([s["scenario"] for s in got if s["recommended"]], ["Conservative"])
+		self.assertEqual(got[0]["contribution_if_won_chf"], round(426000 - 414489.12, 2))
+
+	def test_indicative_price_uses_target_margin(self):
+		baseline = subset_baseline(sum(c.direct_cost for c in self.costs), PARAMS)
+		self.assertEqual(indicative_price(baseline, PARAMS), {"bid_price_chf": 439000, "margin_pct": 5.5})
+
+	def test_assumption_overrides_are_clamped_and_change_probability(self):
+		a = effective_assumptions(
+			PARAMS, {"competition_adjustment": -9, "scenario_margins_pct": {"Target": 99, "Nope": 1}}
+		)
+		self.assertEqual(a["competition_adjustment"], -0.5)
+		self.assertEqual(a["scenario_margins_pct"]["Target"], 30.0)
+		self.assertNotIn("Nope", a["scenario_margins_pct"])
+		baseline = subset_baseline(sum(c.direct_cost for c in self.costs), PARAMS)
+		tougher = bid_range(baseline, PARAMS, {"competition_adjustment": -0.15})
+		default = bid_range(baseline, PARAMS)
+		for t, d in zip(tougher, default, strict=True):
+			self.assertEqual(t["bid_price_chf"], d["bid_price_chf"])
+			self.assertLess(t["estimated_win_probability"], d["estimated_win_probability"])
 
 	def test_project_baseline_adds_project_costs(self):
 		result = project_baseline(0, 0, 0, PARAMS)

@@ -15,6 +15,7 @@
         <p v-if="tender.doc?.processing_log" class="truncate text-sm text-ink-gray-5">{{ tender.doc.processing_log }}</p>
       </div>
       <div class="flex shrink-0 gap-2">
+        <Button icon-left="download" :disabled="!summary.data" @click="exportCsv">Export (CSV)</Button>
         <Button icon-left="refresh-cw" :loading="reprocessing" @click="reprocess">Erneut verarbeiten</Button>
       </div>
     </header>
@@ -27,6 +28,8 @@
         <div v-if="k.hint" class="text-xs text-ink-gray-5">{{ k.hint }}</div>
       </div>
     </section>
+
+    <BidPanel v-if="summary.data" :summary="summary.data" :tender="name" @update="(s) => summary.setData(s)" />
 
     <!-- Subtotals by system -->
     <section v-if="summary.data" class="border-b px-5 py-2">
@@ -232,6 +235,7 @@
 <script setup lang="ts">
 import { Badge, ErrorMessage, call, createDocumentResource, createListResource, createResource } from 'frappe-ui'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import BidPanel from '@/components/BidPanel.vue'
 import PdfViewer from '@/components/PdfViewer.vue'
 import { STATUS, TENDER_STATUS, UNIT, chf, num, pct } from '@/utils/format'
 
@@ -366,6 +370,10 @@ async function update(row: any, args: Record<string, any>) {
 const saveQuote = (row: any, value: string) => update(row, { quote_override: value === '' ? 0 : Number(value) })
 const saveProduct = (row: any, product: string) => product && update(row, { matched_product: product })
 const saveStatus = (row: any, status: string) => update(row, { status })
+
+function exportCsv() {
+  window.location.href = `/api/method/equans_bid.api.export_tender?tender=${encodeURIComponent(props.name)}`
+}
 
 // Background processing: poll until the job finishes, then load the positions.
 const reprocessing = ref(false)

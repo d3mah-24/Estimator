@@ -62,7 +62,7 @@ class TestMatcher(unittest.TestCase):
 	def test_family_without_catalogue_item_is_named(self):
 		m = matcher.match("thermometer", {}, "Zeigerthermometer", CATALOG, "pc")
 		self.assertIsNone(m.product_id)
-		self.assertIn("dial thermometer", m.reason)
+		self.assertIn("Zeigerthermometer", m.reason)
 
 
 class TestPageSystem(unittest.TestCase):

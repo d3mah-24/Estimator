@@ -40,20 +40,20 @@ TENDER_KIND_RULES: list[tuple[str, re.Pattern]] = [
 # Families the tender asks for that the catalogue has no item for: named, so the
 # estimator sees what is missing instead of "not recognised".
 NO_CATALOG_LABELS = {
-	"grille": "air grille",
-	"air_outlet": "air outlet / transfer element",
-	"fire_insulation": "fire protection insulation",
-	"humidity_sensor": "humidity sensor",
-	"frost_thermostat": "frost protection thermostat",
-	"thermometer": "dial thermometer",
-	"cleaning_cover": "cleaning / access cover",
-	"rain_hat": "rain hat / louvre cap",
-	"earth_duct": "earth-laid insulated duct",
-	"labels": "labels and marking",
-	"leak_test": "duct leakage test (service)",
-	"service": "installation / commissioning service",
-	"fitting_round": "round duct fitting",
-	"fitting_rect": "rectangular duct fitting",
+	"grille": "Luftgitter",
+	"air_outlet": "Luftauslass / Überströmer",
+	"fire_insulation": "Brandschutzdämmung",
+	"humidity_sensor": "Feuchtefühler",
+	"frost_thermostat": "Frostschutzwächter",
+	"thermometer": "Zeigerthermometer",
+	"cleaning_cover": "Kontroll- / Putzdeckel",
+	"rain_hat": "Regenhut / Lamellenhut",
+	"earth_duct": "erdverlegte Lüftungsleitung",
+	"labels": "Bezeichnungsschilder",
+	"leak_test": "Kanaldichtheitsprüfung (Dienstleistung)",
+	"service": "Montage- / Inbetriebsetzungsleistung",
+	"fitting_round": "Formstück rund",
+	"fitting_rect": "Kanalformstück",
 }
 
 CATALOG_FIELD_DEVICE_KINDS = [

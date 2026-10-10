@@ -80,7 +80,7 @@ def page_system(text: str) -> tuple[str, str]:
 	if header and footer:
 		hc, fc = SECTION_CODE.match(header), SECTION_CODE.match(footer)
 		if hc and fc and hc.group(1) != fc.group(1):
-			return footer, f"Page header says '{header}', source document is '{footer}.docx'"
+			return footer, f"Seitenkopf nennt '{header}', Quelldokument ist '{footer}.docx'"
 	return header or footer, ""
 
 

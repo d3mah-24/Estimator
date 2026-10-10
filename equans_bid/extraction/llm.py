@@ -145,7 +145,7 @@ class GPT4oClassifier:
 			self.errors += 1
 			return {
 				"kind": None,
-				"error": f"LLM classification failed: {type(e).__name__}: {e}"[:300],
+				"error": f"LLM-Klassifizierung fehlgeschlagen: {type(e).__name__}: {e}"[:300],
 			}
 		path.write_text(json.dumps(data, ensure_ascii=False))
 		return self._validate(data)
@@ -181,7 +181,9 @@ class GPT4oClassifier:
 		}
 
 	def stats(self) -> str:
-		return f"{self.model}: {self.calls} API calls, {self.cache_hits} cached, {self.errors} errors"
+		return (
+			f"LLM {self.model}: {self.calls} API-Aufrufe, {self.cache_hits} aus Cache, {self.errors} Fehler"
+		)
 
 
 def get_enricher(cache_dir) -> GPT4oClassifier | None:

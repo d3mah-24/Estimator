@@ -68,36 +68,74 @@ def selling_price(baseline, margin_pct, round_to=1000) -> int:
 	return math.ceil(unrounded / D(round_to)) * int(round_to)
 
 
-def win_probability(price, baseline, params: dict) -> Decimal:
+# Bid assumptions an estimator may change per tender (defaults come from project_parameters.json).
+ASSUMPTION_LIMITS = {
+	"reference_win_probability": (0.0, 1.0),
+	"price_sensitivity_probability_points_per_1pct_price": (0.0, 0.5),
+	"strategic_appetite_adjustment": (-0.5, 0.5),
+	"competition_adjustment": (-0.5, 0.5),
+}
+MARGIN_LIMITS = (0.0, 30.0)
+
+
+def effective_assumptions(params: dict, overrides: dict | None = None) -> dict:
+	"""Parameter-file bid settings with the tender's overrides applied (validated, clamped)."""
 	cfg = params["stretch_bid_optimization"]
+	out = {k: float(cfg[k]) for k in ASSUMPTION_LIMITS}
+	out["scenario_margins_pct"] = {k: float(v) for k, v in cfg["scenario_margins_pct"].items()}
+	for key, (lo, hi) in ASSUMPTION_LIMITS.items():
+		if overrides and overrides.get(key) is not None:
+			out[key] = min(hi, max(lo, float(overrides[key])))
+	for name, value in ((overrides or {}).get("scenario_margins_pct") or {}).items():
+		if name in out["scenario_margins_pct"] and value is not None:
+			out["scenario_margins_pct"][name] = min(MARGIN_LIMITS[1], max(MARGIN_LIMITS[0], float(value)))
+	return out
+
+
+def win_probability(price, baseline, params: dict, assumptions: dict | None = None) -> Decimal:
+	cfg = params["stretch_bid_optimization"]
+	a = assumptions or effective_assumptions(params)
 	reference_price = D(baseline) / (1 - _pct(params["commercial"]["target_margin_pct"]))
 	deviation_pct = (D(price) / reference_price - 1) * 100
 	p = (
-		D(cfg["reference_win_probability"])
-		- D(cfg["price_sensitivity_probability_points_per_1pct_price"]) * deviation_pct
-		+ D(cfg["strategic_appetite_adjustment"])
-		+ D(cfg["competition_adjustment"])
+		D(a["reference_win_probability"])
+		- D(a["price_sensitivity_probability_points_per_1pct_price"]) * deviation_pct
+		+ D(a["strategic_appetite_adjustment"])
+		+ D(a["competition_adjustment"])
 	)
 	return max(D(cfg["minimum_probability"]), min(D(cfg["maximum_probability"]), p))
 
 
-def bid_range(baseline, params: dict, margins: dict | None = None) -> list[dict]:
-	"""Aggressive / Target / Conservative scenarios. `margins` overrides the parameter file."""
+def indicative_price(baseline, params: dict) -> dict:
+	"""The standard offer: baseline at the target margin, rounded up."""
+	margin = params["commercial"]["target_margin_pct"]
+	return {
+		"bid_price_chf": selling_price(baseline, margin, params["commercial"].get("round_to_chf", 1000)),
+		"margin_pct": float(margin),
+	}
+
+
+def bid_range(baseline, params: dict, overrides: dict | None = None) -> list[dict]:
+	"""Aggressive / Target / Conservative scenarios; the best expected contribution is recommended."""
 	cfg = params["stretch_bid_optimization"]
-	margins = margins or cfg["scenario_margins_pct"]
+	a = effective_assumptions(params, overrides)
 	round_to = params["commercial"].get("round_to_chf", 1000)
 	scenarios = []
 	for name in cfg["scenario_names"]:
-		margin = margins[name]
+		margin = a["scenario_margins_pct"][name]
 		price = selling_price(baseline, margin, round_to)
-		p = win_probability(price, baseline, params)
+		p = win_probability(price, baseline, params, a)
 		scenarios.append(
 			{
 				"scenario": name,
 				"bid_price_chf": price,
 				"margin_pct": float(margin),
 				"estimated_win_probability": float(round(p, 2)),
+				"contribution_if_won_chf": float(money(D(price) - D(baseline))),
 				"expected_contribution_chf": float(money((D(price) - D(baseline)) * p)),
+				"recommended": False,
 			}
 		)
+	if scenarios:
+		max(scenarios, key=lambda s: s["expected_contribution_chf"])["recommended"] = True
 	return scenarios

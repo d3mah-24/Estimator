@@ -11,7 +11,7 @@ from equans_bid.extraction.llm import get_enricher
 from equans_bid.extraction.pdf_text import file_sha256
 from equans_bid.extraction.pipeline import STARTER, extract_positions
 from equans_bid.pricing.engine import factor_keys_for_system, price_position
-from equans_bid.pricing.project import bid_range, project_baseline
+from equans_bid.pricing.project import bid_range, effective_assumptions, indicative_price, project_baseline
 
 PRICED_STATUSES = {"calculated", "supplier_quote_required", "assumption_applied"}
 PROVISIONAL_STATUSES = {"supplier_quote_required", "assumption_applied"}
@@ -69,7 +69,7 @@ def _price_item(item, catalog: dict, rules: dict, params: dict):
 	rule = rules.get(product.install_code)
 	if not rule:
 		item.status = "review_required"
-		item.status_reason = f"No productivity rule {product.install_code}"
+		item.status_reason = f"Keine Leistungsregel {product.install_code}"
 		return
 	cost = price_position(
 		item.quantity,
@@ -150,8 +150,8 @@ def process_tender_pdf(tender: str, pages: str | list | None = None):
 		_recalculate(doc)
 		doc.status = "Completed"
 		# Record which provider saw the tender text (data-handling requirement).
-		llm = enrich.stats() if enrich else "LLM: not configured (rules only)"
-		doc.processing_log = f"{len(positions)} positions extracted from {path.name}. {llm}"
+		llm = enrich.stats() if enrich else "LLM: nicht konfiguriert (nur Regeln)"
+		doc.processing_log = f"{len(positions)} Positionen aus {path.name} extrahiert. {llm}"
 		doc.save()
 	except Exception as e:
 		frappe.db.rollback()
@@ -203,13 +203,13 @@ def update_item(
 		row.matched_product = matched_product
 		row.match_confidence = 1.0
 		row.status = "supplier_quote_required" if product.supplier_quote_required else "calculated"
-		row.status_reason = "Product set by estimator"
+		row.status_reason = "Produkt durch Kalkulator gesetzt"
 	if status:
 		allowed = row.meta.get_field("status").options.split("\n")
 		if status not in allowed:
 			frappe.throw(_("Unknown status {0}").format(status))
 		row.status = status
-		row.status_reason = "Status set by estimator"
+		row.status_reason = "Status durch Kalkulator gesetzt"
 
 	params = get_params()
 	catalog = {c.product_id: c for c in _catalog_rows()}
@@ -231,21 +231,37 @@ def get_tender_pdf(tender: str):
 	frappe.local.response.type = "pdf"
 
 
+def _assumptions(doc) -> dict:
+	raw = doc.bid_assumptions
+	if not raw:
+		return {}
+	return json.loads(raw) if isinstance(raw, str) else raw
+
+
 @frappe.whitelist()
-def get_tender_summary(tender: str, margins: str | dict | None = None):
-	"""Totals by system and status, the project build-up and the Recommended Bid Range."""
+def get_tender_summary(tender: str, assumptions: str | dict | None = None):
+	"""Totals by system, category and status, the project build-up and the Recommended Bid Range.
+
+	`assumptions` previews bid overrides without saving them; otherwise the tender's saved
+	overrides apply.
+	"""
 	doc = frappe.get_doc("Tender", tender)
 	doc.check_permission("read")
 	params = get_params()
-	if isinstance(margins, str):
-		margins = json.loads(margins)
+	if isinstance(assumptions, str):
+		assumptions = json.loads(assumptions)
+	overrides = assumptions if assumptions is not None else _assumptions(doc)
 	catalog = {c.product_id: c for c in _catalog_rows()}
 	build_up = _build_up(doc, catalog, params)
+	baseline = build_up["cost_baseline"]
 
 	by_system = defaultdict(lambda: {"direct_cost": 0.0, "positions": 0})
+	by_category = defaultdict(lambda: {"direct_cost": 0.0, "positions": 0})
 	by_status = defaultdict(lambda: {"direct_cost": 0.0, "positions": 0})
 	for i in doc.items:
-		for bucket in (by_system[i.system or "-"], by_status[i.status]):
+		product = catalog.get(i.matched_product)
+		category = product.category if product and i.status in PRICED_STATUSES else "-"
+		for bucket in (by_system[i.system or "-"], by_category[category], by_status[i.status]):
 			bucket["direct_cost"] += i.direct_cost
 			bucket["positions"] += 1
 
@@ -261,11 +277,144 @@ def get_tender_summary(tender: str, margins: str | dict | None = None):
 			"unresolved_count": doc.unresolved_count,
 		},
 		"build_up": {k: float(v) for k, v in build_up.items()},
+		"parameters": {
+			"overhead_pct": params["commercial"]["overhead_pct"],
+			"target_margin_pct": params["commercial"]["target_margin_pct"],
+			**{k: params["allowances"][k] for k in params["allowances"]},
+		},
 		"by_system": dict(by_system),
+		"by_category": dict(by_category),
 		"by_status": dict(by_status),
-		"bid_range": bid_range(build_up["cost_baseline"], params, margins),
+		"indicative_price": indicative_price(baseline, params),
+		"bid_range": bid_range(baseline, params, overrides),
+		"assumptions": effective_assumptions(params, overrides),
+		"default_assumptions": effective_assumptions(params),
 		"win_probability_note": "Model estimate from project parameters, not calibrated on past bids.",
 	}
+
+
+@frappe.whitelist()
+def set_bid_assumptions(tender: str, assumptions: str | dict | None = None):
+	"""Save (or with None, reset) the tender's bid overrides; values are validated and clamped."""
+	doc = frappe.get_doc("Tender", tender)
+	doc.check_permission("write")
+	if isinstance(assumptions, str):
+		assumptions = json.loads(assumptions) if assumptions else None
+	clean = effective_assumptions(get_params(), assumptions) if assumptions else None
+	doc.db_set("bid_assumptions", json.dumps(clean) if clean else None)
+	return get_tender_summary(tender)
+
+
+EXPORT_COLUMNS = [
+	("position_id", "LV-ID"),
+	("golden_lv_id", "Referenz-LV"),
+	("system", "Anlage"),
+	("source_page", "Seite"),
+	("description", "Beschreibung"),
+	("quantity", "Menge"),
+	("unit", "Einheit"),
+	("matched_product", "Produkt"),
+	("status", "Status"),
+	("status_reason", "Begründung"),
+	("price_source", "Preisquelle"),
+	("quote_override", "Offerte CHF"),
+	("material_cost", "Material CHF"),
+	("labour_hours", "Stunden"),
+	("labour_rate", "Ansatz CHF/h"),
+	("labour_cost", "Arbeit CHF"),
+	("direct_cost", "Direkte Kosten CHF"),
+]
+
+STATUS_DE = {
+	"calculated": "Berechnet",
+	"supplier_quote_required": "Offerte nötig",
+	"assumption_applied": "Annahme",
+	"review_required": "Prüfung nötig",
+	"insufficient_information": "Angaben fehlen",
+	"out_of_scope": "Ausser Umfang",
+	"non_priceable": "Nicht kalkulierbar",
+}
+SCENARIO_DE = {"Aggressive": "Aggressiv", "Target": "Zielmarge", "Conservative": "Konservativ"}
+UNIT_DE = {"pc": "Stk", "m": "m", "m2": "m2", "m3": "m3", "h": "Std", "LS": "psch", "system": "Anlage"}
+
+BUILD_UP_LABELS = [
+	("catalog_material", "Material Katalog"),
+	("supplier_material", "Lieferpakete"),
+	("labour", "Montage (Arbeit)"),
+	("small_material", "Kleinmaterial"),
+	("supplier_contingency", "Reserve Lieferpakete"),
+	("project_costs", "Projektkosten (Engineering, IBS, Hygiene, Doku)"),
+	("direct_cost", "Direkte Kosten"),
+	("transport_equipment", "Transport & Geräte"),
+	("overhead", "Gemeinkosten"),
+	("cost_baseline", "Kostenbasis"),
+]
+
+
+@frappe.whitelist()
+def export_tender(tender: str):
+	"""Priced offer as CSV (semicolon, UTF-8 with BOM, opens directly in Excel CH)."""
+	import csv
+	import io
+
+	summary = get_tender_summary(tender)
+	doc = frappe.get_doc("Tender", tender)
+	buf = io.StringIO()
+	w = csv.writer(buf, delimiter=";")
+	w.writerow([f"Erstpreis {doc.project_name}", f"Stand {frappe.utils.now_datetime():%d.%m.%Y %H:%M}"])
+	w.writerow([])
+	w.writerow([label for _, label in EXPORT_COLUMNS])
+	for i in doc.items:
+		row = {f: i.get(f) for f, _ in EXPORT_COLUMNS}
+		row["status"] = STATUS_DE.get(i.status, i.status)
+		row["unit"] = UNIT_DE.get(i.unit, i.unit)
+		w.writerow(["" if row[f] is None else row[f] for f, _ in EXPORT_COLUMNS])
+	w.writerow([])
+	w.writerow(["Kostenaufbau", "CHF"])
+	for key, label in BUILD_UP_LABELS:
+		w.writerow([label, summary["build_up"][key]])
+	w.writerow(["Offene Positionen ohne Preis", summary["totals"]["unresolved_count"]])
+	w.writerow([])
+	w.writerow(
+		[
+			"Szenario",
+			"Angebotspreis CHF",
+			"Marge %",
+			"Gewinnchance",
+			"Deckungsbeitrag bei Zuschlag CHF",
+			"Erwarteter Beitrag CHF",
+			"Empfohlen",
+		]
+	)
+	for sc in summary["bid_range"]:
+		w.writerow(
+			[
+				SCENARIO_DE.get(sc["scenario"], sc["scenario"]),
+				sc["bid_price_chf"],
+				sc["margin_pct"],
+				sc["estimated_win_probability"],
+				sc["contribution_if_won_chf"],
+				sc["expected_contribution_chf"],
+				"ja" if sc["recommended"] else "",
+			]
+		)
+	w.writerow(
+		[
+			"Richtpreis (Zielmarge)",
+			summary["indicative_price"]["bid_price_chf"],
+			summary["indicative_price"]["margin_pct"],
+		]
+	)
+	w.writerow(
+		[
+			"Gewinnchance: Modellschätzung aus den Projektparametern, nicht auf historische Angebote kalibriert."
+		]
+	)
+
+	safe = "".join(ch if ch.isalnum() or ch in "-_" else "_" for ch in doc.project_name)[:60]
+	frappe.local.response.filename = f"Erstpreis_{safe}_{frappe.utils.nowdate()}.csv"
+	frappe.local.response.filecontent = "\ufeff" + buf.getvalue()
+	frappe.local.response.type = "download"
 
 
 @frappe.whitelist()

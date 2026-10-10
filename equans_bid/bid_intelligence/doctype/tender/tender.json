@@ -19,6 +19,7 @@
   "provisional_cost",
   "unresolved_count",
   "cost_baseline",
+  "bid_assumptions",
   "section_items",
   "items"
  ],
@@ -109,6 +110,12 @@
    "read_only": 1
   },
   {
+   "description": "Estimator overrides of the bid model (margins, competition, strategic appetite)",
+   "fieldname": "bid_assumptions",
+   "fieldtype": "JSON",
+   "label": "Bid Assumptions"
+  },
+  {
    "fieldname": "section_items",
    "fieldtype": "Section Break",
    "label": "Positions"
@@ -120,7 +127,7 @@
    "options": "Tender Item"
   }
  ],
- "modified": "2026-10-10 11:00:00.000000",
+ "modified": "2026-10-10 16:00:00.000000",
  "modified_by": "Administrator",
  "module": "Bid Intelligence",
  "name": "Tender",

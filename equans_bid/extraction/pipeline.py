@@ -41,7 +41,7 @@ def extraction_confidence(raw, page_text: str) -> float:
 
 def status_for(position: dict, kind, m: matcher.Match, catalog_by_id: dict) -> tuple[str, str]:
 	if position["quantity"] is None:
-		return "insufficient_information", "Quantity column is empty in the tender"
+		return "insufficient_information", "Mengenspalte im LV ist leer"
 	if not m.product_id:
 		return "review_required", m.reason
 	if m.confidence < matcher.CONFIDENT:
@@ -50,7 +50,7 @@ def status_for(position: dict, kind, m: matcher.Match, catalog_by_id: dict) -> t
 	if catalog_by_id[m.product_id]["supplier_quote_required"]:
 		return (
 			"supplier_quote_required",
-			"Supplier package: catalogue price is provisional until a quote is entered",
+			"Lieferpaket: Katalogpreis ist provisorisch, bis eine Offerte erfasst ist",
 		)
 	return "calculated", m.reason
 
@@ -146,7 +146,7 @@ def extract_positions(
 		m = matcher.match(kind, attrs, f"{c['title']} {c['label']}", catalog, c["unit"])
 		status, reason = status_for(c, kind, m, catalog_by_id)
 		if source == "llm":
-			reason = f"Classified by LLM as {kind}. {reason}"
+			reason = f"Von LLM klassifiziert als {kind}. {reason}"
 		description = re.sub(r"\s+", " ", f"{c['title']} — {c['label']}" if c["label"] else c["title"]).strip(
 			" —"
 		)
