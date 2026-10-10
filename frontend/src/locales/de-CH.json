@@ -22,7 +22,8 @@
       "status": "Status",
       "directCost": "Direkte Kosten",
       "baseline": "Kostenbasis",
-      "open": "Offene Positionen"
+      "open": "Offene Positionen",
+      "trade": "Gewerk"
     },
     "empty": "Noch keine Ausschreibung erfasst.",
     "dialog": {
@@ -76,7 +77,19 @@
     "processed": "Keine Positionen aus {file} extrahiert. | Eine Position aus {file} extrahiert. | {count} Positionen aus {file} extrahiert.",
     "llmUsed": "LLM {model}: {calls} Aufrufe, {cached} aus Cache, {errors} Fehler.",
     "llmNone": "LLM nicht konfiguriert (nur Regeln).",
-    "saved": "Gespeichert und neu berechnet in {ms} ms"
+    "saved": "Gespeichert und neu berechnet in {ms} ms",
+    "customAttributes": "Projektmerkmale (wie im LV)",
+    "noCustomAttributes": "Keine Projektmerkmale erkannt",
+    "family": "Produktfamilie",
+    "trade": "Gewerk",
+    "refreshPrices": "Preise aktualisieren",
+    "refreshTitle": "Preise aus dem aktuellen Katalog übernehmen?",
+    "refreshNone": "Keine Preisänderung gegenüber dem Katalog.",
+    "refreshSummary": "{count} Positionen ändern sich: {before} → {after}",
+    "refreshApply": "Übernehmen",
+    "refreshCancel": "Abbrechen",
+    "pricedAt": "Preise Stand {date}",
+    "positionRef": "LV-Nr."
   },
   "kpi": {
     "direct": {
@@ -207,43 +220,6 @@
     "supplier_package": "Lieferpaket",
     "supplier_quote": "Offerte"
   },
-  "family": {
-    "supply_valve": "Zuluftventil",
-    "exhaust_valve": "Abluftventil",
-    "fire_damper": "Brandschutzklappe",
-    "manual_damper": "Drosselklappe",
-    "silencer": "Schalldämpfer",
-    "vav": "VVS-Regler (variabler Volumenstrom)",
-    "cav": "Konstant-Volumenstromregler",
-    "insulation": "Kanaldämmung",
-    "fire_seal": "Brandabschottung",
-    "support_set": "Anschlusswinkel-Set",
-    "inspection_cover": "Revisionsdeckel",
-    "duct_round": "Rundrohr",
-    "duct_rect": "Rechteckkanal",
-    "bend": "Rohrbogen",
-    "ahu": "Lüftungsgerät",
-    "fan": "Ventilator",
-    "field_device": "Feldgerät",
-    "dp_transmitter": "Druckdifferenzfühler",
-    "temp_sensor": "Temperaturfühler",
-    "actuator": "Stellantrieb",
-    "flow_transmitter": "Volumenstrom-Messumformer",
-    "grille": "Luftgitter",
-    "air_outlet": "Luftauslass / Überströmer",
-    "fire_insulation": "Brandschutzdämmung",
-    "humidity_sensor": "Feuchtefühler",
-    "frost_thermostat": "Frostschutzwächter",
-    "thermometer": "Zeigerthermometer",
-    "cleaning_cover": "Kontroll- / Putzdeckel",
-    "rain_hat": "Regenhut / Lamellenhut",
-    "earth_duct": "erdverlegte Lüftungsleitung",
-    "labels": "Bezeichnungsschilder",
-    "leak_test": "Kanaldichtheitsprüfung (Dienstleistung)",
-    "service": "Montage- / Inbetriebsetzungsleistung",
-    "fitting_round": "Formstück rund",
-    "fitting_rect": "Kanalformstück"
-  },
   "reason": {
     "family_unknown": "Produktfamilie nicht erkannt",
     "no_catalog_item": "Kein Katalogartikel für {family}: manuell kalkulieren oder Offerte einholen",
@@ -264,7 +240,9 @@
     "llm_classified": "Vom LLM klassifiziert als {family}. {detail}",
     "no_productivity_rule": "Keine Leistungsregel {install_code}",
     "product_set_by_estimator": "Produkt durch Kalkulator gesetzt",
-    "status_set_by_estimator": "Status durch Kalkulator gesetzt"
+    "status_set_by_estimator": "Status durch Kalkulator gesetzt",
+    "attribute_mismatch": "{attribute} ist {found}, Katalogartikel hat {expected}",
+    "llm_conflict": "Das LLM hat eine andere {fields} gelesen als die Regeln; bitte Quelle prüfen"
   },
   "warning": {
     "header_conflict": "Seitenkopf nennt «{header}», Quelldokument ist «{source}.docx»"

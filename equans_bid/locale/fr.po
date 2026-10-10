@@ -39,6 +39,9 @@ msgctxt "Tender Item status"
 msgid "Assumption applied"
 msgstr "Hypothèse appliquée"
 
+msgid "At most {0} custom attributes per position"
+msgstr "Au maximum {0} attributs de projet par position"
+
 msgctxt "Tender export"
 msgid "Bid price"
 msgstr "Prix de l’offre"
@@ -73,6 +76,12 @@ msgstr "Base de coûts"
 msgctxt "Tender export"
 msgid "Cost build-up"
 msgstr "Structure des coûts"
+
+msgid "Custom attribute {0} must be text"
+msgstr "L’attribut de projet {0} doit être du texte"
+
+msgid "Custom attributes must be an object of label: value"
+msgstr "Les attributs de projet doivent être un objet libellé : valeur"
 
 msgid "DN{dn} not found in the position"
 msgstr "DN{dn} absent de la position"
@@ -112,6 +121,9 @@ msgstr "forfait"
 msgctxt "Tender export"
 msgid "LV ID"
 msgstr "N° de position"
+
+msgid "Labels need at least an English label"
+msgstr "Les libellés exigent au moins un libellé anglais"
 
 msgctxt "Tender export"
 msgid "Labour"
@@ -155,6 +167,9 @@ msgstr "Page"
 
 msgid "Page header says '{header}', source document is '{source}.docx'"
 msgstr "L’en-tête de page indique « {header} », le document source est « {source}.docx »"
+
+msgid "Pattern {0} is not a valid regular expression: {1}"
+msgstr "Le motif {0} n’est pas une expression régulière valide : {1}"
 
 msgid "Position {0} not found in tender {1}"
 msgstr "Position {0} introuvable dans l’appel d’offres {1}"
@@ -221,6 +236,9 @@ msgctxt "Tender export"
 msgid "Small material"
 msgstr "Petit matériel"
 
+msgid "Soft attributes must also be key attributes"
+msgstr "Les attributs souples doivent aussi être des attributs clés"
+
 msgctxt "Tender export"
 msgid "Standard offer (target margin)"
 msgstr "Prix indicatif (marge cible)"
@@ -263,9 +281,36 @@ msgctxt "Tender export"
 msgid "System"
 msgstr "Installation"
 
+msgid "System header pattern is not a valid regular expression: {0}"
+msgstr "Le motif d’en-tête n’est pas une expression régulière valide : {0}"
+
+msgid "System header pattern needs a named group (?P<system>…)"
+msgstr "Le motif d’en-tête exige un groupe nommé (?P<system>…)"
+
+msgid "Table parser {0} needs is_table_page() and parse_page()"
+msgstr "L’analyseur de tableau {0} exige is_table_page() et parse_page()"
+
+msgid "Table parsers must live in equans_bid.trades: {0}"
+msgstr "Les analyseurs de tableau doivent se trouver dans equans_bid.trades : {0}"
+
 msgctxt "Bid scenario"
 msgid "Target"
 msgstr "Marge cible"
+
+msgid "Tender file {0} not found"
+msgstr "Fichier d’appel d’offres {0} introuvable"
+
+msgid "The LLM read a different {fields} than the rules; please check the source"
+msgstr "Le LLM a lu une autre {fields} que les règles ; veuillez vérifier la source"
+
+msgid "The tender file is larger than {0} MB"
+msgstr "Le fichier d’appel d’offres dépasse {0} Mo"
+
+msgid "The tender file must be a PDF"
+msgstr "Le fichier d’appel d’offres doit être un PDF"
+
+msgid "Trade {0} is not configured. Run equans_bid.commands.seed_data.run."
+msgstr "Le corps de métier {0} n’est pas configuré. Exécutez equans_bid.commands.seed_data.run."
 
 msgctxt "Tender export"
 msgid "Transport and equipment"
@@ -289,114 +334,18 @@ msgctxt "Tender export"
 msgid "Win probability is a model estimate from the project parameters, not calibrated on past bids."
 msgstr "Probabilité de gain : estimation du modèle à partir des paramètres du projet, non calibrée sur des offres passées."
 
-msgctxt "Product family"
-msgid "actuator"
-msgstr "servomoteur"
-
-msgctxt "Product family"
-msgid "air grille"
-msgstr "grille d’air"
-
-msgctxt "Product family"
-msgid "air outlet / transfer element"
-msgstr "bouche d’air / élément de transfert"
-
-msgctxt "Product family"
-msgid "air-handling unit"
-msgstr "monobloc de ventilation"
-
 msgid "angle {angle}° instead of catalogue {catalog_angle}°"
 msgstr "angle de {angle}° au lieu de {catalog_angle}° au catalogue"
 
 msgid "attributes agree"
 msgstr "les caractéristiques correspondent"
 
-msgctxt "Product family"
-msgid "balancing damper"
-msgstr "registre de réglage"
-
-msgctxt "Product family"
-msgid "cleaning / access cover"
-msgstr "trappe de contrôle / de nettoyage"
-
-msgctxt "Product family"
-msgid "connection-angle set"
-msgstr "jeu de cornières de fixation"
-
-msgctxt "Product family"
-msgid "constant air-volume controller"
-msgstr "régulateur de débit constant"
-
-msgctxt "Product family"
-msgid "dial thermometer"
-msgstr "thermomètre à cadran"
-
-msgctxt "Product family"
-msgid "differential pressure transmitter"
-msgstr "transmetteur de pression différentielle"
-
-msgctxt "Product family"
-msgid "duct insulation"
-msgstr "isolation de gaine"
-
-msgctxt "Product family"
-msgid "duct leakage test (service)"
-msgstr "essai d’étanchéité des gaines (prestation)"
-
-msgctxt "Product family"
-msgid "earth-laid ventilation duct"
-msgstr "conduite d’air enterrée"
-
-msgctxt "Product family"
-msgid "exhaust air valve"
-msgstr "bouche d’air repris"
-
-msgctxt "Product family"
-msgid "fan"
-msgstr "ventilateur"
-
-msgctxt "Product family"
-msgid "field device"
-msgstr "appareil de terrain"
-
-msgctxt "Product family"
-msgid "fire damper"
-msgstr "clapet coupe-feu"
-
-msgctxt "Product family"
-msgid "fire protection insulation"
-msgstr "isolation coupe-feu"
-
-msgctxt "Product family"
-msgid "fire seal"
-msgstr "obturation coupe-feu"
-
-msgctxt "Product family"
-msgid "frost protection thermostat"
-msgstr "thermostat antigel"
-
 msgctxt "Unit of measure"
 msgid "h"
 msgstr "h"
 
-msgctxt "Product family"
-msgid "humidity sensor"
-msgstr "sonde d’humidité"
-
-msgctxt "Product family"
-msgid "inspection cover"
-msgstr "trappe de visite"
-
-msgctxt "Product family"
-msgid "installation / commissioning service"
-msgstr "prestation de montage / mise en service"
-
 msgid "insulation thickness {thickness} mm does not match"
 msgstr "l’épaisseur d’isolation {thickness} mm ne correspond pas"
-
-msgctxt "Product family"
-msgid "labels and marking"
-msgstr "plaques signalétiques"
 
 msgctxt "Unit of measure"
 msgid "m"
@@ -418,56 +367,12 @@ msgctxt "Unit of measure"
 msgid "pc"
 msgstr "pce"
 
-msgctxt "Product family"
-msgid "rain hat / louvre cap"
-msgstr "chapeau pare-pluie / à lamelles"
-
-msgctxt "Product family"
-msgid "rectangular duct"
-msgstr "gaine rectangulaire"
-
-msgctxt "Product family"
-msgid "rectangular duct fitting"
-msgstr "raccord de gaine rectangulaire"
-
-msgctxt "Product family"
-msgid "round bend"
-msgstr "coude circulaire"
-
-msgctxt "Product family"
-msgid "round duct"
-msgstr "gaine circulaire"
-
-msgctxt "Product family"
-msgid "round duct fitting"
-msgstr "raccord circulaire"
-
-msgctxt "Product family"
-msgid "silencer"
-msgstr "silencieux"
-
 msgid "size {size} mm does not match"
 msgstr "la dimension {size} mm ne correspond pas"
-
-msgctxt "Product family"
-msgid "supply air valve"
-msgstr "bouche d’air soufflé"
 
 msgctxt "Unit of measure"
 msgid "system"
 msgstr "installation"
-
-msgctxt "Product family"
-msgid "temperature sensor"
-msgstr "sonde de température"
-
-msgctxt "Product family"
-msgid "variable air-volume controller"
-msgstr "régulateur de débit variable (VAV)"
-
-msgctxt "Product family"
-msgid "volume flow transmitter"
-msgstr "transmetteur de débit"
 
 msgid "weatherproof finish differs"
 msgstr "l’exécution résistante aux intempéries diffère"
@@ -475,6 +380,12 @@ msgstr "l’exécution résistante aux intempéries diffère"
 msgctxt "Tender export"
 msgid "yes"
 msgstr "oui"
+
+msgid "{0} must be a list of attribute keys"
+msgstr "{0} doit être une liste de clés d’attributs"
+
+msgid "{attribute} is {found}, catalogue item has {expected}"
+msgstr "{attribute} vaut {found}, l’article du catalogue a {expected}"
 
 msgid "{count} catalogue items fit; best text match chosen"
 msgstr "{count} articles du catalogue conviennent ; meilleure correspondance textuelle retenue"

@@ -22,7 +22,8 @@
       "status": "Status",
       "directCost": "Direct cost",
       "baseline": "Cost baseline",
-      "open": "Open positions"
+      "open": "Open positions",
+      "trade": "Trade"
     },
     "empty": "No tenders yet.",
     "dialog": {
@@ -76,7 +77,19 @@
     "processed": "No positions extracted from {file}. | One position extracted from {file}. | {count} positions extracted from {file}.",
     "llmUsed": "LLM {model}: {calls} calls, {cached} cached, {errors} errors.",
     "llmNone": "LLM not configured (rules only).",
-    "saved": "Saved and repriced in {ms} ms"
+    "saved": "Saved and repriced in {ms} ms",
+    "customAttributes": "Project attributes (as printed)",
+    "noCustomAttributes": "No project attributes found",
+    "family": "Product family",
+    "trade": "Trade",
+    "refreshPrices": "Refresh prices",
+    "refreshTitle": "Take prices from the current catalogue?",
+    "refreshNone": "No price change against the catalogue.",
+    "refreshSummary": "{count} positions change: {before} → {after}",
+    "refreshApply": "Apply",
+    "refreshCancel": "Cancel",
+    "pricedAt": "Prices as of {date}",
+    "positionRef": "Printed LV no."
   },
   "kpi": {
     "direct": {
@@ -207,43 +220,6 @@
     "supplier_package": "Supplier package",
     "supplier_quote": "Supplier quote"
   },
-  "family": {
-    "supply_valve": "supply air valve",
-    "exhaust_valve": "exhaust air valve",
-    "fire_damper": "fire damper",
-    "manual_damper": "balancing damper",
-    "silencer": "silencer",
-    "vav": "variable air-volume controller",
-    "cav": "constant air-volume controller",
-    "insulation": "duct insulation",
-    "fire_seal": "fire seal",
-    "support_set": "connection-angle set",
-    "inspection_cover": "inspection cover",
-    "duct_round": "round duct",
-    "duct_rect": "rectangular duct",
-    "bend": "round bend",
-    "ahu": "air-handling unit",
-    "fan": "fan",
-    "field_device": "field device",
-    "dp_transmitter": "differential pressure transmitter",
-    "temp_sensor": "temperature sensor",
-    "actuator": "actuator",
-    "flow_transmitter": "volume flow transmitter",
-    "grille": "air grille",
-    "air_outlet": "air outlet / transfer element",
-    "fire_insulation": "fire protection insulation",
-    "humidity_sensor": "humidity sensor",
-    "frost_thermostat": "frost protection thermostat",
-    "thermometer": "dial thermometer",
-    "cleaning_cover": "cleaning / access cover",
-    "rain_hat": "rain hat / louvre cap",
-    "earth_duct": "earth-laid ventilation duct",
-    "labels": "labels and marking",
-    "leak_test": "duct leakage test (service)",
-    "service": "installation / commissioning service",
-    "fitting_round": "round duct fitting",
-    "fitting_rect": "rectangular duct fitting"
-  },
   "reason": {
     "family_unknown": "Product family not recognised",
     "no_catalog_item": "No catalogue item for {family}: price manually or request a quote",
@@ -264,7 +240,9 @@
     "llm_classified": "Classified by LLM as {family}. {detail}",
     "no_productivity_rule": "No productivity rule {install_code}",
     "product_set_by_estimator": "Product set by estimator",
-    "status_set_by_estimator": "Status set by estimator"
+    "status_set_by_estimator": "Status set by estimator",
+    "attribute_mismatch": "{attribute} is {found}, catalogue item has {expected}",
+    "llm_conflict": "The LLM read a different {fields} than the rules; please check the source"
   },
   "warning": {
     "header_conflict": "Page header says '{header}', source document is '{source}.docx'"

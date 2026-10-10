@@ -1,0 +1,6 @@
+install_code,work_type,unit,base_hours_per_unit,labour_role,default_hourly_rate_chf,factor_keys
+EL_CABLE_PULL,Pull and connect installation cable,m,0.08,electrician,92,site_efficiency|school_logistics
+EL_SOCKET,Install socket outlet,pc,0.35,electrician,92,site_efficiency|mounting_height_school|school_logistics
+EL_SWITCH,Install switch,pc,0.30,electrician,92,site_efficiency|mounting_height_school|school_logistics
+EL_BOARD,Install and wire sub-distribution board,pc,6.0,lead_electrician,112,site_efficiency|school_logistics
+EL_LUMINAIRE,Install and connect luminaire,pc,0.60,electrician,92,site_efficiency|mounting_height_school|school_logistics

@@ -1,0 +1,17 @@
+{
+  "trade": "Electrical",
+  "families": [
+    {"code": "el_emergency_light", "priority": 10, "labels": {"de-CH": "Notleuchte", "fr-CH": "luminaire de secours", "en": "emergency light"},
+     "patterns": ["notleuchte|notbeleuchtung"], "key_attributes": [], "soft_attributes": [], "size_strategy": "exact", "catalog_match": []},
+    {"code": "el_cable", "priority": 20, "labels": {"de-CH": "Installationskabel", "fr-CH": "câble d’installation", "en": "installation cable"},
+     "patterns": ["installationskabel|kabel nym|nym-j"], "key_attributes": ["cores", "cross_section_mm2"], "soft_attributes": [], "size_strategy": "exact", "catalog_match": []},
+    {"code": "el_socket", "priority": 30, "labels": {"de-CH": "Steckdose", "fr-CH": "prise", "en": "socket outlet"},
+     "patterns": ["steckdose"], "key_attributes": ["ip_rating"], "soft_attributes": [], "size_strategy": "exact", "catalog_match": []},
+    {"code": "el_switch", "priority": 40, "labels": {"de-CH": "Schalter", "fr-CH": "interrupteur", "en": "switch"},
+     "patterns": ["schalter"], "key_attributes": [], "soft_attributes": [], "size_strategy": "exact", "catalog_match": []},
+    {"code": "el_board", "priority": 50, "labels": {"de-CH": "Unterverteilung", "fr-CH": "tableau de distribution", "en": "distribution board"},
+     "patterns": ["unterverteilung|verteilerkasten"], "key_attributes": [], "soft_attributes": [], "size_strategy": "exact", "catalog_match": []},
+    {"code": "el_luminaire", "priority": 60, "labels": {"de-CH": "Leuchte", "fr-CH": "luminaire", "en": "luminaire"},
+     "patterns": ["led-panel|leuchte"], "key_attributes": ["ip_rating"], "soft_attributes": [], "size_strategy": "exact", "catalog_match": []}
+  ]
+}

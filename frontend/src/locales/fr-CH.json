@@ -22,7 +22,8 @@
       "status": "Statut",
       "directCost": "Coûts directs",
       "baseline": "Base de coûts",
-      "open": "Positions ouvertes"
+      "open": "Positions ouvertes",
+      "trade": "Corps de métier"
     },
     "empty": "Aucun appel d’offres saisi.",
     "dialog": {
@@ -76,7 +77,19 @@
     "processed": "Aucune position extraite de {file}. | Une position extraite de {file}. | {count} positions extraites de {file}.",
     "llmUsed": "LLM {model} : {calls} appels, {cached} en cache, {errors} erreurs.",
     "llmNone": "LLM non configuré (règles uniquement).",
-    "saved": "Enregistré et recalculé en {ms} ms"
+    "saved": "Enregistré et recalculé en {ms} ms",
+    "customAttributes": "Attributs du projet (tels qu’imprimés)",
+    "noCustomAttributes": "Aucun attribut de projet reconnu",
+    "family": "Famille de produits",
+    "trade": "Corps de métier",
+    "refreshPrices": "Actualiser les prix",
+    "refreshTitle": "Reprendre les prix du catalogue actuel ?",
+    "refreshNone": "Aucun changement de prix par rapport au catalogue.",
+    "refreshSummary": "{count} positions changent : {before} → {after}",
+    "refreshApply": "Appliquer",
+    "refreshCancel": "Annuler",
+    "pricedAt": "Prix au {date}",
+    "positionRef": "N° pos. imprimé"
   },
   "kpi": {
     "direct": {
@@ -207,43 +220,6 @@
     "supplier_package": "Lot fournisseur",
     "supplier_quote": "Offre fournisseur"
   },
-  "family": {
-    "supply_valve": "bouche d’air soufflé",
-    "exhaust_valve": "bouche d’air repris",
-    "fire_damper": "clapet coupe-feu",
-    "manual_damper": "registre de réglage",
-    "silencer": "silencieux",
-    "vav": "régulateur de débit variable (VAV)",
-    "cav": "régulateur de débit constant",
-    "insulation": "isolation de gaine",
-    "fire_seal": "obturation coupe-feu",
-    "support_set": "jeu de cornières de fixation",
-    "inspection_cover": "trappe de visite",
-    "duct_round": "gaine circulaire",
-    "duct_rect": "gaine rectangulaire",
-    "bend": "coude circulaire",
-    "ahu": "monobloc de ventilation",
-    "fan": "ventilateur",
-    "field_device": "appareil de terrain",
-    "dp_transmitter": "transmetteur de pression différentielle",
-    "temp_sensor": "sonde de température",
-    "actuator": "servomoteur",
-    "flow_transmitter": "transmetteur de débit",
-    "grille": "grille d’air",
-    "air_outlet": "bouche d’air / élément de transfert",
-    "fire_insulation": "isolation coupe-feu",
-    "humidity_sensor": "sonde d’humidité",
-    "frost_thermostat": "thermostat antigel",
-    "thermometer": "thermomètre à cadran",
-    "cleaning_cover": "trappe de contrôle / de nettoyage",
-    "rain_hat": "chapeau pare-pluie / à lamelles",
-    "earth_duct": "conduite d’air enterrée",
-    "labels": "plaques signalétiques",
-    "leak_test": "essai d’étanchéité des gaines (prestation)",
-    "service": "prestation de montage / mise en service",
-    "fitting_round": "raccord circulaire",
-    "fitting_rect": "raccord de gaine rectangulaire"
-  },
   "reason": {
     "family_unknown": "Famille de produits non reconnue",
     "no_catalog_item": "Aucun article de catalogue pour {family} : calculer manuellement ou demander une offre",
@@ -264,7 +240,9 @@
     "llm_classified": "Classé par le LLM comme {family}. {detail}",
     "no_productivity_rule": "Aucune règle de productivité {install_code}",
     "product_set_by_estimator": "Produit défini par le calculateur",
-    "status_set_by_estimator": "Statut défini par le calculateur"
+    "status_set_by_estimator": "Statut défini par le calculateur",
+    "attribute_mismatch": "{attribute} vaut {found}, l’article du catalogue a {expected}",
+    "llm_conflict": "Le LLM a lu une autre {fields} que les règles ; veuillez vérifier la source"
   },
   "warning": {
     "header_conflict": "L’en-tête de page indique « {header} », le document source est « {source}.docx »"

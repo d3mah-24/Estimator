@@ -1,6 +1,6 @@
 // Status reasons arrive as codes (reason_code + reason_args) and are translated here,
-// mirroring equans_bid/reasons.py: a nested `detail` reason and a `family` code are
-// translated before they are put into the template.
+// mirroring equans_bid/reasons.py: a nested `detail` reason is translated and a `family`
+// code is replaced by its master-data label (familyLabel) before going into the template.
 
 function parse(args) {
   if (!args) return {}
@@ -14,13 +14,13 @@ function parse(args) {
   return args
 }
 
-export function reasonText(t, code, args, fallback = '') {
+export function reasonText(t, code, args, fallback = '', familyLabel = (c) => c) {
   if (!code) return fallback
   const values = { ...parse(args) }
   if (values.detail && typeof values.detail === 'object' && values.detail.code) {
-    values.detail = reasonText(t, values.detail.code, values.detail.args)
+    values.detail = reasonText(t, values.detail.code, values.detail.args, '', familyLabel)
   }
-  if (values.family) values.family = t(`family.${values.family}`)
+  if (values.family) values.family = familyLabel(values.family)
   return t(`reason.${code}`, values)
 }
 

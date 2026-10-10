@@ -35,13 +35,20 @@ def _check(results: list, label: str, ok: bool, detail: str = "", fix: str = "")
 def smoke():
 	"""Everything the live demo depends on. Prints OK/FAIL per check."""
 	r: list[bool] = []
-	_check(
-		r,
-		"Catalogue loaded",
-		frappe.db.count("Catalog Item") == 56,
-		f"{frappe.db.count('Catalog Item')} items",
-	)
-	_check(r, "Productivity rules loaded", frappe.db.count("Productivity Rule") == 22)
+	from equans_bid.trades import available_trades, load_trade, read_catalog, read_productivity
+
+	for folder in available_trades():
+		trade = load_trade(folder)
+		want_items, want_rules = len(read_catalog(trade)), len(read_productivity(trade))
+		items = frappe.db.count("Catalog Item", {"trade": trade.code})
+		rules = frappe.db.count("Productivity Rule", {"trade": trade.code})
+		_check(
+			r,
+			f"{trade.code}: catalogue and rules loaded",
+			(items, rules) == (want_items, want_rules),
+			f"{items}/{want_items} items, {rules}/{want_rules} rules",
+			fix="run commands.seed_data.run",
+		)
 	_check(r, "Project parameters loaded", bool(frappe.get_single("Project Parameter").parameters))
 
 	name = frappe.db.get_value("Tender", {"project_name": seed_demo.DEMO_NAME})

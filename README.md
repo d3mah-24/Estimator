@@ -38,16 +38,20 @@ uvx ruff@0.14.10 check equans_bid && uvx ruff@0.14.10 format --check equans_bid
 
 | Step | Module | Notes |
 | --- | --- | --- |
+| Trade data | `trades/__init__.py`, `data/trades/<trade>/` | header pattern, families, attribute rules, plug-ins, factor rules |
 | PDF text | `extraction/pdf_text.py` | pdfplumber, 1-based `source_page` |
 | LV positions | `extraction/segmenter.py` | quantity lines (`Stk 5`), system from page header; footer wins on conflicts |
-| Ductwork | `extraction/componentlist.py` | CAD lists ("Bauteilliste"): lengths → m, rectangular area = perimeter × length |
-| Family + size | `extraction/classify.py` | German keyword rules, sizes in mm |
-| LLM fallback | `extraction/llm.py` | GPT-4o strict JSON schema, family + sizes only, cached, never prices |
-| Matching | `extraction/matcher.py` | size must agree; similarity only ranks agreeing items |
+| Table plug-ins | `trades/hvac/component_list.py` | HVAC CAD lists ("Bauteilliste"); registered in trade.json |
+| Family | `extraction/families.py` | Product Family patterns from master data, in priority order |
+| Attributes | `extraction/attributes.py` | generic notation (Ø, DN, W×H) + trade rules; `custom_attributes` as printed |
+| LLM (optional) | `extraction/structurer.py`, `verify.py` | strict contract, verified against the page, cached, never prices |
+| Matching | `extraction/matcher.py` | family key attributes must agree; similarity only ranks |
 | Pricing | `pricing/engine.py` | material = qty × net × (1 + waste); hours = qty × base × factors |
 | Project price | `pricing/project.py` | build-up, overhead, margin, Recommended Bid Range |
-| API | `api.py` | process, edit one row, summary, assumptions, PDF, CSV export |
+| API | `api.py` | process, edit, price snapshot + refresh, summary, assumptions, PDF, CSV export |
 | UI | `frontend/` | Vue 3 + frappe-ui, served at `/estimator` |
+
+Design decisions are recorded in `docs/adr/`.
 
 Golden reference: `data/starter/expected_output_example.json` (LV0001 = 806.26 CHF; subset baseline
 414,489.12 CHF; scenarios 426k / 432k / 444k CHF) — all reproduced by `tests/test_pricing.py`.
@@ -86,11 +90,37 @@ forms, that every code has a label, and that no component formats numbers itself
 5. `bench compile-po-to-mo --app equans_bid && bench --site equans.localhost clear-cache`,
    `cd frontend && yarn test && yarn build`, `bench run-tests --app equans_bid`.
 
-#### Extending to another trade
+#### Adding a trade (no code changes)
 
-Swap `data/starter/catalog.csv`, `productivity.csv` and `project_parameters.json`, add the trade's
-keyword families in `extraction/classify.py`, run `commands.seed_data.run`. Pricing, review UI,
-bid range and export are trade-neutral.
+1. Create `equans_bid/data/trades/<trade>/` with
+   - `trade.json`: code, labels, LV page header regex (named group `system`), attribute labels
+     (printed column labels kept as `custom_attributes`), attribute rules (text → canonical keys),
+     optional table-parser plug-ins and factor rules, and the catalogue/productivity file names;
+   - `families.json`: families with labels in de-CH / fr-CH / en, recognition patterns, key and
+     soft attributes, size strategy;
+   - `catalog.csv` (with `family` and `attributes` columns) and `productivity.csv`.
+2. `bench --site equans.localhost execute equans_bid.commands.seed_data.run` (idempotent upsert).
+3. Create a tender with that trade and upload its PDF.
+
+`data/trades/electrical/` is a complete, **synthetic** example (rebuild its PDF with
+`sample/build_pdf.py`); `tests/test_trades.py` proves it is priced with no code change.
+
+#### Central catalogue and price snapshots
+
+`Catalog Item` is one global master for all tenders (upserted by `product_id`, never duplicated).
+Each priced position keeps a snapshot of net cost, hours, rate, factors and price version, so a
+catalogue change does not move an existing tender. "Preise aktualisieren" previews the difference
+(`preview_price_refresh`) and applies it on confirmation (`apply_price_refresh`).
+
+#### Benchmark
+
+```bash
+cd apps/equans_bid && ../../env/bin/python -m equans_bid.extraction.benchmark [--all] [--strict] [--llm]
+```
+
+`validate_extraction_against_benchmark()` finds each of the 22 verified rows by page, unit and
+quantity (ties: expected install code, then sizes in the description). The PDF prints no LV IDs,
+so `LV0001`… are assigned, not extracted. `--strict` also checks product and status.
 
 #### License
 

@@ -16,6 +16,7 @@
         <thead class="bg-surface-gray-2 text-sm text-ink-gray-6">
           <tr>
             <th class="px-4 py-2 font-medium">{{ t('list.col.project') }}</th>
+            <th class="px-4 py-2 font-medium">{{ t('list.col.trade') }}</th>
             <th class="px-4 py-2 font-medium">{{ t('list.col.status') }}</th>
             <th class="px-4 py-2 text-right font-medium">{{ t('list.col.directCost') }}</th>
             <th class="px-4 py-2 text-right font-medium">{{ t('list.col.baseline') }}</th>
@@ -24,10 +25,10 @@
         </thead>
         <tbody>
           <tr v-if="tenders.loading && !tenders.data?.length">
-            <td colspan="5" class="px-4 py-6 text-center text-ink-gray-5">{{ t('common.loading') }}</td>
+            <td colspan="6" class="px-4 py-6 text-center text-ink-gray-5">{{ t('common.loading') }}</td>
           </tr>
           <tr v-else-if="!tenders.data?.length">
-            <td colspan="5" class="px-4 py-6 text-center text-ink-gray-5">{{ t('list.empty') }}</td>
+            <td colspan="6" class="px-4 py-6 text-center text-ink-gray-5">{{ t('list.empty') }}</td>
           </tr>
           <tr
             v-for="row in tenders.data"
@@ -36,6 +37,7 @@
             @click="open(row.name)"
           >
             <td class="px-4 py-3 font-medium text-ink-gray-9">{{ row.project_name }}</td>
+            <td class="px-4 py-3 text-ink-gray-7">{{ tradeLabel(row.trade) }}</td>
             <td class="px-4 py-3">
               <Badge :theme="TENDER_STATUS[row.status]?.theme" :label="t(`tenderStatus.${row.status}`)" />
             </td>
@@ -51,6 +53,12 @@
       <template #body-content>
         <div class="space-y-4">
           <FormControl v-model="projectName" :label="t('list.dialog.projectName')" :placeholder="t('list.dialog.placeholder')" />
+          <label class="block text-xs text-ink-gray-5">
+            {{ t('list.col.trade') }}
+            <select v-model="trade" class="form-select mt-1 h-8 w-full rounded border-outline-gray-2 py-0 text-sm">
+              <option v-for="tr in trades.data || []" :key="tr.name" :value="tr.name">{{ tradeLabel(tr.name) }}</option>
+            </select>
+          </label>
           <FileUploader
             file-types=".pdf"
             :upload-args="{ private: true }"
@@ -94,6 +102,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import { api, errorText } from '@/utils/api'
 import { TENDER_STATUS } from '@/utils/codes'
 import { formatCHF, formatNumber, formatPercent } from '@/utils/format'
+import { tradeLabel, trades } from '@/data/masterData'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -102,10 +111,11 @@ const projectName = ref('')
 const uploaded = ref<any>(null)
 const creating = ref(false)
 const createError = ref('')
+const trade = ref('HVAC')
 
 const tenders = createListResource({
   doctype: 'Tender',
-  fields: ['name', 'project_name', 'status', 'direct_cost', 'cost_baseline', 'unresolved_count', 'modified'],
+  fields: ['name', 'project_name', 'trade', 'status', 'direct_cost', 'cost_baseline', 'unresolved_count', 'modified'],
   orderBy: 'modified desc',
   pageLength: 50,
   auto: true,
@@ -124,7 +134,11 @@ async function create() {
   creating.value = true
   createError.value = ''
   try {
-    const doc = await tenders.insert.submit({ project_name: projectName.value, tender_file: uploaded.value.file_url })
+    const doc = await tenders.insert.submit({
+      project_name: projectName.value,
+      trade: trade.value,
+      tender_file: uploaded.value.file_url,
+    })
     await api('equans_bid.api.start_processing', { tender: doc.name })
     showNew.value = false
     open(doc.name)

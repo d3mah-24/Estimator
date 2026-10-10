@@ -33,9 +33,9 @@
    "label": "Labels"
   },
   {
-   "description": "Regex with a named group (?P<system>\u2026) for the LV page header",
+   "description": "Regex with a named group (?P<system>\u2026) for the LV page header (Code field: stored verbatim, never HTML-sanitised)",
    "fieldname": "system_header_pattern",
-   "fieldtype": "Small Text",
+   "fieldtype": "Code",
    "label": "System Header Pattern"
   },
   {
@@ -85,7 +85,7 @@
    "label": "Factor Rules"
   }
  ],
- "modified": "2026-10-10 22:00:00.000000",
+ "modified": "2026-10-11 09:00:00.000000",
  "modified_by": "Administrator",
  "module": "Bid Intelligence",
  "name": "Trade",

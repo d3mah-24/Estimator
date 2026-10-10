@@ -9,7 +9,7 @@ import unittest
 from decimal import Decimal
 from pathlib import Path
 
-from equans_bid.pricing.engine import factor_keys_for_system, labour_factor, money, price_position
+from equans_bid.pricing.engine import apply_factor_rules, labour_factor, money, price_position
 from equans_bid.pricing.project import (
 	bid_range,
 	effective_assumptions,
@@ -17,6 +17,7 @@ from equans_bid.pricing.project import (
 	project_baseline,
 	subset_baseline,
 )
+from equans_bid.trades import load_trade
 
 STARTER = Path(__file__).resolve().parent.parent / "data" / "starter"
 
@@ -78,11 +79,15 @@ class TestPositionPricing(unittest.TestCase):
 		self.assertEqual(factor, Decimal("1.25"))
 
 	def test_sports_hall_uses_its_mounting_height(self):
-		keys = factor_keys_for_system(RULES["DIFFUSER"]["factor_keys"], "244.05 LA05 Turnhalle")
+		"""The rule is HVAC trade data (trade.json factor_rules), not code."""
+		rules = load_trade("HVAC").factor_rules
+		keys = apply_factor_rules(
+			RULES["DIFFUSER"]["factor_keys"], {"system": "244.05 LA05 Turnhalle"}, rules
+		)
 		self.assertIn("mounting_height_sports_hall", keys)
 		self.assertNotIn("mounting_height_school", keys)
 		self.assertEqual(
-			factor_keys_for_system("site_efficiency|mounting_height_school", "244.01 LA01"),
+			apply_factor_rules("site_efficiency|mounting_height_school", {"system": "244.01 LA01"}, rules),
 			["site_efficiency", "mounting_height_school"],
 		)
 

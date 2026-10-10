@@ -12,9 +12,9 @@ from equans_bid.extraction.pdf_text import file_sha256
 from equans_bid.extraction.pipeline import STARTER, extract_positions
 from equans_bid.extraction.structurer import get_structurer
 from equans_bid.pricing.engine import apply_factor_rules, parse_factor_keys, price_position
-from equans_bid.trades import TradeConfig, from_documents
 from equans_bid.pricing.project import bid_range, effective_assumptions, indicative_price, project_baseline
 from equans_bid.reasons import render
+from equans_bid.trades import TradeConfig, from_documents
 
 PRICED_STATUSES = {"calculated", "supplier_quote_required", "assumption_applied"}
 PROVISIONAL_STATUSES = {"supplier_quote_required", "assumption_applied"}
@@ -61,6 +61,16 @@ def _catalog_rows(trade: str | None = None) -> list[dict]:
 			else (r.attributes or {})
 		)
 	return rows
+
+
+@frappe.whitelist()
+def family_labels() -> dict:
+	"""Display labels of all product families, by code (master data, for UI and export)."""
+	out = {}
+	for row in frappe.get_all("Product Family", fields=["family_code", "labels"]):
+		labels = row.labels
+		out[row.family_code] = json.loads(labels) if isinstance(labels, str) and labels else (labels or {})
+	return out
 
 
 def trade_config(code: str | None) -> TradeConfig:
@@ -422,7 +432,9 @@ def export_tender(tender: str, lang: str | None = None):
 
 	summary = get_tender_summary(tender)
 	doc = frappe.get_doc("Tender", tender)
-	filename, content = build_csv(doc, summary, lang, frappe.utils.now_datetime())
+	filename, content = build_csv(
+		doc, summary, lang, frappe.utils.now_datetime(), family_labels=family_labels()
+	)
 	frappe.local.response.filename = filename
 	frappe.local.response.filecontent = content
 	frappe.local.response.type = "download"

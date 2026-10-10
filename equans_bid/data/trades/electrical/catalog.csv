@@ -1,0 +1,9 @@
+product_id,category,subcategory,manufacturer,model,description,unit,list_price_chf,discount_pct,net_cost_chf,install_code,source_type,supplier_quote_required,family,attributes
+E-CAB-315,Cable,Installation cable,DemoCable,NYM-J 3x1.5,Installation cable NYM-J 3x1.5 mm²,m,2.10,12,1.85,EL_CABLE_PULL,catalog,false,el_cable,"{""cores"": 3, ""cross_section_mm2"": 1.5}"
+E-CAB-325,Cable,Installation cable,DemoCable,NYM-J 3x2.5,Installation cable NYM-J 3x2.5 mm²,m,2.95,12,2.60,EL_CABLE_PULL,catalog,false,el_cable,"{""cores"": 3, ""cross_section_mm2"": 2.5}"
+E-CAB-525,Cable,Installation cable,DemoCable,NYM-J 5x2.5,Installation cable NYM-J 5x2.5 mm²,m,4.43,12,3.90,EL_CABLE_PULL,catalog,false,el_cable,"{""cores"": 5, ""cross_section_mm2"": 2.5}"
+E-SOC-T13,Wiring device,Socket,DemoSwitch,T13-UP,Socket outlet type 13 flush IP20,pc,7.40,12,6.50,EL_SOCKET,catalog,false,el_socket,"{""ip_rating"": ""20""}"
+E-SOC-T13-55,Wiring device,Socket,DemoSwitch,T13-AP55,Socket outlet type 13 surface IP55,pc,16.10,12,14.20,EL_SOCKET,catalog,false,el_socket,"{""ip_rating"": ""55""}"
+E-SW-1P,Wiring device,Switch,DemoSwitch,S1-UP,Light switch 1-pole flush,pc,10.10,12,8.90,EL_SWITCH,catalog,false,el_switch,{}
+E-DB-24,Distribution,Board,DemoBoard,UV-24,Sub-distribution board 24 modules,pc,1450,0,1450,EL_BOARD,supplier_package,true,el_board,{}
+E-LUM-6060,Lighting,LED panel,DemoLight,P6060-40,LED panel 600x600 mm IP40,pc,101,12,89.00,EL_LUMINAIRE,catalog,false,el_luminaire,"{""ip_rating"": ""40""}"

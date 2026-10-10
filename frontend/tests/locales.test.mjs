@@ -68,7 +68,7 @@ test('every status, unit, scenario, price source and tender status code has a la
   }
 })
 
-test('frontend codes match the backend (doctype options, reasons, families)', () => {
+test('frontend codes match the backend (doctype options, reasons, warnings)', () => {
   const app = join(root, '..', 'equans_bid')
   const doctype = JSON.parse(readFileSync(join(app, 'bid_intelligence/doctype/tender_item/tender_item.json'), 'utf8'))
   const statusOptions = doctype.fields.find((f) => f.fieldname === 'status').options.split('\n')
@@ -80,7 +80,8 @@ test('frontend codes match the backend (doctype options, reasons, families)', ()
   const reasons = readFileSync(join(app, 'reasons.py'), 'utf8')
   const block = (name) => reasons.slice(reasons.indexOf(`${name} = {`), reasons.indexOf('\n}', reasons.indexOf(`${name} = {`)))
   const keysOf = (name) => [...block(name).matchAll(/^\t"(\w+)":/gm)].map((m) => m[1])
-  for (const [name, group] of [['REASONS', 'reason'], ['WARNINGS', 'warning'], ['FAMILIES', 'family']]) {
+  // Product-family labels are master data (Product Family), not locale strings.
+  for (const [name, group] of [['REASONS', 'reason'], ['WARNINGS', 'warning']]) {
     const backend = keysOf(name)
     assert.ok(backend.length > 0, name)
     assert.deepEqual(backend.sort(), Object.keys(locales[REFERENCE][group]).sort(), `${name} vs ${group}.*`)

@@ -13,7 +13,7 @@ from equans_bid.trades import TradeConfig, apply_rule
 NUM = r"\d+(?:[.,]\d+)?"
 DIAMETER = re.compile(rf"(?:Ø\s*({NUM})\s*(cm|mm)|({NUM})\s*Ø\s*(cm|mm))")
 # "x" or the multiplication sign U+00D7.
-DIMS = re.compile(rf"({NUM})\s*[x×]\s*({NUM})(?:\s*[x×]\s*({NUM}))?\s*(cm|mm)?")
+DIMS = re.compile(rf"({NUM})\s*[x\u00d7]\s*({NUM})(?:\s*[x\u00d7]\s*({NUM}))?\s*(cm|mm)?")
 TABLE_UNIT = re.compile(r"^(cm|mm)\b")
 DIAMETER_HEADER = re.compile(r"\bDN\b|Ø")
 DIMS_LINE = re.compile(r"^B\s*x\s*H")  # "B x H": width x height notation

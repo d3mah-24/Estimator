@@ -20,6 +20,8 @@ from equans_bid.export import AMOUNT_COLUMNS, BUILD_UP, TEXT_COLUMNS
 
 APP = Path(__file__).resolve().parent.parent
 UI_LOCALES = list(L.UI_LOCALES)
+# Raw direct-cost column: after the text columns and the formatted/raw pairs (custom columns follow).
+RAW_DIRECT = len(TEXT_COLUMNS) + 2 * len(AMOUNT_COLUMNS) - 1
 NBSP, NNBSP, RSQUO = "\u00a0", "\u202f", "\u2019"
 
 
@@ -66,7 +68,6 @@ class TestTranslationFiles(unittest.TestCase):
 
 	def required(self) -> set:
 		need = {(None, s) for s in [*R.REASONS.values(), *R.WARNINGS.values()]}
-		need |= {(L.CTX_FAMILY, s) for s in R.FAMILIES.values()}
 		need |= {(L.CTX_STATUS, s) for s in L.STATUS_LABELS.values()}
 		need |= {(L.CTX_UNIT, s) for s in L.UNIT_LABELS.values()}
 		need |= {(L.CTX_SCENARIO, s) for s in L.SCENARIO_LABELS.values()}
@@ -75,8 +76,10 @@ class TestTranslationFiles(unittest.TestCase):
 		headers = {lbl for _, lbl in TEXT_COLUMNS + AMOUNT_COLUMNS + BUILD_UP}
 		headers |= set(re.findall(r"""\bh\(\s*["']([^"']+)["']\s*\)""", export_src))
 		need |= {(L.CTX_EXPORT, s) for s in headers}
-		# frappe.throw(_("…")) messages in the API
-		need |= {(None, s) for s in re.findall(r'_\("([^"]+)"\)', (APP / "api.py").read_text())}
+		# frappe.throw(_("…")) messages in the API and the DocType controllers
+		sources = [APP / "api.py", *(APP / "bid_intelligence" / "doctype").glob("*/*.py")]
+		for src in sources:
+			need |= {(None, s) for s in re.findall(r'_\("([^"]+)"\)', src.read_text())}
 		return need
 
 	def test_every_string_translated(self):
@@ -92,10 +95,14 @@ class TestTranslationFiles(unittest.TestCase):
 				with self.subTest(lang=lang, msgid=msgid):
 					self.assertEqual(_placeholders(msgstr), _placeholders(msgid))
 
-	def test_every_family_kind_has_a_label(self):
-		from equans_bid.extraction.llm import KINDS
+	def test_product_family_labels_are_master_data(self):
+		"""Family labels live in data/trades/*/families.json, in every UI locale (not in .po)."""
+		from equans_bid.trades import available_trades, load_trade
 
-		self.assertEqual(set(KINDS) - set(R.FAMILIES), set())
+		for folder in available_trades():
+			for family in load_trade(folder).families:
+				for ui in UI_LOCALES:
+					self.assertTrue(family.labels.get(ui), (folder, family.code, ui))
 
 
 def _rows(content: str) -> list[list[str]]:
@@ -142,8 +149,8 @@ class TestLocaleIndependence(IntegrationTestCase):
 				self.assertAlmostEqual(lv1.direct_cost, 806.26, places=2)
 				rows = self.export_rows(ui)
 				row = next(r for r in rows if len(r) > 1 and r[1] == "LV0001")
-				self.assertEqual(row[-1], "806.26")  # raw direct-cost column, dot decimal
-				self.assertIn("806", row[-2])  # formatted column, locale separators
+				self.assertEqual(row[RAW_DIRECT], "806.26")  # raw direct-cost column, dot decimal
+				self.assertIn("806", row[RAW_DIRECT - 1])  # formatted column, locale separators
 
 	def test_raw_amounts_identical_and_text_translated(self):
 		by_locale = {ui: self.export_rows(ui) for ui in UI_LOCALES}
@@ -167,8 +174,8 @@ class TestLocaleIndependence(IntegrationTestCase):
 			self.assertTrue(unpriced)
 			for r in rows:
 				if r and r[0] in unpriced:
-					self.assertEqual(r[-2], "—", (ui, r[0]))  # formatted direct cost
-					self.assertEqual(r[-1], "", (ui, r[0]))  # raw direct cost
+					self.assertEqual(r[RAW_DIRECT - 1], "—", (ui, r[0]))  # formatted direct cost
+					self.assertEqual(r[RAW_DIRECT], "", (ui, r[0]))  # raw direct cost
 
 	def test_database_keeps_codes(self):
 		for ui in UI_LOCALES:

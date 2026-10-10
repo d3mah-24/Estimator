@@ -10,9 +10,9 @@
  ],
  "fields": [
   {
-   "description": "Regular expression on the lower-cased tender text",
+   "description": "Regular expression on the lower-cased tender text (Code field: stored verbatim, never HTML-sanitised)",
    "fieldname": "pattern",
-   "fieldtype": "Data",
+   "fieldtype": "Code",
    "in_list_view": 1,
    "label": "Pattern",
    "reqd": 1
@@ -25,7 +25,7 @@
   }
  ],
  "istable": 1,
- "modified": "2026-10-10 22:00:00.000000",
+ "modified": "2026-10-11 09:00:00.000000",
  "modified_by": "Administrator",
  "module": "Bid Intelligence",
  "name": "Product Family Pattern",

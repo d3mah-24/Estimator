@@ -23,7 +23,6 @@ CTX_UNIT = "Unit of measure"
 CTX_SCENARIO = "Bid scenario"
 CTX_PRICE_SOURCE = "Price source"
 CTX_EXPORT = "Tender export"
-CTX_FAMILY = "Product family"
 
 STATUS_LABELS = {
 	"calculated": "Calculated",
@@ -54,11 +53,13 @@ class Localizer:
 	"""Translate codes and format numbers for one locale. `translate(msg, lang, context)`
 	defaults to Frappe's `_`; tests may pass their own."""
 
-	def __init__(self, ui_locale: str | None = None, translate=None):
+	def __init__(self, ui_locale: str | None = None, translate=None, family_labels: dict | None = None):
 		self.ui, self.lang, self.babel = resolve(ui_locale)
 		if translate is None:
 			from frappe import _ as translate
 		self._translate = translate
+		# Product family labels are master data: {family_code: {"de-CH": …, "fr-CH": …, "en": …}}
+		self.family_labels = family_labels or {}
 
 	def t(self, msg: str, context: str | None = None) -> str:
 		return self._translate(msg, lang=self.lang, context=context)
@@ -78,7 +79,11 @@ class Localizer:
 	def reason(self, code: str | None, args: dict | None = None) -> str:
 		if not code:
 			return ""
-		return render(code, args, lambda s, ctx=None: self.t(s, CTX_FAMILY if ctx == "family" else None))
+		return render(code, args, lambda s: self.t(s), self.family)
+
+	def family(self, code: str | None) -> str:
+		labels = self.family_labels.get(code) or {}
+		return labels.get(self.ui) or labels.get("en") or (code or "")
 
 	# Formatting: amounts stay numbers until here.
 	def chf(self, value) -> str:

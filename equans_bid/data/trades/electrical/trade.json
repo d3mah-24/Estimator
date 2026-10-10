@@ -1,0 +1,17 @@
+{
+  "code": "Electrical",
+  "labels": {"de-CH": "Elektro (BKP 23)", "fr-CH": "Électricité (CFC 23)", "en": "Electrical (BKP 23)"},
+  "catalog": "catalog.csv",
+  "productivity": "productivity.csv",
+  "system_header_pattern": "(?P<system>23\\d\\.\\d+\\s+\\S.*?)\\s+Seite\\s+\\d+\\s*/\\s*\\d+",
+  "continuation_labels": ["Fabrikat", "Typ"],
+  "attribute_labels": ["Fabrikat", "Typ", "Querschnitt", "Schutzart", "Spannung", "Ausführung", "Bestückung"],
+  "attribute_rules": [
+    {"key": "cores", "pattern": "(\\d+)\\s*[x\\u00d7]\\s*\\d+(?:[.,]\\d+)?\\s*mm", "type": "int"},
+    {"key": "cross_section_mm2", "pattern": "\\d+\\s*[x\\u00d7]\\s*(\\d+(?:[.,]\\d+)?)\\s*mm", "type": "float"},
+    {"key": "ip_rating", "pattern": "IP\\s?(\\d{2})", "type": "text"}
+  ],
+  "catalog_attribute_rules": [],
+  "table_parsers": [],
+  "factor_rules": []
+}

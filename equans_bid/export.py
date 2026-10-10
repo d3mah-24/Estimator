@@ -55,9 +55,12 @@ def raw(value) -> str:
 	return "" if value is None else f"{float(value):.2f}"
 
 
-def build_csv(doc, summary: dict, ui_locale: str | None, now, translate=None) -> tuple[str, str]:
-	"""(filename, csv text with BOM). `doc` is the Tender, `summary` get_tender_summary()."""
-	loc = Localizer(ui_locale, translate)
+def build_csv(
+	doc, summary: dict, ui_locale: str | None, now, translate=None, family_labels: dict | None = None
+) -> tuple[str, str]:
+	"""(filename, csv text with BOM). `doc` is the Tender, `summary` get_tender_summary(),
+	`family_labels` the Product Family labels by code."""
+	loc = Localizer(ui_locale, translate, family_labels)
 
 	def h(label):
 		return loc.t(label, CTX_EXPORT)
@@ -71,6 +74,13 @@ def build_csv(doc, summary: dict, ui_locale: str | None, now, translate=None) ->
 	header = [h(label) for _, label in TEXT_COLUMNS]
 	for _, label in AMOUNT_COLUMNS:
 		header += [h(label), f"{h(label)} ({raw_suffix})"]
+	# Project-specific columns: every printed attribute label in this tender, as printed.
+	custom_keys = []
+	for i in doc.items:
+		for key in _args(i.custom_attributes):
+			if key not in custom_keys:
+				custom_keys.append(key)
+	header += custom_keys
 	w.writerow(header)
 
 	for i in doc.items:
@@ -98,6 +108,8 @@ def build_csv(doc, summary: dict, ui_locale: str | None, now, translate=None) ->
 				row += [loc.chf(i.get(field)), raw(i.get(field))]
 			else:
 				row += [loc.chf(None), ""]  # "—": no price until reviewed
+		custom = _args(i.custom_attributes)
+		row += [custom.get(key, "") for key in custom_keys]
 		w.writerow(row)
 
 	w.writerow([])

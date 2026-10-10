@@ -21,7 +21,7 @@ def _number_variants(value: float) -> set[str]:
 	whole = int(value) if float(value).is_integer() else None
 	out = {f"{value:g}", f"{value:g}".replace(".", ",")}
 	if whole is not None:
-		out |= {str(whole), f"{whole:,}".replace(",", "'"), f"{whole:,}".replace(",", "’")}
+		out |= {str(whole), f"{whole:,}".replace(",", "'"), f"{whole:,}".replace(",", "\u2019")}
 	return out
 
 
